@@ -1,0 +1,87 @@
+---
+
+# be sure to use static ip addresses
+- name : install ldapscripts
+  apt:
+    name: ldapscripts
+  become: true
+
+- name: edit ldapscripts config
+  block:
+  - name: Modfiy ldapscripts.conf
+    lineinfile:
+      path: /etc/ldapscripts/ldapscripts.conf
+      regex: '^#SERVER'
+      line: 'SERVER=ldap://{{ ldap_fqdn }}'
+  - name: Modfiy ldapscripts.conf
+    lineinfile:
+      path: /etc/ldapscripts/ldapscripts.conf
+      regex: '^#LDAPBINOPTS'
+      line: 'LDAPBINOPTS="-ZZ"'
+  - name: Modfiy ldapscripts.conf
+    lineinfile:
+      path: /etc/ldapscripts/ldapscripts.conf
+      regex: '^BINDDN="cn='
+      line: "BINDDN='cn=admin,{{ ldap_dc_base }}'"
+  - name: Modfiy ldapscripts.conf
+    lineinfile:
+      path: /etc/ldapscripts/ldapscripts.conf
+      search_string: 'BINDPWDFILE="/etc/ldapscripts/ldapscripts.passwd"'
+      line: 'BINDPWDFILE="/etc/ldapscripts/ldapscripts.passwd"'
+  - name: Modfiy ldapscripts.conf
+    lineinfile:
+      path: /etc/ldapscripts/ldapscripts.conf
+      regex: '^#SUFFIX'
+      line: "SUFFIX='{{ ldap_dc_base }}'"
+  - name: Modfiy ldapscripts.conf
+    lineinfile:
+      path: /etc/ldapscripts/ldapscripts.conf
+      regex: '^#GSUFFIX'
+      line: "GSUFFIX='ou=Groups'"
+  - name: Modfiy ldapscripts.conf
+    lineinfile:
+      path: /etc/ldapscripts/ldapscripts.conf
+      regex: '^#USUFFIX'
+      line: "USUFFIX='ou=People'"
+  - name: Modfiy ldapscripts.conf
+    lineinfile:
+      path: /etc/ldapscripts/ldapscripts.conf
+      regex: '^#MSUFFIX'
+      line: "MSUFFIX='ou=Computers'"
+  - name: Modfiy ldapscripts.conf
+    lineinfile:
+      path: /etc/ldapscripts/ldapscripts.conf
+      regex: '^CREATEHOMES'
+      line: 'CREATEHOMES="yes"'
+  - name: Modfiy ldapscripts.conf
+    lineinfile:
+      path: /etc/ldapscripts/ldapscripts.conf
+      regex: '^#UHOMES'
+      line: 'UHOMES="/home/ldap/%u"'
+  - name: Modfiy ldapscripts.conf
+    lineinfile:
+      path: /etc/ldapscripts/ldapscripts.conf
+      regex: '^#HOMEPERM'
+      line: 'HOMEPERMS="750"'
+  - name: Modfiy ldapscripts.conf
+    lineinfile:
+      path: /etc/ldapscripts/ldapscripts.conf
+      regex: '^PASSWORDGEN'
+      line: 'PASSWORDGEN="echo %u"'
+  become: true
+
+- name: Add pw to file
+  shell: "echo -n {{ ldap_admin_pw }} > /etc/ldapscripts/ldapscripts.passwd"
+  become: true
+
+- name: Change rights of pw file
+  shell: "chmod 600 /etc/ldapscripts/ldapscripts.passwd"
+  become: true
+
+
+
+
+
+
+
+

@@ -1,0 +1,11 @@
+---
+
+ldap_host: 'fvm-01'
+ldap_ip: '192.168.178.56'
+ldap_fqdn: 'fvm-01.local'
+ldap_dc_base: 'dc=fvm-01,dc=local'
+
+  # -> vault_vars:
+  #ldap_admin_pw:   -> vault
+
+ldap_client: 'fvm-02'

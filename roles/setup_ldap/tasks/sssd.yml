@@ -1,0 +1,36 @@
+---
+- name: Install sssd-ldap, ldap-utils
+  apt:
+    name: sssd-ldap, ldap-utils
+  become: true
+
+- name: Create sssd config
+  copy:
+    dest: /etc/sssd/sssd.conf
+    content: |    # ':' has to be escaped :(
+      [sssd]
+      config_file_version = 2
+      domains = {{ ldap_fqdn }}
+      services = nss, pam
+
+      [domain/{{ ldap_fqdn }}]
+      id_provider = ldap
+      auth_provider = ldap
+      ldap_uri = ldap://{{ ldap_fqdn }}
+      cache_credentials = True
+      ldap_search_base = {{ ldap_dc_base }}
+      ldap_id_use_start_tls = true
+  become: true
+
+- name: Enable automatic home folder creation and fix access rights
+  shell: "chmod 600 /etc/sssd/sssd.conf && pam-auth-update --enable mkhomedir"
+  become: true
+
+    # - name: Restart sssd
+    #   service:
+    #     name: sssd.service
+    #     state: restarted
+
+- name: Verify setup
+  shell: "ldapwhoami -x -ZZ -h {{ ldap_fqdn }}"
+

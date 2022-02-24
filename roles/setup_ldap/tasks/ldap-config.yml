@@ -1,0 +1,14 @@
+---
+
+- block:
+  - name: setup /etc/ldap/ldap.conf
+    lineinfile:
+      path: /etc/ldap/ldap.conf
+      regex: '^BASE'
+      line: 'BASE   {{ ldap_dc_base }}'
+  - name: setup /etc/ldap/ldap.conf
+    lineinfile:
+      path: /etc/ldap/ldap.conf
+      regex: '^URI'
+      line: 'URI    ldap://{{ ldap_fqdn }}'
+  become: true

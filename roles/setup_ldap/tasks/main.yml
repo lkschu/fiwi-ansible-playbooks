@@ -1,0 +1,66 @@
+---
+
+
+
+
+# be sure to use static ip addresses
+- name : check for hostname in /etc/hosts
+  shell: grep "{{ inventory_hostname }}" /etc/hosts
+  register: static_ip
+  # don't immediately crash on no match!
+  failed_when: static_ip.rc == 2
+
+# Print debug msg and exit if hostname not in /etc/hosts
+- block:
+  - debug:
+      msg: "Fatal! Hostname not found in /etc/hosts!"
+  - meta: end_play
+  when: static_ip.rc != 0
+
+
+- name: install slapd and ldap-utils
+  apt:
+    name: slapd, ldap-utils
+  become: true
+
+- name: Configure slapd manually
+  pause:
+    prompt: "Please connect to remote machine and configure using: 'sudo dpkg-reconfigure slapd'. DNS domain name: '{{ ldap_fqdn }}'. Administrator passwd: '{{ ldap_admin_pw }}'. Confirm with <enter>."
+
+# Install TLS support
+- include: TLS.yml
+- include: ldap-config.yml
+- include: ldapscripts.yml
+
+- name: Add group and user categories
+  copy:
+    dest: "categories.ldif"
+    content: |    # '"' are needed because ':' have to be escaped
+      dn: ou=People,{{ ldap_dc_base }}
+      objectClass: organizationalUnit
+      ou: People
+
+      dn: ou=Groups,{{ ldap_dc_base }}
+      objectClass: organizationalUnit
+      ou: Groups
+
+      dn: cn=testgroup,ou=Groups,{{ ldap_dc_base }}
+      objectClass: posixGroup
+      cn: testgroup
+      gidNumber: 5566
+
+- name: Import categories from ldif and remove tmp file
+  # passwordfile exists because of ldapscripts install
+  shell: "ldapadd -x -D cn=admin,{{ ldap_dc_base }} -f categories.ldif -y /etc/ldapscripts/ldapscripts.passwd " #&& rm categories.ldif"
+  become: true
+  register: out
+
+- debug: var=out.stdout_lines
+
+- block:
+  - debug:
+      msg: failure adding content of ldiff!
+  - meta: end_play
+  when: out.stdout_lines|length == 0
+
+    # - include: sssd.yml

@@ -1,0 +1,12 @@
+---
+  - name: Install updates
+    hosts: fvms
+    tasks:
+      - name: Update & Upgrade
+        apt:
+          update_cache: yes
+          upgrade: full
+          autoremove: yes
+        become: yes
+
+

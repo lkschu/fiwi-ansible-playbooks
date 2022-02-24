@@ -1,0 +1,90 @@
+---
+  - name: install gnutls-bin & ssl-cert
+    apt:
+      name: gnutls-bin, ssl-cert
+    become: true
+
+  - name: generate privkey for Certificate Authority
+    shell: "certtool --generate-privkey --bits 4096 --outfile /etc/ssl/private/fiwi_ca_key.pem"
+    become: true
+
+  - name: define CA
+    #shell: "bash -c 'printf \"cn = FiWi Würzburg\nca\ncert_signing_key\nexpiration_days = 3650\" > /etc/ssl/ca.info'"
+    copy:
+      dest: "/etc/ssl/ca.info"
+      content: |
+        cn = FiWi Würzburg
+        ca
+        cert_signing_key
+        expiration_days = 3650
+    become: true
+
+  - name: Create self-signed certificate
+    shell: certtool --generate-self-signed --load-privkey /etc/ssl/private/fiwi_ca_key.pem --template /etc/ssl/ca.info --outfile /usr/local/share/ca-certificates/fiwi_ca_self-signed_cert.crt
+    become: true
+      # This also creates a /etc/ssl/certs/mycacert.pem (or rather fiwi_ca_self-signed_cert) symlink pointing to the real file in /usr/local/share/ca-certificates.
+
+  - name: Configure ca-certificates manually
+    pause:
+      prompt: "Please connect to remote machine and configure using: 'sudo dpkg-reconfigure ca-certificates'"
+
+  - name: import ca-certificates
+    shell: update-ca-certificates
+    become: true
+
+  - name: make private keys for the server
+    shell: "certtool --generate-privkey --bits 2048 --outfile /etc/ldap/fiwi_slapd_key.pem"
+    become: true
+
+  - name: create info for ldap server
+    #shell: "bash -c 'printf \"organization = FiWi Würzburg\ncn = {{ inventory_hostname}}.local\ntls_www_server\nencryption_key\nsigning_key\nexpiration_days = 3650\" > /etc/ssl/fiwi-ldap.info'"
+    copy:
+      dest: "/etc/ssl/fiwi-ldap.info"
+      content: |
+        organization = FiWi Würzburg
+        cn = {{ inventory_hostname }}.local
+        tls_www_server
+        encryption_key
+        signing_key
+        expiration_days = 3650
+    become: true
+
+  - name: create server certificate
+    shell: "certtool --generate-certificate \
+  --load-privkey /etc/ldap/fiwi_slapd_key.pem \
+  --load-ca-certificate /etc/ssl/certs/fiwi_ca_self-signed_cert.pem \
+  --load-ca-privkey /etc/ssl/private/fiwi_ca_key.pem \
+  --template /etc/ssl/fiwi-ldap.info \
+  --outfile /etc/ldap/fiwi_slapd_cert.pem"
+    become: true
+
+  - name: adjust permissions and ownership
+    #shell: "chgrp openldap /etc/ldap/fiwi_slapd_key.pem && chmod 0640 /etc/ldap/fiwi_slapd_key.pem"
+    file:
+      path: "/etc/ldap/fiwi_slapd_key.pem"
+      mode: 0640
+      group: openldap
+    become: true
+
+  - name: create certinfo.ldif
+    copy:
+      dest: "certinfo.ldif"
+      content: |
+        dn: cn=config
+        add: olcTLSCACertificateFile
+        olcTLSCACertificateFile: /etc/ssl/certs/fiwi_ca_self-signed_cert.pem
+        -
+        add: olcTLSCertificateFile
+        olcTLSCertificateFile: /etc/ldap/fiwi_slapd_cert.pem
+        -
+        add: olcTLSCertificateKeyFile
+        olcTLSCertificateKeyFile: /etc/ldap/fiwi_slapd_key.pem
+
+  - name: import certs into ldap
+    shell: "ldapmodify -Y EXTERNAL -H ldapi:/// -f certinfo.ldif"
+    become: true
+
+
+
+
+

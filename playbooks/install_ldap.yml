@@ -1,0 +1,14 @@
+---
+
+- hosts: "{{ ldap_host | default('fvm-01') }}"
+  pre_tasks:
+    - name: include env vars
+      include_vars: vault_vars
+    - name: include config
+      include_vars: ldap_config.yml
+
+  roles:
+    - purge_unattended_upgrades
+    - apt_update_cache
+    - setup_timezone
+    - setup_ldap

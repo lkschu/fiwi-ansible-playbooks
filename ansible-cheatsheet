@@ -1,0 +1,1 @@
+ansible-vault [edit|view|...] --vault-password-file <vault-file>

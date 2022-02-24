@@ -1,0 +1,5 @@
+---
+ - name: set timezone
+   apt:
+     name: rng-tools, bash-completion, vim, chrony, tmux, ranger, gfortran
+   become: true
