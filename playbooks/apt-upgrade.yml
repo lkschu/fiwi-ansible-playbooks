@@ -1,6 +1,6 @@
 ---
   - name: Install updates
-    hosts: fvms
+    hosts: vms
     tasks:
       - name: Update & Upgrade
         apt:

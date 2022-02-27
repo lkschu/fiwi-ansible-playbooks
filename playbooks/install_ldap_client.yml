@@ -1,11 +1,11 @@
 ---
 
-- hosts: "{{ ldap_client | default('fvm-02') }}"
+- hosts: "{{ ldap_clients | default('fvm-02') }}"
   pre_tasks:
     - name: include env vars
       include_vars: vault_vars
     - name: include config
-      include_vars: ldap_config.yml
+      include_vars: configs/ldap_config.yml
 
   roles:
     - purge_unattended_upgrades
