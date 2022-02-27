@@ -1,0 +1,15 @@
+fresh install
+    (for local server: 30GB, write back, NO discard
+    (-pcid -spec-ctrl +aes
+    (61440MB ram, 2048 min
+    -> user lkschu
+    (add user to admin group
+    -> pw
+    ((make template from this setup, then clone, change hostname, delete /etc/ssh/ssh_host_* and dpkg-reconfigure openssh-server
+
+add admin user and make sure ist accessible over ssh
+    make sure python is installed
+    (add qemu guest agent for local server)
+    (imported ssh keys from github!
+
+configure 'hosts'
