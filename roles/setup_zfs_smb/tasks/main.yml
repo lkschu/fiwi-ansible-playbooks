@@ -39,6 +39,7 @@
           writeable = yes
           invalid users = lkschu
           # directory mask = 0700
+          # create mask = 0775
 
   become: true
 
