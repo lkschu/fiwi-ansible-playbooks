@@ -1,1 +1,5 @@
+# acces vaulted storage like this, (but we acutally use encrypt-string)
 ansible-vault [edit|view|...] --vault-password-file <vault-file>
+
+# use ad hoc roles like this
+ansible vms -m include_role -a name=reboot --vault-password-file=.vkey

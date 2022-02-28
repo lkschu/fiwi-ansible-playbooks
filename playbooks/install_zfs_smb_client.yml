@@ -1,6 +1,6 @@
 ---
 
-- hosts: ldap
+- hosts: worker
   pre_tasks:
     - name: include config
       include_vars: ../configs/ldap_config.yml
@@ -8,5 +8,9 @@
   roles:
     - purge_unattended_upgrades
     - apt_update_cache
-    - setup_timezone
-    - setup_ldap
+
+  tasks:
+    - name: Install smb and smb utils
+      include_role:
+        name: setup_zfs_smb
+        tasks_from: client.yml

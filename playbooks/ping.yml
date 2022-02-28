@@ -1,11 +1,12 @@
 ---
-  - name: Ping all
-    hosts: worker
-    gather_facts: no
-    tasks:
-      - name: Ping
-        ping:
-          data: Pong
-        become: yes
+- name: Ping all
+  hosts: worker
+  gather_facts: no
+
+  tasks:
+    - name: Ping
+      ping:
+        data: Pong
+      become: yes
 
 

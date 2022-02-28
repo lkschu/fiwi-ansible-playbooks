@@ -11,6 +11,7 @@ objectClass: posixGroup
 cn: fiwi
 gidNumber: 5000
 
+# this is propably not used??
 dn: uid=lks,ou=People,dc=fvm-01,dc=local
 objectClass: inetOrgPerson
 objectClass: posixAccount

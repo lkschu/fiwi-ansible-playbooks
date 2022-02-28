@@ -8,5 +8,4 @@
   roles:
     - purge_unattended_upgrades
     - apt_update_cache
-    - setup_timezone
-    - setup_ldap
+    - setup_zfs_smb

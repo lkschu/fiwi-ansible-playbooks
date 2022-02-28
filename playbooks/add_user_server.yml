@@ -1,0 +1,16 @@
+---
+
+- hosts: ldap
+
+  tasks:
+    - name: Add user to ldap
+      include_role:
+        name: setup_ldap
+        tasks_from: add-user-server.yml
+
+    - name: Add user to smb
+      include_role:
+        name: setup_zfs_smb
+        tasks_from: add_user_server.yml
+
+

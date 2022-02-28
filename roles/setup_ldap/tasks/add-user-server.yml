@@ -1,0 +1,13 @@
+---
+
+ - name: Adding {{ smb_user }} to ldap
+   shell: ldapadduser {{ smb_user }} fiwi
+   become: true
+
+ - name: Adding {{ smb_user }} to fiwi
+   shell: ldapaddusertogroup {{ smb_user }} fiwi
+   become: true
+
+ - name: Setting {{ smb_user }} pw to dummy for now ( 1234 )
+   shell: (echo 1234; echo 1234) | ldapsetpasswd {{ smb_user }}
+   become: true

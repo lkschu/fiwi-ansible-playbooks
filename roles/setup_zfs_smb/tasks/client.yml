@@ -1,0 +1,11 @@
+---
+
+- name: Install samba utils
+  apt:
+    name: samba, cifs-utils, smbclient
+  become: true
+
+- name: Prepare credentials
+  shell: mkdir -p /etc/samba/creds
+  become: true
+

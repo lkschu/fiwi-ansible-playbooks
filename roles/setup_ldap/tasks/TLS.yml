@@ -24,9 +24,9 @@
     become: true
       # This also creates a /etc/ssl/certs/mycacert.pem (or rather fiwi_ca_self-signed_cert) symlink pointing to the real file in /usr/local/share/ca-certificates.
 
-  - name: Configure ca-certificates manually
-    pause:
-      prompt: "Please connect to remote machine and configure using: 'sudo dpkg-reconfigure ca-certificates'"
+  - name: Reconfigure ca-certificates
+    shell: sudo dpkg-reconfigure -p critical ca-certificates
+    become: true
 
   - name: import ca-certificates
     shell: update-ca-certificates

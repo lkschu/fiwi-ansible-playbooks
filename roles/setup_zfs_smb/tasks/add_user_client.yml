@@ -1,0 +1,47 @@
+---
+# notes: requires smb_user and add_user_server first
+
+- name: Create credentials file
+  copy:
+    dest: /etc/samba/creds/{{ smb_user }}
+    content: |
+      username={{ smb_user }}
+      password={{ smb_master_pw }}
+    owner: root
+    group: root
+    mode: '600'
+  become: true
+
+- name: Add fstab entry
+  lineinfile:
+    path: /etc/fstab
+    search_string: '//{{ ldap_fqdn }}/{{ smb_user }}'
+    line: '//{{ ldap_fqdn }}/{{ smb_user }}    /home/ldap/{{ smb_user }}    cifs    vers=3.0,credentials=/etc/samba/creds/{{ smb_user }},nouser,udir_mode=0700,file_mode=0600,id={{ smb_user }},gid=fiwi,exec 0 0'
+  become: true
+
+- name: Add systemd mount file
+  copy:
+    dest: /etc/systemd/system/home-ldap-{{ smb_user }}.mount
+    content: |
+      [Unit]
+        Description=cifs mount script
+        Requires=network-online.target
+        After=network-online.service
+
+      [Mount]
+        What=//{{ ldap_fqdn }}/{{ smb_user }}
+        Where=/home/ldap/{{ smb_user }}
+        Options=credentials=/etc/samba/creds/{{ smb_user }},rw,dir_mode=0700,file_mode=0600,uid={{ smb_user }},gid=fiwi
+        Type=cifs
+
+      [Install]
+        WantedBy=multi-user.target
+  become: true
+
+- name: Enable systemd mounting
+  shell: systemctl enable --now home-ldap-{{ smb_user }}.mount
+  become: true
+
+- name: Mounting missing shares
+  shell: mount -a
+  become: true

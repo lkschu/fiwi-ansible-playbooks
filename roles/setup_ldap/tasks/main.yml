@@ -1,7 +1,26 @@
 ---
 
+# remove old entries
+- name: Setup Hostname (0/2)
+  lineinfile:
+    path: /etc/hosts
+    search_string: '{{ inventory_hostname }}'
+    state: absent
+  become: true
 
+- name: Setup Hostname (1/2)
+  lineinfile:
+    path: /etc/hosts
+    search_string: '{{ inventory_hostname }}'
+    line: "{{ ldap_ip }} {{ inventory_hostname }}"
+  become: true
 
+- name: Setup Hostname (2/2)
+  lineinfile:
+    path: /etc/hosts
+    search_string: '{{ ldap_fqdn }}'
+    line: "{{ ldap_ip }} {{ ldap_fqdn }}"
+  become: true
 
 # be sure to use static ip addresses
 - name : check for hostname in /etc/hosts
@@ -25,12 +44,12 @@
 
 - name: Configure slapd manually
   pause:
-    prompt: "Please connect to remote machine and configure using: 'sudo dpkg-reconfigure slapd'. DNS domain name: '{{ ldap_fqdn }}'. Administrator passwd: '{{ ldap_admin_pw }}'. Confirm with <enter>."
+    prompt: "Please connect to remote machine and configure using: 'sudo dpkg-reconfigure slapd'.\nAnswers:\n - Omit config? <NO>\n - domain name: {{ ldap_fqdn }}\n - organization: FiWi-Wue \n - admin password: {{ ldap_admin_pw }}\n - remove when purged <YES>\n - Move? <YES>\nConfirm with <enter>."
 
 # Install TLS support
-- include: TLS.yml
-- include: ldap-config.yml
-- include: ldapscripts.yml
+- include_tasks: TLS.yml
+- include_tasks: ldap-config.yml
+- include_tasks: ldapscripts.yml
 
 - name: Add group and user categories
   copy:
@@ -44,7 +63,7 @@
       objectClass: organizationalUnit
       ou: Groups
 
-      dn: cn=testgroup,ou=Groups,{{ ldap_dc_base }}
+      dn: cn=fiwi,ou=Groups,{{ ldap_dc_base }}
       objectClass: posixGroup
       cn: testgroup
       gidNumber: 5566
@@ -63,4 +82,4 @@
   - meta: end_play
   when: out.stdout_lines|length == 0
 
-    # - include: sssd.yml
+    # - include_tasks: sssd.yml

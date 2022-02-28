@@ -1,0 +1,51 @@
+---
+
+- name: Install zfs
+  apt:
+    name: zfsutils-linux
+  become: true
+
+- name: Create pool
+  shell: zpool create -m /home/ldap {{ pool_name }} {{ pool_location_src }}
+  become: true
+
+- name: Set compression, no checksum, no access time
+  shell : zfs set compression=lz4 checksum=off atime=off {{ pool_name }}
+  become: true
+
+- name: Install samba
+  apt:
+    name: samba
+  become: true
+
+- name: Copy Samba config
+  copy:
+    dest: "/etc/samba/smb.conf"
+    content: |
+      [global]
+          workgroup = fiwi
+          server string = fiwi-coordinator
+          server role = standalone server
+          log file = /var/log/samba/log.%m
+          # max log size in kb
+          max log size = 200
+          # require user to have a unix account
+          security = user
+
+      [homes]
+          # make all homes but lkschu accessible
+          comment = Home Directories
+          browsable = no
+          writeable = yes
+          invalid users = lkschu
+          # directory mask = 0700
+
+  become: true
+
+- name: Restart samba
+  service:
+    name: smbd
+    state: restarted
+  become: true
+
+

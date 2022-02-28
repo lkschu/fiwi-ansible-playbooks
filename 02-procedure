@@ -11,5 +11,17 @@ add admin user and make sure ist accessible over ssh
     make sure python is installed
     (add qemu guest agent for local server)
     (imported ssh keys from github!
+    ((add hdd passthrough for ssd in proxmox: sudo qm set 101 -scsi5 /dev/disk/by-id/ata-KINGSTON_SA400S37480G_50026B73810ADCEC
+    ((where 101 is vm id
 
 configure 'hosts'
+
+
+
+# REMEMBER:
+ - passwords of users can be changed by user with passwd, but sudo user have to use ldapsetpasswd <user> to set password of others
+ - for each user: ldapadduser, smbpasswd -a <user>,
+
+# TODO:
+ - configure /etc/hosts automatically
+ - WARNING: not all ldappw are valid: '<>' will get escaped

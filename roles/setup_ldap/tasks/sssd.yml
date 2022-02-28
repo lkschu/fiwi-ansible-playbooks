@@ -1,5 +1,6 @@
 ---
-- name: Install sssd-ldap, ldap-utils
+
+- name: Install sssd-ldap, ldap-utils, this takes a while
   apt:
     name: sssd-ldap, ldap-utils
   become: true

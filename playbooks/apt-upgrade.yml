@@ -1,12 +1,13 @@
 ---
-  - name: Install updates
-    hosts: vms
-    tasks:
-      - name: Update & Upgrade
-        apt:
-          update_cache: yes
-          upgrade: full
-          autoremove: yes
-        become: yes
+
+- name: Install updates
+  hosts: vms
+  tasks:
+    - name: Update & Upgrade
+      apt:
+        update_cache: yes
+        upgrade: full
+        autoremove: yes
+      become: yes
 
 

@@ -1,0 +1,12 @@
+---
+# notes: requires smb_user
+
+- name: Add user {{ smb_user }}
+  shell: (echo {{ smb_master_pw }}; echo {{ smb_master_pw }}) | smbpasswd -a {{ smb_user }}
+  become: true
+
+- name: Restart samba
+  service:
+    name: smbd
+    state: restarted
+  become: true
