@@ -1,12 +1,12 @@
 ---
-
+# Client
 - hosts: worker
   pre_tasks:
     - name: include config
       include_vars: ../configs/ldap_config.yml
 
   tasks:
-    - name: Setting up smb mount for {{ smb_user }}
+    - name: Setting up smb mount for {{ user_name }}
       include_role:
         name: setup_zfs_smb
         tasks_from: add_user_client.yml

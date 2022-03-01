@@ -1,0 +1,46 @@
+---
+
+- hosts: ldap
+  pre_tasks:
+    - name: include user vars
+      include_vars: ../configs/users_to_add.yml
+    - name: include config
+      include_vars: ../configs/ldap_config.yml
+
+  tasks:
+    - name: Add user to ldap
+      include_role:
+        name: setup_ldap
+        tasks_from: add-user-server.yml
+      loop: "{{ users_to_add }}"
+      vars:
+        user_name: "{{ item.name }}"
+        user_pw: "{{ item.passwd }}"
+
+    - name: Add users to smb
+      include_role:
+        name: setup_zfs_smb
+        tasks_from: add_user_server.yml
+      loop: "{{ users_to_add }}"
+      vars:
+        user_name: "{{ item.name }}"
+        user_pw: "{{ item.passwd }}"
+
+- hosts: worker
+  pre_tasks:
+    - name: include user vars
+      include_vars: ../configs/users_to_add.yml
+    - name: include config
+      include_vars: ../configs/ldap_config.yml
+
+  tasks:
+    - name: Setting up smb mounts
+      include_role:
+        name: setup_zfs_smb
+        tasks_from: add_user_client.yml
+      loop: "{{ users_to_add }}"
+      vars:
+        user_name: "{{ item.name }}"
+        user_pw: "{{ item.passwd }}"
+
+

@@ -20,8 +20,9 @@ configure 'hosts'
 
 # REMEMBER:
  - passwords of users can be changed by user with passwd, but sudo user have to use ldapsetpasswd <user> to set password of others
- - for each user: ldapadduser, smbpasswd -a <user>,
+ - for each user: ldapadduser, smbpasswd -a <user>, add mountentry to fstab & systemd file
 
 # TODO:
  - configure /etc/hosts automatically
  - WARNING: not all ldappw are valid: '<>' will get escaped
+ - cronjob to mount -a

@@ -1,0 +1,15 @@
+---
+
+users_to_add:
+  - name: 'test01'
+    passwd: '6789'
+
+  - name: 'test02'
+    passwd: 'abc'
+
+  - name: 'test03'
+    passwd: 'lkjl'
+
+  - name: 'test04'
+    passwd: '9876'
+

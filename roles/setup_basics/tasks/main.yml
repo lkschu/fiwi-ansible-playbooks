@@ -1,5 +1,5 @@
 ---
- - name: "Install needed tools: rng-tools, bash-completion, vim, chrony, tmux, ranger, gfortran"
+ - name: "Install needed tools: rng-tools, bash-completion, vim, chrony, tmux, ranger, gfortran, acl, ...\nMight take a few minutes."
    apt:
-     name: rng-tools, bash-completion, vim, chrony, tmux, ranger, gfortran
+     name: rng-tools, bash-completion, vim, chrony, tmux, ranger, gfortran, acl
    become: true
