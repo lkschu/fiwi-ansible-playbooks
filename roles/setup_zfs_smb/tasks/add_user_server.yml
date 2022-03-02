@@ -12,18 +12,45 @@
   become_user: "{{ user_name }}"
   vars:
     allow_world_readable_tmpfiles: true
+
+# cat id_rsa.pub to check if key already exists!
 - name: Generating ssh keys for {{ user_name }} (2/3)
-  shell: ssh-keygen -b 3072 -t rsa -f ~/.ssh/id_rsa -N ""
+  shell: cat ~/.ssh/id_rsa.pub || ssh-keygen -b 3072 -t rsa -f ~/.ssh/id_rsa -N ""
   become: true
   become_user: "{{ user_name }}"
   vars:
     allow_world_readable_tmpfiles: true
+
+# check if key is present before
 - name: Generating ssh keys for {{ user_name }} (3/3)
-  shell: echo '# This users own local key' >> ~/.ssh/authorized_keys && cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
+  shell: grep -F -f ~/.ssh/id_rsa.pub ~/.ssh/authorized_keys || echo '# This users own local key' >> ~/.ssh/authorized_keys && cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
   become: true
   become_user: "{{ user_name }}"
   vars:
     allow_world_readable_tmpfiles: true
+
+- name: Create directory for web access
+  shell: mkdir -p ~/{{ user_webdir }}/data
+  become: true
+  become_user: "{{ user_name }}"
+  vars:
+    allow_world_readable_tmpfiles: true
+
+- name: Make symlink 1
+  shell: ln -s /usr/local/lib/server-site/site ~/{{ user_webdir }}/site
+  become: true
+  become_user: "{{ user_name }}"
+  vars:
+    allow_world_readable_tmpfiles: true
+
+- name: Make sysmlink 2
+  shell: ln -s ~/{{ user_webdir }}/site/index.php ~/{{ user_webdir }}/index.php
+  become: true
+  become_user: "{{ user_name }}"
+  vars:
+    allow_world_readable_tmpfiles: true
+
+  # TODO: include server logic
 
 - name: Restart samba
   service:

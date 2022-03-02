@@ -26,3 +26,10 @@ configure 'hosts'
  - configure /etc/hosts automatically
  - WARNING: not all ldappw are valid: '<>' will get escaped
  - cronjob to mount -a
+ - smb, ldap firewall
+ - logrotate.conf
+
+
+# TODO apache:
+ - a2enmod authnz_ldap, userdir
+ - apache starts as root -> 600 on conf with ldap pw

@@ -13,3 +13,30 @@ users_to_add:
   - name: 'test04'
     passwd: '9876'
 
+  - name: 'mfeldman'
+    passwd: 'MzEyNDIK'
+
+  - name: 'hfehr'
+    passwd: 'OTUwNQo='
+
+  - name: 'afroehlich'
+    passwd: 'MzUwNQo='
+
+  - name: 'acc102'
+    passwd: '9876'
+
+  - name: 'acc103'
+    passwd: '9876'
+
+  - name: 'acc104'
+    passwd: '9876'
+
+  - name: 'acc105'
+    passwd: '9876'
+
+  - name: 'acc106'
+    passwd: '9876'
+
+  - name: 'acc107'
+    passwd: '9876'
+

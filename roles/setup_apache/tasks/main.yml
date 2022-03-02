@@ -1,0 +1,114 @@
+---
+
+- name: Install apache2
+  apt:
+    name: apache2, php
+  become: true
+
+- name: Create cert (1/3)
+  shell: mkdir -p /etc/apache2/cert
+  become: true
+
+  # This creates keys with 700
+- name: Create cert (2/3)
+  shell: certtool --generate-privkey --bits 4096 --outfile /etc/apache2/cert/key.pem
+  become: true
+
+- name: Create cert (3/3)
+  shell: certtool --generate-certificate --load-privkey /etc/apache2/cert/key.pem --load-ca-certificate /etc/ssl/certs/fiwi_ca_self-signed_cert.pem --load-ca-privkey /etc/ssl/private/fiwi_ca_key.pem --template /etc/ssl/fiwi-ldap.info --outfile /etc/apache2/cert/cert.pem
+  become: true
+
+- name: Enable apache2 ssl, authnz_ldap, userdir
+  shell: a2enmod ssl authnz_ldap userdir rewrite actions
+  become: true
+
+- name: Copy port.conf
+  copy:
+    src: ../../../configs/apache/ports.conf
+    dest: /etc/apache2/ports.conf
+  become: true
+
+- name: Copy ssl.conf
+  copy:
+    src: ../../../configs/apache/ssl.conf
+    dest: /etc/apache2/sites-available/ssl.conf
+  become: true
+
+- name: Modify ssl.conf
+  lineinfile:
+    path: /etc/apache2/sites-available/ssl.conf
+    search_string: 'UserDir #replace'
+    line: '    UserDir /home/ldap/*/{{ user_webdir }}'
+  become: true
+
+- name: Modify ssl.conf
+  lineinfile:
+    path: /etc/apache2/sites-available/ssl.conf
+    search_string: 'DirectoryMatch #replace'
+    line: '    <DirectoryMatch "/home/ldap/(?<username>[^/]+)/{{ user_webdir }}">'
+  become: true
+
+- name: Modify ssl.conf
+  lineinfile:
+    path: /etc/apache2/sites-available/ssl.conf
+    search_string: 'AuthLDAPURL'
+    line: '        AuthLDAPURL "ldap://{{ ldap_fqdn }}/{{ ldap_dc_base }}?cn?sub" TLS'
+  become: true
+
+- name: Modify ssl.conf
+  lineinfile:
+    path: /etc/apache2/sites-available/ssl.conf
+    search_string: 'AuthLDAPBindDN'
+    line: '        AuthLDAPBindDN cn=admin,{{ ldap_dc_base }}'
+  become: true
+
+- name: Double check permissions
+  shell: chmod 700 /etc/apache2/sites-available/ssl.conf
+  become: true
+
+- name: Modify ssl.conf
+  lineinfile:
+    path: /etc/apache2/sites-available/ssl.conf
+    search_string: 'AuthLDAPBindPassword'
+    line: '        AuthLDAPBindPassword {{ ldap_admin_pw }}'
+  become: true
+
+- name: Activate ssl.conf
+  shell: a2ensite ssl.conf
+  become: true
+
+- name: Copy 000-default.conf
+  copy:
+    src: ../../../configs/apache/000-default.conf
+    dest: /etc/apache2/sites-available/000-default.conf
+  become: true
+
+- name: Modify 000-default.conf
+  lineinfile:
+    path: /etc/apache2/sites-available/000-default.conf
+    search_string: 'ServerName'
+    line: '    ServerName {{ ldap_host }}'
+  become: true
+
+- name: Modify 000-default.conf
+  lineinfile:
+    path: /etc/apache2/sites-available/000-default.conf
+    search_string: 'ServerAlias'
+    line: '    ServerAlias {{ ldap_ip }}'
+  become: true
+
+- name: Copy apache2.conf
+  copy:
+    src: ../../../configs/apache/apache2.conf
+    dest: /etc/apache2/apache2.conf
+  become: true
+
+- include_tasks: copy_site.yml
+
+- name: Restart apache
+  service:
+    name: apache2
+    state: restarted
+  become: true
+
+

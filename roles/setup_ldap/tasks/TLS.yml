@@ -41,7 +41,11 @@
     copy:
       dest: "/etc/ssl/fiwi-ldap.info"
       content: |
-        organization = FiWi Würzburg
+        organization = Julius-Maximilians-Universitaet Wuerzburg
+        unit = FiWi
+        locality = Wuerzburg
+        state = Bavaria
+        country = DE
         cn = {{ inventory_hostname }}.local
         tls_www_server
         encryption_key

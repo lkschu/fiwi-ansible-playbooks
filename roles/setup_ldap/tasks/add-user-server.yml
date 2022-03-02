@@ -2,7 +2,7 @@
 
   # Test if user exists, don't fail if it doesn't.
   # Register output and skip adding user if exit code is 0 == success => user exists
-- name: Testing if user {{ user_name }} exists
+- name: Testing if user {{ user_name }} exists (failure is ok)
   shell: ldapid {{ user_name }}
   become: true
   ignore_errors: true

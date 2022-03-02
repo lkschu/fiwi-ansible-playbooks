@@ -1,0 +1,11 @@
+---
+
+- name: copy site
+  copy:
+    src: ../../../configs/site
+    dest: /usr/local/lib/server-site
+  become: true
+
+- name: set owenership
+  shell: chown -R www-data /usr/local/lib/server-site
+  become: true

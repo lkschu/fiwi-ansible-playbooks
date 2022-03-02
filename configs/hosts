@@ -3,11 +3,14 @@ vms:
   hosts:
     fvm-[01:04]
   vars:
+    ansible_user: lkschu
+    user_webdir: "web_html"
     pool_name: "tank"
     pool_location_src: "/dev/sdb"
-      ##smb_user: lukas
-    # pool_location_dest should not be changed, as it is included in ldap configs
-    # pool_location_dest: "/home/ldap"
+
+    # pool_location_dest is "/home/ldap" and should not be changed,
+    # as it is included in all ldap configs and more
+
     # encrypted via vaultkey, indentation must be kept!
     ansible_password: !vault |
       $ANSIBLE_VAULT;1.1;AES256

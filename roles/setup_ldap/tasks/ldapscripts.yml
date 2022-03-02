@@ -62,7 +62,7 @@
     lineinfile:
       path: /etc/ldapscripts/ldapscripts.conf
       regex: '^#HOMEPERM'
-      line: 'HOMEPERMS="700"'
+      line: 'HOMEPERMS="755"'
   - name: Modfiy ldapscripts.conf
     lineinfile:
       path: /etc/ldapscripts/ldapscripts.conf
