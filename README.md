@@ -1,6 +1,6 @@
 # Ansible playbooks for fortran pipeline
 Author: Lukas K. Schumann
 
-created for fiwi wuerzburg, 2021-2022
+created for Chair of Public Finance, Julius-Maximilians-Universität Wuerzburg, 2021-2022
 
 

@@ -23,7 +23,6 @@ configure 'hosts'
  - for each user: ldapadduser, smbpasswd -a <user>, add mountentry to fstab & systemd file
 
 # TODO:
- - configure /etc/hosts automatically
  - WARNING: not all ldappw are valid: '<>' will get escaped
  - cronjob to mount -a
  - smb, ldap firewall
@@ -31,5 +30,4 @@ configure 'hosts'
 
 
 # TODO apache:
- - a2enmod authnz_ldap, userdir
  - apache starts as root -> 600 on conf with ldap pw

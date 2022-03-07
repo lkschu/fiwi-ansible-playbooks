@@ -1,5 +1,22 @@
 ---
- - name: "Install needed tools: rng-tools, bash-completion, vim, chrony, tmux, ranger, gfortran, acl, ...\nMight take a few minutes."
-   apt:
-     name: rng-tools, bash-completion, vim, chrony, tmux, ranger, gfortran, acl
-   become: true
+
+- name: "Install needed tools: rng-tools, bash-completion, vim, chrony, tmux, ranger,...\nMight take a few minutes."
+  apt:
+    name: "{{ item }}"
+  become: true
+  loop:
+    - rng-tools
+    - bash-completion
+    - vim
+    - chrony
+    - tmux
+    - ranger
+      #- gfortran
+    - gfortran-8
+    - acl
+    - unzip
+    - dos2unix
+
+- include_tasks: fortran.yml
+- include_tasks: set_config.yml
+- include_tasks: workerlist.yml

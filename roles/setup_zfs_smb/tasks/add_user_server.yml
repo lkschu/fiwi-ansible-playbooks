@@ -5,6 +5,11 @@
   shell: (echo {{ smb_master_pw }}; echo {{ smb_master_pw }}) | smbpasswd -a {{ user_name }}
   become: true
 
+# adjust permissions
+- name: Adjust permissions
+  shell: chown {{ user_name }}:www-data /home/ldap/{{ user_name }}
+  become: true
+
 # allow each user to ssh into its own machines
 - name: Generating ssh keys for {{ user_name }} (1/3)
   shell: mkdir -p ~/.ssh && chmod 700 ~/.ssh
@@ -36,12 +41,14 @@
   vars:
     allow_world_readable_tmpfiles: true
 
+# check if link is present before creation
 - name: Make symlink 1
   shell: ln -s /usr/local/lib/server-site/site ~/{{ user_webdir }}/site
   become: true
   become_user: "{{ user_name }}"
   vars:
     allow_world_readable_tmpfiles: true
+  ignore_errors: true
 
 - name: Make sysmlink 2
   shell: ln -s ~/{{ user_webdir }}/site/index.php ~/{{ user_webdir }}/index.php
@@ -49,6 +56,17 @@
   become_user: "{{ user_name }}"
   vars:
     allow_world_readable_tmpfiles: true
+  ignore_errors: true
+
+- name: Add worker to known hosts
+  shell: ssh-keyscan -H {{ hostvars[inner_item]['ansible_host'] }} >> ~/.ssh/known_hosts
+  become: true
+  become_user: "{{ user_name }}"
+  vars:
+    allow_world_readable_tmpfiles: true
+  loop: "{{ groups['vms'] }}"
+  loop_control:
+    loop_var: inner_item
 
   # TODO: include server logic
 

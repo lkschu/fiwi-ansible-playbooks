@@ -16,7 +16,7 @@
   lineinfile:
     path: /etc/fstab
     search_string: '//{{ ldap_fqdn }}/{{ user_name }}'
-    line: '//{{ ldap_fqdn }}/{{ user_name }}    /home/ldap/{{ user_name }}    cifs    vers=3.0,credentials=/etc/samba/creds/{{ user_name }},nouser,dir_mode=0700,file_mode=0600,uid={{ user_name }},gid=fiwi,exec 0 0'
+    line: '//{{ ldap_fqdn }}/{{ user_name }}    /home/ldap/{{ user_name }}    cifs    vers=3.0,credentials=/etc/samba/creds/{{ user_name }},nouser,dir_mode=0700,file_mode=0700,uid={{ user_name }},gid=fiwi,exec 0 0'
   become: true
 
 - name: Add systemd mount file for {{ user_name }}
@@ -32,7 +32,7 @@
       [Mount]
         What=//{{ ldap_fqdn }}/{{ user_name }}
         Where=/home/ldap/{{ user_name }}
-        Options=credentials=/etc/samba/creds/{{ user_name }},rw,dir_mode=0700,file_mode=0600,uid={{ user_name }},gid=fiwi
+        Options=credentials=/etc/samba/creds/{{ user_name }},rw,dir_mode=0700,file_mode=0700,uid={{ user_name }},gid=fiwi
         Type=cifs
 
       [Install]

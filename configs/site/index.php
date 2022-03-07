@@ -1,12 +1,12 @@
 <html>
 <head>
   <title>
-    Script-out
+    FiWi-Wue Fortran
   </title>
 </head>
 
 <frameset marginheight="0" framespacing="0" border="0"
-          scrolling="no" frameborder="1" rows="60, *">
+          scrolling="no" frameborder="1" rows="80, *">
  <frame src="site/sysinfo.php" name="top">
  <frame src="site/files.php" name="left">
 </frameset>

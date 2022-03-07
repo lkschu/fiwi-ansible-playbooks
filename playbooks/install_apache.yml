@@ -9,4 +9,9 @@
     - purge_unattended_upgrades
     - apt_update_cache
     - setup_apache
-    - copy_bin
+
+  tasks:
+    - name: Copy bin/
+      include_role:
+        name: copy_landingpage
+        tasks_from: main.yml

@@ -1,6 +1,6 @@
 ---
 
-- hosts: ldap
+- hosts: vms
 
   roles:
     - copy_bin
