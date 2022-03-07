@@ -1,0 +1,38 @@
+#!/bin/bash
+
+# unpack source
+tar -xzf source.tar.gz --warning=no-timestamp
+
+# convert script
+dos2unix -q config.cfg
+
+# source execution script
+source config.cfg
+
+# delete tar archive
+rm *.tar.gz
+
+#main="$1"
+
+# reset limits
+ulimit -s unlimited
+
+# prepare compilation
+# mkdir -p Build && gfortran -g -Og -fopenmp -Werror -Wno-unused -fimplicit-none -Wall -fcheck=bound,do -ffpe-trap=invalid,zero,overflow -ffree-line-length-0 -mcmodel=large -I/usr/local/include/ -J"./Build" -c $main -o "Build/%e.o"
+
+
+# mkdir -p Build && gfortran-8 -O3 -fopenmp -Wall -Wno-unused -fimplicit-none -Wall -fcheck=bound,do -ffpe-trap=invalid,zero,overflow -mcmodel=large -ffree-line-length-0 -I/usr/local/include/ -J"./Build" -c $main -o "Build/%e.o"
+# -Werror warnings being treated as errors
+#  -I/usr/local/include/
+
+mkdir -p Build
+echo "Compiling $1"
+$compiler -fopenmp -Wall -Wno-unused -fimplicit-none -fbacktrace -fdump-core -fcheck=bound,do -ffpe-trap=invalid,zero,overflow -mcmodel=large -ffree-line-length-0 -J"./Build" -I/usr/local/include/ -c $main -o "Build/%e.o"
+$compiler -fopenmp -J"./Build" /usr/local/include/toolbox.o "Build/%e.o" -o Build/prog
+
+# execute
+echo "Executing $1"
+echo "----------------------------------------------------------------"
+time (./Build/prog; echo "----------------------------------------------------------------")
+echo "----"
+echo "Executed on $(hostname)"

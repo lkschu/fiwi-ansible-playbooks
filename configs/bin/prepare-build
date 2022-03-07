@@ -1,0 +1,29 @@
+#!/bin/bash
+
+
+
+if [[ $# -eq 1 ]]; then
+    timestamp=$1
+
+    cd "$HOME/web_html/data/$timestamp" || exit #exit if cd fails
+
+    # Allow only 7 most recent entrys to be visible on the webinterface
+    if [[ ! -d "$HOME/archive" ]]; then
+        mkdir "$HOME/archive"
+    fi
+    ( ls -t .. | tail -n +8 | xargs -I {} mv ../{} $HOME/archive/ ) || echo "$(ls -t .. | tail -n +8)" >> "../.ERROR-$1"
+
+    # htaccess files don't work well on userdirs
+    #echo "IndexIgnoreReset On" > ".htaccess"
+
+    # redirect output (and stderr) from programm to prog-log.txt
+    date >> 0-RUNNING
+    execute-elivagar 2>&1 | tee console.txt
+    # if stderr is not empty tee won't exit with exit 0, so no '&&'
+    rm -r Build && rm config.cfg # && rm *.f90
+    rm 0-RUNNING
+    date >> 0-FINISHED
+
+else
+    echo "Expected directory name as 1 parameter, got $# parameters instead!"
+fi

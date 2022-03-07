@@ -1,0 +1,47 @@
+#!/bin/bash
+
+# Author: Lukas K. Schumann
+# Mail:   lukas_kilian.schumann@stud-mail.uni-wuerzburg.de
+
+# Runs on fiwi-coordinator to find fitting worker
+
+
+
+
+
+timestamp=""
+gpu=false
+detach=true
+
+for i in "$@"; do
+    case $i in
+        --gpu)
+            gpu=true
+            shift
+            ;;
+        --local)
+            detach=false
+            shift
+            ;;
+        --ts=*)
+            timestamp="${i#*=}"
+            shift
+            ;;
+        *)
+            ;;
+    esac
+done
+
+
+echo "Getting valid worker"
+HOST=$(/usr/local/bin/workerlist-proc)
+echo "Worker node is $HOST"
+
+
+if [ "$detach" = true ]; then
+    ssh "$USER"@"$HOST" "tmux new -d -s $timestamp 'prepare-build $timestamp'"\
+        && echo "Program is being build and executed in the background."
+else
+    ssh "$USER"@"$HOST" "prepare-build $timestamp"
+fi
+

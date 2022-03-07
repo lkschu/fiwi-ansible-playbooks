@@ -1,0 +1,25 @@
+---
+
+# Use not newest but v1.3 of toolbox
+# - name: "Get toolbox"
+#   get_url:
+#     url: https://www.ce-fortran.com/src/toolbox_lin.zip
+#     dest: /tmp/toolbox.zip
+
+- name: Get toolbox
+  copy:
+    src: ../../../configs/toolbox-1.3.zip
+    dest: /tmp/toolbox.zip
+
+- name: "Unpack toolbox"
+  shell: cd /tmp && unzip -o /tmp/toolbox.zip
+
+- name: "Install toolbox"
+  shell: echo y | /tmp/toolbox/install_toolbox.sh
+  become: true
+
+
+
+
+
+

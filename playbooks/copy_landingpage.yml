@@ -1,0 +1,6 @@
+---
+
+- hosts: ldap
+
+  roles:
+    - copy_landingpage

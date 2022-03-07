@@ -1,0 +1,23 @@
+#!/bin/bash
+
+
+# reset limits
+ulimit -s unlimited
+
+main="$1"
+
+debug="gfortran -g -Og"
+nodebug="gfortran -O3"
+
+
+compiler="$nodebug -fopenmp -Werror -Wno-unused -fimplicit-none -Wall -fcheck=bound,do -ffpe-trap=invalid,zero,overflow -ffree-line-length-0 -mcmodel=large -I/usr/local/include/"
+
+# compile
+mkdir -p Build && \
+    $compiler -J"./Build" -c "$main" -o "Build/%e.o"
+
+$compiler -J"./Build" /usr/local/include/toolbox.o "Build/%e.o" -o Build/prog
+
+
+# execute
+./Build/prog

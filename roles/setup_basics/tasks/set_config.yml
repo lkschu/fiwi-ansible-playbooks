@@ -1,0 +1,29 @@
+---
+
+- name: Allow password based logins
+  lineinfile:
+    path: /etc/ssh/sshd_config
+    regex: '^PasswordAuthentication'
+    line: 'PasswordAuthentication yes'
+  become: true
+
+- name: Restart sshd
+  service:
+    name: sshd
+    state: restarted
+  become: true
+
+- name: Setting journald.conf
+  lineinfile:
+    path: /etc/systemd/journald.conf
+    search_string: 'SystemMaxUse'
+    line: 'SystemMaxUse=500M'
+  become: true
+
+- name: Setting journald.conf
+  lineinfile:
+    path: /etc/systemd/journald.conf
+    search_string: 'Compress'
+    line: 'Compress=yes'
+  become: true
+

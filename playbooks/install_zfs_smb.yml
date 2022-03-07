@@ -1,0 +1,28 @@
+---
+
+# Server
+- hosts: ldap
+  pre_tasks:
+    - name: include config
+      include_vars: ../configs/ldap_config.yml
+
+  roles:
+    - purge_unattended_upgrades
+    - apt_update_cache
+    - setup_zfs_smb
+
+# Client
+- hosts: worker
+  pre_tasks:
+    - name: include config
+      include_vars: ../configs/ldap_config.yml
+
+  roles:
+    - purge_unattended_upgrades
+    - apt_update_cache
+
+  tasks:
+    - name: Install smb and smb utils
+      include_role:
+        name: setup_zfs_smb
+        tasks_from: client.yml

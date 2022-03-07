@@ -1,0 +1,11 @@
+---
+
+- name: remove old workerlist if exits
+  shell: rm /usr/local/lib/workerlist
+  become: true
+  ignore_errors: true
+
+- name: set workerlist
+  shell: echo {{ hostvars[item]['ansible_host'] }} >> /usr/local/lib/workerlist
+  become: true
+  loop: "{{ groups['worker'] }}"
