@@ -5,6 +5,6 @@
   roles:
     - purge_unattended_upgrades
     - apt_update_cache
-    - setup_basics
     - copy_bin
+    - setup_basics
 

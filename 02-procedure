@@ -16,6 +16,24 @@ add admin user and make sure ist accessible over ssh
 
 configure 'hosts'
 
+Then run these playbooks:
+-apt-upgrade
+-basics
+-ldap
+-zfs-smb
+-add-user
+-apache
+
+
+TODO
+ proc wieder normal
+ procall -> ssh key muss passen
+
+
+
+
+
+
 
 
 # REMEMBER:

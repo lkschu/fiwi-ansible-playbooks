@@ -5,7 +5,41 @@
   become: true
   ignore_errors: true
 
-- name: set workerlist
-  shell: echo {{ hostvars[item]['ansible_host'] }} >> /usr/local/lib/workerlist
+- name: copy workerlist
+  copy:
+    src: ../../../configs/workerlist
+    dest: /usr/local/lib/workerlist
   become: true
-  loop: "{{ groups['worker'] }}"
+
+
+- name: add (1/6) cronjob to proc cpu
+  cron:
+    name: get cpu usage (1/6)
+    job: (/usr/local/bin/procsys > /tmp/proccpu)
+  become: true
+
+- name: add (2/6) cronjob to proc cpu
+  cron:
+    name: get cpu usage (2/6)
+    job: (sleep 10; /usr/local/bin/procsys > /tmp/proccpu)
+  become: true
+- name: add (3/6) cronjob to proc cpu
+  cron:
+    name: get cpu usage (3/6)
+    job: (sleep 20; /usr/local/bin/procsys > /tmp/proccpu)
+  become: true
+- name: add (4/6) cronjob to proc cpu
+  cron:
+    name: get cpu usage (4/6)
+    job: (sleep 30; /usr/local/bin/procsys > /tmp/proccpu)
+  become: true
+- name: add (5/6) cronjob to proc cpu
+  cron:
+    name: get cpu usage (5/6)
+    job: (sleep 40; /usr/local/bin/procsys > /tmp/proccpu)
+  become: true
+- name: add (6/6) cronjob to proc cpu
+  cron:
+    name: get cpu usage (6/6)
+    job: (sleep 50; /usr/local/bin/procsys > /tmp/proccpu)
+  become: true

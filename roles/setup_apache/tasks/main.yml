@@ -9,7 +9,7 @@
   shell: mkdir -p /etc/apache2/cert
   become: true
 
-  # This creates keys with 700
+    # This creates keys with permissions: 700
 - name: Create cert (2/3)
   shell: certtool --generate-privkey --bits 4096 --outfile /etc/apache2/cert/key.pem
   become: true
@@ -34,28 +34,28 @@
     dest: /etc/apache2/sites-available/ssl.conf
   become: true
 
-- name: Modify ssl.conf
+- name: Modify ssl.conf (1/5)
   lineinfile:
     path: /etc/apache2/sites-available/ssl.conf
     search_string: 'UserDir #replace'
     line: '    UserDir /home/ldap/*/{{ user_webdir }}'
   become: true
 
-- name: Modify ssl.conf
+- name: Modify ssl.conf (2/5)
   lineinfile:
     path: /etc/apache2/sites-available/ssl.conf
     search_string: 'DirectoryMatch #replace'
     line: '    <DirectoryMatch "/home/ldap/(?<username>[^/]+)/{{ user_webdir }}">'
   become: true
 
-- name: Modify ssl.conf
+- name: Modify ssl.conf (3/5)
   lineinfile:
     path: /etc/apache2/sites-available/ssl.conf
     search_string: 'AuthLDAPURL'
     line: '        AuthLDAPURL "ldap://{{ ldap_fqdn }}/{{ ldap_dc_base }}?cn?sub" TLS'
   become: true
 
-- name: Modify ssl.conf
+- name: Modify ssl.conf (4/5)
   lineinfile:
     path: /etc/apache2/sites-available/ssl.conf
     search_string: 'AuthLDAPBindDN'
@@ -66,7 +66,7 @@
   shell: chmod 700 /etc/apache2/sites-available/ssl.conf
   become: true
 
-- name: Modify ssl.conf
+- name: Modify ssl.conf (5/5)
   lineinfile:
     path: /etc/apache2/sites-available/ssl.conf
     search_string: 'AuthLDAPBindPassword'
@@ -83,14 +83,14 @@
     dest: /etc/apache2/sites-available/000-default.conf
   become: true
 
-- name: Modify 000-default.conf
+- name: Modify 000-default.conf (1/2)
   lineinfile:
     path: /etc/apache2/sites-available/000-default.conf
     search_string: 'ServerName'
     line: '    ServerName {{ ldap_host }}'
   become: true
 
-- name: Modify 000-default.conf
+- name: Modify 000-default.conf (2/2)
   lineinfile:
     path: /etc/apache2/sites-available/000-default.conf
     search_string: 'ServerAlias'

@@ -10,6 +10,3 @@ users_to_add:
   - name: 'test03'
     passwd: 'lkjl'
 
-  - name: 'test04'
-    passwd: '9876'
-

@@ -17,7 +17,7 @@
   </style>
 </head>
 <body>
-<?php $output=shell_exec('/usr/local/bin/procsys.sh'); echo "<pre>$output</pre>"; ?>
+<?php $output=shell_exec('/usr/local/bin/workerlist-proc --all'); echo "<pre>$output</pre>"; ?>
 </body>
 
 </html>
