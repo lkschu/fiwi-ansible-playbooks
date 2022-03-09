@@ -37,6 +37,28 @@ if [[ "$1" == "--install" ]]; then
     exit 1
 fi
 
+if [[ "$1" == "--ls" ]]; then
+    echo "Listing archive:"
+    ssh $REMOTEUSER@$IPADDRESS "ls archive"
+    exit 0
+fi
+
+if [[ "$1" == "--get" ]]; then
+    # Regex test for $2
+    if [[ "$2" =~ ^[-_0-9]{19}$ ]]; then
+        echo "Getting $2 from archive."
+        scp -r $REMOTEUSER@$IPADDRESS:archive/$2 .
+        exit 0
+    else
+        echo "Usage: fiwi-fortran.sh --get 2022-03-09_12-51-00"
+        exit 0
+    fi
+fi
+
+if [[ "$1" == "--kill" ]]; then
+    echo "--kill not implemented yet :("
+fi
+
 
 
 
