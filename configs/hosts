@@ -20,6 +20,7 @@ vms:
     # as it is included in all ldap configs and more
 
     # encrypted via vaultkey, indentation must be kept!
+    # ansible_password should only be used if actually necessary
     # ansible_password: !vault |
     #   $ANSIBLE_VAULT;1.1;AES256
     #   33616533373965326433326337643662313337336531386334343032636139633538616434326432

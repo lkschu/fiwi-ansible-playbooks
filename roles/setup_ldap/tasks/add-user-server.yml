@@ -19,6 +19,6 @@
       become: true
 
     - name: Setting {{ user_name }} pw to dummy for now ( {{ user_pw }} )
-      shell: (echo {{ user_pw }}; echo {{ user_pw }}) | ldapsetpasswd {{ user_name }}
+      shell: (echo "{{ user_pw }}"; echo "{{ user_pw }}") | ldapsetpasswd {{ user_name }}
       become: true
   when: command_output.rc != 0

@@ -1,6 +1,13 @@
 #!/bin/bash
 
+# Author: Lukas K. Schumann
+# Mail:   lukas_kilian.schumann@stud-mail.uni-wuerzburg.de
 
+################################
+# Prepares execution of fortran code, by:
+#   - moving old entries to archive if web_html is 'full'
+#   - running the execute command and redirecting to file
+################################
 
 if [[ $# -eq 1 ]]; then
     timestamp=$1

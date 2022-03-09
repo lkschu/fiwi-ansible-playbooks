@@ -1,0 +1,9 @@
+---
+
+- hosts: ldap
+
+  tasks:
+    - name: Copy site
+      include_role:
+        name: setup_apache
+        tasks_from: copy_site.yml

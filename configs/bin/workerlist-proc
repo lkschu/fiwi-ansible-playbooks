@@ -1,9 +1,15 @@
 #!/bin/bash
 
+# Author: Lukas K. Schumann
+# Mail:   lukas_kilian.schumann@stud-mail.uni-wuerzburg.de
+
+################################
 # Gets cpu usage of worker nodes and gives ip of least used one
+# if '--all' is specified: returns list of all nodes, sorted by speed
+################################
 
 function proc() {
-    echo "$( (ssh -o ConnectTimeout=2 $USER@$1 cat /tmp/proccpu) || echo 200) $1"
+    echo "$( (/usr/bin/ssh -i ~/.ssh/id_rsa "-o ConnectTimeout=2" "$1" /usr/local/bin/procsys) || echo 200) $1"
 }
 
 function callproc() {
@@ -23,9 +29,9 @@ function callproc() {
 # get first entry, second word = host ip
 
 if [[ "$1" == "--all" ]]; then
-    # asume for printing, so add '%'
-    callproc | sort -n | awk '{ print $1 "%\t" $2 }'
+    # list all for printing, so add '%'
+    callproc | /usr/bin/sort -n | /usr/bin/awk '{ print $1 "%\t" $2 }'
 else
     # return least used cpu
-    callproc | sort -n | head -n 1 | cut -d ' ' -f 2
+    callproc | /usr/bin/sort -n | /usr/bin/head -n 1 | /usr/bin/cut -d ' ' -f 2
 fi

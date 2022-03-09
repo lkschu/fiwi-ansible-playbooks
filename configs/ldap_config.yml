@@ -5,8 +5,4 @@ ldap_ip: '10.106.242.102'
 ldap_fqdn: 'FIWI-COORDINATOR.local'
 ldap_dc_base: 'dc=FIWI-COORDINATOR,dc=local'
 
-# -> vault_vars:
-# ldap_admin_pw:   -> vault
-
-#ldap_client: 'fvm-02'
 ldap_clients: "{{ worker }}"

@@ -9,3 +9,9 @@
 - name: set owenership
   shell: chown -R www-data /usr/local/lib/server-site
   become: true
+
+- name: copy manual
+  copy:
+    src: ../../../docs/manual-user/user-manual.pdf
+    dest: /usr/local/lib/server-site
+  become: true

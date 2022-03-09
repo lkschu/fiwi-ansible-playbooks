@@ -1,8 +1,9 @@
 #!/bin/bash
-# Author: Lukas K. Schumann
-# Mail:   lukas_kilian.schumann@stud-mail.uni-wuerzburg.de
 
-# Newest Version available at https://10.106.242.102
+# Author: Lukas K. schumann
+# Mail: lukas_kilian.schumann@stud-mail.uni-wuerzburg.de
+
+# Newest Version always available at https://10.106.242.102
 
 
 
@@ -11,7 +12,7 @@
 # should normally point to fiwi-coordinator: 10.106.242.102
 IPADDRESS="10.106.242.102"
 # your user account, i.e. lkschu
-REMOTEHOST="test02"
+REMOTEUSER="test02"
 
 NODEBUG="gfortran-8 -O3"
 DEBUG="gfortran-8 -g -Og"
@@ -26,6 +27,21 @@ GPU=false
 
 # get 'actual' working directory, not home, when run interacively on macos
 cd -- "$(dirname "$0")"
+
+
+if [[ "$1" == "--install" ]]; then
+    scp ~/.ssh/id_rsa.pub $REMOTEUSER@$IPADDRESS:id_rsa.pub && \
+    ssh $REMOTEUSER@$IPADDRESS "cat id_rsa.pub >> .ssh/authorized_keys && rm id_rsa.pub" && \
+    exit 0
+    echo "Installing ssh keys failed, please check internet and vpn status or contact the administrator."
+fi
+
+
+
+
+
+
+
 
 # save pid to kill this script reliably from functions
 trap "exit 1" TERM
@@ -89,11 +105,11 @@ echo "timestamp=\"$timestamp\"" >> config.cfg # timestamp to create temporary di
 tar -czf source.tar.gz *.f90 config.cfg
 
 # create directory on the server
-ssh $REMOTEHOST@$IPADDRESS "mkdir web_html/data/$timestamp" || error
+ssh $REMOTEUSER@$IPADDRESS "mkdir web_html/data/$timestamp" || error
 
 # send over source and config
 echo "Sending files to target."
-scp ./source.tar.gz $REMOTEHOST@$IPADDRESS:"web_html/data/$timestamp"\
+scp ./source.tar.gz $REMOTEUSER@$IPADDRESS:"web_html/data/$timestamp"\
 && echo "Done." || error
 echo "--------------------------------"
 
@@ -102,14 +118,14 @@ rm source.tar.gz; rm config.cfg
 
 # execute the code on the server
 if [ "$DETACH" = true ]; then
-    ssh $REMOTEHOST@$IPADDRESS "delegate-build --ts=$timestamp"\
-    && echo "Check the website https://$IPADDRESS/~$REMOTEHOST for progress."\
+    ssh $REMOTEUSER@$IPADDRESS "delegate-build --ts=$timestamp"\
+    && echo "Check the website https://$IPADDRESS/~$REMOTEUSER for progress."\
     && echo "Program ID is $timestamp."\
     && read -r -n 1 -s -p "Press any key to close this window..."\
     && echo "" \
     || error
 else
-    ssh $REMOTEHOST@$IPADDRESS "delegate-build --local --ts=$timestamp"\
+    ssh $REMOTEUSER@$IPADDRESS "delegate-build --local --ts=$timestamp"\
     && read -r -n 1 -s -p "Press any key to close this window..."\
     && echo "" \
     || error

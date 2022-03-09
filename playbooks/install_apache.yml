@@ -15,3 +15,79 @@
       include_role:
         name: copy_landingpage
         tasks_from: main.yml
+
+    - name: set shell in crontab
+      cron:
+        name: SHELL
+        env: yes
+        job: /bin/bash
+      become: true
+      become_user: dummy
+    - name: add (1/6) cronjob to proc cpu
+      cron:
+        name: get cpu usage (1/6)
+        job: (/usr/local/bin/workerlist-proc --all > /tmp/proccpulist)
+      become: true
+      become_user: dummy
+    - name: add (2/6) cronjob to proc cpu
+      cron:
+        name: get cpu usage (2/6)
+        job: (sleep 10; /usr/local/bin/workerlist-proc --all > /tmp/proccpulist)
+      become: true
+      become_user: dummy
+    - name: add (3/6) cronjob to proc cpu
+      cron:
+        name: get cpu usage (3/6)
+        job: (sleep 20; /usr/local/bin/workerlist-proc --all > /tmp/proccpulist)
+      become: true
+      become_user: dummy
+    - name: add (4/6) cronjob to proc cpu
+      cron:
+        name: get cpu usage (4/6)
+        job: (sleep 30; /usr/local/bin/workerlist-proc --all > /tmp/proccpulist)
+      become: true
+      become_user: dummy
+    - name: add (5/6) cronjob to proc cpu
+      cron:
+        name: get cpu usage (5/6)
+        job: (sleep 40; /usr/local/bin/workerlist-proc --all > /tmp/proccpulist)
+      become: true
+      become_user: dummy
+    - name: add (6/6) cronjob to proc cpu
+      cron:
+        name: get cpu usage (6/6)
+        job: (sleep 50; /usr/local/bin/workerlist-proc --all > /tmp/proccpulist)
+      become: true
+      become_user: dummy
+
+    - name: add (1/6) copy cronjob to proc cpu
+      cron:
+        name: get cpu usage in webserver dir (1/6)
+        job: (sleep 5; cp /tmp/proccpulist /usr/local/lib/server-site/site/proccpulist)
+      become: true
+    - name: add (2/6) copy cronjob to proc cpu
+      cron:
+        name: get cpu usage in webserver dir (2/6)
+        job: (sleep 15; cp /tmp/proccpulist /usr/local/lib/server-site/site/proccpulist)
+      become: true
+    - name: add (3/6) copy cronjob to proc cpu
+      cron:
+        name: get cpu usage in webserver dir (3/6)
+        job: (sleep 25; cp /tmp/proccpulist /usr/local/lib/server-site/site/proccpulist)
+      become: true
+    - name: add (4/6) copy cronjob to proc cpu
+      cron:
+        name: get cpu usage in webserver dir (4/6)
+        job: (sleep 35; cp /tmp/proccpulist /usr/local/lib/server-site/site/proccpulist)
+      become: true
+    - name: add (5/6) copy cronjob to proc cpu
+      cron:
+        name: get cpu usage in webserver dir (5/6)
+        job: (sleep 45; cp /tmp/proccpulist /usr/local/lib/server-site/site/proccpulist)
+      become: true
+    - name: add (6/6) copy cronjob to proc cpu
+      cron:
+        name: get cpu usage in webserver dir (6/6)
+        job: (sleep 55; cp /tmp/proccpulist /usr/local/lib/server-site/site/proccpulist)
+      become: true
+

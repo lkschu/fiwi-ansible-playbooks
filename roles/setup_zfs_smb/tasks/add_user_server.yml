@@ -2,7 +2,7 @@
 # notes: requires user_name
 
 - name: Add user {{ user_name }}
-  shell: (echo {{ smb_master_pw }}; echo {{ smb_master_pw }}) | smbpasswd -a {{ user_name }}
+  shell: (echo "{{ smb_master_pw }}"; echo "{{ smb_master_pw }}") | smbpasswd -a {{ user_name }}
   become: true
 
 # adjust permissions
