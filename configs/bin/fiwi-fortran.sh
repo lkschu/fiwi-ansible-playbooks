@@ -127,6 +127,7 @@ if [ "$DETACH" = true ]; then
     || error
 else
     ssh $REMOTEUSER@$IPADDRESS "delegate-build --local --ts=$timestamp"\
+    && scp -r $REMOTEUSER@$IPADDRESS:web_html/data/$timestamp/ . \
     && read -r -n 1 -s -p "Press any key to close this window..."\
     && echo "" \
     || error

@@ -115,6 +115,7 @@ if %DETACH% == true (
 
 :: else
 ssh %REMOTEUSER%@%IPADDRESS% delegate-build --local --ts=%timestamp%
+scp -r %REMOTEUSER%@%IPADDRESS%:web_html/data/%timestamp% .
 goto CLEANUP
 
 :ERROR

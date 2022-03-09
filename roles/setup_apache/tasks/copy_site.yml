@@ -13,5 +13,5 @@
 - name: copy manual
   copy:
     src: ../../../docs/manual-user/user-manual.pdf
-    dest: /usr/local/lib/server-site
+    dest: /usr/local/lib/server-site/site
   become: true
