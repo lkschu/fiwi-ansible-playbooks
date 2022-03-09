@@ -3,6 +3,12 @@
 - name: Install updates
   hosts: vms
   tasks:
+
+    - name: Purge unattended upgrades
+      include_role:
+        name: purge_unattended_upgrades
+        tasks_from: main.yml
+
     - name: Update & Upgrade
       apt:
         update_cache: yes

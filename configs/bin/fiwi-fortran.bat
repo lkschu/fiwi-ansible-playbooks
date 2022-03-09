@@ -23,8 +23,9 @@ set GPU=false
 if [%1]==[--install] (
     scp %userprofile%\.ssh\id_rsa.pub %REMOTEUSER%@%IPADDRESS%:id_rsa.pub^
     && ssh %REMOTEUSER%@%IPADDRESS% "cat id_rsa.pub >> .ssh/authorized_keys && rm id_rsa.pub"^
-    && goto :EOF^
-    || echo Installing ssh keys failed, please check internet and vpn status or contact the administrator.
+    && goto :EOF
+    echo Installing ssh keys failed, please check internet and vpn status or contact the administrator.
+    goto :EOF
 )
 
 ::::::::
@@ -47,7 +48,7 @@ echo main="%MAINFILE%" > config.cfg
 :: choose compiler
 :enableDebug
 set "answer=x"
-set /p answer=Enable debug flags? Gives traceback but can increase runtime.(y/N)
+set /p answer=Enable debug flags? Gives traceback but can increase runtime.(y/n)
 if %answer%==y (
     echo Debugging active.
     echo compiler="%DEBUG%" >> config.cfg

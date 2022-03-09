@@ -34,6 +34,7 @@ if [[ "$1" == "--install" ]]; then
     ssh $REMOTEUSER@$IPADDRESS "cat id_rsa.pub >> .ssh/authorized_keys && rm id_rsa.pub" && \
     exit 0
     echo "Installing ssh keys failed, please check internet and vpn status or contact the administrator."
+    exit 1
 fi
 
 

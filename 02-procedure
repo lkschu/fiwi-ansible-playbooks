@@ -1,22 +1,16 @@
 fresh install
-    (for local server: 30GB, write back, NO discard
-    (-pcid -spec-ctrl +aes
-    (61440MB ram, 2048 min
-    -> user lkschu
-    (add user to admin group
-    -> pw
-    ((make template from this setup, then clone, change hostname, delete /etc/ssh/ssh_host_* and dpkg-reconfigure openssh-server
 
 add admin user and make sure ist accessible over ssh
-    make sure python is installed
-    (add qemu guest agent for local server)
-    (imported ssh keys from github!
-    ((add hdd passthrough for ssd in proxmox: sudo qm set 101 -scsi5 /dev/disk/by-id/ata-KINGSTON_SA400S37480G_50026B73810ADCEC
-    ((where 101 is vm id
 
-configure 'hosts'
+configure 'hosts', set ansible_user and if needed pw
 
-Then run these playbooks:
+configure ldap and workerlist
+
+connect to each machine in host, to test connection and add machine to known_hosts
+
+test ansible connection with: ansible vms -m ping
+
+Then run these playbooks like so: ansible-playbook playbooks/<name>
 -apt-upgrade
 -basics
 -ldap
