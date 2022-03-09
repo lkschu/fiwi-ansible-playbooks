@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/Arch Linux) (preloaded format=pdflatex 2021.12.30)  9 MAR 2022 01:53
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/Arch Linux) (preloaded format=pdflatex 2021.12.30)  9 MAR 2022 02:39
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -370,6 +370,9 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <8> on input line 55.
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <6> on input line 55.
+
+LaTeX Warning: No \author given.
+
 LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 6
 4.
 (/usr/share/texmf-dist/tex/latex/base/t1cmtt.fd
@@ -399,13 +402,13 @@ Package pdftex.def Info: ./pics/2022-03-08_23-57.png  used on input line 84.
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./pics/2022-03-08_23-52.pn
 g (PNG copy)> <./pics/2022-03-08_23-57.png (PNG copy)>]
-<./pics/2022-03-08_23-59_1.png, id=48, 436.32169pt x 218.16084pt>
+<./pics/2022-03-08_23-59_1.png, id=47, 436.32169pt x 218.16084pt>
 File: ./pics/2022-03-08_23-59_1.png Graphic file (type png)
 <use ./pics/2022-03-08_23-59_1.png>
 Package pdftex.def Info: ./pics/2022-03-08_23-59_1.png  used on input line 114.
 
 (pdftex.def)             Requested size: 288.79422pt x 144.39937pt.
-<./pics/2022-03-09_00-05.png, id=50, 450.50551pt x 405.92775pt>
+<./pics/2022-03-09_00-05.png, id=49, 450.50551pt x 405.92775pt>
 File: ./pics/2022-03-09_00-05.png Graphic file (type png)
 <use ./pics/2022-03-09_00-05.png>
 Package pdftex.def Info: ./pics/2022-03-09_00-05.png  used on input line 133.
@@ -436,13 +439,13 @@ ng mit dem Na-men \T1/cmtt/m/n/10.95 SEC_ERROR_UNKNOWN_ISSUER\T1/cmr/m/n/10.95
 ,
  []
 
-<./pics/2022-03-09_01-03_1.png, id=58, 434.29543pt x 343.11365pt>
+<./pics/2022-03-09_01-03_1.png, id=57, 434.29543pt x 343.11365pt>
 File: ./pics/2022-03-09_01-03_1.png Graphic file (type png)
 <use ./pics/2022-03-09_01-03_1.png>
 Package pdftex.def Info: ./pics/2022-03-09_01-03_1.png  used on input line 149.
 
 (pdftex.def)             Requested size: 288.79422pt x 228.16771pt.
-<./pics/2022-03-09_01-18.png, id=59, 614.6327pt x 339.73654pt>
+<./pics/2022-03-09_01-18.png, id=58, 614.6327pt x 339.73654pt>
 File: ./pics/2022-03-09_01-18.png Graphic file (type png)
 <use ./pics/2022-03-09_01-18.png>
 Package pdftex.def Info: ./pics/2022-03-09_01-18.png  used on input line 161.
@@ -454,7 +457,7 @@ een already used, duplicate ignored
 l.168 
        [3 <./pics/2022-03-09_01-03_1.png (PNG copy)> <./pics/2022-03-09_01-18.p
 ng (PNG copy)>]
-<./pics/2022-03-09_00-17.png, id=67, 439.02336pt x 290.43085pt>
+<./pics/2022-03-09_00-17.png, id=66, 439.02336pt x 290.43085pt>
 File: ./pics/2022-03-09_00-17.png Graphic file (type png)
 <use ./pics/2022-03-09_00-17.png>
 Package pdftex.def Info: ./pics/2022-03-09_00-17.png  used on input line 179.
@@ -492,27 +495,26 @@ Package rerunfilecheck Info: File `user-manual.out' has not changed.
 (rerunfilecheck)             Checksum: 23ADECFB989A0CDE7E164AC1C6B0C7BE;858.
  ) 
 Here is how much of TeX's memory you used:
- 10631 strings out of 478353
- 172570 string characters out of 5854634
- 471457 words of memory out of 5000000
- 28617 multiletter control sequences out of 15000+600000
- 415655 words of font info for 52 fonts, out of 8000000 for 9000
+ 10629 strings out of 478353
+ 172549 string characters out of 5854634
+ 470399 words of memory out of 5000000
+ 28616 multiletter control sequences out of 15000+600000
+ 414892 words of font info for 51 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 60i,7n,63p,362b,335s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 60i,6n,63p,362b,335s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}{/usr/share/t
 exmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/share/texmf-dist/font
 s/type1/public/cm-super/sfbx1095.pfb></usr/share/texmf-dist/fonts/type1/public/
 cm-super/sfbx1200.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx14
 40.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm0900.pfb></usr/sh
-are/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb></usr/share/texmf-dist/
-fonts/type1/public/cm-super/sfrm1095.pfb></usr/share/texmf-dist/fonts/type1/pub
-lic/cm-super/sfrm1200.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sf
-rm1728.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfti1095.pfb></us
-r/share/texmf-dist/fonts/type1/public/cm-super/sftt1095.pfb>
-Output written on user-manual.pdf (5 pages, 376829 bytes).
+are/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb></usr/share/texmf-dist/
+fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texmf-dist/fonts/type1/pub
+lic/cm-super/sfrm1728.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sf
+ti1095.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sftt1095.pfb>
+Output written on user-manual.pdf (5 pages, 360870 bytes).
 PDF statistics:
- 132 PDF objects out of 1000 (max. 8388607)
- 95 compressed objects within 1 object stream
+ 127 PDF objects out of 1000 (max. 8388607)
+ 92 compressed objects within 1 object stream
  15 named destinations out of 1000 (max. 500000)
  84 words of extra memory for PDF output out of 10000 (max. 10000000)
 
