@@ -8,7 +8,6 @@
 
 
 
-
 # should normally point to fiwi-coordinator: 10.106.242.102
 IPADDRESS="10.106.242.102"
 # your user account, i.e. lkschu
@@ -28,6 +27,7 @@ GPU=false
 # get 'actual' working directory, not home, when run interacively on macos
 cd -- "$(dirname "$0")"
 
+###### Handle command arguments
 
 if [[ "$1" == "--install" ]]; then
     scp ~/.ssh/id_rsa.pub $REMOTEUSER@$IPADDRESS:id_rsa.pub && \
@@ -38,25 +38,31 @@ if [[ "$1" == "--install" ]]; then
 fi
 
 if [[ "$1" == "--ls" ]]; then
+    # list all directories in archive
     echo "Listing archive:"
     ssh $REMOTEUSER@$IPADDRESS "ls archive"
     exit 0
 fi
 
 if [[ "$1" == "--get" ]]; then
+    # Copy folder from ~/archive to working directory
     # Regex test for $2
     if [[ "$2" =~ ^[-_0-9]{19}$ ]]; then
         echo "Getting $2 from archive."
         scp -r $REMOTEUSER@$IPADDRESS:archive/$2 .
         exit 0
     else
+        echo "ERROR"
         echo "Usage: fiwi-fortran.sh --get 2022-03-09_12-51-00"
         exit 0
     fi
 fi
 
 if [[ "$1" == "--kill" ]]; then
-    echo "--kill not implemented yet :("
+    # kill remote tmux session
+    echo "Trying to kill $2."
+    ssh $REMOTEUSER@$IPADDRESS "delegate-build --kill --ts=$2"
+    exit 0
 fi
 
 
@@ -64,6 +70,8 @@ fi
 
 
 
+
+###### Normal execution
 
 
 # save pid to kill this script reliably from functions

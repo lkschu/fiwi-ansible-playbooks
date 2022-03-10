@@ -1,0 +1,78 @@
+\documentclass[11pt, a4paper]{article}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{enumitem}
+
+\usepackage[T1]{fontenc}
+\usepackage[font={footnotesize}]{caption}
+\usepackage{wrapfig}
+\usepackage{geometry}
+\geometry{
+ a4paper,
+ total={170mm,257mm},
+ left=35mm,
+ right=30mm,
+ top=40mm,
+ bottom=15mm
+ }
+
+\usepackage{url}
+\usepackage{hyperref}
+\usepackage{indentfirst} % indent first paragraph
+\usepackage[section]{placeins} % place figure inside section if declared in sec.
+\setlength{\parindent}{-5mm}
+\setlength{\parskip}{\baselineskip}%
+
+\pagenumbering{gobble}
+
+\newcommand{\bs}{\textbackslash}
+% enumerate shortcuts \e
+\def\e{\begingroup\catcode`\^^M=12 \xmymacro}
+{\catcode`\^^M=12 %
+ \gdef\xmymacro#1^^M{\begin{itemize}\item #1\end{itemize}\endgroup}%
+}
+\def\ee{\begingroup\catcode`\^^M=12 \xxmymacro}
+{\catcode`\^^M=12 %
+ \gdef\xxmymacro#1^^M{\begin{itemize}\item[]\begin{itemize}\item #1\end{itemize}\end{itemize}\endgroup}%
+}
+\def\eee{\begingroup\catcode`\^^M=12 \xxxmymacro}
+{\catcode`\^^M=12 %
+ \gdef\xxxmymacro#1^^M{\begin{itemize}\item[]\begin{itemize}\item[]\begin{itemize}\item #1\end{itemize}\end{itemize}\end{itemize}\endgroup}%
+}
+
+%\renewcommand{\texttildelow}[1][0pt]{%
+%  \mathrel{\raisebox{#1}{\oldtexttildelow}}%
+%}
+
+
+\title{\vspace{-3cm}FiWi Würzburg Fortran Pipeline - Admin Manual}
+%\author{Lukas K. Schumann, \\\small{lukas\_kilian.schumann@stud-mail.uni-wuerzburg.de}}
+\date{Stand: 03.2022}
+
+\begin{document}
+
+\maketitle
+
+\bigskip\noindent
+
+
+\vspace{-1cm}
+\section{Architekture}
+
+\subsection{Überblick}
+Die folgenden kritischen Komponenten werden verwendet:
+\e LDAP
+\e Samba
+\e ZFS
+\e Apache
+
+\section{Nutzung}
+
+\section{Problemlösung}
+
+\section{Kontakt}
+
+Fragen, Fehlermeldungen, Ergänzungen und Anregungen können gerne an \underline{\href{mailto:lukas_kilian.schumann@stud-mail.uni-wuerzburg.de}{Lukas K. Schumann}} gesendet werden.
+
+\end{document}
+

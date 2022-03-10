@@ -19,6 +19,7 @@ set DETACH=true
 set GPU=false
 
 
+:::::::: Handle command arguments
 
 if [%1]==[--install] (
     scp %userprofile%\.ssh\id_rsa.pub %REMOTEUSER%@%IPADDRESS%:id_rsa.pub^
@@ -28,7 +29,35 @@ if [%1]==[--install] (
     goto :EOF
 )
 
-::::::::
+if [%1]==[--ls] (
+    echo Listing archive:
+    ssh %REMOTEUSER%@%IPADDRESS% "ls archive"
+    goto :EOF
+)
+
+if [%1]==[--get] (
+    echo Getting %2 from archive.
+    scp -r %REMOTEUSER%@%IPADDRESS%:archive/%2 .^
+    && goto :EOF
+
+    echo ERROR
+    echo Usage: fiwi-fortran.sh --get 2022-03-09_12-51-00
+    goto :EOF
+)
+
+if [%1]==[--kill] (
+    echo Trying to kill $2.
+    ssh %REMOTEUSER%@%IPADDRESS% "delegate-build --kill --ts=$2"
+    goto :EOF
+)
+
+
+
+
+
+
+
+:::::::: Normal execution
 
 :: get timestamp
 for /f "tokens=2 delims==" %%a in ('wmic OS Get localdatetime /value') do set "dt=%%a"

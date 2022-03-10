@@ -14,6 +14,7 @@
 timestamp=""
 gpu=false
 detach=true
+kill_tmux=false
 
 for i in "$@"; do
     case $i in
@@ -23,6 +24,10 @@ for i in "$@"; do
             ;;
         --local)
             detach=false
+            shift
+            ;;
+        --kill)
+            kill_tmux=true
             shift
             ;;
         --ts=*)
@@ -35,10 +40,32 @@ for i in "$@"; do
 done
 
 
+function killtmuxsession() {
+    # connect to each worker node and try to kill tmux session, echo on success, redirect all errors to /dev/null
+    /usr/bin/ssh -i ~/.ssh/id_rsa "-o ConnectTimeout=2" "$1" "tmux kill-session -t \"$2\"  2>/dev/null && echo \"Successfully terminated $2 on $1\" && touch \"web_html/data/$2/0-ABORTED\" && rm \"web_html/data/$2/0-RUNNING\""
+}
+
+function callkill() {
+    # read workerlist
+    # call function as background task so ssh can happen in parallel
+    while IFS="" read -r p || [ -n "$p" ]
+    do
+        killtmuxsession "$p" "$timestamp" &
+    done < /usr/local/lib/workerlist
+
+    # wait for ssh to finish
+    sleep 4
+}
+
+if [ "$kill_tmux" = true ]; then
+    callkill
+    exit
+fi
+
+
 echo "Getting valid worker..."
 HOST=$(/usr/local/bin/workerlist-proc)
 echo "Worker node is $HOST "
-
 
 if [ "$detach" = true ]; then
     ssh "$USER"@"$HOST" "tmux new -d -s $timestamp 'prepare-build $timestamp'"
