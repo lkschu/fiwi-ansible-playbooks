@@ -11,11 +11,11 @@
     - chrony
     - tmux
     - ranger
-      #- gfortran
     - gfortran-8
     - acl
     - unzip
     - dos2unix
+    - gnuplot-nox
 
 - include_tasks: fortran.yml
 - include_tasks: set_config.yml

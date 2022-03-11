@@ -9,3 +9,9 @@ created for Chair of Public Finance, Julius-Maximilians-Universität Wuerzburg, 
 Uses LDAP, ZFS, Samba, Apache and more.
 
 
+
+# TODO
+
+- Toolbox has gnuplot terminal type hardcoded and doesn't allow png or cairopng. Should be patched
+
+
