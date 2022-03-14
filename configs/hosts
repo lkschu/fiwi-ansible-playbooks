@@ -9,6 +9,8 @@ vms:
       ansible_host: '10.106.241.105'
     FIWI-W03:
       ansible_host: '10.106.242.45'
+    FIWI-GPU01:
+      ansible_host: '10.106.241.232'
 
   vars:
     ansible_user: ubuntu
@@ -54,6 +56,7 @@ vms:
 worker:
   hosts:
     FIWI-W[01:03]
+    FIWI-GPU01
 
 # One machine handling ldap, webserver and zfs network storage
 ldap:

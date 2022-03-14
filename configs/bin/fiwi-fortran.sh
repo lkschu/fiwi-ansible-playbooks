@@ -17,6 +17,7 @@ NODEBUG="gfortran-8 -O3"
 DEBUG="gfortran-8 -g -Og"
 DETACH=true
 GPU=false
+MAXRAM=false
 
 
 
@@ -63,6 +64,11 @@ if [[ "$1" == "--kill" ]]; then
     echo "Trying to kill $2."
     ssh $REMOTEUSER@$IPADDRESS "delegate-build --kill --ts=$2"
     exit 0
+fi
+
+if [[ "$1" == "--max" ]]; then
+    echo "Allowing high RAM usage"
+    MAXRAM=true
 fi
 
 
@@ -149,12 +155,21 @@ rm source.tar.gz; rm config.cfg
 
 # execute the code on the server
 if [ "$DETACH" = true ]; then
-    ssh $REMOTEUSER@$IPADDRESS "delegate-build --ts=$timestamp"\
-    && echo "Check the website https://$IPADDRESS/~$REMOTEUSER for progress."\
-    && echo "Program ID is $timestamp."\
-    && read -r -n 1 -s -p "Press any key to close this window..."\
-    && echo "" \
-    || error
+    if [ "$MAXRAM" = true ]; then
+        ssh $REMOTEUSER@$IPADDRESS "delegate-build --max --ts=$timestamp"\
+        && echo "Check the website https://$IPADDRESS/~$REMOTEUSER for progress."\
+        && echo "Program ID is $timestamp."\
+        && read -r -n 1 -s -p "Press any key to close this window..."\
+        && echo "" \
+        || error
+    else
+        ssh $REMOTEUSER@$IPADDRESS "delegate-build --ts=$timestamp"\
+        && echo "Check the website https://$IPADDRESS/~$REMOTEUSER for progress."\
+        && echo "Program ID is $timestamp."\
+        && read -r -n 1 -s -p "Press any key to close this window..."\
+        && echo "" \
+        || error
+    fi
 else
     ssh $REMOTEUSER@$IPADDRESS "delegate-build --local --ts=$timestamp"\
     && scp -r $REMOTEUSER@$IPADDRESS:web_html/data/$timestamp/ . \

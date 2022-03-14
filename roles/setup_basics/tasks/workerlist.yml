@@ -11,6 +11,16 @@
     dest: /usr/local/lib/workerlist
   become: true
 
+- name: remove old workerlist-max if exits
+  shell: rm /usr/local/lib/workerlist-maxram
+  become: true
+  ignore_errors: true
+
+- name: copy workerlist-maxram
+  copy:
+    src: ../../../configs/workerlist-maxram
+    dest: /usr/local/lib/workerlist-maxram
+  become: true
 
     # - name: add (1/6) cronjob to proc cpu
     #   cron:

@@ -1,0 +1,117 @@
+---
+# Do this:
+# - update & upgrade
+# - install basics
+# - install ldap
+# - install zfs,smb
+# - add users
+# - add ssh host key of new machine to known_hosts of coordinator
+# -- update workerlist on ALL machines
+
+# WARNING!
+# The Host variable here must also be set at 'ssh-keyscan' at the bottom!
+
+- hosts: FIWI-GPU01  #__new__host__
+  pre_tasks:
+    - name: include config
+      include_vars: ../configs/ldap_config.yml
+    - name: include user vars
+      include_vars: ../configs/users_to_add.yml
+
+  roles:
+    - purge_unattended_upgrades
+    - apt_update_cache
+    - copy_bin
+    - setup_basics
+    - setup_timezone
+
+
+  tasks:
+    - name: Update & Upgrade
+      apt:
+        update_cache: yes
+        upgrade: full
+        autoremove: yes
+      become: yes
+
+    # From install_ldap playbook, start
+    - name: Add {{ ldap_host }} to /etc/hosts
+      lineinfile:
+        path: /etc/hosts
+        regex: '^{{ ldap_ip }}'
+        line: '{{ ldap_ip }} {{ ldap_fqdn }}'
+      become: true
+
+    - name: Pull CA-cert from ldap server
+      fetch:
+        src: /usr/local/share/ca-certificates/fiwi_ca_self-signed_cert.crt
+        dest: /tmp/xyzzzzz
+      delegate_to: "{{ ldap_host }}"
+
+    - name: Push CA-cert to client
+      copy:
+        src: /tmp/xyzzzzz
+        dest: /usr/local/share/ca-certificates/fiwi-ca-cert.crt
+      become: true
+
+    - name: Update certificates
+      shell: "update-ca-certificates"
+      become: true
+
+    - name: Install sssd
+      include_role:
+        name: setup_ldap
+        tasks_from: sssd.yml
+
+    - name: Waiting for reboot
+      include_role:
+        name: reboot
+        tasks_from: main.yml
+    # From install_ldap playbook, end
+
+    # From install_zfs_smb playbook, start
+    - name: Install smb and smb utils
+      include_role:
+        name: setup_zfs_smb
+        tasks_from: client.yml
+    # From install_zfs_smb playbook, end
+
+    # From add_user playbook, start
+    - name: Setting up smb mounts
+      include_role:
+        name: setup_zfs_smb
+        tasks_from: add_user_client.yml
+      loop: "{{ users_to_add }}"
+      vars:
+        user_name: "{{ item.name }}"
+    # From add_user playbook, end
+
+
+- hosts: ldap
+  pre_tasks:
+    - name: include user vars
+      include_vars: ../configs/users_to_add.yml
+  tasks:
+    - name: Add worker to known hosts
+      # This must be the ip of the new host!
+      shell: ssh-keyscan -H 10.106.241.232 >> ~/.ssh/known_hosts
+      become: true
+      become_user: "{{ user_name }}"
+      vars:
+        user_name: "{{ item.name }}"
+        allow_world_readable_tmpfiles: true
+      loop: "{{ users_to_add }}"
+
+
+
+# Update workerlist on all machines
+- hosts: vms
+  tasks:
+    - name: Update new workerlist
+      include_role:
+        name: setup_basics
+        tasks_from: workerlist.yml
+# Update workerlist on all machines
+
+
+

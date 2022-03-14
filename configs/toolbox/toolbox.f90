@@ -64,7 +64,7 @@ real*8, allocatable, private :: gnu_x(:, :), gnu_y(:, :)
 real*8, allocatable, private :: gnu_x_temp(:, :), gnu_y_temp(:, :)
 
 ! style data for gnuplot
-character(LEN = 2000), dimension(1000), private :: gnu_definitions 
+character(LEN = 2000), dimension(1000), private :: gnu_definitions
 
 
 
@@ -367,7 +367,7 @@ interface linint_Cheb
 
 end interface
 
-  
+
 !##############################################################################
 ! INTERFACE linint_Grow
 !
@@ -468,11 +468,10 @@ interface sort
 
     module procedure sort_r, sort_r2, sort_i, sort_i2
 
-end interface 
+end interface
 
 
 contains
- 
 
 
 
@@ -486,13 +485,14 @@ contains
 
 
 
- 
+
+
 !##############################################################################
 !##############################################################################
 ! MODULE errwarn
 !##############################################################################
-!############################################################################## 
- 
+!##############################################################################
+
 
     !##############################################################################
     ! SUBROUTINE error
@@ -500,57 +500,52 @@ contains
     ! Throws error message and stops program.
     !##############################################################################
     subroutine error(routine, message)
-    
-    
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-        
+
         ! routine in which error occured
         character(len=*), intent(in) :: routine
-        
+
         ! error message
         character(len=*), intent(in) :: message
-        
-        
+
+
         !##### ROUTINE CODE #######################################################
-        
+
         ! write error message
         write(*,'(/a,a,a,a/)')'ERROR ',routine,': ',message
-        
+
         ! stop program
         stop
-    
+
     end subroutine error
-    
-    
+
+
     !##############################################################################
     ! SUBROUTINE warning
     !
     ! Throws warning message
     !##############################################################################
     subroutine warning(routine, message)
-        
-        
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-        
+
         ! routine in which warning occured
         character(len=*), intent(in) :: routine
-        
+
         ! warning message
         character(len=*), intent(in) :: message
-        
-        
+
+
         !##### ROUTINE CODE #######################################################
-        
+
         ! write warning message
         write(*,'(/a,a,a,a/)')'WARNING ',routine,': ',message
-    
+
     end subroutine warning
 
- 
- 
- 
- 
- 
 
 
 
@@ -560,211 +555,211 @@ contains
 
 
 
-!############################################################################## 
+
+
+
+
+
+!##############################################################################
 !##############################################################################
 ! MODULE assertions
 !##############################################################################
 !##############################################################################
- 
- 
+
+
     !##############################################################################
     ! FUNCTION assert_eq2
     !
     ! Checks equality for two integers.
     !
     ! PARTS OF THIS PROCEDURE WERE COPIED AND ADAPTED FROM:
-    !     Press, W.H., Teukolsky, S.A., Vetterling, W.T. & Flannery, B.P. (1992). 
+    !     Press, W.H., Teukolsky, S.A., Vetterling, W.T. & Flannery, B.P. (1992).
     !     Numerical Recipes in Fortran 90: The Art of Parallel Scientific
     !     Computing, 2nd edition. Cambridge: Cambridge University Press.
     !##############################################################################
     function assert_eq2(n1, n2, string)
-    
-    
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-        
+
         ! integers to compare for equality
         integer, intent(in) :: n1, n2
-        
+
         ! routine from which error should be thrown
         character(len=*), intent(in) :: string
-        
+
         ! return value
         integer :: assert_eq2
-        
-        
+
+
         !##### ROUTINE CODE #######################################################
-        
+
         ! if equality, set return value to n1
         if (n1 == n2)then
             assert_eq2 = n1
-        
+
         ! else throw error message
         else
             call error(string, 'an assertion failed in assert_eq2')
         end if
-    
+
     end function assert_eq2
-    
-    
+
+
     !##############################################################################
     ! FUNCTION assert_eq3
     !
     ! Checks equality for three integers.
     !
     ! PARTS OF THIS PROCEDURE WERE COPIED AND ADAPTED FROM:
-    !     Press, W.H., Teukolsky, S.A., Vetterling, W.T. & Flannery, B.P. (1992). 
+    !     Press, W.H., Teukolsky, S.A., Vetterling, W.T. & Flannery, B.P. (1992).
     !     Numerical Recipes in Fortran 90: The Art of Parallel Scientific
     !     Computing, 2nd edition. Cambridge: Cambridge University Press.
     !##############################################################################
     function assert_eq3(n1, n2, n3, string)
-    
-    
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-        
+
         ! integers to compare for equality
         integer, intent(in) :: n1, n2, n3
-        
+
         ! routine from which error should be thrown
         character(len=*), intent(in) :: string
-        
+
         ! return value
         integer :: assert_eq3
-        
-        
+
+
         !##### ROUTINE CODE #######################################################
-        
+
         ! if equality, set return value to n1
         if (n1 == n2 .and. n2 == n3)then
             assert_eq3 = n1
-        
+
         ! else throw error message
         else
             call error(string, 'an assertion failed in assert_eq3')
         end if
-    
+
     end function assert_eq3
-    
-    
+
+
     !##############################################################################
     ! FUNCTION assert_eq4
     !
     ! Checks equality for four integers.
     !
     ! PARTS OF THIS PROCEDURE WERE COPIED AND ADAPTED FROM:
-    !     Press, W.H., Teukolsky, S.A., Vetterling, W.T. & Flannery, B.P. (1992). 
+    !     Press, W.H., Teukolsky, S.A., Vetterling, W.T. & Flannery, B.P. (1992).
     !     Numerical Recipes in Fortran 90: The Art of Parallel Scientific
     !     Computing, 2nd edition. Cambridge: Cambridge University Press.
     !##############################################################################
     function assert_eq4(n1, n2, n3, n4, string)
-    
-    
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-        
+
         ! integers to compare for equality
         integer, intent(in) :: n1, n2, n3, n4
-        
+
         ! routine from which error should be thrown
         character(len=*), intent(in) :: string
-        
+
         ! return value
         integer :: assert_eq4
-        
-        
+
+
         !##### ROUTINE CODE #######################################################
-        
+
         ! if equality, set return value to n1
         if (n1 == n2 .and. n2 == n3 .and. n3 == n4)then
             assert_eq4 = n1
-        
+
         ! else throw error message
         else
             call error(string, 'an assertion failed in assert_eq4')
         end if
-    
+
     end function assert_eq4
-    
-    
+
+
     !##############################################################################
     ! FUNCTION assert_eq5
     !
     ! Checks equality for five integers.
     !
     ! PARTS OF THIS PROCEDURE WERE COPIED AND ADAPTED FROM:
-    !     Press, W.H., Teukolsky, S.A., Vetterling, W.T. & Flannery, B.P. (1992). 
+    !     Press, W.H., Teukolsky, S.A., Vetterling, W.T. & Flannery, B.P. (1992).
     !     Numerical Recipes in Fortran 90: The Art of Parallel Scientific
     !     Computing, 2nd edition. Cambridge: Cambridge University Press.
     !##############################################################################
     function assert_eq5(n1, n2, n3, n4, n5, string)
-    
-    
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-        
+
         ! integers to compare for equality
         integer, intent(in) :: n1, n2, n3, n4, n5
-        
+
         ! routine from which error should be thrown
         character(len=*), intent(in) :: string
-        
+
         ! return value
         integer :: assert_eq5
-        
-        
+
+
         !##### ROUTINE CODE #######################################################
-        
+
         ! if equality, set return value to n1
         if (n1 == n2 .and. n2 == n3 .and. n3 == n4 .and. n4 == n5)then
             assert_eq5 = n1
-        
+
         ! else throw error message
         else
             call error(string, 'an assertion failed in assert_eq5')
         end if
-    
+
     end function assert_eq5
-    
-    
+
+
     !##############################################################################
     ! FUNCTION assert_eqn
     !
     ! Checks equality for n integers.
     !
     ! PARTS OF THIS PROCEDURE WERE COPIED AND ADAPTED FROM:
-    !     Press, W.H., Teukolsky, S.A., Vetterling, W.T. & Flannery, B.P. (1992). 
+    !     Press, W.H., Teukolsky, S.A., Vetterling, W.T. & Flannery, B.P. (1992).
     !     Numerical Recipes in Fortran 90: The Art of Parallel Scientific
     !     Computing, 2nd edition. Cambridge: Cambridge University Press.
     !##############################################################################
     function assert_eqn(nn, string)
-    
-    
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-        
+
         ! integers to compare for equality
         integer, intent(in) :: nn(:)
-        
+
         ! routine from which error should be thrown
         character(len=*), intent(in) :: string
-        
+
         ! return value
         integer :: assert_eqn
-        
-        
+
+
         !##### ROUTINE CODE #######################################################
-        
+
         ! if equality, set return value to n1
         if (all(nn(2:) == nn(1)))then
             assert_eqn = nn(1)
-        
+
         ! else throw error message
         else
             call error(string, 'an assertion failed in assert_eqn')
         end if
-    
+
     end function assert_eqn
- 
- 
- 
- 
- 
 
 
 
@@ -774,13 +769,18 @@ contains
 
 
 
- 
-!############################################################################## 
+
+
+
+
+
+
+!##############################################################################
 !##############################################################################
 ! MODULE clock
-!############################################################################## 
 !##############################################################################
- 
+!##############################################################################
+
 
     !##############################################################################
     ! SUBROUTINE tic
@@ -788,98 +788,98 @@ contains
     ! Starts cpu timer.
     !##############################################################################
     subroutine tic()
-    
-    
+
+
         !##### ROUTINE CODE #######################################################
-        
+
         ! get cpu time
         call cpu_time(starttime_cpu)
-    
+
     end subroutine tic
-    
-    
+
+
     !##############################################################################
     ! SUBROUTINE toc
     !
     ! Stops cpu timer.
     !##############################################################################
     subroutine toc(file)
-    
-    
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-        
+
         ! optional file identifier
         integer, intent(in), optional :: file
-        
-        
+
+
         !##### OTHER VARIABLES ####################################################
-        
+
         real*8 :: time
         integer :: outfile
         real*8 :: times(4)
-        
-        
+
+
         !##### ROUTINE CODE #######################################################
-        
+
         ! get output file identifier
         if(present(file))then
             outfile = file
         else
             outfile = 0
         endif
-        
+
         ! get cpu time
         call cpu_time(time)
-        
+
         ! calculate time difference
         time = time - starttime_cpu
-        
+
         ! get number of days
         times(1) = floor(time/(24d0*60d0*60d0))
         time = time - times(1)*24d0*60d0*60d0
-        
+
         ! get number of hours
         times(2) = floor(time/(60d0*60d0))
         time = time - times(2)*60d0*60d0
-        
+
         ! get number of minutes
         times(3) = floor(time/60d0)
         time = time - times(3)*60d0
-        
+
         ! get number of seconds
         times(4) = time
-        
+
         call outTime(times, outfile)
-    
+
     end subroutine toc
- 
-    
+
+
     !##############################################################################
     ! SUBROUTINE outTime
     !
     ! Writes time to file.
     !##############################################################################
     subroutine outTime(times, file)
-    
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-        
+
         ! time as integer array
         real*8, intent(in) :: times(4)
-        
+
         ! the output file identifier
         integer, intent(in) :: file
-        
+
         !##### OTHER VARIABLES ####################################################
-        
+
         character(len=200) :: output1, output2
-        
-        
+
+
         !##### ROUTINE CODE #######################################################
-        
+
         ! set up output
         write(output1, '(a)')'Time elapsed: '
         output2 = output1
-        
+
         ! write time values
         if(times(1) > 0d0)then
             write(output1, '(a,1x,i3,a)') trim(output2), int(times(1)), ' d  '
@@ -893,15 +893,15 @@ contains
             write(output1, '(a,1x,i3,a)')trim(output2), int(times(3)), ' min  '
             output2 = output1
         endif
-        
+
         write(output1, '(a,1x,f7.3,a)')trim(output2), times(4), ' s  '
-        
+
         if(file > 0) then
             write(file, '(/a/)')trim(output1)
         else
             write(*, '(/a/)')trim(output1)
         endif
-    
+
     end subroutine outTime
 
 
@@ -917,90 +917,90 @@ contains
 
 
 
-!############################################################################## 
+!##############################################################################
 !##############################################################################
 ! MODULE linint
-!############################################################################## 
+!##############################################################################
 !##############################################################################
 
-        
+
     !##############################################################################
     ! SUBROUTINE grid_Cons_Equi
     !
     ! Constructs a whole equidistant grid on [left,right].
     !##############################################################################
     subroutine grid_Cons_Equi(a, left, right)
-     
-     
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-     
+
         ! the array to fill
         real*8, intent(out) :: a(1:)
-     
+
         ! left and right interval point
         real*8, intent(in) :: left, right
-     
-     
+
+
         !##### OTHER VARIABLES ####################################################
-     
+
         real*8 :: h
         integer :: j, n
-     
-     
+
+
         !##### ROUTINE CODE #######################################################
-        
+
         ! get number of grid points
         n = size(a, 1)-1
-     
+
         ! check for left <= right
         if(left >= right)call error('grid_Cons_Equi', &
             'left interval point greater than right point')
-     
+
         ! calculate distance between grid points
         h = (right-left)/dble(n)
-     
+
         ! calculate grid value
         a = h*(/(dble(j), j=0,n)/)+left
-     
+
     end subroutine grid_Cons_Equi
-     
-     
+
+
     !##############################################################################
     ! SUBROUTINE grid_Cons_Cheb
     !
     ! Constructs a whole grid on [left,right] using chebychev nodes.
     !##############################################################################
     subroutine grid_Cons_Cheb(a, left, right)
-     
-     
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-     
+
         ! the array to fill
         real*8, intent(out) :: a(1:)
-     
+
         ! left and right interval point
         real*8, intent(in) :: left, right
-     
-     
+
+
         !##### OTHER VARIABLES ####################################################
-     
+
         integer :: j, n
         real*8, parameter :: pi = 3.1415926535897932d0
-     
-     
+
+
         !##### ROUTINE CODE #######################################################
-        
+
         ! get number of grid points
         n = size(a, 1)-1
-     
+
         ! check for left <= right
         if(left >= right)call error('grid_Cons_Cheb', &
             'left interval point greater than right point')
-     
+
         ! calculate grid value
         a = (left+right)/2d0 + (right-left)/2d0* &
             cos((dble(n)-(/(dble(j), j=0,n)/)+0.5d0)/dble(n+1)*pi)
-     
+
     end subroutine grid_Cons_Cheb
 
 
@@ -1010,29 +1010,29 @@ contains
     ! Constructs a growing grid on [left, right].
     !##############################################################################
     subroutine grid_Cons_Grow(a, left, right, growth)
-        
+
         implicit none
 
         !##### INPUT/OUTPUT VARIABLES #############################################
-     
+
         ! the array to fill
         real*8, intent(out) :: a(1:)
-     
+
         ! left and right interval point
         real*8, intent(in) :: left, right
-     
+
         ! the growth rate of the grid
         real*8 :: growth
-     
-     
+
+
         !##### OTHER VARIABLES ####################################################
-     
+
         real*8 :: h
         integer :: j, n
-     
-     
+
+
         !##### ROUTINE CODE #######################################################
-        
+
         ! get number of grid points
         n = size(a, 1)-1
 
@@ -1046,53 +1046,53 @@ contains
 
         ! calculate factor
         h = (right-left)/((1d0+growth)**n-1d0)
-     
+
         ! calculate grid value
         a = h*((1d0+growth)**(/(dble(j), j=0,n)/)-1d0)+left
 
     end subroutine grid_Cons_Grow
-    
-    
+
+
     !##############################################################################
     ! FUNCTION grid_Val_Equi
     !
     ! Calculates single gridpoint of an equidistant grid.
     !##############################################################################
     function grid_Val_Equi(x, left, right, n)
-    
-    
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-     
+
         ! point that shall be calculated
         real*8, intent(in) :: x
-     
+
         ! left and right interval point
         real*8, intent(in) :: left, right
 
         ! last grid point: 0,1,...,n
         integer, intent(in) :: n
-     
+
         ! value at the grid point x \in [0,n]
         real*8 :: grid_Val_Equi
-     
-     
+
+
         !##### OTHER VARIABLES ####################################################
-     
+
         real*8 :: h
-     
-     
+
+
         !##### ROUTINE CODE #######################################################
-     
+
         ! check for left <= right
         if(left >= right)call error('grid_Val_Equi', &
-            'left interval point greater than right point')     
-     
+            'left interval point greater than right point')
+
         ! calculate distance between grid points
         h = (right-left)/n
-     
+
         ! calculate grid value
         grid_Val_Equi = h*x+left
-    
+
     end function grid_Val_Equi
 
 
@@ -1102,40 +1102,40 @@ contains
     ! Calculates single gridpoint of a Chebychev grid.
     !##############################################################################
     function grid_Val_Cheb(x, left, right, n)
-    
-    
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-     
+
         ! point that shall be calculated
         real*8, intent(in) :: x
-     
+
         ! left and right interval point
         real*8, intent(in) :: left, right
 
         ! last grid point: 0,1,...,n
         integer, intent(in) :: n
-     
+
         ! value at the grid point x \in [0,n]
         real*8 :: grid_Val_Cheb
-     
-     
+
+
         !##### OTHER VARIABLES ####################################################
-     
-        real*8, parameter :: pi = 3.1415926535897932d0       
-     
-     
+
+        real*8, parameter :: pi = 3.1415926535897932d0
+
+
         !##### ROUTINE CODE #######################################################
-     
+
         ! check for left <= right
         if(left >= right)call error('grid_Val_Cheb', &
-            'left interval point greater than right point')     
-     
+            'left interval point greater than right point')
+
         ! calculate grid value
         grid_Val_Cheb = (left+right)/2d0 + (right-left)/2d0* &
             cos((dble(n)-x+0.5d0)/dble(n+1)*pi)
-    
+
     end function grid_Val_Cheb
-    
+
 
     !##############################################################################
     ! FUNCTION grid_Val_Grow
@@ -1143,33 +1143,33 @@ contains
     ! Calculates single gridpoint of a growing grid.
     !##############################################################################
     function grid_Val_Grow(x, left, right, growth, n)
-    
-    
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-     
+
         ! point that shall be calculated
         real*8, intent(in) :: x
-     
+
         ! left and right interval point
-        real*8, intent(in) :: left, right     
-     
+        real*8, intent(in) :: left, right
+
         ! growth rate
         real*8, intent(in) :: growth
 
         ! last grid point: 0,1,...,n
         integer, intent(in) :: n
-     
+
         ! value at the grid point x \in [0,n]
         real*8 :: grid_Val_Grow
-     
-     
+
+
         !##### OTHER VARIABLES ####################################################
-     
+
         real*8 :: h
-     
-     
+
+
         !##### ROUTINE CODE #######################################################
-     
+
         ! check for left <= right
         if(left >= right)call error('grid_Val', &
             'left interval point greater than right point')
@@ -1177,13 +1177,13 @@ contains
         ! check for growth
         if(growth <= 0d0)call error('grid_Val_Grow', &
             'growth rate must be greater than zero')
-     
+
         ! calculate factor
         h = (right-left)/((1+growth)**n-1)
-     
+
         ! calculate grid value
         grid_Val_Grow = h*((1+growth)**x-1)+left
-    
+
     end function grid_Val_Grow
 
 
@@ -1193,40 +1193,40 @@ contains
     ! Calculates inverse of gridpoints of an equidistant grid.
     !##############################################################################
     function grid_Inv_Equi_1(x, left, right, n)
-    
-    
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-     
+
         ! point that shall be calculated
         real*8, intent(in) :: x
-     
+
         ! left and right interval point
         real*8, intent(in) :: left, right
-     
+
         ! last grid point: 0,1,...,n
         integer, intent(in) :: n
-     
+
         ! value of the inverse of the gridpoint x \in [left, right]
         real*8 :: grid_Inv_Equi_1
-     
-     
+
+
         !##### OTHER VARIABLES ####################################################
-     
+
         real*8 :: h
-     
-     
+
+
         !##### ROUTINE CODE #######################################################
-     
+
         ! check for left <= right
         if(left >= right)call error('grid_Inv_Equi', &
             'left interval point greater than right point')
-     
+
         ! calculate distance between grid points
         h = (right-left)/n
-     
+
         ! calculate grid value
         grid_Inv_Equi_1 = (x-left)/h
-    
+
     end function grid_Inv_Equi_1
 
 
@@ -1236,74 +1236,74 @@ contains
     ! Calculates inverse of gridpoints of a Chebychev grid.
     !##############################################################################
     function grid_Inv_Cheb_1(x, left, right, n)
-    
-    
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-     
+
         ! point that shall be calculated
         real*8, intent(in) :: x
-     
+
         ! left and right interval point
         real*8, intent(in) :: left, right
-     
+
         ! last grid point: 0,1,...,n
-        integer, intent(in) :: n     
-     
+        integer, intent(in) :: n
+
         ! value of the inverse of the gridpoint x \in [left, right]
-        real*8 :: grid_Inv_Cheb_1  
+        real*8 :: grid_Inv_Cheb_1
 
 
         !##### OTHER VARIABLES ####################################################
-     
-        real*8, parameter :: pi = 3.1415926535897932d0 
-     
-     
+
+        real*8, parameter :: pi = 3.1415926535897932d0
+
+
         !##### ROUTINE CODE #######################################################
-     
+
         ! check for left <= right
         if(left >= right)call error('grid_Inv_Cheb', &
             'left interval point greater than right point')
-     
+
         ! calculate grid value
         grid_Inv_Cheb_1 = dble(n) + 0.5d0 - acos((2d0*x-(left+right)) &
             /(right-left))*dble(n+1)/pi
-    
+
     end function grid_Inv_Cheb_1
-    
-    
+
+
     !##############################################################################
     ! FUNCTION grid_Inv_Grow_1
     !
     ! Calculates inverse of gridpoints of a growing grid.
     !##############################################################################
     function grid_Inv_Grow_1(x, left, right, growth, n)
-    
-    
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-     
+
         ! point that shall be calculated
         real*8, intent(in) :: x
-     
+
         ! left and right interval point
         real*8, intent(in) :: left, right
 
         ! growth rate
         real*8, intent(in) :: growth
-     
+
         ! last grid point: 0,1,...,n
-        integer, intent(in) :: n             
-     
+        integer, intent(in) :: n
+
         ! value of the inverse of the gridpoint x \in [left, right]
         real*8 :: grid_Inv_Grow_1
-     
-     
+
+
         !##### OTHER VARIABLES ####################################################
-     
+
         real*8 :: h
-     
-     
+
+
         !##### ROUTINE CODE #######################################################
-     
+
         ! check for left <= right
         if(left >= right)call error('grid_Inv_Grow', &
             'left interval point greater than right point')
@@ -1311,56 +1311,56 @@ contains
         ! check for growth
         if(growth <= 0d0)call error('grid_Inv_Grow', &
             'growth rate must be greater than zero')
-     
+
         ! calculate factor
         h = (right-left)/((1+growth)**n-1d0)
-     
+
         ! calculate grid value
         grid_Inv_Grow_1 = log((x-left)/h+1d0)/log(1d0+growth)
-    
+
     end function grid_Inv_Grow_1
-    
-    
+
+
     !##############################################################################
     ! FUNCTION grid_Inv_Equi_m
     !
     ! Calculates inverse of gridpoints of an equidistant grid.
     !##############################################################################
     function grid_Inv_Equi_m(x, left, right, n)
-    
-    
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-     
+
         ! point that shall be calculated
         real*8, intent(in) :: x(:)
-     
+
         ! left and right interval point
         real*8, intent(in) :: left, right
-     
+
         ! last grid point: 0,1,...,n
-        integer, intent(in) :: n     
-     
+        integer, intent(in) :: n
+
         ! value of the inverse of the gridpoint x \in [left, right]
         real*8 :: grid_Inv_Equi_m(size(x, 1))
-     
-     
+
+
         !##### OTHER VARIABLES ####################################################
-     
+
         real*8 :: h
-     
-     
+
+
         !##### ROUTINE CODE #######################################################
-     
+
         ! check for left <= right
         if(left >= right)call error('grid_Inv_Equi', &
             'left interval point greater than right point')
-     
+
         ! calculate distance between grid points
         h = (right-left)/n
- 
+
         ! calculate grid value
         grid_Inv_Equi_m = (x-left)/h
-    
+
     end function grid_Inv_Equi_m
 
 
@@ -1370,38 +1370,38 @@ contains
     ! Calculates inverse of gridpoints of a Chebychev grid.
     !##############################################################################
     function grid_Inv_Cheb_m(x, left, right, n)
-    
-    
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-     
+
         ! point that shall be calculated
         real*8, intent(in) :: x(:)
-     
+
         ! left and right interval point
         real*8, intent(in) :: left, right
-     
+
         ! last grid point: 0,1,...,n
-        integer, intent(in) :: n     
-     
+        integer, intent(in) :: n
+
         ! value of the inverse of the gridpoint x \in [left, right]
         real*8 :: grid_Inv_Cheb_m(size(x, 1))
-     
-     
+
+
         !##### OTHER VARIABLES ####################################################
-     
-        real*8, parameter :: pi = 3.1415926535897932d0 
-     
-     
+
+        real*8, parameter :: pi = 3.1415926535897932d0
+
+
         !##### ROUTINE CODE #######################################################
-     
+
         ! check for left <= right
         if(left >= right)call error('grid_Inv_Cheb', &
             'left interval point greater than right point')
- 
+
         ! calculate grid value
         grid_Inv_Cheb_m = dble(n) + 0.5d0 - acos((2d0*x-(left+right)) &
             /(right-left))*dble(n+1)/pi
-    
+
     end function grid_Inv_Cheb_m
 
 
@@ -1411,33 +1411,33 @@ contains
     ! Calculates inverse of gridpoints of a growing grid.
     !##############################################################################
     function grid_Inv_Grow_m(x, left, right, growth, n)
-    
-    
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-     
+
         ! point that shall be calculated
         real*8, intent(in) :: x(:)
-     
+
         ! left and right interval point
         real*8, intent(in) :: left, right
 
         ! growth rate
         real*8, intent(in) :: growth
-     
+
         ! last grid point: 0,1,...,n
         integer, intent(in) :: n
-     
+
         ! value of the inverse of the gridpoint x \in [left, right]
         real*8 :: grid_Inv_Grow_m(size(x, 1))
-     
-     
+
+
         !##### OTHER VARIABLES ####################################################
-     
+
         real*8 :: h
-     
-     
+
+
         !##### ROUTINE CODE #######################################################
-     
+
         ! check for left <= right
         if(left >= right)call error('grid_Inv_Grow', &
             'left interval point greater than right point')
@@ -1445,13 +1445,13 @@ contains
         ! check for growth
         if(growth <= 0d0)call error('grid_Inv_Grow', &
             'growth rate must be greater than zero')
-     
+
         ! calculate factor
         h = (right-left)/((1d0+growth)**n-1d0)
 
         ! calculate grid value
         grid_Inv_Grow_m = log((x-left)/h+1d0)/log(1d0+growth)
-    
+
     end function grid_Inv_Grow_m
 
 
@@ -1461,38 +1461,38 @@ contains
     ! Calculates linear interpolant on an equidistant grid.
     !##############################################################################
     subroutine linint_Equi_1(x, left, right, n, il, ir, phi)
-    
-    
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-     
+
         ! point that shall be calculated
         real*8, intent(in) :: x
-     
+
         ! left and right interval point
         real*8, intent(in) :: left, right
-     
+
         ! last grid point: 0,1,...,n
         integer, intent(in) :: n
-     
+
         ! left interpolation point
         integer, intent(out) :: il
-        
+
         ! right interpolation point
         integer, intent(out) :: ir
 
         ! interpolation fraction
         real*8, intent(out) :: phi
-     
+
         !##### OTHER VARIABLES ####################################################
-     
+
         real*8 :: h, xinv, xl, xr
-     
-     
+
+
         !##### ROUTINE CODE #######################################################
-             
+
         ! invert the grid to get point
         xinv = grid_Inv_Equi_1(min(max(x, left), right), left, right, n)
-     
+
         ! get left and right gridpoint
         il = min(max(floor(xinv), 0), n-1)
         ir = il+1
@@ -1504,7 +1504,7 @@ contains
 
         ! get share on the left point
         phi = (xr-x)/(xr-xl)
-    
+
     end subroutine linint_Equi_1
 
 
@@ -1514,43 +1514,43 @@ contains
     ! Calculates linear interpolant on an equidistant grid.
     !##############################################################################
     subroutine linint_Equi_m(x, left, right, n, il, ir, phi)
-    
-    
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-     
+
         ! point that shall be calculated
         real*8, intent(in) :: x(:)
-     
+
         ! left and right interval point
         real*8, intent(in) :: left, right
-     
+
         ! last grid point: 0,1,...,n
         integer, intent(in) :: n
-     
+
         ! left interpolation point
         integer, intent(out) :: il(:)
-        
+
         ! right interpolation point
         integer, intent(out) :: ir(:)
 
         ! interpolation fraction
         real*8, intent(out) :: phi(:)
-     
+
         !##### OTHER VARIABLES ####################################################
-     
+
         integer :: m
         real*8 :: h, xinv(size(x, 1)), xl(size(x, 1)), xr(size(x, 1))
-     
-     
+
+
         !##### ROUTINE CODE #######################################################
 
         ! check for sizes
         m = assert_eq(size(x, 1), size(il, 1), size(ir, 1), size(phi, 1), 'linint_Equi')
         m = m
-             
+
         ! invert the grid to get point
         xinv = grid_Inv_Equi_m(min(max(x, left), right), left, right, n)
-     
+
         ! get left and right gridpoint
         il = min(max(floor(xinv), 0), n-1)
         ir = il+1
@@ -1562,7 +1562,7 @@ contains
 
         ! get share on the left point
         phi = (xr-x)/(xr-xl)
-    
+
     end subroutine linint_Equi_m
 
 
@@ -1572,44 +1572,44 @@ contains
     ! Calculates linear interpolant on an equidistant grid.
     !##############################################################################
     subroutine linint_Cheb_1(x, left, right, n, il, ir, phi)
-    
-    
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-     
+
         ! point that shall be calculated
         real*8, intent(in) :: x
-     
+
         ! left and right interval point
         real*8, intent(in) :: left, right
-     
+
         ! last grid point: 0,1,...,n
         integer, intent(in) :: n
-     
+
         ! left interpolation point
         integer, intent(out) :: il
-        
+
         ! right interpolation point
         integer, intent(out) :: ir
 
         ! interpolation fraction
         real*8, intent(out) :: phi
-     
+
         !##### OTHER VARIABLES ####################################################
-     
+
         real*8 :: xinv, xl, xr
-        real*8, parameter :: pi = 3.1415926535897932d0 
-     
-     
+        real*8, parameter :: pi = 3.1415926535897932d0
+
+
         !##### ROUTINE CODE #######################################################
-     
+
         ! invert the grid to get point
         xinv = grid_Inv_Cheb_1(min(max(x, left), right), left, right, n)
-     
+
         ! get left and right gridpoint
         il = min(max(floor(xinv), 0), n-1)
         ir = il+1
 
-        ! determine left and right gridpoint        
+        ! determine left and right gridpoint
         xl = (left+right)/2d0 + (right-left)/2d0* &
             cos((dble(n)-dble(il)+0.5d0)/dble(n+1)*pi)
         xr = (left+right)/2d0 + (right-left)/2d0* &
@@ -1617,7 +1617,7 @@ contains
 
         ! get share on the left point
         phi = (xr-x)/(xr-xl)
-    
+
     end subroutine linint_Cheb_1
 
 
@@ -1627,44 +1627,44 @@ contains
     ! Calculates linear interpolant on a Chebychev grid.
     !##############################################################################
     subroutine linint_Cheb_m(x, left, right, n, il, ir, phi)
-    
-    
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-     
+
         ! point that shall be calculated
         real*8, intent(in) :: x(:)
-     
+
         ! left and right interval point
         real*8, intent(in) :: left, right
-     
+
         ! last grid point: 0,1,...,n
         integer, intent(in) :: n
-     
+
         ! left interpolation point
         integer, intent(out) :: il(:)
-        
+
         ! right interpolation point
         integer, intent(out) :: ir(:)
 
         ! interpolation fraction
         real*8, intent(out) :: phi(:)
-     
+
         !##### OTHER VARIABLES ####################################################
-     
+
         integer :: m
         real*8 :: xinv(size(x, 1)), xl(size(x, 1)), xr(size(x, 1))
         real*8, parameter :: pi = 3.1415926535897932d0
-     
-     
+
+
         !##### ROUTINE CODE #######################################################
 
         ! check for sizes
         m = assert_eq(size(x, 1), size(il, 1), size(ir, 1), size(phi, 1), 'linint_Equi')
         m = m
-     
+
         ! invert the grid to get point
         xinv = grid_Inv_Cheb_m(min(max(x, left), right), -1d0, 1d0, n)
-     
+
         ! get left and right gridpoint
         il = min(max(floor(xinv), 0), n-1)
         ir = il+1
@@ -1677,67 +1677,67 @@ contains
 
         ! get share on the left point
         phi = (xr-x)/(xr-xl)
-    
+
     end subroutine linint_Cheb_m
 
-    
+
     !##############################################################################
     ! subroutine linint_Grow_1
     !
     ! Calculates linear interpolant on a growing grid.
     !##############################################################################
     subroutine linint_Grow_1(x, left, right, growth, n, il, ir, phi)
-    
-    
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-     
+
         ! point that shall be calculated
         real*8, intent(in) :: x
-     
+
         ! left and right interval point
         real*8, intent(in) :: left, right
 
         ! growth rate
         real*8, intent(in) :: growth
-     
+
         ! last grid point: 0,1,...,n
         integer, intent(in) :: n
-     
+
         ! left interpolation point
         integer, intent(out) :: il
-        
+
         ! right interpolation point
         integer, intent(out) :: ir
 
         ! interpolation fraction
         real*8, intent(out) :: phi
-     
+
         !##### OTHER VARIABLES ####################################################
-     
+
         real*8 :: h, xinv, xl, xr
-     
-     
+
+
         !##### ROUTINE CODE #######################################################
-     
+
         ! check for left <= right
         if(left >= right)call error('linint_Grow', &
             'left interval point greater than right point')
-     
+
         ! invert the grid to get point
         xinv = grid_Inv_Grow_1(min(max(x, left), right), left, right, growth, n)
-     
+
         ! get left and right gridpoint
         il = min(max(floor(xinv), 0), n-1)
         ir = il+1
 
         ! determine left and right gridpoint
-        h = (right-left)/((1+growth)**n-1)     
+        h = (right-left)/((1+growth)**n-1)
         xl = h*((1+growth)**dble(il)-1d0)+left
         xr = h*((1+growth)**dble(ir)-1d0)+left
 
         ! get share on the left point
         phi = (xr-x)/(xr-xl)
-    
+
     end subroutine linint_Grow_1
 
 
@@ -1747,62 +1747,62 @@ contains
     ! Calculates linear interpolant on an equidistant grid.
     !##############################################################################
     subroutine linint_Grow_m(x, left, right, growth, n, il, ir, phi)
-    
-    
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-     
+
         ! point that shall be calculated
         real*8, intent(in) :: x(:)
-     
+
         ! left and right interval point
         real*8, intent(in) :: left, right
 
         ! growth rate
         real*8, intent(in) :: growth
-     
+
         ! last grid point: 0,1,...,n
         integer, intent(in) :: n
-     
+
         ! left interpolation point
         integer, intent(out) :: il(:)
-        
+
         ! right interpolation point
         integer, intent(out) :: ir(:)
 
         ! interpolation fraction
         real*8, intent(out) :: phi(:)
-     
+
         !##### OTHER VARIABLES ####################################################
-     
+
         integer :: m
         real*8 :: h, xinv(size(x, 1)), xl(size(x, 1)), xr(size(x, 1))
-     
-     
+
+
         !##### ROUTINE CODE #######################################################
 
         ! check for sizes
         m = assert_eq(size(x, 1), size(il, 1), size(ir, 1), size(phi, 1), 'linint_Equi')
         m = m
-     
+
         ! check for left <= right
         if(left >= right)call error('linint_Grow', &
             'left interval point greater than right point')
-     
+
         ! invert the grid to get point
         xinv = grid_Inv_Grow_m(min(max(x, left), right), left, right, growth, n)
-     
+
         ! get left and right gridpoint
         il = min(max(floor(xinv), 0), n-1)
         ir = il+1
 
         ! determine left and right gridpoint
-        h = (right-left)/((1+growth)**n-1)     
+        h = (right-left)/((1+growth)**n-1)
         xl = h*((1+growth)**dble(il)-1d0)+left
         xr = h*((1+growth)**dble(ir)-1d0)+left
 
         ! get share on the left point
         phi = (xr-x)/(xr-xl)
-    
+
     end subroutine linint_Grow_m
 
 
@@ -1813,7 +1813,7 @@ contains
     !##############################################################################
     function linint_Gen(x, xi, yi, istart_in)
 
-        
+
         !##### INPUT/OUTPUT VARIABLES #############################################
 
         ! point where to evaluate
@@ -1824,14 +1824,14 @@ contains
 
         ! data which to evaluate
         real*8, intent(in) :: yi(0:)
-        
+
         ! (optional) point where to start
         integer, intent(in), optional :: istart_in
 
         ! output value
         real*8 :: linint_Gen
 
-        
+
         !##### OTHER VARIABLES ####################################################
 
         ! other variables
@@ -1848,34 +1848,34 @@ contains
         else
             istart = n/2
         endif
-        
+
         ! if grid value too large, search for first smaller point
         if(xi(istart) > x)then
             ial = istart
-            do 
+            do
                 ial = ial - 1
                 if(ial <= 0)exit
                 if(xi(ial) <= x)exit
             enddo
             ial = max(ial, 0)
-            ial = min(ial, n-1)            
+            ial = min(ial, n-1)
             iar = ial+1
 
         ! if grid value too small, search for first larger point
         else
             iar = istart
-            do 
+            do
                 iar = iar + 1
                 if(iar >= n)exit
                 if(xi(iar) >= x)exit
             enddo
             iar = max(iar, 1)
-            iar = min(iar, n)            
+            iar = min(iar, n)
             ial = iar-1
         endif
 
         ! linearly interpolate between the two points
-        phi = 1d0 - (x-xi(ial))/(xi(iar)-xi(ial))        
+        phi = 1d0 - (x-xi(ial))/(xi(iar)-xi(ial))
         linint_Gen = phi*yi(ial) + (1d0-phi)*yi(iar)
 
     end function
@@ -1883,331 +1883,331 @@ contains
 
 
 
- 
-!############################################################################## 
+
+!##############################################################################
 !##############################################################################
 ! MODULE matrixtools
 !
 !##############################################################################
 !##############################################################################
-    
-    
+
+
     !##############################################################################
     ! SUBROUTINE lu_solve
     !
     ! Solves a linear equation system by lu-decomposition.
     !
     ! PARTS OF THIS PROCEDURE WERE COPIED AND ADAPTED FROM:
-    !     Press, W.H., Teukolsky, S.A., Vetterling, W.T. & Flannery, B.P. (1992). 
+    !     Press, W.H., Teukolsky, S.A., Vetterling, W.T. & Flannery, B.P. (1992).
     !     Numerical Recipes in Fortran 90: The Art of Parallel Scientific
     !     Computing, 2nd edition. Cambridge: Cambridge University Press.
     !##############################################################################
     subroutine lu_solve(a, b)
-    
-    
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-        
+
         ! matrix of the system
         real*8, intent(in) :: a(:, :)
-        
+
         ! right side of equation and solution of the system
         real*8, intent(inout) :: b(:)
-        
-        
+
+
         !##### OTHER VARIABLES ####################################################
-        
+
         integer :: indx(size(b))
         real*8 :: worka(size(a, 1), size(a, 2))
         real*8 :: d
         integer :: n
-        
-        
+
+
         !##### ROUTINE CODE #######################################################
-        
+
         ! assert size equality
         n = assert_eq(size(a,1), size(a,2), size(b), 'lu_solve')
         n = n
-        
+
         ! copy matrix to working matrix
         worka = a
-        
+
         ! decompose matrix
         call lu_decomp(worka, indx, d)
-        
+
         ! solve system
         call lu_back(worka, indx, b)
-    
+
     end subroutine lu_solve
-    
-    
+
+
     !##############################################################################
     ! FUNCTION lu_invert
     !
     ! Inverts a matrix by lu-decomposition.
     !
     ! PARTS OF THIS PROCEDURE WERE COPIED AND ADAPTED FROM:
-    !     Press, W.H., Teukolsky, S.A., Vetterling, W.T. & Flannery, B.P. (1992). 
+    !     Press, W.H., Teukolsky, S.A., Vetterling, W.T. & Flannery, B.P. (1992).
     !     Numerical Recipes in Fortran 90: The Art of Parallel Scientific
     !     Computing, 2nd edition. Cambridge: Cambridge University Press.
     !##############################################################################
     function lu_invert(a)
-    
-    
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-        
+
         ! matrix of the system
         real*8, intent(in) :: a(:, :)
-        
+
         ! the inverse of the matrix
         real*8 :: lu_invert(size(a, 1), size(a, 2))
-        
-        
+
+
         !##### OTHER VARIABLES ####################################################
-        
+
         integer :: j, n
-        
-        
+
+
         !##### ROUTINE CODE #######################################################
-        
+
         ! assert size equality
         n = assert_eq(size(a,1), size(a,2), 'lu_invert')
-        
+
         ! set up unity matrix
         lu_invert = 0d0
         do j = 1, n
             lu_invert(j, j) = 1d0
         enddo
-        
+
         ! succesively solve the system with unity matrix
         do j = 1, n
             call lu_solve(a, lu_invert(:, j))
         enddo
-    
+
     end function lu_invert
-    
-    
+
+
     !##############################################################################
     ! SUBROUTINE lu_decomp
     !
     ! Calculates lu-decomposition of matrices.
     !
     ! PARTS OF THIS PROCEDURE WERE COPIED AND ADAPTED FROM:
-    !     Press, W.H., Teukolsky, S.A., Vetterling, W.T. & Flannery, B.P. (1992). 
+    !     Press, W.H., Teukolsky, S.A., Vetterling, W.T. & Flannery, B.P. (1992).
     !     Numerical Recipes in Fortran 90: The Art of Parallel Scientific
     !     Computing, 2nd edition. Cambridge: Cambridge University Press.
     !##############################################################################
     subroutine lu_decomp(a, indx, d)
-    
-    
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-        
+
         ! matrix that shall be decomposed
         real*8, intent(inout) :: a(:, :)
-        
+
         ! row permutation indicator due to pivoting
         integer, intent(out) :: indx(:)
-        
+
         ! indicates whether number of row permutations was even or odd
         real*8, intent(out) :: d
-        
-        
+
+
         !##### OTHER VARIABLES ####################################################
-        
+
         real*8 :: vv(size(a,1))
         real*8, parameter :: tiny = 1.0e-20
         integer :: j, n, imax
-        
-        
+
+
         !##### ROUTINE CODE #######################################################
-        
+
         ! check array sizes
         n = assert_eq(size(a,1), size(a,2), size(indx),'lu_decomp')
-        
+
         ! initialize permutation indicator
         d = 1d0
-        
+
         ! get maximum value in every row
         vv = maxval(abs(a), dim=2)
-        
+
         ! if there is a zero row then matrix is singular
         if (any(abs(vv) <= 1d-100)) call error('lu_decomp', 'matrix is singular')
-        
+
         ! invert v
         vv = 1d0/vv
-        
+
         ! start lu-decomposition process
         do j = 1, n
-        
+
             ! get index of pivot element
             imax = (j-1) + imaxloc(vv(j:n)*abs(a(j:n,j)))
-            
+
             ! do pivoting if pivot element is not the first element
             if(j /= imax)then
                 call swap(a(imax,:), a(j,:))
                 d = -d
                 vv(imax) = vv(j)
             endif
-            
+
             ! indicate pivot element
             indx(j) = imax
-            
+
             ! prevent division by 0
             if(abs(a(j,j))  <= 1d-100)call error('lu_decomp', 'matrix is singular')
-            
+
             ! calculate new elements
             a(j+1:n, j) = a(j+1:n,j)/a(j,j)
             a(j+1:n, j+1:n) = a(j+1:n,j+1:n)-outerprod(a(j+1:n,j), a(j,j+1:n))
         enddo
-        
-        
+
+
     !##### SUBROUTINES AND FUNCTIONS ##########################################
-        
+
     contains
-        
-        
+
+
         function outerprod(a, b)
-        
+
             real*8, intent(in) :: a(:), b(:)
             real*8 :: outerprod(size(a, 1),size(b, 1))
-        
+
             outerprod = spread(a, dim=2, ncopies=size(b, 1)) * &
             spread(b, dim=1, ncopies=size(a, 1))
-        
+
         end function outerprod
-        
-        
+
+
         subroutine swap(a, b)
-        
+
             real*8, intent(inout) :: a(:), b(:)
             real*8 :: dum(size(a))
-        
+
             dum = a
             a = b
             b = dum
-        
+
         end subroutine swap
-        
-        
+
+
         function imaxloc(arr)
-        
+
             real*8, intent(in) :: arr(:)
             integer :: imaxloc
             integer :: imax(1)
-        
+
             imax = maxloc(arr(:))
             imaxloc = imax(1)
-        
+
         end function imaxloc
-    
+
     end subroutine lu_decomp
-    
-    
-    
+
+
+
     !##############################################################################
     ! SUBROUTINE lu_dec
     !
     ! Calculates lu-decomposition of matrices and returns L and U matrix.
     !
     ! PARTS OF THIS PROCEDURE WERE COPIED AND ADAPTED FROM:
-    !     Press, W.H., Teukolsky, S.A., Vetterling, W.T. & Flannery, B.P. (1992). 
+    !     Press, W.H., Teukolsky, S.A., Vetterling, W.T. & Flannery, B.P. (1992).
     !     Numerical Recipes in Fortran 90: The Art of Parallel Scientific
     !     Computing, 2nd edition. Cambridge: Cambridge University Press.
     !##############################################################################
     subroutine lu_dec(a, l, u)
-    
-    
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-        
+
         ! matrix that shall be decomposed
         real*8, intent(in) :: a(:, :)
-        
+
         ! lower triangular matrix
         real*8, intent(out) :: l(:, :)
-        
+
         ! upper triangular martix
         real*8, intent(out) :: u(:, :)
-        
-        
+
+
         !##### OTHER VARIABLES ####################################################
-        
+
         real*8 :: Awork(size(a,1), size(a,2))
         integer :: indx(size(a,1))
         real*8 :: d
         integer :: n, j
-        
-                
+
+
         !##### ROUTINE CODE #######################################################
-        
+
         ! check array sizes
         n = assert_eq((/size(a,1), size(a,2), size(l, 1), size(l, 2), &
         size(u, 1), size(u, 2)/), 'lu_dec')
-        
+
         ! copy matrix
         Awork(:, :) = A(:, :)
-        
+
         ! calculate decomposition
         call lu_decomp(Awork, indx, d)
-        
+
         ! initialize matrices
         L(:, :) = 0d0
         U(:, :) = 0d0
-        
+
         ! set up new matrices
         do j = 1, n
-        
+
             ! diagonal element of L
             L(j, j) = 1d0
-            
+
             ! other elements of L
             L(j, 1:j-1) = Awork(j, 1:j-1)
-            
+
             ! elements of U
             U(j, j:n) = AWork(j, j:n)
         enddo
-    
+
     end subroutine lu_dec
-    
-    
+
+
     !##############################################################################
     ! SUBROUTINE lu_back
     !
     ! Solves a lu decomposed linear equation system by backsubstitution.
     !
     ! PARTS OF THIS PROCEDURE WERE COPIED AND ADAPTED FROM:
-    !     Press, W.H., Teukolsky, S.A., Vetterling, W.T. & Flannery, B.P. (1992). 
+    !     Press, W.H., Teukolsky, S.A., Vetterling, W.T. & Flannery, B.P. (1992).
     !     Numerical Recipes in Fortran 90: The Art of Parallel Scientific
     !     Computing, 2nd edition. Cambridge: Cambridge University Press.
     !##############################################################################
     subroutine lu_back(a, indx, b)
-    
-    
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-        
+
         ! lu-decomposed matrix that defines system
         real*8, intent(in) :: a(:, :)
-        
+
         ! row permutation indicator due to pivoting
         integer, intent(in) :: indx(:)
-        
+
         ! right side of equation and solution of the system
         real*8, intent(inout) :: b(:)
-        
-        
+
+
         !##### OTHER VARIABLES ####################################################
-        
+
         real*8 :: summ
         integer :: i, n, ii, ll
-        
-        
+
+
         !##### ROUTINE CODE #######################################################
-        
+
         ! assert size equality
         n = assert_eq(size(a,1), size(a,2), size(indx), size(b), 'lu_back')
-        
+
         ! start backward solving provess
         ii = 0
         do i = 1, n
-        
+
             ll = indx(i)
             summ = b(ll)
             b(ll) = b(i)
@@ -2218,52 +2218,52 @@ contains
             endif
             b(i)=summ
         enddo
-        
+
         do i=n, 1, -1
             b(i) = (b(i)-dot_product(a(i,i+1:n), b(i+1:n)))/a(i,i)
         enddo
-    
+
     end subroutine lu_back
-    
-    
-    
+
+
+
     !##############################################################################
     ! SUBROUTINE cholesky
     !
     ! Calculates cholesky factorization of a symmetric matrix.
     !
     ! PARTS OF THIS PROCEDURE WERE COPIED AND ADAPTED FROM:
-    !     Press, W.H., Teukolsky, S.A., Vetterling, W.T. & Flannery, B.P. (1992). 
+    !     Press, W.H., Teukolsky, S.A., Vetterling, W.T. & Flannery, B.P. (1992).
     !     Numerical Recipes in Fortran 90: The Art of Parallel Scientific
     !     Computing, 2nd edition. Cambridge: Cambridge University Press.
     !##############################################################################
     subroutine cholesky(a, l)
-    
-    
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-        
+
         ! the matrix that should be decomposed
         real*8, intent(in) :: a(:, :)
-        
+
         ! the cholesky factor
         real*8, intent(out) :: l(:, :)
-        
-        
+
+
         !##### OTHER VARIABLES ####################################################
-        
+
         integer :: i, n
         real*8 :: summ, p(size(a,1))
-        
-        
+
+
         !##### ROUTINE CODE #######################################################
-        
+
         ! assert equalities
         n = assert_eq(size(a,1), size(a,2), size(l, 1), size(l, 2), &
             size(p), 'cholesky')
-        
+
         ! copy matrix
         l = a
-        
+
         ! decompose matrix
         do i = 1, n
             summ = l(i,i)-dot_product(l(i,1:i-1), l(i,1:i-1))
@@ -2272,19 +2272,14 @@ contains
             p(i) = sqrt(summ)
             l(i+1:n,i) = (l(i,i+1:n)-matmul(l(i+1:n,1:i-1),l(i,1:i-1)))/p(i)
         enddo
-        
+
         ! copy matrix
         do i = 1, n
             l(i, i) = p(i)
             l(i, i+1:n) = 0d0
         enddo
-    
+
     end subroutine cholesky
- 
- 
- 
- 
- 
 
 
 
@@ -2294,13 +2289,18 @@ contains
 
 
 
- 
-!############################################################################## 
+
+
+
+
+
+
+!##############################################################################
 !##############################################################################
 ! MODULE probabilities
 !##############################################################################
 !##############################################################################
- 
+
 
     !##############################################################################
     ! FUNCTION uniformPDF
@@ -2308,93 +2308,93 @@ contains
     ! Calculates uniform density at point x.
     !##############################################################################
     function uniformPDF(x, a, b)
-     
+
         implicit none
-     
-     
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-     
+
         ! point where to calculate function
         real*8, intent(in) :: x
-     
+
         ! left end of the distribution
         real*8, optional :: a
-     
+
         ! right end of the distribution
         real*8, optional :: b
-        
+
         ! value of the uniform density
         real*8 :: uniformPDF
-        
-     
+
+
         !##### OTHER VARIABLES ####################################################
-     
+
         real*8 :: a_c, b_c
-     
-     
+
+
         !##### ROUTINE CODE #######################################################
-     
+
         ! initialize parameters
         a_c = 0d0
         if(present(a))a_c = a
         b_c = 1d0
         if(present(b))b_c = b
-        
+
         if(b_c < a_c)then
             call error('uniformPDF','b is smaller than a')
         endif
-     
+
         if(x < a_c .or. x > b_c)then
             uniformPDF = 0d0
         else
             uniformPDF = 1d0/(b_c-a_c)
         endif
-     
+
     end function uniformPDF
-    
-    
+
+
     !##############################################################################
     ! FUNCTION uniformCDF
     !
     ! Calculates cumulated uniform distribution at point x.
     !##############################################################################
     function uniformCDF(x, a, b)
-     
+
         implicit none
-     
-     
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-     
+
         ! point where to calculate function
         real*8, intent(in) :: x
-     
+
         ! left end of the distribution
         real*8, optional :: a
-     
+
         ! right end of the distribution
         real*8, optional :: b
-        
+
         ! value of the uniform distribution function
         real*8 :: uniformCDF
-        
-     
+
+
         !##### OTHER VARIABLES ####################################################
-     
+
         real*8 :: a_c, b_c
-     
-     
+
+
         !##### ROUTINE CODE #######################################################
-     
+
         ! initialize parameters
         a_c = 0d0
         if(present(a))a_c = a
         b_c = 1d0
         if(present(b))b_c = b
-        
+
         if(b_c < a_c)then
             call error('uniformCDF','b is smaller than a')
         endif
-     
+
         if(x <= a_c)then
             uniformCDF = 0d0
         elseif(x >= b_c)then
@@ -2402,52 +2402,52 @@ contains
         else
             uniformCDF = (x-a_c)/(b_c-a_c)
         endif
-     
+
     end function uniformCDF
-    
-    
+
+
     !##############################################################################
     ! FUNCTION uniformCDF_Inv
     !
     ! Calculates inverse cumulated uniform distribution at point x.
     !##############################################################################
     function uniformCDF_Inv(x, a, b)
-     
+
         implicit none
-     
-     
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-     
+
         ! point where to calculate function
         real*8, intent(in) :: x
-     
+
         ! left end of the distribution
         real*8, optional :: a
-     
+
         ! right end of the distribution
         real*8, optional :: b
-        
+
         ! value of the uniform distribution function
         real*8 :: uniformCDF_Inv
-        
-     
+
+
         !##### OTHER VARIABLES ####################################################
-     
+
         real*8 :: a_c, b_c
-     
-     
+
+
         !##### ROUTINE CODE #######################################################
-     
+
         ! initialize parameters
         a_c = 0d0
         if(present(a))a_c = a
         b_c = 1d0
         if(present(b))b_c = b
-        
+
         if(b_c < a_c)then
             call error('uniformCDF_Inv','b is smaller than a')
         endif
-     
+
         if(x <= 0d0)then
             uniformCDF_Inv = a_c
         elseif(x >= 1d0)then
@@ -2455,7 +2455,7 @@ contains
         else
             uniformCDF_Inv = a_c + x*(b_c-a_c)
         endif
-     
+
     end function uniformCDF_Inv
 
 
@@ -2465,82 +2465,82 @@ contains
     ! Calculates normal density functions at point x.
     !##############################################################################
     function normalPDF(x, mu, sigma)
-     
+
         implicit none
-     
-     
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-     
+
         ! point where to calculate function
         real*8, intent(in) :: x
-     
+
         ! expectation of distribution
         real*8, optional :: mu
-     
+
         ! variance of distribution
         real*8, optional :: sigma
-     
+
         ! value of normal density at p
         real*8 :: normalPDF
-     
-     
+
+
         !##### OTHER VARIABLES ####################################################
-     
+
         real*8 :: mu_c, sigma_c
         real*8, parameter :: pi = 3.1415926535897d0
-     
-     
+
+
         !##### ROUTINE CODE #######################################################
-     
+
         ! initialize parameters
         mu_c = 0d0
         if(present(mu))mu_c = mu
         sigma_c = 1d0
         if(present(sigma))sigma_c = sqrt(sigma)
-        
+
         if(sigma_c <= 0d0)then
             call error('normalCDF','sigma has zero or negative value')
         endif
-     
+
         normalPDF = 1d0/(sigma_c*sqrt(2d0*pi))*exp(-((x-mu_c)/sigma_c)**2/2d0)
-     
+
     end function normalPDF
-    
- 
+
+
     !##############################################################################
     ! FUNCTION normalCDF
     !
     ! Calculates cumulated normal distribution at point x.
     !
     ! PARTS OF THIS PROCEDURE WERE COPIED AND ADAPTED FROM:
-    !     Fortran Code by John Burkardt available as Algorithm ASA066 from 
+    !     Fortran Code by John Burkardt available as Algorithm ASA066 from
     !     https://people.sc.fsu.edu/~jburkardt/f_src/asa066/asa066.html
     !
     !     REFERENCE: Hill, D. (1973). Algorithm AS 66: The Normal Integral.
     !                Applied Statistics, 22(3), 424-427.
     !##############################################################################
     function normalCDF(x, mu, sigma)
-     
+
         implicit none
-     
-     
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-     
+
         ! point where to calculate function
         real*8, intent(in) :: x
-     
+
         ! expectation of distribution
         real*8, optional :: mu
-     
+
         ! variance of distribution
         real*8, optional :: sigma
-     
+
         ! value of the normal distribution at x
         real*8 :: normalCDF
-     
-     
+
+
         !##### OTHER VARIABLES ####################################################
-     
+
         real*8 :: mu_c, sigma_c, xtrans, xabs, y
         real*8, parameter :: a0  = 0.5d0
         real*8, parameter :: a1  = 0.398942280444d0
@@ -2562,10 +2562,10 @@ contains
         real*8, parameter :: b9  = 0.742380924027d0
         real*8, parameter :: b10 = 30.789933034d0
         real*8, parameter :: b11 = 3.99019417011d0
-     
-     
+
+
         !##### ROUTINE CODE #######################################################
-     
+
         ! initialize parameters
         mu_c = 0d0
         if(present(mu))mu_c = mu
@@ -2573,18 +2573,18 @@ contains
         if(present(sigma))then
             if(sigma_c > 0d0)sigma_c = sqrt(sigma)
         endif
-        
+
         if(sigma_c <= 0d0)then
             call error('normalCDF','sigma has zero or negative value')
         endif
-     
+
         ! standardize evaluation point
         xtrans = (x - mu_c)/sigma_c
-        
+
         ! calculate absolute value and quadratic
         xabs = abs(xtrans)
         y = a0*xtrans**2
-        
+
         ! choose the right interval for calculation
         if(xabs <= 1.28d0)then
             normalCDF = a0-xabs*(a1-a2*y/(y+a3-a4/(y+a5+a6/(y+a7))))
@@ -2594,48 +2594,48 @@ contains
         else
             normalCDF = 0d0
         endif
-        
+
         ! transform if other side of the bell
         if(xtrans > 0d0)normalCDF = 1d0-normalCDF
-     
+
     end function normalCDF
-     
-     
+
+
     !##############################################################################
     ! FUNCTION normalCDF_Inv
     !
     ! Calculates inverse cumulated normal distribution at point x.
     !
     ! PARTS OF THIS PROCEDURE WERE COPIED AND ADAPTED FROM:
-    !     Fortran Code by John Burkardt available as Algorithm ASA241 from 
+    !     Fortran Code by John Burkardt available as Algorithm ASA241 from
     !     https://people.sc.fsu.edu/~jburkardt/f_src/asa241/asa241.html
     !
-    !     REFERENCE: Wichura, M. (1988). Algorithm AS 241: The Percentage Points 
+    !     REFERENCE: Wichura, M. (1988). Algorithm AS 241: The Percentage Points
     !                of the Normal Distribution. Applied Statistics, 37(3),
     !                477-484.
     !##############################################################################
     function normalCDF_Inv(x, mu, sigma)
-     
+
         implicit none
-     
-     
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-     
+
         ! point where to calculate function
         real*8 :: x
-     
+
         ! expectation of distribution
         real*8, optional :: mu
-     
+
         ! variance of distribution
         real*8, optional :: sigma
-     
-        ! value of the inverse of the normal distribution at x   
+
+        ! value of the inverse of the normal distribution at x
         real*8 :: normalCDF_Inv
-     
-     
+
+
         !##### OTHER VARIABLES ####################################################
-     
+
         real*8 :: mu_c, sigma_c, q, r
         real*8, parameter :: a(8) = (/  3.3871328727963666080d0, &
                                         1.3314166789178437745d2, &
@@ -2690,10 +2690,10 @@ contains
 
         real*8, parameter :: split1 = 0.425D+00
         real*8, parameter :: split2 = 5.0D+00
-     
-     
+
+
         !##### ROUTINE CODE #######################################################
-     
+
         ! initialize parameters
         mu_c = 0d0
         if(present(mu))mu_c = mu
@@ -2701,38 +2701,38 @@ contains
         if(present(sigma))then
             if(sigma_c > 0d0)sigma_c = sqrt(sigma)
         endif
-        
+
         if(sigma_c <= 0d0)then
             call error('normalCDF_Inv','sigma has zero or negative value')
         endif
-     
+
         ! check for very small or large values
         if(x <= 0d0)then
             normalcdf_Inv = - huge(x)
             return
         endif
-        
+
         if (x >= 1d0)then
             normalcdf_Inv = huge(x)
             return
         endif
-        
+
         ! calculate for reasonable values
         q = x - 0.5d0
-        
+
         if(abs(q) <= split1)then
             r = const1 - q*q
             normalcdf_inv = q*r8poly_value(8, a, r)/r8poly_value(8, b, r)
         else
-        
+
             if (q < 0d0) then
                 r = x
             else
                 r = 1d0 - x
             endif
-        
+
             r = sqrt(-log(r))
-        
+
             if(r <= split2)then
                 r = r - const2
                 normalcdf_Inv = r8poly_value(8, c, r)/r8poly_value(8, d, r)
@@ -2740,276 +2740,276 @@ contains
                 r = r - split2
                 normalcdf_Inv = r8poly_value(8, e, r)/r8poly_value (8, f, r)
             endif
-        
+
             if(q < 0d0)then
                 normalcdf_Inv = -normalcdf_inv
             endif
-        endif   
-     
+        endif
+
         ! transfer to mu and sigma
         normalCDF_Inv = mu_c + sigma_c*normalCDF_Inv
-     
-     
+
+
     contains
-        
+
         ! stable evaluation of a polynomial
         function r8poly_value(n, a, x)
-        
+
             implicit none
-            
-            
+
+
             !##### INPUT/OUTPUT VARIABLES #############################################
-    
+
             ! degree of polynomial
             integer, intent(in) :: n
-            
+
             ! polynomial coefficients
             real*8, intent(in) :: a(n)
-            
+
             ! point where to evaluate the polynomial
             real*8, intent(in) :: x
-            
+
             ! the value of the polynomial
             real*8 :: r8poly_value
-            
-            
+
+
             !##### OTHER VARIABLES ####################################################
-            
+
             integer :: i
-            
-            
+
+
             !##### ROUTINE CODE #######################################################
-        
+
             r8poly_value = 0d0
             do i = n, 1, -1
                 r8poly_value = r8poly_value * x + a(i)
             enddo
-        
+
         end function
-     
+
     end function normalCDF_Inv
-    
-    
+
+
     !##############################################################################
     ! FUNCTION log_normalPDF
     !
     ! Calculates log-normal density functions at point x.
     !##############################################################################
     function log_normalPDF(x, mu, sigma)
-     
+
         implicit none
-     
-     
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-     
+
         ! point where to calculate function
         real*8, intent(in) :: x
-     
+
         ! expectation of distribution
         real*8, optional :: mu
-     
+
         ! variance of distribution
         real*8, optional :: sigma
-     
+
         ! value of normal density at p
         real*8 :: log_normalPDF
-     
-     
+
+
         !##### OTHER VARIABLES ####################################################
-     
+
         real*8 :: mu_c, sigma_c
-     
-     
+
+
         !##### ROUTINE CODE #######################################################
-     
+
         ! initialize parameters
         mu_c = exp(0.5d0)
         if(present(mu))mu_c = mu
         sigma_c = exp(1d0)*(exp(1d0)-1d0)
         if(present(sigma))sigma_c = sigma
-        
+
         if(sigma_c <= 0d0)then
             call error('log_normalPDF','sigma has zero or negative value')
         endif
         if(mu_c <= 0d0)then
             call error('log_normalPDF','mu has zero or negative value')
         endif
-        
+
         if(x < 0d0)then
             call error('log_normalPDF','x has negative value')
         endif
-     
+
         ! get expectation and variance
         sigma_c = log(1d0+sigma_c/mu_c**2)
         mu_c  = log(mu_c)-0.5d0*sigma_c
-     
+
         ! simulate normal and convert to log_normal
         if(x > 0d0)then
             log_normalPDF = normalPDF(log(x), mu_c, sigma_c)
         else
             log_normalPDF = 0d0
         endif
-     
+
     end function log_normalPDF
-    
-    
+
+
     !##############################################################################
     ! FUNCTION log_normalCDF
     !
     ! Calculates log-normal distribution at point x.
     !##############################################################################
     function log_normalCDF(x, mu, sigma)
-     
+
         implicit none
-     
-     
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-     
+
         ! point where to calculate function
         real*8, intent(in) :: x
-     
+
         ! expectation of distribution
         real*8, optional :: mu
-     
+
         ! variance of distribution
         real*8, optional :: sigma
-     
+
         ! value of normal density at p
         real*8 :: log_normalCDF
-     
-     
+
+
         !##### OTHER VARIABLES ####################################################
-     
+
         real*8 :: mu_c, sigma_c
-     
-     
+
+
         !##### ROUTINE CODE #######################################################
-     
+
         ! initialize parameters
         mu_c = exp(0.5d0)
         if(present(mu))mu_c = mu
         sigma_c = exp(1d0)*(exp(1d0)-1d0)
         if(present(sigma))sigma_c = sigma
-        
+
         if(sigma_c <= 0d0)then
             call error('log_normalCDF','sigma has zero or negative value')
         endif
         if(mu_c <= 0d0)then
             call error('log_normalCDF','mu has zero or negative value')
         endif
-        
+
         if(x < 0d0)then
             call error('log_normalCDF','x has negative value')
         endif
-     
+
         ! get expectation and variance
         sigma_c = log(1d0+sigma_c/mu_c**2)
         mu_c  = log(mu_c)-0.5d0*sigma_c
-     
+
         ! simulate normal and convert to log_normal
         if(x > 0d0)then
             log_normalCDF = normalCDF(log(x), mu_c, sigma_c)
         else
             log_normalCDF = 0d0
         endif
-     
+
     end function log_normalCDF
-    
-    
+
+
     !##############################################################################
     ! FUNCTION log_normalCDF_Inv
     !
     ! Calculates cumulated log-normal distribution at point x.
     !##############################################################################
     function log_normalCDF_Inv(x, mu, sigma)
-     
+
         implicit none
-     
-     
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-     
+
         ! point where to calculate function
         real*8, intent(in) :: x
-     
+
         ! expectation of distribution
         real*8, optional :: mu
-     
+
         ! variance of distribution
         real*8, optional :: sigma
-     
+
         ! value of normal density at p
         real*8 :: log_normalCDF_Inv
-     
-     
+
+
         !##### OTHER VARIABLES ####################################################
-     
+
         real*8 :: mu_c, sigma_c
-     
-     
+
+
         !##### ROUTINE CODE #######################################################
-     
+
         ! initialize parameters
         mu_c = exp(0.5d0)
         if(present(mu))mu_c = mu
         sigma_c = exp(1d0)*(exp(1d0)-1d0)
         if(present(sigma))sigma_c = sigma
-        
+
         if(sigma_c <= 0d0)then
             call error('log_normalCDF_Inv','sigma has zero or negative value')
         endif
         if(mu_c <= 0d0)then
             call error('log_normalCDF_Inv','mu has zero or negative value')
         endif
-        
+
         ! get expectation and variance
         sigma_c = log(1d0+sigma_c/mu_c**2)
         mu_c  = log(mu_c)-0.5d0*sigma_c
-     
+
         ! simulate normal and convert to log_normal
         log_normalCDF_Inv = normalCDF_Inv(x, mu_c, sigma_c)
         log_normalCDF_Inv = exp(log_normalCDF_Inv)
-        
+
     end function log_normalCDF_Inv
-    
-    
+
+
     !##############################################################################
     ! FUNCTION GammaPDF
     !
     ! Calculates Gamma density functions at point x.
     !##############################################################################
     function GammaPDF(x, alpha, beta)
-     
+
         implicit none
-     
-     
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-     
+
         ! point where to calculate function
         real*8, intent(in) :: x
-     
+
         ! shape parameter of the distribution
         real*8, optional :: alpha
-     
+
         ! scale parameter of the distribution
         real*8, optional :: beta
-     
+
         ! value of Gamma density at p
         real*8 :: gammaPDF
-        
-        
+
+
         !##### OTHER VARIABLES ####################################################
-     
+
         real*8 :: alpha_c, beta_c
-     
-          
+
+
         !##### ROUTINE CODE #######################################################
-     
+
         ! initialize parameters
         alpha_c = 1d0
         if(present(alpha))alpha_c = alpha
         beta_c = 1d0
         if(present(beta))beta_c = beta
-     
+
         ! check for validity of parameters
         if(alpha_c <= 0d0)then
             call error('GammaPDF','alpha has a non-positive value')
@@ -3017,55 +3017,55 @@ contains
         if(beta_c <= 0d0)then
             call error('GammaPDF','beta has a non-positive value')
         endif
-     
+
         if(x < 0d0 .or. alpha_c < 1d0 .and. x <= 0d0)then
             GammaPDF = 0d0
         else
             GammaPDF = beta_c**alpha_c/gamma_function(alpha_c)* &
                         x**(alpha_c-1d0)*exp(-beta_c*x)
         endif
-     
+
     end function GammaPDF
-    
-    
+
+
     !##############################################################################
     ! FUNCTION GammaCDF
     !
     ! Calculates cumulated Gamma distribution at point x.
     !##############################################################################
     function GammaCDF(x, alpha, beta)
-     
+
         implicit none
-     
-     
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-     
+
         ! point where to calculate function
         real*8, intent(in) :: x
-     
+
         ! shape parameter of the distribution
         real*8, optional :: alpha
-     
+
         ! scale parameter of the distribution
         real*8, optional :: beta
-     
+
         ! value of cumulated Gamma distribution at p
         real*8 :: gammaCDF
-        
-        
+
+
         !##### OTHER VARIABLES ####################################################
-     
+
         real*8 :: alpha_c, beta_c
-     
-          
+
+
         !##### ROUTINE CODE #######################################################
-     
+
         ! initialize parameters
         alpha_c = 1d0
         if(present(alpha))alpha_c = alpha
         beta_c = 1d0
         if(present(beta))beta_c = beta
-     
+
         ! check for validity of parameters
         if(alpha_c <= 0d0)then
             call error('GammaCDF','alpha has a non-positive value')
@@ -3073,55 +3073,55 @@ contains
         if(beta_c <= 0d0)then
             call error('GammaCDF','beta has a non-positive value')
         endif
-     
+
         if(x <= 0d0)then
             GammaCDF = 0d0
         else
             GammaCDF = incomplete_gamma(beta_c*x, alpha_c)
         endif
-     
+
     end function gammaCDF
-    
-    
-    
+
+
+
     !##############################################################################
     ! FUNCTION betaPDF
     !
     ! Calculates beta density functions at point x.
     !##############################################################################
     function betaPDF(x, p, q)
-     
+
         implicit none
-     
-     
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-     
+
         ! point where to calculate function
         real*8, intent(in) :: x
-     
+
         ! parameter of the distribution
         real*8, optional :: p
-     
+
         ! parameter of the distribution
         real*8, optional :: q
-     
+
         ! value of Gamma density at p
         real*8 :: betaPDF
-        
-        
+
+
         !##### OTHER VARIABLES ####################################################
-     
+
         real*8 :: p_c, q_c, betanorm
-     
-          
+
+
         !##### ROUTINE CODE #######################################################
-     
+
         ! initialize parameters
         p_c = 1d0
         if(present(p))p_c = p
         q_c = 1d0
         if(present(q))q_c = q
-     
+
         ! check for validity of parameters
         if(p_c <= 0d0)then
             call error('betaPDF','p has a non-positive value')
@@ -3129,66 +3129,66 @@ contains
         if(q_c <= 0d0)then
             call error('betaPDF','q has a non-positive value')
         endif
-     
+
         if(x < 0d0 .or. x > 1d0)then
             betaPDF = 0d0
         else
             betanorm = exp(my_log_gamma(p_c) + my_log_gamma(q_c) - my_log_gamma(p_c+q_c))
             betaPDF = x**(p_c-1d0)*(1d0-x)**(q_c-1d0)/betanorm
         endif
-     
+
     end function betaPDF
-    
-    
+
+
     !##############################################################################
     ! FUNCTION betaCDF
     !
     ! Calculates cumulated beta distribution at point x.
     !
     ! PARTS OF THIS PROCEDURE WERE COPIED AND ADAPTED FROM:
-    !     Fortran Code by John Burkardt available as Algorithm ASA063 from 
+    !     Fortran Code by John Burkardt available as Algorithm ASA063 from
     !     https://people.sc.fsu.edu/~jburkardt/f_src/asa063/asa063.html
     !
     !     REFERENCE: Majumder, K.L. & Bhattacharjee, G.P. (1973). Algorithm AS 63:
-    !                The incomplete Beta Integral, Applied Statistics, 22(3), 
+    !                The incomplete Beta Integral, Applied Statistics, 22(3),
     !                409-411.
     !##############################################################################
     function betaCDF(x, p_in, q_in)
-     
+
         implicit none
-     
-     
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-     
+
         ! point where to calculate function
         real*8, intent(in) :: x
-     
+
         ! parameter of the distribution
         real*8, optional :: p_in
-     
+
         ! parameter of the distribution
         real*8, optional :: q_in
-     
+
         ! value of Gamma density at p
         real*8 :: betaCDF
-        
-        
+
+
         !##### OTHER VARIABLES ####################################################
-     
+
         real*8, parameter :: acu = 0.1d-14
         real*8 :: p, q, ai, beta_log, cx, pp, psq, qq, rx, temp, term, xx
         integer :: ns
         logical :: indx
-     
-          
+
+
         !##### ROUTINE CODE #######################################################
-     
+
         ! initialize parameters
         p = 1d0
         if(present(p_in))p = p_in
         q = 1d0
         if(present(q_in))q = q_in
-     
+
         ! check for validity of parameters
         if(p <= 0d0)then
             call error('betaPDF','p has a non-positive value')
@@ -3196,7 +3196,7 @@ contains
         if(q <= 0d0)then
             call error('betaPDF','q has a non-positive value')
         endif
-     
+
         ! check outside of range
         if(x <= 0d0)then
             betaCDF = 0d0
@@ -3206,7 +3206,7 @@ contains
             betaCDF = 1d0
             return
         endif
-        
+
         ! calculate logarithm of the complete beta function
         beta_log = my_log_gamma(p) + my_log_gamma(q) - my_log_gamma(p + q)
 
@@ -3243,22 +3243,22 @@ contains
             term = term*temp*rx / (pp + ai)
             betaCDF = betaCDF + term
             temp = abs (term)
-        
+
             if(temp <= acu .and. temp <= acu*betaCDF) then
-        
+
                 betaCDF = betaCDF*exp (pp*log(xx) &
                     + (qq-1d0)*log(cx)-beta_log)/pp
-        
+
                 ! change if other tail
                 if(indx)then
                     betaCDF = 1d0 - betaCDF
                 endif
-                exit       
+                exit
             endif
-        
+
             ai = ai + 1d0
             ns = ns - 1
-        
+
             if(0 <= ns)then
                 temp = qq - ai
                 if(ns == 0)then
@@ -3269,62 +3269,62 @@ contains
                 psq = psq + 1d0
             endif
         enddo
-     
+
     end function betaCDF
-    
-    
+
+
     !##############################################################################
     ! FUNCTION incomplete_gamma
     !
     ! Calculates the incomplete gamma integral.
     !
     ! PARTS OF THIS PROCEDURE WERE COPIED AND ADAPTED FROM:
-    !     Fortran Code by John Burkardt available as Algorithm ASA239 from 
+    !     Fortran Code by John Burkardt available as Algorithm ASA239 from
     !     https://people.sc.fsu.edu/~jburkardt/f_src/asa239/asa239.html
     !
-    !     REFERENCE: Shea, B. (1988). Algorithm AS 239: Chi-squared and Incomplete 
+    !     REFERENCE: Shea, B. (1988). Algorithm AS 239: Chi-squared and Incomplete
     !                Gamma Integral, Applied Statistics, 37(3), 466-473.
     !##############################################################################
     function incomplete_gamma(x, p)
 
         implicit none
-        
-        
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-     
+
         ! point where to calculate function
         real*8, intent(in) :: x
-     
+
         ! parameter of the gamma function
         real*8, intent(in) :: p
-     
+
         ! value of normal density at p
         real*8 :: incomplete_gamma
-     
-     
+
+
         !##### OTHER VARIABLES ####################################################
-     
+
         real*8 :: a, an, arg, b, c, pn1, pn2, pn3, pn4, pn5, pn6, rn
         real*8, parameter :: elimit = - 88d0
         real*8, parameter :: oflo = 1d37
         real*8, parameter :: plimit = 1000d0
         real*8, parameter :: tol = 1d-14
         real*8, parameter :: xbig = 1d8
-     
-     
+
+
         !##### ROUTINE CODE #######################################################
 
         incomplete_gamma = 0d0
-        
+
         ! check validity of inputs solution
         if(x < 0d0)then
             call error('incomeplete_gamma','x is smaller than zero')
         endif
-        
+
         if(p <= 0d0)then
             call error('incomeplete_gamma','p is not positive')
         endif
-        
+
         ! set incomeplete_gamma = 0 if x is zero
         if(x <= 0d0)then
             incomplete_gamma = 0d0
@@ -3337,41 +3337,41 @@ contains
             incomplete_gamma = normalCDF(pn1)
             return
         endif
-        
+
         ! set incomeplete_gamma = 1 if x is large
         if(x > xbig)then
             incomplete_gamma = 1d0
         endif
-        
+
         ! Pearson series expansion
         if(x <= 1d0 .or. x < p)then
             arg = p*log(x) - x - my_log_gamma(p+1d0)
             c = 1d0
             incomplete_gamma = 1.0D+00
             a = p
-        
+
             do
                 a = a + 1d0
                 c = c*x/a
                 incomplete_gamma = incomplete_gamma + c
-        
+
                 if(c <= tol) then
                     exit
                 endif
-        
+
             enddo
-        
+
             arg = arg + log (incomplete_gamma)
-        
+
             if ( elimit <= arg ) then
               incomplete_gamma = exp ( arg )
             else
               incomplete_gamma = 0d0
             endif
-            
+
         ! Use a continued fraction expansion.
         else
-        
+
             arg = p*log (x) - x - my_log_gamma(p)
             a = 1d0 - p
             b = a + x + 1d0
@@ -3381,31 +3381,31 @@ contains
             pn3 = x + 1d0
             pn4 = x*b
             incomplete_gamma = pn3/pn4
-        
+
             do
-        
+
                 a = a + 1d0
                 b = b + 2d0
                 c = c + 1d0
                 an = a*c
                 pn5 = b*pn3 - an*pn1
                 pn6 = b*pn4 - an*pn2
-        
+
                 if ( abs(pn6) > 0d0 ) then
-        
+
                     rn = pn5 / pn6
-        
+
                     if ( abs(incomplete_gamma - rn) <= min(tol, tol*rn)) then
                         exit
                     endif
                     incomplete_gamma = rn
                 endif
-        
+
                 pn1 = pn3
                 pn2 = pn4
                 pn3 = pn5
                 pn4 = pn6
-                
+
                 !  Re-scale terms in continued fraction if terms are large.
                 if (oflo <= abs(pn5) ) then
                     pn1 = pn1/oflo
@@ -3413,21 +3413,21 @@ contains
                     pn3 = pn3/oflo
                     pn4 = pn4/oflo
                 endif
-        
+
             enddo
-        
+
             arg = arg + log (incomplete_gamma)
-        
+
             if (arg >= elimit) then
               incomplete_gamma = 1d0 - exp (arg)
             else
               incomplete_gamma = 1d0
             endif
         endif
-    
+
     end function incomplete_gamma
-    
-    
+
+
     !##############################################################################
     ! FUNCTION gamma_function
     !
@@ -3436,65 +3436,65 @@ contains
     function gamma_function(x)
 
         implicit none
-     
-     
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-     
+
         ! point where to calculate function
         real*8, intent(in) :: x
-     
+
         ! value of log of the gamma function
         real*8 :: gamma_function
-             
-     
+
+
         !##### ROUTINE CODE #######################################################
 
-        
+
         ! check validity of inputs solution
         if(x < 0d0)then
             call error('gamma_function','x is smaller than zero')
         endif
-        
+
         gamma_function = my_log_gamma(x)
         gamma_function = exp(gamma_function)
-        
+
     end function gamma_function
-    
-    
+
+
     !##############################################################################
     ! FUNCTION my_log_gamma
     !
     ! Calculates log of the gamma fuction.
     !
     ! PARTS OF THIS PROCEDURE WERE COPIED AND ADAPTED FROM:
-    !     Fortran Code by John Burkardt available as Algorithm AS245 from 
+    !     Fortran Code by John Burkardt available as Algorithm AS245 from
     !     https://people.sc.fsu.edu/~jburkardt/f_src/asa245/asa245.html
     !
-    !     REFERENCE: Macleod, A.J. (1989). Algorithm AS 245: A Robust and Reliable 
-    !                Algorithm for the  Logarithm of the Gamma Function. Applied 
+    !     REFERENCE: Macleod, A.J. (1989). Algorithm AS 245: A Robust and Reliable
+    !                Algorithm for the  Logarithm of the Gamma Function. Applied
     !                Statistics, 38(2), 397-402.
     !##############################################################################
     function my_log_gamma(x_in)
 
         implicit none
-     
-     
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-     
+
         ! point where to calculate function
         real*8, intent(in) :: x_in
-     
+
         ! value of log of the gamma function
         real*8 :: my_log_gamma
-     
-     
+
+
         !##### OTHER VARIABLES ####################################################
-     
+
         real*8, parameter :: alr2pi = 9.18938533204673d-1
-        real*8, parameter :: xlge = 5.10d6 
+        real*8, parameter :: xlge = 5.10d6
         real*8, parameter :: r1(9) = (/ -2.66685511495d0, &
                                         -2.44387534237d1, &
-                                        -2.19698958928d1, & 
+                                        -2.19698958928d1, &
                                          1.11667541262d1, &
                                          3.13060547623d0, &
                                          6.07771387771d-1, &
@@ -3503,14 +3503,14 @@ contains
                                          1.52346874070d1 /)
         real*8, parameter :: r2(9) = (/ -7.83359299449d1, &
                                         -1.42046296688d2, &
-                                         1.37519416416d2, & 
+                                         1.37519416416d2, &
                                          7.86994924154d1, &
                                          4.16438922228d0, &
                                          4.70668766060d1, &
-                                         3.13399215894d2, & 
+                                         3.13399215894d2, &
                                          2.63505074721d2, &
                                          4.33400022514d1 /)
-        real*8, parameter :: r3(9) = (/ -2.12159572323d5, & 
+        real*8, parameter :: r3(9) = (/ -2.12159572323d5, &
                                          2.30661510616d5, &
                                          2.74647644705d4, &
                                         -4.02621119975d4, &
@@ -3525,25 +3525,25 @@ contains
                                          3.350343815022304d0, &
                                          6.012459259764103d0 /)
         real*8 :: x, x1, x2, y
-     
-     
+
+
         !##### ROUTINE CODE #######################################################
 
 
         my_log_gamma = 0d0
         x = x_in
-        
+
         ! check validity of inputs solution
         if(x < 0d0)then
             call error('my_log_gamma','x is smaller than zero')
         endif
-        
+
         ! get solution for 0 < X < 0.5 and 0.5 <= x < 1.5
         if(x < 1.5d0)then
             if(x < 0.5d0)then
                 my_log_gamma = -log(x)
                 y = x + 1d0
-                
+
                 ! return if x is smaller than machine epsilon
                 if(y <= 1d0)return
             else
@@ -3553,7 +3553,7 @@ contains
             endif
             my_log_gamma = my_log_gamma + x * ((((r1(5)*y + r1(4))*y + r1(3))*y &
                 + r1(2))*y + r1(1)) / ((((y + r1(9))*y + r1(8))*y + r1(7))*y + r1(6))
-        
+
 
         ! get solution for 1.5 <= x < 4.0
         elseif(x < 4.0d0)then
@@ -3575,10 +3575,10 @@ contains
                     ((x2 + r4(5))*x2 + r4(4))
             endif
         endif
-        
+
     end function my_log_gamma
-    
-    
+
+
     !##############################################################################
     ! FUNCTION bernoulliPDF
     !
@@ -3587,38 +3587,38 @@ contains
     function bernoulliPDF(k, p)
 
         implicit none
-     
-     
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-     
+
         ! zero or 1 draw
         integer, intent(in) :: k
-     
+
         ! the probability of the positive draw
         real*8, intent(in) :: p
 
         ! the probability of this to happen
         real*8 :: bernoulliPDF
-        
-             
+
+
         !##### ROUTINE CODE #######################################################
-        
+
         ! check for validity
         if(p < 0d0 .or. p > 1d0)then
             call error('bernoulliPDF', 'Probability p is out of [0,1]')
         endif
-        
+
         ! outside of range
         if(k < 0)then
             bernoulliPDF = 0d0
             return
         endif
-        
+
         if(k > 1)then
             bernoulliPDF = 1d0
             return
         endif
-        
+
         if(k == 0)then
             bernoulliPDF = 1d0 - p
         else
@@ -3626,8 +3626,8 @@ contains
         endif
 
     end function
-    
-    
+
+
     !##############################################################################
     ! FUNCTION bernoulliCDF
     !
@@ -3636,43 +3636,43 @@ contains
     function bernoulliCDF(k, p)
 
         implicit none
-     
-     
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-     
+
         ! zero or 1 draw
         integer, intent(in) :: k
-     
+
         ! the probability of the positive draw
         real*8, intent(in) :: p
 
         ! the cumulated probability of this to happen
         real*8 :: bernoulliCDF
-        
-             
+
+
         !##### ROUTINE CODE #######################################################
-        
+
         ! check for validity
         if(p < 0d0 .or. p > 1d0)then
             call error('bernoulliCDF', 'Probability p is out of [0,1]')
         endif
-        
+
         ! outside of range
         if(k < 0)then
             bernoulliCDF = 0d0
             return
         endif
-        
+
         if(k >= 1)then
             bernoulliCDF = 1d0
             return
         endif
-        
+
         bernoulliCDF = 1d0 - p
 
     end function
-    
-    
+
+
     !##############################################################################
     ! FUNCTION binomialPDF
     !
@@ -3681,42 +3681,42 @@ contains
     function binomialPDF(k, n, p)
 
         implicit none
-     
-     
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-     
+
         ! the number of positive draws
         integer, intent(in) :: k
-     
+
         ! the total number of draws
         integer, intent(in) :: n
-     
+
         ! the probability of a positive draw
         real*8, intent(in) :: p
 
         ! the probability of this to happen
         real*8 :: binomialPDF
-     
-     
+
+
         !##### ROUTINE CODE #######################################################
-        
+
 
         ! check for validity
         if(p < 0d0 .or. p > 1d0)then
             call error('binomialPDF', 'Probability p is out of [0,1]')
         endif
-        
+
         ! outside of range
         if(k < 0 .or. k > n)then
             binomialPDF = 0d0
             return
         endif
 
-        binomialPDF = binomial_coefficient(n, k)*p**k*(1d0-p)**(n-k)        
+        binomialPDF = binomial_coefficient(n, k)*p**k*(1d0-p)**(n-k)
 
     end function
-    
-    
+
+
     !##############################################################################
     ! FUNCTION binomialCDF
     !
@@ -3725,108 +3725,108 @@ contains
     function binomialCDF(k, n, p)
 
         implicit none
-     
-     
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-     
+
         ! the number of positive draws
         integer, intent(in) :: k
-     
+
         ! the total number of draws
         integer, intent(in) :: n
-     
+
         ! the probability of a positive draw
         real*8, intent(in) :: p
 
         ! the cumulated probability of this to happen
         real*8 :: binomialCDF
-        
-        
+
+
         !##### OTHER VARIABLES ####################################################
-        
+
         integer :: ii
-     
-     
+
+
         !##### ROUTINE CODE #######################################################
-        
+
         ! check for validity
         if(p < 0d0 .or. p > 1d0)then
             call error('binomialCDF', 'Probability p is out of [0,1]')
         endif
-        
+
         ! outside of range
         if(k < 0)then
             binomialCDF = 0d0
             return
         endif
-        
+
         if(k > n)then
             binomialCDF = 1d0
             return
         endif
-        
+
         binomialCDF = 0d0
         do ii = 0, k
             binomialCDF = binomialCDF +  binomial_coefficient(n, ii)*p**ii*(1d0-p)**(n-ii)
         enddo
 
     end function
-    
-    
+
+
     !##############################################################################
     ! FUNCTION binomial_coefficient
     !
     ! Calculate binomial coefficients efficiently
     !##############################################################################
     function binomial_coefficient(n, k)
-    
+
         implicit none
-     
-     
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-     
+
         ! out of number
         integer, intent(in) :: n
-     
+
         ! number
         integer, intent(in) :: k
-     
+
         ! the probability of this to happen
         real*8 :: binomial_coefficient
-     
-     
+
+
         !##### OTHER VARIABLES ####################################################
-     
+
         integer :: n0, k0, ii
-     
-     
+
+
         !##### ROUTINE CODE #######################################################
-        
-        
+
+
         if(k == 0 .or. k == n)then
             binomial_coefficient = 1d0
         endif
-        
+
         ! copy values
         n0 = n
         k0 = k
-        
+
         ! use symmetry of binomial coefficients
         if(k0 > n0 - k0)then
             k0 = n0 - k0
         endif
-        
+
         ! use factorial formula for stability
         binomial_coefficient = 1d0
         do ii = 1, k
             binomial_coefficient = binomial_coefficient*dble(n+1-ii)
             binomial_coefficient = binomial_coefficient/dble(ii)
         enddo
-    
+
     end function
-    
-     
-     
+
+
+
     !##############################################################################
     ! SUBROUTINE init_random_seed
     !
@@ -3837,17 +3837,17 @@ contains
     !    https://gcc.gnu.org/onlinedocs/gcc-4.8.5/gfortran/RANDOM_005fSEED.html
     !##############################################################################
     subroutine init_random_seed(fixed)
-     
+
         implicit none
         integer, allocatable :: seed(:)
         integer :: i, n, dt(8)
         integer, parameter :: int64 = selected_int_kind(16)
         integer(kind=int64) :: t
         logical, optional :: fixed
-     
+
         call random_seed(size = n)
         allocate(seed(n))
-     
+
         call system_clock(t)
         if (t == 0) then
             call date_and_time(values=dt)
@@ -3858,7 +3858,7 @@ contains
                 + dt(6) * 60 * 1000 + dt(7) * 1000 &
                 + dt(8)
         endif
-        
+
         if(present(fixed))then
             if(fixed)t = 0
         endif
@@ -3866,17 +3866,17 @@ contains
             seed(i) = lcg(t)
         enddo
         call random_seed(put=seed)
-     
+
     contains
-     
+
         ! This simple PRNG might not be good enough for real work, but is
         ! sufficient for seeding a better PRNG.
         function lcg(s)
-     
+
             implicit none
             integer :: lcg
             integer(int64) :: s
-     
+
             if (s == 0) then
                 s = 104729
             else
@@ -3884,50 +3884,50 @@ contains
             endif
             s = mod(s * 279470273_int64, 4294967291_int64)
             lcg = int(mod(s, int(huge(0), int64)), kind(0))
-     
+
         end function lcg
-     
+
     end subroutine init_random_seed
-     
-     
+
+
     !##############################################################################
     ! SUBROUTINE simulate_uniform_1
     !
     ! Simulates one draw from a uniform distribution.
     !##############################################################################
     subroutine simulate_uniform_1(x, a, b, fixed)
-     
+
         implicit none
-     
-     
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-     
+
         ! point into which the draw should be saved
         real*8, intent(out) :: x
-     
+
         ! left end of the distribution
         real*8, optional :: a
-     
+
         ! right end of the distribution
         real*8, optional :: b
-        
+
         ! should the random seed be initialized at a fixed values
         logical, optional :: fixed
-     
-     
+
+
         !##### OTHER VARIABLES ####################################################
-     
+
         real*8 :: a_c, b_c
-     
-     
+
+
         !##### ROUTINE CODE #######################################################
-     
+
         ! initialize parameters
         a_c = 0d0
         if(present(a))a_c = a
         b_c = 1d0
         if(present(b))b_c = b
-     
+
         ! initialize the random seed
         if(tbox_seed)then
             if(present(fixed))then
@@ -3937,53 +3937,53 @@ contains
             endif
             tbox_seed = .false.
         endif
-     
+
         ! draw the random number
         call random_number(x)
-     
+
         x = a_c + (b_c-a_c)*x
-     
+
     end subroutine simulate_uniform_1
-     
-     
+
+
     !##############################################################################
     ! SUBROUTINE simulate_uniform_n
     !
     ! Simulates a series draw from a uniform distribution.
     !##############################################################################
     subroutine simulate_uniform_n(x, a, b, fixed)
-     
+
         implicit none
-     
-     
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-     
+
         ! point into which the draw should be saved
         real*8, intent(out) :: x(:)
-     
+
         ! left end of the distribution
         real*8, optional :: a
-     
+
         ! right end of the distribution
         real*8, optional :: b
-        
+
         ! should the random seed be initialized at a fixed values
         logical, optional :: fixed
-     
-     
+
+
         !##### OTHER VARIABLES ####################################################
-     
+
         real*8 :: a_c, b_c
-     
-     
+
+
         !##### ROUTINE CODE #######################################################
-     
+
         ! initialize parameters
         a_c = 0d0
         if(present(a))a_c = a
         b_c = 1d0
         if(present(b))b_c = b
-     
+
         ! initialize the random seed
         if(tbox_seed)then
             if(present(fixed))then
@@ -3993,62 +3993,62 @@ contains
             endif
             tbox_seed = .false.
         endif
-     
+
         call random_number(x)
-     
+
         x = a_c + (b_c-a_c)*x
-     
+
     end subroutine simulate_uniform_n
-     
-     
+
+
     !##############################################################################
     ! Subroutine simulate_normal_1
     !
     ! Simulates one draw from a normal distribution using
     !     Box-Muller tranformation.
     !
-    ! REFERENCE: Box, G.E.P., Muller, M.E. (1958). A Note on the Generation of  
-    !            Random Normal Deviates, The Annals of Mathematical Statistics,  
+    ! REFERENCE: Box, G.E.P., Muller, M.E. (1958). A Note on the Generation of
+    !            Random Normal Deviates, The Annals of Mathematical Statistics,
     !            29(2), 610–611.
     !##############################################################################
     subroutine simulate_normal_1(x, mu, sigma, fixed)
-     
+
         implicit none
-     
-     
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-     
+
         ! point into which the draw should be saved
         real*8, intent(out) :: x
-     
+
         ! expectation of distribution
         real*8, optional :: mu
-     
+
         ! variance of distribution
         real*8, optional :: sigma
-        
+
         ! should the random seed be initialized at a fixed values
         logical, optional :: fixed
-     
-     
+
+
         !##### OTHER VARIABLES ####################################################
-     
+
         real*8 :: uni1, uni2, mu_c, sigma_c
         real*8 :: pi = 3.141592653589793d0
-     
-     
+
+
         !##### ROUTINE CODE #######################################################
-     
+
         ! initialize parameters
         mu_c = 0d0
         if(present(mu))mu_c = mu
         sigma_c = 1d0
         if(present(sigma))sigma_c = sigma
-        
+
         if(sigma_c <= 0d0)then
             call error('simulate_normal','sigma has zero or negative value')
         endif
-     
+
         ! simulate a uniform variable draw
         if(present(fixed))then
             call simulate_uniform_1(uni1, fixed=fixed)
@@ -4057,69 +4057,69 @@ contains
             call simulate_uniform_1(uni1)
             call simulate_uniform_1(uni2)
         endif
-     
+
         ! transform by Box-Muller transformation
         x = sqrt(-2d0*log(uni1))*cos(2d0*pi*uni2)
-     
+
         ! transform to mean and variance
         x = mu_c + sqrt(sigma_c)*x
-     
+
     end subroutine simulate_normal_1
-     
-     
+
+
     !##############################################################################
     ! SUBROUTINE simulate_normal_n
     !
     ! Simulates draws from a normal distribution using
     !     Box-Muller tranformation.
     !
-    ! REFERENCE: Box, G.E.P., Muller, M.E. (1958). A Note on the Generation of  
-    !            Random Normal Deviates, The Annals of Mathematical Statistics,  
+    ! REFERENCE: Box, G.E.P., Muller, M.E. (1958). A Note on the Generation of
+    !            Random Normal Deviates, The Annals of Mathematical Statistics,
     !            29(2), 610–611.
     !##############################################################################
     subroutine simulate_normal_n(x, mu, sigma, fixed)
-     
+
         implicit none
-     
-     
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-     
+
         ! point into which the draw should be saved
         real*8, intent(out) :: x(:)
-     
+
         ! expectation of distribution
         real*8, optional :: mu
-     
+
         ! variance of distribution
         real*8, optional :: sigma
-        
+
         ! should the random seed be initialized at a fixed values
         logical, optional :: fixed
-     
-     
+
+
         !##### OTHER VARIABLES ####################################################
-     
+
         real*8 :: uni1(size(x, 1)/2), uni2(size(x, 1)/2), mu_c, sigma_c
         integer :: n, in, n2
         real*8 :: pi = 3.141592653589793d0
-     
-     
+
+
         !##### ROUTINE CODE #######################################################
-     
+
         ! initialize parameters
         mu_c = 0d0
         if(present(mu))mu_c = mu
         sigma_c = 1d0
         if(present(sigma))sigma_c = sigma
-        
+
         if(sigma_c <= 0d0)then
             call error('simulate_normal','sigma has zero or negative value')
         endif
-     
+
         ! get size of x
         n = size(x, 1)
         n2 = n/2
-     
+
         ! simulate a uniform variable draw
         if(present(fixed))then
             call simulate_uniform_n(uni1, fixed=fixed)
@@ -4128,190 +4128,190 @@ contains
             call simulate_uniform_n(uni1)
             call simulate_uniform_n(uni2)
         endif
-     
+
         ! transform by Box-Muller transformation
         do in = 1, n2
             x(2*(in-1)+1) = sqrt(-2d0*log(uni1(in)))*cos(2d0*pi*uni2(in))
             x(2*(in-1)+2) = sqrt(-2d0*log(uni1(in)))*sin(2d0*pi*uni2(in))
         enddo
-     
+
         if(2*n2 /= n)then
             call simulate_normal_1(x(n), 0d0, 1d0)
         endif
-     
+
         ! transform to mean and variance
         x = mu_c + sqrt(sigma_c)*x
-     
+
     end subroutine simulate_normal_n
-     
-     
+
+
     !##############################################################################
     ! SUBROUTINE simulate_log_normal_1
     !
     ! Simulates one draw from a log normal distribution.
     !##############################################################################
     subroutine simulate_log_normal_1(x, mu, sigma, fixed)
-     
+
         implicit none
-     
-     
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-     
+
         ! point into which the draw should be saved
         real*8, intent(out) :: x
-     
+
         ! expectation of distribution
         real*8, optional :: mu
-     
+
         ! variance of distribution
         real*8, optional :: sigma
-        
+
         ! should the random seed be initialized at a fixed values
         logical, optional :: fixed
-     
-     
+
+
         !##### OTHER VARIABLES ####################################################
-     
+
         real*8 :: mu_c, sigma_c
-     
-     
+
+
         !##### ROUTINE CODE #######################################################
-     
+
         ! initialize parameters
         mu_c = exp(0.5d0)
         if(present(mu))mu_c = mu
         sigma_c = exp(1d0)*(exp(1d0)-1d0)
         if(present(sigma))sigma_c = sigma
-        
+
         if(sigma_c <= 0d0)then
             call error('simulate_log_normal','sigma has zero or negative value')
         endif
         if(mu_c <= 0d0)then
             call error('simulate_log_normal','mu has zero or negative value')
         endif
-        
+
         ! get expectation and variance
         sigma_c = log(1d0+sigma_c/mu_c**2)
         mu_c  = log(mu_c)-0.5d0*sigma_c
-             
+
         ! simulate normal and convert to log_normal
         if(present(fixed))then
             call simulate_normal_1(x, mu_c, sigma_c, fixed)
         else
             call simulate_normal_1(x, mu_c, sigma_c)
         endif
-     
+
         ! transform to log normal
         x = exp(x)
-     
+
     end subroutine simulate_log_normal_1
-     
-     
+
+
     !##############################################################################
     ! SUBROUTINE simulate_log_normal_n
     !
     ! Simulates draws from a log normal distribution.
     !##############################################################################
     subroutine simulate_log_normal_n(x, mu, sigma, fixed)
-     
+
         implicit none
-     
-     
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-     
+
         ! point into which the draw should be saved
         real*8, intent(out) :: x(:)
-     
+
         ! expectation of distribution
         real*8, optional :: mu
-     
+
         ! variance of distribution
         real*8, optional :: sigma
-        
+
         ! should the random seed be initialized at a fixed values
         logical, optional :: fixed
-     
-     
+
+
         !##### OTHER VARIABLES ####################################################
-     
+
         real*8 :: mu_c, sigma_c
-     
-     
+
+
         !##### ROUTINE CODE #######################################################
-     
+
         ! initialize parameters
         mu_c = exp(0.5d0)
         if(present(mu))mu_c = mu
         sigma_c = exp(1d0)*(exp(1d0)-1d0)
         if(present(sigma))sigma_c = sigma
-        
+
         if(sigma_c <= 0d0)then
             call error('simulate_log_normal','sigma has zero or negative value')
         endif
         if(mu_c <= 0d0)then
             call error('simulate_log_normal','mu has zero or negative value')
         endif
-        
+
         ! get expectation and variance
         sigma_c = log(1d0+sigma_c/mu_c**2)
-        mu_c  = log(mu_c)-0.5d0*sigma_c   
-          
+        mu_c  = log(mu_c)-0.5d0*sigma_c
+
         ! simulate normal and convert to log_normal
         if(present(fixed))then
             call simulate_normal_n(x, mu_c, sigma_c, fixed)
         else
             call simulate_normal_n(x, mu_c, sigma_c)
         endif
-     
+
         ! transform to log normal
         x = exp(x)
-     
+
     end subroutine simulate_log_normal_n
-     
-     
+
+
     !##############################################################################
     ! SUBROUTINE simulate_Gamma_1
     !
     ! Simulates draws from a gamma distribution using the
     !     Marsaglia/Tsang method.
     !
-    ! REFERENCE: Marsaglia, G., Tsang, W.W. (2000). A simple method for generating 
+    ! REFERENCE: Marsaglia, G., Tsang, W.W. (2000). A simple method for generating
     !            gamma variables, ACM Transactions on Mathematical Software, 26(2),
     !            363-372.
     !##############################################################################
     subroutine simulate_Gamma_1(x, alpha, beta, fixed)
-     
+
         implicit none
-     
-     
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-     
+
         ! point into which the draw should be saved
         real*8, intent(out) :: x
-     
+
         ! shape parameter
         real*8, optional :: alpha
-     
+
         ! rate parameter
         real*8, optional :: beta
-        
+
         ! should the random seed be initialized at a fixed values
         logical, optional :: fixed
-     
-     
+
+
         !##### OTHER VARIABLES ####################################################
-     
+
         real*8 :: alpha_c, beta_c, d, c, uni
-     
-     
+
+
         !##### ROUTINE CODE #######################################################
-     
+
         ! initialize parameters
         alpha_c = 1d0
         if(present(alpha))alpha_c = alpha
         beta_c = 1d0
         if(present(beta))beta_c = beta
-     
+
         ! check for validity of parameters
         if(alpha_c <= 0d0)then
             call error('simulate_Gamma','alpha has a non-positive value')
@@ -4319,14 +4319,14 @@ contains
         if(beta_c <= 0d0)then
             call error('simulate_Gamma','beta has a non-positive value')
         endif
-     
+
         ! check whether alpha >= 1
         if(alpha_c >= 1d0)then
-     
+
             ! calculate c and d
             d = alpha_c - 1d0/3d0
             c = 1d0/sqrt(9d0*d)
-     
+
             ! simulate the gammas step by step
             if(present(fixed))then
                 x = simulate_Gamma_plain(c, d, fixed)
@@ -4334,18 +4334,18 @@ contains
                 x = simulate_Gamma_plain(c, d)
             endif
         else
-     
+
             ! generate alpha+1 variables
             d = alpha_c + 2d0/3d0
             c = 1d0/sqrt(9d0*d)
-     
+
             ! simulate the gammas step by step
             if(present(fixed))then
                 x = simulate_Gamma_plain(c, d, fixed)
             else
                 x = simulate_Gamma_plain(c, d)
             endif
-     
+
             ! add uniform transformation
             if(present(fixed))then
                 call simulate_uniform_1(uni, fixed=fixed)
@@ -4353,75 +4353,75 @@ contains
                 call simulate_uniform_1(uni)
             endif
             x = x*uni**(1d0/alpha_c)
-     
+
         endif
-     
+
         ! apply scaling parameter
         x = x/beta_c
-     
-     
+
+
     end subroutine simulate_Gamma_1
-     
-     
+
+
     !##############################################################################
     ! SUBROUTINE simulate_Gamma_n
     !
     ! Simulates draws from a gamma distribution using the
     !     Marsaglia/Tsang method.
     !
-    ! REFERENCE: Marsaglia, G., Tsang, W.W. (2000). A simple method for generating 
+    ! REFERENCE: Marsaglia, G., Tsang, W.W. (2000). A simple method for generating
     !            gamma variables, ACM Transactions on Mathematical Software, 26(2),
     !            363-372.
     !##############################################################################
     subroutine simulate_Gamma_n(x, alpha, beta, fixed)
-     
+
         implicit none
-     
-     
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-     
+
         ! point into which the draw should be saved
         real*8, intent(out) :: x(:)
-     
+
         ! shape parameter
         real*8, optional :: alpha
-     
+
         ! rate parameter
         real*8, optional :: beta
-        
+
         ! should the random seed be initialized at a fixed values
         logical, optional :: fixed
-     
-     
+
+
         !##### OTHER VARIABLES ####################################################
-     
+
         real*8 :: alpha_c, beta_c, d, c, uni(size(x, 1))
         integer :: n, in
-     
-     
+
+
         !##### ROUTINE CODE #######################################################
-     
+
         ! initialize parameters
         alpha_c = 1d0
         if(present(alpha))alpha_c = alpha
         beta_c = 1d0
         if(present(beta))beta_c = beta
-     
+
         ! check for validity of beta
         if(beta_c <= 0d0)then
             call error('simulate_Gamma','beta has a non-positive value')
         endif
-     
+
         ! get size of x
         n = size(x, 1)
-     
+
         ! check whether alpha >= 1
         if(alpha_c >= 1d0)then
-     
+
             ! calculate c and d
             d = alpha_c - 1d0/3d0
             c = 1d0/sqrt(9d0*d)
-     
+
             ! simulate the gammas step by step
             do in = 1, n
                 if(present(fixed))then
@@ -4431,11 +4431,11 @@ contains
                 endif
             enddo
         else
-     
+
             ! generate alpha+1 variables
             d = alpha_c + 2d0/3d0
             c = 1d0/sqrt(9d0*d)
-     
+
             ! simulate the gammas step by step
             do in = 1, n
                 if(present(fixed))then
@@ -4444,7 +4444,7 @@ contains
                     x(in) = simulate_Gamma_plain(c, d)
                 endif
             enddo
-     
+
             ! add uniform transformation
             if(present(fixed))then
                 call simulate_uniform_n(uni, fixed=fixed)
@@ -4452,52 +4452,52 @@ contains
                 call simulate_uniform_n(uni)
             endif
             x = x*uni**(1d0/alpha_c)
-     
+
         endif
-     
+
         ! apply scaling parameter
         x = x/beta_c
-     
-     
+
+
     end subroutine simulate_Gamma_n
-     
-     
+
+
     !##############################################################################
     ! FUNCTION simulate_Gamma_plain
     !
     ! Simulates one draw from gamma distribution without any testing.
     !
-    ! REFERENCE: Marsaglia, G., Tsang, W.W., A simple method for generating gamma 
+    ! REFERENCE: Marsaglia, G., Tsang, W.W., A simple method for generating gamma
     !            variables, ACM Transactions on Mathematical Software, Vol. 26,
     !            No. 2, 2000, 363-372.
     !##############################################################################
     function simulate_Gamma_plain(c, d, fixed) result(res)
-     
+
         implicit none
-     
-     
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-     
+
         ! c parameter
         real*8 :: c
-     
+
         ! d parameter
         real*8 :: d
-        
+
         ! should the random seed be initialized at a fixed values
         logical, optional :: fixed
-     
+
         ! a gamma realization
         real*8 :: res
-     
-     
+
+
         !##### OTHER VARIABLES ####################################################
-     
+
         real*8 :: v, x, u
-     
-     
+
+
         !##### ROUTINE CODE #######################################################
-     
+
         do
             ! generate v
             if(present(fixed))then
@@ -4507,71 +4507,71 @@ contains
             endif
             v = (1d0+c*x)
             v = v*v*v
-     
+
             ! test v
             if(v <= 0d0)cycle
-     
+
             ! generate u
             if(present(fixed))then
                 call simulate_uniform_1(u, fixed=fixed)
             else
                 call simulate_uniform_1(u)
             endif
-     
+
             ! check squeeze
             if(u < 1d0 - 0.0331d0*(x*x)*(x*x))then
                 res = d*v
                 return
             endif
-     
+
             ! check real condition
             if(log(u) < 0.5d0*x*x + d*(1d0 - v + log(v)))then
                 res = d*v
                 return
             endif
         enddo
-     
+
     end function simulate_Gamma_plain
-     
-     
+
+
     !##############################################################################
     ! SUBROUTINE simulate_beta_1
     !
     ! Simulates one draw from a beta distribution.
     !##############################################################################
     subroutine simulate_beta_1(x, p, q, fixed)
-     
+
         implicit none
-     
-     
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-     
+
         ! point into which the draw should be saved
         real*8, intent(out) :: x
-     
+
         ! shape parameter
         real*8, optional :: p
-     
+
         ! rate parameter
         real*8, optional :: q
-        
+
         ! should the random seed be initialized at a fixed values
         logical, optional :: fixed
-     
-     
+
+
         !##### OTHER VARIABLES ####################################################
-     
+
         real*8 :: p_c, q_c, gamma1, gamma2, bern
-     
-     
+
+
         !##### ROUTINE CODE #######################################################
-     
+
         ! initialize parameters
         p_c = 1d0
         if(present(p))p_c = p
         q_c = 1d0
         if(present(q))q_c = q
-     
+
         ! check for validity of parameters
         if(p_c <= 0d0)then
             call error('simulate_beta','p has a non-positive value')
@@ -4579,10 +4579,10 @@ contains
         if(q_c <= 0d0)then
             call error('simulate_beta','q has a non-positive value')
         endif
-     
+
         ! get bernoulli parametzer for small p and q
         bern = p_c/(p_c+q_c)
-     
+
         if(present(fixed))then
             call simulate_Gamma_1(gamma1, p_c, fixed=fixed)
             call simulate_Gamma_1(gamma2, q_c, fixed=fixed)
@@ -4590,7 +4590,7 @@ contains
             call simulate_Gamma_1(gamma1, p_c)
             call simulate_Gamma_1(gamma2, q_c)
         endif
-     
+
         ! check whether gammas both greaters 0
         if(gamma1 > 0d0 .or. gamma2 > 0d0)then
             x = gamma1/(gamma1+gamma2)
@@ -4601,49 +4601,49 @@ contains
                 call simulate_bernoulli_1(x, bern)
             endif
         endif
-     
+
     end subroutine simulate_beta_1
-     
-     
+
+
     !##############################################################################
     ! SUBROUTINE simulate_beta_n
     !
     ! Simulates draws from a beta distribution.
     !##############################################################################
     subroutine simulate_beta_n(x, p, q, fixed)
-     
+
         implicit none
-     
-     
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-     
+
         ! point into which the draw should be saved
         real*8, intent(out) :: x(:)
-     
+
         ! shape parameter
         real*8, optional :: p
-     
+
         ! rate parameter
         real*8, optional :: q
-        
+
         ! should the random seed be initialized at a fixed values
         logical, optional :: fixed
-     
-     
+
+
         !##### OTHER VARIABLES ####################################################
-     
+
         real*8 :: p_c, q_c, gamma1(size(x,1)), gamma2(size(x,1)), bern
         integer :: n, in
-     
-     
+
+
         !##### ROUTINE CODE #######################################################
-     
+
         ! initialize parameters
         p_c = 1d0
         if(present(p))p_c = p
         q_c = 1d0
         if(present(q))q_c = q
-     
+
         ! check for validity of parameters
         if(p_c <= 0d0)then
             call error('simulate_beta','p has a non-positive value')
@@ -4651,13 +4651,13 @@ contains
         if(q_c <= 0d0)then
             call error('simulate_beta','q has a non-positive value')
         endif
-     
+
         ! get size of x
         n = size(x, 1)
-     
+
         ! get bernoulli parametzer for small p and q
         bern = p_c/(p_c+q_c)
-     
+
         if(present(fixed))then
             call simulate_Gamma_n(gamma1, p_c, fixed=fixed)
             call simulate_Gamma_n(gamma2, q_c, fixed=fixed)
@@ -4665,9 +4665,9 @@ contains
             call simulate_Gamma_n(gamma1, p_c)
             call simulate_Gamma_n(gamma2, q_c)
         endif
-     
+
         do in = 1, n
-     
+
             ! check whether gammas both greaters 0
             if(gamma1(in) > 0d0 .or. gamma2(in) > 0d0)then
                 x(in) = gamma1(in)/(gamma1(in)+gamma2(in))
@@ -4679,92 +4679,92 @@ contains
                 endif
             endif
         enddo
-     
+
     end subroutine simulate_beta_n
-     
-     
+
+
     !##############################################################################
     ! SUBROUTINE simulate_bernoulli_1
     !
     ! Simulates one draw from bernoulli distribution
     !##############################################################################
     subroutine simulate_bernoulli_1(x, p, fixed)
-     
+
         implicit none
-     
-     
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-     
+
         ! point into which the draw should be saved
         real*8, intent(out) :: x
 
         ! probability to draw 1
         real*8, intent(in) :: p
-        
+
         ! should the random seed be initialized at a fixed values
         logical, optional :: fixed
-     
-     
+
+
         !##### ROUTINE CODE #######################################################
-     
+
         if(p < 0d0)then
             call error('simulate_bernoulli', 'p has a negative value')
         endif
-     
+
         if(present(fixed))then
             call simulate_uniform_1(x, fixed=fixed)
         else
             call simulate_uniform_1(x)
         endif
-     
+
         if(x <= p)then
             x = 1d0
         else
             x = 0d0
         endif
-     
+
     end subroutine simulate_bernoulli_1
-    
-    
+
+
     !##############################################################################
     ! SUBROUTINE simulate_bernoulli_n
     !
     ! Simulates draws from bernoulli distribution
     !##############################################################################
     subroutine simulate_bernoulli_n(x, p, fixed)
-     
+
         implicit none
-     
-     
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-     
+
         ! point into which the draw should be saved
         real*8, intent(out) :: x(:)
 
         ! probability to draw 1
         real*8, intent(in) :: p
-        
+
         ! should the random seed be initialized at a fixed values
         logical, optional :: fixed
-     
-     
+
+
         !##### OTHER VARIABLES ####################################################
-     
+
         integer :: ii
-     
-     
+
+
         !##### ROUTINE CODE #######################################################
-     
+
         if(p < 0d0)then
             call error('simulate_bernoulli', 'p has a negative value')
         endif
-     
+
         if(present(fixed))then
             call simulate_uniform_n(x, fixed=fixed)
         else
             call simulate_uniform_n(x)
         endif
-        
+
         do ii = 1, size(x, 1)
             if(x(ii) <= p)then
                 x(ii) = 1d0
@@ -4772,57 +4772,57 @@ contains
                 x(ii) = 0d0
             endif
         enddo
-     
+
     end subroutine simulate_bernoulli_n
-    
-    
+
+
     !##############################################################################
     ! SUBROUTINE simulate_binomial_1
     !
     ! Simulates one draw from binomial distribution
     !##############################################################################
     subroutine simulate_binomial_1(x, n, p, fixed)
-     
+
         implicit none
-     
-     
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-     
+
         ! point into which the draw should be saved
         real*8, intent(out) :: x
-        
+
         ! total number of draws
         integer, intent(in) :: n
 
         ! probability to draw 1
         real*8, intent(in) :: p
-        
+
         ! should the random seed be initialized at a fixed values
         logical, optional :: fixed
-        
-        
+
+
         !##### OTHER VARIABLES ####################################################
-     
+
         integer :: ii
         real*8 :: cumprob
-     
-     
+
+
         !##### ROUTINE CODE #######################################################
-     
+
         if(p < 0d0)then
             call error('simulate_binomial', 'p has a negative value')
         endif
-        
+
         if(n < 0)then
             call error('simulate_binomial', 'n must be positive')
         endif
-     
+
         if(present(fixed))then
             call simulate_uniform_1(x, fixed=fixed)
         else
             call simulate_uniform_1(x)
         endif
-        
+
         ! derive bernoulli probability schedule
         cumprob = binomialPDF(0, n, p)
         if(x <= cumprob)then
@@ -4836,64 +4836,64 @@ contains
                 endif
             enddo
         endif
-     
+
     end subroutine simulate_binomial_1
-    
-    
+
+
     !##############################################################################
     ! SUBROUTINE simulate_binomial_n
     !
     ! Simulates draws from binomial distribution
     !##############################################################################
     subroutine simulate_binomial_n(x, n, p, fixed)
-     
+
         implicit none
-     
-     
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-     
+
         ! point into which the draw should be saved
         real*8, intent(out) :: x(:)
-        
+
         ! total number of draws
         integer, intent(in) :: n
 
         ! probability to draw 1
         real*8, intent(in) :: p
-        
+
         ! should the random seed be initialized at a fixed values
         logical, optional :: fixed
-     
-     
+
+
         !##### OTHER VARIABLES ####################################################
-     
+
         integer :: ii, it
         real*8 :: cumprob(0:n)
-     
-     
+
+
         !##### ROUTINE CODE #######################################################
-     
+
         if(p < 0d0)then
             call error('simulate_binomial', 'p has a negative value')
         endif
-        
+
         if(n < 0)then
             call error('simulate_binomial', 'n must be positive')
         endif
-     
+
         ! simulate
         if(present(fixed))then
             call simulate_uniform_n(x, fixed=fixed)
         else
             call simulate_uniform_n(x)
         endif
-        
+
         ! derive bernoulli probability schedule
         cumprob(0) = binomialPDF(0, n, p)
         do ii = 1, n
             cumprob(ii) = cumprob(ii-1) + binomialPDF(ii, n, p)
         enddo
-        
+
         ! get draws
         do it = 1, size(x, 1)
             do ii = 0, n
@@ -4903,10 +4903,10 @@ contains
                 endif
             enddo
         enddo
-             
+
     end subroutine simulate_binomial_n
-     
-     
+
+
     !##############################################################################
     ! SUBROUTINE normal_discrete_1
     !
@@ -4916,65 +4916,65 @@ contains
     !     CompEcon toolbox of Mario Miranda and Paul Fackler available under
     !     http://www4.ncsu.edu/~pfackler/compecon/toolbox.html
     !
-    ! REFERENCE: Miranda, M. & Fackler, P. (2002). Applied Computational Economics 
+    ! REFERENCE: Miranda, M. & Fackler, P. (2002). Applied Computational Economics
     !            and Finance. Cambridge: MIT Press.
     !##############################################################################
     subroutine normal_discrete_1(x, prob, mu, sigma)
-     
+
         implicit none
-     
-     
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-     
+
         ! discrete points of normal distribution
         real*8, intent(out) :: x(:)
-     
+
         ! probability weights
         real*8, intent(out) :: prob(:)
-     
+
         ! expectation of distribution
         real*8, optional :: mu
-     
+
         ! variance of distribution
         real*8, optional :: sigma
-     
-     
+
+
         !##### OTHER VARIABLES ####################################################
-     
+
         real*8 :: mu_c, sigma_c, pim4, z=0d0, z1, p1, p2, p3, pp
         integer :: n, m, i, j, its
         integer, parameter :: maxit = 200
         real*8, parameter :: pi = 3.1415926535897932d0
-     
-     
+
+
         !##### ROUTINE CODE #######################################################
-     
+
         ! initialize parameters
         mu_c = 0d0
         if(present(mu))mu_c = mu
         sigma_c = 1d0
         if(present(sigma))sigma_c = sqrt(sigma)
-        
+
         if(sigma_c < 0d0)then
             call error('normal_discrete','sigma has negative value')
         endif
-     
+
         ! check for right array sizes
         n = assert_eq(size(x,1), size(prob,1), 'normal_discrete')
-     
+
         ! calculate 1/pi^0.25
         pim4 = 1d0/pi**0.25d0
-     
+
         ! get number of points
         m = (n+1)/2
-     
+
         ! initialize x and prob
         x = 0d0
         prob = 0d0
-     
+
         ! start iteration
         do i = 1, m
-     
+
             ! set reasonable starting values
             if(i == 1)then
                 z = sqrt(dble(2*n+1))-1.85575d0*(dble(2*n+1)**(-1d0/6d0))
@@ -4987,7 +4987,7 @@ contains
             else
                 z = 2d0*z+x(i-2);
             endif
-     
+
             ! root finding iterations
             its = 0
             do while(its < maxit)
@@ -5013,14 +5013,14 @@ contains
             prob(i) = 2d0/pp**2
             prob(n+1-i) = prob(i)
         enddo
-     
+
         ! set output data
         prob = prob/sqrt(pi)
         x = x*sqrt(2d0)*sigma_c + mu_c
-     
+
     end subroutine normal_discrete_1
-     
-     
+
+
     !##############################################################################
     ! SUBROUTINE normal_discrete_2
     !
@@ -5031,44 +5031,44 @@ contains
     !     CompEcon toolbox of Mario Miranda and Paul Fackler available under
     !     http://www4.ncsu.edu/~pfackler/compecon/toolbox.html
     !
-    ! REFERENCE: Miranda, M. & Fackler, P. (2002). Applied Computational Economics 
+    ! REFERENCE: Miranda, M. & Fackler, P. (2002). Applied Computational Economics
     !            and Finance. Cambridge: MIT Press.
     !##############################################################################
     subroutine normal_discrete_2(n, x, prob, mu, sigma, rho)
-     
+
         implicit none
-     
-     
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-     
+
         ! number of points in every direction
         integer, intent(in) :: n(2)
-     
+
         ! discrete points of normal distribution
         real*8, intent(out) :: x(:, :)
-     
+
         ! probability weights
         real*8, intent(out) :: prob(:)
-     
+
         ! expectation of distribution
         real*8, optional :: mu(2)
-     
+
         ! variance of distribution
         real*8, optional :: sigma(2)
-     
+
         ! correlation of distribution
         real*8, optional :: rho
-     
-     
+
+
         !##### OTHER VARIABLES ####################################################
-     
+
         real*8 :: mu_c(2), sig_c(2), rho_c, sigma_c(2,2), l(2,2)
         real*8 :: x1(n(1)), x2(n(2)), p1(n(1)), p2(n(2))
         integer :: m, j, k
-     
-     
+
+
         !##### ROUTINE CODE #######################################################
-     
+
         ! initialize parameters
         mu_c = 0d0
         if(present(mu))mu_c = mu
@@ -5076,26 +5076,26 @@ contains
         if(present(sigma))sig_c = sigma
         rho_c = 0d0
         if(present(rho))rho_c = rho
-     
+
         ! set up variance covariance matrix
         sigma_c(1, 1) = sig_c(1)
         sigma_c(2, 2) = sig_c(2)
         sigma_c(1, 2) = rho_c*sqrt(sig_c(1)*sig_c(2))
         sigma_c(2, 1) = sigma_c(1, 2)
-     
+
         ! check for right array sizes
         m = assert_eq(size(x,1), size(prob,1), n(1)*n(2), 'normal_discrete')
         m = assert_eq(size(x,2), 2, 'normal_discrete')
-     
+
         ! check whether sigma is symmetric
         if(any(abs(transpose(sigma_c) - sigma_c) > 1d-20)) &
             call error('normal_discrete', &
             'Variance-Covariance matrix is not symmetric')
-     
+
         ! get standard normal distributed random variables
         call normal_discrete(x1, p1, 0d0, 1d0)
         call normal_discrete(x2, p2, 0d0, 1d0)
-     
+
         ! get joint distribution
         m = 1
         do k = 1, n(2)
@@ -5105,7 +5105,7 @@ contains
                 m = m+1
             enddo
         enddo
-     
+
         ! decompose var-cov matrix
         if(.not.any(abs(sig_c)  <= 1d-100))then
             call cholesky(sigma_c, l)
@@ -5114,122 +5114,122 @@ contains
             l(1,1) = sqrt(sig_c(1))
             l(2,2) = sqrt(sig_c(2))
         endif
-     
+
         ! calculate distribution
         x = matmul(x, transpose(l))
         x(:, 1) = x(:, 1) + mu_c(1)
         x(:, 2) = x(:, 2) + mu_c(2)
-     
+
     end subroutine normal_discrete_2
-     
-     
+
+
     !##############################################################################
     ! SUBROUTINE log_normal_discrete_1
     !
     ! Creates n points and probabilities for a log-normal distribution.
     !
-    ! REFERENCE: Miranda, M. & Fackler, P. (2002). Applied Computational Economics 
+    ! REFERENCE: Miranda, M. & Fackler, P. (2002). Applied Computational Economics
     !            and Finance. Cambridge: MIT Press.
     !##############################################################################
     subroutine log_normal_discrete_1(x, prob, mu, sigma)
-     
+
         implicit none
-     
-     
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-     
+
         ! discrete points of normal distribution
         real*8, intent(out) :: x(:)
-     
+
         ! probability weights
         real*8, intent(out) :: prob(:)
-     
+
         ! expectation of distribution
         real*8, optional :: mu
-     
+
         ! variance of distribution
         real*8, optional :: sigma
-     
-     
+
+
         !##### OTHER VARIABLES ####################################################
-     
+
         real*8 :: mu_c, sigma_c
         integer :: n
-     
+
         !##### ROUTINE CODE #######################################################
-     
+
         ! initialize parameters
         mu_c = exp(0.5d0)
         if(present(mu))mu_c = mu
         sigma_c = exp(1d0)*(exp(1d0)-1d0)
         if(present(sigma))sigma_c = sigma
-        
+
         if(sigma_c < 0d0)then
             call error('log_normal_discrete','sigma has negative value')
         endif
         if(mu_c <= 0d0)then
             call error('log_normal_discrete','mu has zero or negative value')
         endif
-        
+
         ! get expectation and variance
         sigma_c = log(1d0+sigma_c/mu_c**2)
         mu_c  = log(mu_c)-0.5d0*sigma_c
-     
+
         ! check for right array sizes
         n = assert_eq(size(x,1), size(prob,1), 'normal_discrete')
         n = n
-     
+
         call normal_discrete(x, prob, mu_c, sigma_c)
-     
+
         x = exp(x)
-     
+
     end subroutine log_normal_discrete_1
-     
-     
+
+
     !##############################################################################
     ! SUBROUTINE log_normal_discrete_2
     !
     ! Creates n1*n2 points and probabilities for a two-dimensional log-normal
     !     distribution.
     !
-    ! REFERENCE: Miranda, M. & Fackler, P. (2002). Applied Computational Economics 
+    ! REFERENCE: Miranda, M. & Fackler, P. (2002). Applied Computational Economics
     !            and Finance. Cambridge: MIT Press.
     !##############################################################################
     subroutine log_normal_discrete_2(n, x, prob, mu, sigma, rho)
-     
+
         implicit none
-     
-     
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-     
+
         ! number of points in every direction
         integer, intent(in) :: n(2)
-     
+
         ! discrete points of normal distribution
         real*8, intent(out) :: x(:, :)
-     
+
         ! probability weights
         real*8, intent(out) :: prob(:)
-     
+
         ! expectation of distribution
         real*8, optional :: mu(2)
-     
+
         ! variance of distribution
         real*8, optional :: sigma(2)
-     
+
         ! correlation of distribution
         real*8, optional :: rho
-     
-     
+
+
         !##### OTHER VARIABLES ####################################################
-     
+
         real*8 :: mu_c(2), sig_c(2), rho_c, sigma_c(2,2), l(2,2)
         real*8 :: x1(n(1)), x2(n(2)), p1(n(1)), p2(n(2))
         integer :: m, j, k
-     
-     
+
+
         !##### ROUTINE CODE #######################################################
-     
+
         ! initialize parameters
         mu_c = exp(0.5d0)
         if(present(mu))mu_c = mu
@@ -5237,7 +5237,7 @@ contains
         if(present(sigma))sig_c = sigma
         rho_c = 0d0
         if(present(rho))rho_c = rho
-        
+
         if(any(sig_c < 0d0))then
             call error('log_normal_discrete','sigma has negative value')
         endif
@@ -5247,31 +5247,31 @@ contains
         if(rho_c < -1d0 .or. rho_c > 1d0)then
             call error('log_normal_discrete','rho is outside -1 to 1')
         endif
-        
+
         ! get expectation and variance
         sig_c = log(1d0+sig_c/mu_c**2)
         mu_c  = log(mu_c)-0.5d0*sig_c
-        
+
         ! set up covariance matrix
         sigma_c(1, 1) = sig_c(1)
         sigma_c(2, 2) = sig_c(2)
         sigma_c(1, 2) = log(rho_c*sqrt(exp(sig_c(1))-1d0)* &
             sqrt(exp(sig_c(2))-1d0)+1d0)
         sigma_c(2, 1) = sigma_c(1, 2)
-     
+
         ! check for right array sizes
         m = assert_eq(size(x,1), size(prob,1), n(1)*n(2), 'normal_discrete')
         m = assert_eq(size(x,2), 2, 'normal_discrete')
-     
+
         ! check whether sigma is symmetric
         if(any(abs(transpose(sigma_c) - sigma_c) > 1d-20)) &
             call error('normal_discrete', &
             'Variance-Covariance matrix is not symmetric')
-     
+
         ! get standard normal distributed random variables
         call normal_discrete(x1, p1, 0d0, 1d0)
         call normal_discrete(x2, p2, 0d0, 1d0)
-     
+
         ! get joint distribution
         m = 1
         do k = 1, n(2)
@@ -5281,7 +5281,7 @@ contains
                 m = m+1
             enddo
         enddo
-     
+
         ! decompose var-cov matrix
         if(.not.any(abs(sig_c) <= 1d-100))then
             call cholesky(sigma_c, l)
@@ -5290,13 +5290,13 @@ contains
             l(1,1) = sqrt(sig_c(1))
             l(2,2) = sqrt(sig_c(2))
         endif
-     
+
         ! calculate distribution
         x = matmul(x, transpose(l))
         x(:, 1) = x(:, 1) + mu_c(1)
         x(:, 2) = x(:, 2) + mu_c(2)
         x = exp(x)
-     
+
     end subroutine log_normal_discrete_2
 
 
@@ -5306,55 +5306,55 @@ contains
 
 
 
- 
- 
- 
- 
- 
- 
-!############################################################################## 
+
+
+
+
+
+
+!##############################################################################
 !##############################################################################
 ! MODULE polynomial
 !##############################################################################
 !##############################################################################
-     
-     
+
+
     !##############################################################################
     ! FUNCTION poly_interpol_1
     !
     ! Constructs interpolating polynomial given nodes xi and data yi.
     !##############################################################################
     function poly_interpol_1(x, xi, yi)
-     
-     
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-     
+
         ! value where to evaluate polynomial
         real*8, intent(in) :: x
-     
+
         ! nodes of interpolation
         real*8, intent(in) :: xi(0:)
-     
+
         ! data of interpolation
         real*8, intent(in) :: yi(0:)
-     
+
         ! return value
         real*8 :: poly_interpol_1
-     
-     
+
+
         !##### OTHER VARIABLES ####################################################
-     
+
         integer :: j, n, i
         real*8 :: lagrange_poly(0:size(xi, 1)-1)
-     
+
         !##### ROUTINE CODE #######################################################
-     
+
         ! get number of interpolation nodes
         n = assert_eq(size(xi, 1), size(yi, 1), 'poly_interpol') - 1
-     
+
         ! initialize lagrange basis polynomials
         lagrange_poly(:) = 1d0
-     
+
         ! span polynomials
         do j = 0, n
             do i = 0, n
@@ -5363,12 +5363,12 @@ contains
                 endif
             enddo
         enddo
-     
+
         poly_interpol_1 = sum(yi*lagrange_poly, 1)
-     
+
     end function poly_interpol_1
-     
-     
+
+
     !##############################################################################
     ! FUNCTION poly_interpol_m
     !
@@ -5376,37 +5376,37 @@ contains
     !     points x.
     !##############################################################################
     function poly_interpol_m(x, xi, yi)
-     
-     
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-     
+
         ! value where to evaluate polynomial
         real*8, intent(in) :: x(1:)
-     
+
         ! nodes of interpolation
         real*8, intent(in) :: xi(0:)
-     
+
         ! data of interpolation
         real*8, intent(in) :: yi(0:)
-     
+
         ! return value
         real*8 :: poly_interpol_m(size(x, 1))
-     
-     
+
+
         !##### OTHER VARIABLES ####################################################
-     
+
         integer :: j, n, i
         real*8 :: lagrange_poly(size(x, 1), 0:size(xi, 1))
-     
-     
+
+
         !##### ROUTINE CODE #######################################################
-     
+
         ! get number of interpolation nodes
         n = assert_eq(size(xi, 1), size(yi, 1), 'poly_interpol') - 1
-     
+
         ! initialize lagrange basis polynomials
         lagrange_poly(:, :) = 1d0
-     
+
         ! span polynomials
         do j = 0, n
             do i = 0, n
@@ -5416,11 +5416,11 @@ contains
                 endif
             enddo
         enddo
-     
+
         do j = 1, size(x, 1)
             poly_interpol_m(j) = sum(yi*lagrange_poly(j, :), 1)
         enddo
-     
+
     end function poly_interpol_m
 
 
@@ -5431,136 +5431,136 @@ contains
 
 
 
- 
- 
- 
- 
- 
- 
-!############################################################################## 
+
+
+
+
+
+
+!##############################################################################
 !##############################################################################
 ! MODULE minimization
 !##############################################################################
 !##############################################################################
- 
- 
+
+
     !##############################################################################
     ! SUBROUTINE settol_min
     !
     ! For setting global tolerance level.
     !##############################################################################
     subroutine settol_min(tol)
-     
+
         implicit none
-     
-     
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-     
+
         ! tolerance level
         real*8, intent(in) :: tol
-     
-     
+
+
         !##### ROUTINE CODE #######################################################
-    
+
         ! check whether tolerance level is valid
         if(tol > 0d0)then
             tbox_gftol = tol
         else
             call warning('settol_min', 'tolerance level is not valid')
         endif
-     
+
     end subroutine settol_min
-     
-     
+
+
     !##############################################################################
     ! SUBROUTINE setiter_min
     !
     ! For setting maximum number of iterations.
     !##############################################################################
     subroutine setiter_min(iter)
-     
+
         implicit none
-     
-     
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-     
+
         ! tolerance level
         integer, intent(in) :: iter
-     
-     
+
+
         !##### ROUTINE CODE #######################################################
-    
+
         ! check whether tolerance level is valid
         if(iter > 0)then
             tbox_itermax_min = iter
         else
             call warning('setiter_min', 'number of iterations is not valid')
         endif
-     
+
     end subroutine setiter_min
-     
-     
+
+
     !##############################################################################
     ! SUBROUTINE brent
     !
     ! Minimizes a one dimensional function.
     !
     ! PARTS OF THIS PROCEDURE WERE COPIED AND ADAPTED FROM:
-    !     Press, W.H., Teukolsky, S.A., Vetterling, W.T. & Flannery, B.P. (1992). 
+    !     Press, W.H., Teukolsky, S.A., Vetterling, W.T. & Flannery, B.P. (1992).
     !     Numerical Recipes in Fortran 90: The Art of Parallel Scientific
     !     Computing, 2nd edition. Cambridge: Cambridge University Press.
     !##############################################################################
     subroutine brent(xmin, fret, minimum, maximum, func)
-     
+
         implicit none
-        
-        
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-        
+
         ! minimum value found
         real*8, intent(inout) :: xmin
-        
+
         ! function value at minimum
         real*8, intent(out) :: fret
-        
+
         ! left, middle and right interval points
         real*8, intent(in) :: minimum, maximum
-        
-        
+
+
         !##### OTHER VARIABLES ####################################################
-        
+
         real*8 :: tol
         real*8, parameter :: cgold = 0.3819660d0
         real*8, parameter :: zeps = 1.0e-3*epsilon(xmin)
         real*8 :: a, b, d, e, etemp, fu, fv, fw, fx, p, q, r, tol1, tol2, &
             u, v, w, x, xm, ax, bx, cx
         integer :: iter
-        
-        
+
+
         !##### INTERFACES #########################################################
-        
+
         ! interface for the function
         interface
             function func(p)
                 implicit none
                 real*8, intent(in) :: p
                 real*8 :: func
-            end function func        
+            end function func
         end interface
-        
-        
+
+
         !##### ROUTINE CODE #######################################################
-        
+
         ! set tolerance level
         tol =  tbox_gftol
-        
+
         ! set ax, bx and cx
         ax = minimum
         cx = maximum
 
         a = min(ax, cx)
         b = max(ax, cx)
-        
+
         if(abs(xmin-a) <= 1d-6)then
             bx = a + 1d-6
         elseif(abs(xmin-b) <= 1d-6)then
@@ -5570,7 +5570,7 @@ contains
         else
             bx = (ax+cx)/2d0
         endif
-        
+
         v = bx
         w = v
         x = v
@@ -5578,18 +5578,18 @@ contains
         fx = func(x)
         fv = fx
         fw = fx
-        
+
         do iter = 1,tbox_itermax_min
             xm = 0.5d0*(a+b)
             tol1 = tol*abs(x)+zeps
             tol2 = 2.0d0*tol1
-        
+
             if(abs(x-xm) <= (tol2-0.5d0*(b-a)))then
                 xmin = x
                 fret = fx
                 return
             endif
-        
+
             if(abs(e) > tol1)then
                 r = (x-w)*(fx-fv)
                 q = (x-v)*(fx-fw)
@@ -5608,12 +5608,12 @@ contains
                     u = x+d
                     if(u-a < tol2 .or. b-u < tol2) d = sign(tol1, xm-x)
                 endif
-            
+
             else
                 e = merge(a-x, b-x, x >= xm )
                 d = CGOLD*e
             endif
-            
+
             u = merge(x+d, x+sign(tol1, d), abs(d) >= tol1 )
             fu = func(u)
             if(fu <= fx)then
@@ -5641,74 +5641,74 @@ contains
                 endif
             endif
         enddo
-        
+
         call warning('fminsearch', 'maximum iterations exceeded')
-    
-    
+
+
     !##### SUBROUTINES AND FUNCTIONS ##########################################
-    
+
     contains
-    
-    
+
+
         !##########################################################################
         ! SUBROUTINE shft
         !
         ! Shifts b to a, c to b and d to c.
         !##########################################################################
         subroutine shft(a, b, c, d)
- 
+
             implicit none
- 
- 
+
+
             !##### INPUT/OUTPUT VARIABLES #########################################
- 
+
             real*8, intent(out)   :: a
             real*8, intent(inout) :: b, c
             real*8, intent(in   ) :: d
- 
- 
+
+
             !##### ROUTINE CODE ###################################################
             a = b
             b = c
             c = d
         end subroutine shft
-    
+
     end subroutine brent
-    
-    
-    
+
+
+
     !##############################################################################
     ! SUBROUTINE powell
     !
     ! Powell is a multidimensional function minimizer.
     !
     ! PARTS OF THIS PROCEDURE WERE COPIED AND ADAPTED FROM:
-    !     Press, W.H., Teukolsky, S.A., Vetterling, W.T. & Flannery, B.P. (1992). 
+    !     Press, W.H., Teukolsky, S.A., Vetterling, W.T. & Flannery, B.P. (1992).
     !     Numerical Recipes in Fortran 90: The Art of Parallel Scientific
     !     Computing, 2nd edition. Cambridge: Cambridge University Press.
     !##############################################################################
     subroutine powell(p, fret, minimum, maximum, func)
-    
+
         implicit none
-    
-    
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-    
+
         ! starting and ending point
         real*8, intent(inout) :: p(:)
-    
+
         ! value of function in minimum
         real*8, intent(out) :: fret
-    
+
         ! minimum optimization interval point
         real*8, intent(in) :: minimum(:)
-    
+
         ! maximum optimization interval point
         real*8, intent(in) :: maximum(:)
-    
-    
+
+
         !##### OTHER VARIABLES ####################################################
-    
+
         real*8 :: xi(size(p, 1), size(p, 1))
         real*8 :: ftol
         real*8, parameter :: tiny = 1.0e-25
@@ -5716,10 +5716,10 @@ contains
         real*8 :: del, fp, fptt, t
         real*8, dimension(size(p)) :: pt, ptt, xit
         real*8 :: xicom(size(p,1))
-    
-        
+
+
         !##### INTERFACES #########################################################
-    
+
         ! interface for the function
         interface
             function func(p)
@@ -5728,130 +5728,130 @@ contains
                 real*8 :: func
             end function func
         end interface
-    
-    
+
+
         !##### ROUTINE CODE #######################################################
-    
+
         ! set tolerance level
         ftol = tbox_gftol
-        
+
         ! Set number of points
         n = assert_eq(size(p), size(minimum, 1), size(maximum,1), 'fminsearch')
-        
+
         ! initialize direction set
         xi = 0d0
         do i = 1, n
             xi(i, i) = 1d0
         enddo
-        
+
         ! calculate function value
         fret = func(p)
-        
+
         ! store old p
         pt(:) = p(:)
-        
+
         ! start iteration
         iter = 0
         do
             ! step counter
             iter = iter+1
-            
+
             ! save old function value
             fp = fret
-            
+
             ! ibig will be direction of steepest decline
             ibig = 0
             del = 0.0d0
-            
+
             ! iterate over all dimensions
             do i = 1, n
-            
+
                 ! copy direction i and store old function value
                 xit(:) = xi(:,i)
                 fptt = fret
-                
+
                 ! minimize along this direction
                 call linmin(p, xit, n, fret, func)
-                
+
                 ! store i into i big if i is the direction of steepest decline
                 if (fptt-fret > del) then
                     del=fptt-fret
                     ibig=i
                 endif
             enddo
-            
+
             ! termination criterion
             if (2d0*(fp - fret) <= ftol*(abs(fp) + abs(fret)) + tiny) return
-            
+
             ! quit if maximum iterations reached
             if(iter == tbox_itermax_min)then
                 call warning('fminsearch', 'maximum iterations exceeded')
             endif
-            
+
             ! construct extrapolated point
             ptt(:) = 2d0*p(:) - pt(:)
             xit(:) = p(:) - pt(:)
             pt(:) = p(:)
-            
+
             ! calculate function value at extrapolated point
             fptt = func(ptt)
-            
+
             ! if function value greater than actual value
             ! -> no change of directions
             if (fptt >= fp) cycle
-            
+
             ! calculate t
             t = 2d0*(fp - 2d0*fret + fptt) * (fp - fret - del)**2 &
                 - del*(fp - fptt)**2
-            
+
             ! if t > 0 -> no change of directions
             if (t >= 0d0) cycle
-            
+
             ! else minimize along new direction and start new iteration
             call linmin(p, xit, n, fret, func)
             xi(:, ibig) = xi(:, n)
             xi(:,n) = xit(:)
         enddo
-    
-    
+
+
     !##### SUBROUTINES AND FUNCTIONS ##########################################
-    
+
     contains
-    
-    
+
+
         !##########################################################################
         ! SUBROUTINE linmin
         !
         ! Minimizes multidimensional function along a given direction.
         !##########################################################################
         subroutine linmin(p, xi, n, fret, func)
-     
+
             implicit none
-     
-     
+
+
             !##### INPUT/OUTPUT VARIABLES #########################################
-     
+
             ! point where to start and minimum if minimization is done
             real*8, intent(inout) :: p(n)
-     
+
             ! direction in which to optimize
             real*8, intent(inout) :: xi(n)
-     
+
             ! number of dimensions
             integer, intent(in) :: n
-     
+
             ! value of function at minimum
             real*8, intent(out)  :: fret
-     
-     
+
+
             !##### OTHER VARIABLES ################################################
-     
+
             real*8 :: tol
             real*8  :: ax, bx, cx, xmin
-     
-     
+
+
             !##### INTERFACES #####################################################
-     
+
                 ! interface for the function
             interface
                 function func(p)
@@ -5860,52 +5860,52 @@ contains
                     real*8 :: func
                 end function func
             end interface
-     
-     
+
+
             !##### ROUTINE CODE ###################################################
-     
+
             ! set tolerance level
             tol = tbox_gftol
-     
+
             xicom(:) = xi(:)
-     
+
             ! get optimization interval
             call getintervall(ax, bx, cx)
-     
+
             ! minimize function using one dimensional optimizer
             fret = brent_pow(ax, bx, cx, tol, xmin, func)
-     
+
             ! calculate new direction and endpoint
             xi(:) = xmin*xi(:)
             p(:) = p(:) + xi(:)
-     
+
         end subroutine linmin
-     
-     
+
+
         !##########################################################################
         ! SUBROUTINE getinterval
         !
         ! Calculates optimization interval along a given direction.
         !##########################################################################
         subroutine getintervall(ax, bx, cx)
-     
+
             implicit none
-     
-     
+
+
             !##### INPUT/OUTPUT VARIABLES #########################################
-     
+
             ! left, middle and right interval point
             real*8, intent(out) :: ax, bx, cx
-     
-     
+
+
             !##### OTHER VARIABLES ################################################
-     
+
             integer :: i
             real*8  :: w(0:1,n)
-     
-     
+
+
             !##### ROUTINE CODE ###################################################
-     
+
             ! calculate right interval point
             cx = -1.e20
             do i = 1, n
@@ -5916,7 +5916,7 @@ contains
                 endif
                 if(w(0,i) > cx)cx = w(0, i)
             enddo
-     
+
             ! calculate left interval point
             ax = 1.e20
             do i=1, n
@@ -5927,46 +5927,46 @@ contains
                 endif
                 if(w(1,i) < ax)ax = w(1,i)
             enddo
-     
+
             ! calculate point in between [ax, cx]
             bx = 0d0
-     
+
         end subroutine getintervall
-     
-     
+
+
         !##########################################################################
         ! FUNCTION extr
         !
         ! Calculates interval endpoint in a given dimension.
         !##########################################################################
         real*8 function extr(dim, maxxx, richt)
-     
+
             implicit none
-     
-     
+
+
             !##### INPUT/OUTPUT VARIABLES #########################################
-     
+
             ! dimension in which to search
             integer, intent(in) :: dim
-     
+
             ! do you want the maximum or minimum endpoint
             integer, intent(in) :: maxxx
-     
+
             ! what is the optimization direction
             real*8 :: richt
-     
-     
+
+
             !##### ROUTINE CODE ###################################################
-     
+
             if(richt > 0d0 .and. maxxx == 1 .or. richt < 0d0 .and. maxxx == 0)then
                 extr = maximum(dim)
             else
                 extr = minimum(dim)
             endif
-     
+
         end function extr
-     
-     
+
+
         !##########################################################################
         ! FUNCTION f1dim
         !
@@ -5974,26 +5974,26 @@ contains
         !     one-dimensional function.
         !##########################################################################
         function f1dim(x, func)
-     
+
             implicit none
-     
-     
+
+
             !##### INPUT/OUTPUT VARIABLES #########################################
-     
+
             ! point where to evaluate the multidimensional function
             real*8, intent(in)  :: x
-     
+
             ! function value
             real*8 :: f1dim
-     
-     
+
+
             !##### OTHER VARIABLES ################################################
-     
+
             real*8 :: xt(n)
-     
-     
+
+
             !##### INTERFACES #####################################################
-     
+
             ! interface for the function
             interface
                 function func(p)
@@ -6002,56 +6002,56 @@ contains
                     real*8 :: func
                 end function func
             end interface
-     
-     
+
+
             !##### ROUTINE CODE ###################################################
-     
+
             ! create point where to evaluate func
             xt(:) = p(:)+x*xicom(:)
-     
+
             ! evaluate func at this point
             f1dim = func(xt)
-     
+
         end function f1dim
-     
-     
+
+
         !##########################################################################
         ! FUNCTION brent_pow
         !
         ! Minimizes a one dimensional function.
         !##########################################################################
         function brent_pow(ax, bx, cx, tol, xmin, func)
-     
+
             implicit none
-     
-     
+
+
             !##### INPUT/OUTPUT VARIABLES #########################################
-     
+
             ! left, middle and right interval points
             real*8, intent(in) :: ax, bx, cx
-     
+
             ! level of tolerance
             real*8, intent(in) :: tol
-     
+
             ! minimum value found
             real*8, intent(out) :: xmin
-     
+
             ! function value at minimum
             real*8 :: brent_pow
-     
-     
+
+
             !##### OTHER VARIABLES ################################################
-     
+
             real*8, parameter :: cgold = 0.3819660d0
             real*8, parameter :: zeps=1.0e-3*epsilon(ax)
             integer :: iter
             real*8 :: a=0d0, b=0d0, d=0d0, e=0d0, etemp=0d0
             real*8 :: fu, fv, fw, fx, p, q, r, tol1, tol2, &
                 u, v, w, x, xm
-     
-     
+
+
             !##### INTERFACES #####################################################
-     
+
             ! interface for the function
             interface
                 function func(p)
@@ -6060,10 +6060,10 @@ contains
                     real*8 :: func
                 end function func
             end interface
-     
-     
+
+
             !##### ROUTINE CODE ###################################################
-     
+
             a = min(ax, cx)
             b = max(ax, cx)
             v = bx
@@ -6073,9 +6073,9 @@ contains
             fx = f1dim(x, func)
             fv = fx
             fw = fx
-     
+
             do iter = 1,tbox_tbox_itermax_pow_b
-            
+
                 xm = 0.5d0*(a+b)
                 tol1 = tol*abs(x)+zeps
                 tol2 = 2.0d0*tol1
@@ -6136,37 +6136,37 @@ contains
                     endif
                endif
             enddo
-            
+
             xmin = x
             brent_pow = fx
             call warning('fminsearch', 'maximum iterations exceeded')
-     
+
         end function brent_pow
-     
-     
+
+
         !##########################################################################
         ! SUBROUTINE shft
         !
         ! Shifts b to a, c to b and d to c.
         !##########################################################################
         subroutine shft(a, b, c, d)
- 
+
             implicit none
- 
- 
+
+
             !##### INPUT/OUTPUT VARIABLES #########################################
- 
+
             real*8, intent(out)   :: a
             real*8, intent(inout) :: b, c
             real*8, intent(in   ) :: d
- 
- 
+
+
             !##### ROUTINE CODE ###################################################
             a = b
             b = c
             c = d
         end subroutine shft
-    
+
     end subroutine powell
 
 
@@ -6197,49 +6197,49 @@ contains
     !   algorithm.
     !##############################################################################
     subroutine solve_lin(x, c, A, b, numle, numge, numeq)
-    
+
         implicit none
-     
-     
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-     
+
         ! solution of the linear program
         real*8, intent(inout) :: x(:)
-     
+
         ! coefficients in the function to minimize
         real*8, intent(in) :: c(:)
-     
-        ! constraint matrix 
+
+        ! constraint matrix
         real*8, intent(in) :: A(:, :)
-     
+
         ! target vectors of constraint
         real*8, intent(in) :: b(:)
-     
+
         ! number of lower equal constraints
         integer, intent(in) :: numle
-     
+
         ! number of greater equal constraints
         integer, intent(in) :: numge
-     
+
         ! number of equality constraints
         integer, intent(in) :: numeq
-     
-     
+
+
         !##### OTHER VARIABLES ####################################################
-     
+
         integer :: m, n, i1
         real*8 :: A_h(size(A, 1), size(A, 2)+numle+numge)
         real*8 :: c_h(size(c, 1)+numle+numge), b_h(size(b, 1))
         real*8 :: x_h(size(x, 1)+numle+numge)
         real*8 :: newA(size(A, 1), size(A, 2)+numle+numge)
-     
-     
+
+
         !##### ROUTINE CODE #######################################################
-     
+
         ! check for sizes
         n = assert_eq(size(x, 1), size(c, 1), size(A, 2), 'solve_lin')
         m = assert_eq(size(A, 1), size(b, 1), 'solve_lin')
-     
+
         ! check for correct inputs
         if(numle < 0)then
            call error('solve_lin', 'Number of lower equal constraints must '// &
@@ -6253,7 +6253,7 @@ contains
         elseif(numle+numge+numeq /= size(b,1))then
            call error('solve_lin', 'Number of equations does not match size of b')
         endif
-    
+
         ! set up optimization problem
         A_h = 0d0
         A_h(1:m, 1:n) = A(:, :)
@@ -6263,7 +6263,7 @@ contains
         do i1 = 1, numge
             A_h(numle+i1, n+numle+i1) = -1d0
         enddo
-     
+
         ! check for negative bs
         b_h = b
         do i1 = 1, m
@@ -6272,121 +6272,121 @@ contains
                 b_h(i1) = -b_h(i1)
             endif
         enddo
-     
+
         ! initialize c
         c_h = 0d0
         c_h(1:n) = c(:)
-     
+
         call get_starting_value(x_h, A_h, b_h, newA)
-     
+
         call solve_simplex(x_h, c_h, newA)
-     
+
         x = x_h(1:n)
-    
+
     contains
-    
-    
+
+
         !##############################################################################
         ! SUBROUTINE get_starting_value
         !
         ! Calculates a starting value for the linear program.
         !##############################################################################
         subroutine get_starting_value(x0, A, b, newA)
-     
+
             implicit none
-     
-     
+
+
             !##### INPUT/OUTPUT VARIABLES #############################################
-     
+
             ! starting value of the linear program
             real*8, intent(out) :: x0(:)
-     
+
             ! constraint matrix
             real*8, intent(in) :: A(:, :)
-     
+
             ! target vectors of constraint
             real*8, intent(in) :: b(:)
-     
+
             ! new matrix for simplex
             real*8, intent(out) :: newA(:, :)
-     
-     
+
+
             !##### OTHER VARIABLES ####################################################
-     
+
             integer :: m, n, j
             real*8 :: Astart(size(A,1), size(A,1)+size(A,2))
             real*8 :: cstart(size(A,1)+size(A,2)), xstart(size(A,1)+size(A,2))
-     
+
             !##### ROUTINE CODE #######################################################
-     
+
             ! get sizes
             n = size(A, 2)
             m = size(A, 1)
-     
+
             ! set up help problem
             cstart(1:n) = 0d0
             cstart(n+1:n+m) = 1d0
-     
+
             ! set up help matrix
             Astart(1:m, 1:n) = A
             Astart(1:m, n+1:n+m) = 0d0
             do j = 1, m
                 Astart(j,n+j) = 1d0
             enddo
-     
+
             ! get initial guess
             xstart(1:n) = 0d0
             xstart(n+1:n+m) = b
-     
+
             ! solve linear program
             call solve_simplex(xstart, cstart, Astart, newA)
-     
+
             ! set starting value
             x0 = xstart(1:n)
-     
+
         end subroutine get_starting_value
-     
-     
+
+
         !##############################################################################
         ! SUBROUTINE solve_simplex
         !
         ! Solves a linear program in canonic form.
         !##############################################################################
         subroutine solve_simplex(x, c, A, newA)
-     
+
             implicit none
-     
-     
+
+
             !##### INPUT/OUTPUT VARIABLES #############################################
-     
+
             ! starting value of the linear program and result
             real*8, intent(inout) :: x(:)
-     
+
             ! coefficients of the program
             real*8, intent(in) :: c(:)
-     
+
             ! constraint matrix
             real*8, intent(in) :: A(:, :)
-     
+
             ! new tableau if starting value calculation
             real*8, intent(out), optional :: newA(:, :)
-     
-     
+
+
             !##### OTHER VARIABLES ####################################################
-     
+
             integer :: k, m, n, j, ibas, inot, piv(2), ihelp, i1, i2, n1, bhelp
             integer :: bas(size(A, 1)), nbas(size(A, 2)-size(A, 1))
             real*8 :: alpha(size(A, 1), size(A,2)-size(A, 1))
             real*8 :: gamma(size(A, 2)-size(A,1)), x0(size(A, 1))
             real*8 :: pivcheck(size(A,1)), phelp, alpha_h(size(alpha, 2))
-     
+
             !##### ROUTINE CODE #######################################################
-     
+
             ! get sizes
             n = size(A, 2)
             m = size(A, 1)
             k = size(A, 2)-size(A,1)
-     
+
             ! set up basis and non basis elements
             ibas = 1
             inot = 1
@@ -6399,17 +6399,17 @@ contains
                     inot = inot + 1
                 endif
             enddo
-     
+
             ! set up x0 and c'x
             do ibas = 1, m
                 x0(ibas) = x(bas(ibas))
             enddo
-     
+
             ! set up alphas
             do inot = 1, k
                 alpha(:, inot) = -A(:, nbas(inot))
             enddo
-     
+
             ! set up gammas
             do inot = 1, k
                 gamma(inot) = 0d0
@@ -6418,10 +6418,10 @@ contains
                 enddo
                 gamma(inot) = gamma(inot) + c(nbas(inot))
             enddo
-     
+
             ! start algorithm
             do
-     
+
                 ! choose pivot column
                 piv = 0
                 do inot = 1, k
@@ -6430,10 +6430,10 @@ contains
                         exit
                     endif
                 enddo
-     
+
                 ! algorithm ends of no gamma < 0
                 if(piv(2) == 0)exit
-     
+
                 ! else choose pivot row
                 do ibas = 1, m
                     if(abs(alpha(ibas, piv(2))) >= 1d-100)then
@@ -6449,20 +6449,20 @@ contains
                         piv(1) = ibas
                     endif
                 enddo
-     
+
                 ! no solution in piv(1) == 0
                 if(piv(1) == 0)then
                     call error('solve_lin','Problem has no solution')
                 endif
-     
+
                 ! Apply basis change
                 Ihelp = nbas(piv(2))
                 nbas(piv(2)) = bas(piv(1))
                 bas(piv(1)) = Ihelp
-     
+
                 ! change pivot element
                 alpha(piv(1), piv(2)) = 1d0/alpha(piv(1), piv(2))
-     
+
                 ! change pivot column
                 do ibas = 1, m
                     if(ibas /= piv(1))then
@@ -6470,7 +6470,7 @@ contains
                             alpha(piv(1), piv(2))
                     endif
                 enddo
-     
+
                 ! change pivot row
                 do inot = 1, k
                     if(inot /= piv(2))then
@@ -6478,7 +6478,7 @@ contains
                             alpha(piv(1), piv(2))
                     endif
                 enddo
-     
+
                 ! change other elements of alpha
                 do ibas = 1, m
                     do inot = 1, k
@@ -6489,7 +6489,7 @@ contains
                         endif
                     enddo
                 enddo
-     
+
                 ! change x0
                 x0(piv(1)) = -x0(piv(1))*alpha(piv(1), piv(2))
                 do ibas = 1, m
@@ -6498,7 +6498,7 @@ contains
                             alpha(piv(1), piv(2))
                     endif
                 enddo
-     
+
                 ! change gammas
                 gamma(piv(2)) = gamma(piv(2))*alpha(piv(1), piv(2))
                 do inot = 1, k
@@ -6507,18 +6507,18 @@ contains
                             gamma(piv(2))/alpha(piv(1), piv(2))
                     endif
                 enddo
-     
+
             enddo
-     
+
             ! get solution
             x = 0d0
             do ibas = 1, m
                 x(bas(ibas)) = x0(ibas)
             enddo
-     
+
             ! set up new tableau if needed
             if(present(newA))then
-     
+
                 ! check for existence of a solution
                 n1 = 1
                 do i1 = 1, n
@@ -6531,7 +6531,7 @@ contains
                     call error('solve_lin', &
                         'Linear Program does not have a solution')
                 endif
-     
+
                 ! sort tableau in ascending order
                 do i1 = m-1,1,-1
                     do i2 = 1, i1
@@ -6539,14 +6539,14 @@ contains
                             bhelp = bas(i2)
                             bas(i2) = bas(i2+1)
                             bas(i2+1) = bhelp
-     
+
                             alpha_h = alpha(i2, :)
                             alpha(i2, :) = alpha(i2+1, :)
                             alpha(i2+1, :) = alpha_h
                         endif
                     enddo
                 enddo
-     
+
                 ! get new matrix
                 newA = 0d0
                 do i1 = 1, k
@@ -6555,9 +6555,9 @@ contains
                     endif
                 enddo
             endif
-     
+
         end subroutine solve_simplex
-    
+
     end subroutine solve_lin
 
 
@@ -6587,87 +6587,87 @@ contains
     ! For setting global tolerance level.
     !##############################################################################
     subroutine settol_root(tol)
-    
+
         implicit none
-    
-    
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-    
+
         ! tolerance level
         real*8, intent(in) :: tol
-    
-    
+
+
         !##### ROUTINE CODE #######################################################
- 
+
         ! check whether tolerance level is valid
         if(tol > 0d0)then
             tbox_gftol_root = tol
         else
             call warning('settol_root', 'tolerance level is not valid')
         endif
-    
+
     end subroutine settol_root
-    
-    
+
+
     !##############################################################################
     ! SUBROUTINE setiter_root
     !
     ! For setting maximum number of iterations.
     !##############################################################################
     subroutine setiter_root(iter)
-    
+
         implicit none
-    
-    
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-    
+
         ! number of iterations
         integer, intent(in) :: iter
-    
-    
+
+
         !##### ROUTINE CODE #######################################################
- 
+
         ! check whether number of iterations is valid
         if(iter > 0)then
             itermax_root = iter
         else
             call warning('setiter_root', 'number of iterations is not valid')
         endif
-    
+
     end subroutine setiter_root
-    
-    
+
+
     !##############################################################################
     ! SUBROUTINE newton_interpol
     !
     ! Find root of one-dimensional function by interpolatory newton method.
     !##############################################################################
     subroutine newton_interpol(x, funcv, check_return)
-    
+
         implicit none
-     
-     
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-     
+
         ! initial guess and root of the function
         real*8, intent(inout) :: x
-     
+
         ! check is true if newton_interpol converged to local minimum or can make no
         !     further progress
         logical, intent(out), optional :: check_return
-     
+
         !##### OTHER VARIABLES ####################################################
-     
+
         real*8, parameter :: eps = epsilon(x)
         real*8 :: tolf, tolmin
         real*8, parameter :: tolx = eps
         real*8, parameter :: stpmx = 100d0
         real*8 :: x1, x2, f1, f2, xnew, fnew, h
         integer :: its
-     
-     
+
+
         !##### INTERFACES #########################################################
-     
+
         ! interface for the function
         interface
             function funcv(p)
@@ -6676,67 +6676,67 @@ contains
                 real*8 :: funcv
             end function funcv
         end interface
-     
-     
+
+
         !##### ROUTINE CODE #######################################################
-     
+
         ! set tolerance levels
         tolf = tbox_gftol_root
         tolmin = tbox_gftol_root
         if(present(check_return))check_return = .false.
-     
+
         ! initialize values
         x1 = x
         h = 1d-6*max(abs(x), 0.01d0)
         x2 = x + h
-     
+
         ! calculate function values at x1, x2
         f1 = funcv(x1)
         f2 = funcv(x2)
-     
+
         ! check if already in zero
         if(abs(f1) < 0.01d0*tolf)then
             x = x1
             if(present(check_return))check_return = .false.
             return
         endif
-     
+
         if(abs(f2) < 0.01d0*tolf)then
             x = x2
             if(present(check_return))check_return = .false.
             return
         endif
-        
+
         if(abs((1d0-f1/f2)/(x2-x1)) < tolmin .or. &
             abs((1d0-f1/f2)) < epsilon(1d0))then
             x = x1
             if(present(check_return))check_return = .true.
             return
         endif
-     
+
         ! start iteration
         do its = 1, itermax_root
-     
+
             ! calculate new point xnew
             xnew = x2 - (x2-x1)/(1d0-f1/f2)
-     
+
             ! calculate new function value
             fnew = funcv(xnew)
-     
+
             ! check wether function is small enough
             if(abs(fnew) < tolf)then
                 x = xnew
                 if(present(check_return))check_return = .false.
                 return
             endif
-     
+
             ! check whether you are in a minimum or cannot proceed further
             if(2d0*abs(xnew-x2) < tolx*abs(xnew+x2))then
                 x = x2
                 if(present(check_return))check_return = .true.
                 return
             endif
-     
+
             ! else set new data and repeat step
             x1 = x2
             f1 = f2
@@ -6750,42 +6750,42 @@ contains
                 return
             endif
         enddo
-     
+
         ! throw warning if newton didn't converge
         if(present(check_return))check_return = .true.
-     
+
         x = xnew
-    
+
     end subroutine newton_interpol
-    
-    
+
+
     !##############################################################################
     ! SUBROUTINE broydn
     !
     ! Find root of multidimensional function of.
     !
     ! PARTS OF THIS PROCEDURE WERE COPIED AND ADAPTED FROM:
-    !     Press, W.H., Teukolsky, S.A., Vetterling, W.T. & Flannery, B.P. (1992). 
+    !     Press, W.H., Teukolsky, S.A., Vetterling, W.T. & Flannery, B.P. (1992).
     !     Numerical Recipes in Fortran 90: The Art of Parallel Scientific
-    !     Computing, 2nd edition. Cambridge: Cambridge University Press. 
+    !     Computing, 2nd edition. Cambridge: Cambridge University Press.
     !##############################################################################
     subroutine broydn(x, funcv, check_return)
-    
+
         implicit none
-     
-     
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-     
+
         ! initial guess and root of the function
         real*8, intent(inout) :: x(:)
-     
+
         ! check is true if broydn converged to local minimum or can make no
         !     further progress
         logical, intent(out), optional :: check_return
-     
-     
+
+
         !##### OTHER VARIABLES ####################################################
-     
+
         real*8, parameter :: eps = epsilon(x)
         real*8 :: tolf, tolmin
         real*8, parameter :: tolx = eps
@@ -6796,10 +6796,10 @@ contains
         real*8, dimension(size(x),size(x)) :: qt, r
         logical :: restrt, sing, check
         real*8 :: fvec(size(x,1))
-     
-     
+
+
         !##### INTERFACES #########################################################
-     
+
         ! interface for the function
         interface
             function funcv(p)
@@ -6808,55 +6808,55 @@ contains
                 real*8 :: funcv(size(p, 1))
             end function funcv
         end interface
-     
-     
+
+
         !##### ROUTINE CODE #######################################################
-     
+
         ! set tolerance levels
         tolf = tbox_gftol_root
         tolmin = tbox_gftol_root
         if(present(check_return))check_return = .false.
-     
+
         ! get size of x
-        n = size(x)   
-     
+        n = size(x)
+
         ! calculate function euklidean norm at starting point
         f = fmin(x, funcv)
-     
+
         ! check if root has been found
         if (maxval(abs(fvec(:))) < 0.01d0*tolf) then
             if(present(check_return))check_return = .false.
             return
         endif
-     
+
         stpmax = stpmx*max(sqrt(dot_product(x(:),x(:))),dble(n))
         restrt = .true.
-     
+
         ! iterate broydn steps
         do its=1,itermax_root
-     
+
             ! If restart then calculate jacobian of function
             if (restrt) then
-     
+
                 ! calculate jacobian of func at x
                 call fdjac(x, fvec, r, funcv)
-     
+
                 ! make q-r-decomposition of jacobian
                 call qrdcmp(r, c, d, sing)
-     
+
                 ! throw error if jacobian is singular
                 if(sing)then
                     call warning('fzero', 'singular jacobian')
                     if(present(check_return))check_return = .true.
                     return
                 endif
-     
+
                 ! create unity matrix
                 qt(:,:) = 0d0
                     do j = 1, n
                             qt(j, j) = 1d0
                     enddo
-     
+
                 ! for Q^T explicitly
                 do k = 1, n-1
                     if (abs(c(k)) >= 1d-100) then
@@ -6865,95 +6865,95 @@ contains
                     endif
                 enddo
                 where(lower_triangle(n,n))r(:, :) = 0d0
-     
+
                 ! puts diagonal elements of R matrix to r
                 do j = 1, n
                     r(j, j) = d(j)
                 enddo
-     
+
             ! else do Broydn update step
             else
-     
+
                 ! set up s as delta x
                 s(:) = x(:)-xold(:)
-     
+
                 ! t = R*delta x
                 do i = 1, n
                     t(i) = dot_product(r(i,i:n), s(i:n))
                 enddo
-     
+
                 ! w = delta f - B*s = delta f - R*s*Q^T
                 w(:) = fvec(:)-fvcold(:)-matmul(t(:), qt(:,:))
-     
+
                 ! if w entries are small enough, set them to zero
                 where(abs(w(:)) < EPS*(abs(fvec(:))+abs(fvcold(:)))) w(:) = 0d0
-     
+
                 ! update for non-noisy components of w
                 if(any(abs(w(:)) >= 1d-100))then
-     
+
                     ! update t and s
                     t(:) = matmul(qt(:,:),w(:))
                     s(:)=s(:)/dot_product(s,s)
-     
+
                     ! update R and Q^T
                     call qrupdt(r,qt,t,s)
-     
+
                     ! get diagonal of matrix r
                     do j = 1, size(r,1)
                         d(j) = r(j,j)
                     enddo
-     
+
                     ! if any diagonal value of r is 0, then jacobian is singular
                     if(any(abs(d(:)) <= 1d-100))then
                         call warning('fzero', 'singular jacobian')
                         if(present(check_return))check_return = .true.
-                        return  
+                        return
                     endif
                 endif
             endif
-     
+
             ! perform the newton step by inverting jacobian
             p(:) = -matmul(qt(:,:), fvec(:))
             do i = 1, n
                 g(i) = -dot_product(r(1:i,i), p(1:i))
             enddo
-     
+
             ! store old x, function value and function norm
             xold(:) = x(:)
             fvcold(:) = fvec(:)
             fold = f
-     
+
             ! solve linear equation with upper triangular matrix r
             call rsolv(r, d, p)
-     
+
             ! searches along the new gradient direction for new x and f
             call lnsrch(xold, fold, g, p, x, f, stpmax, check, funcv)
-     
+
             ! check whether root was found
             if(maxval(abs(fvec(:))) < tolf)then
                 if(present(check_return))check_return = .false.
                 return
             endif
-     
+
             ! if check is true
             if(check)then
-     
+
                 ! check if improvement can be made, if not, return
                 if(restrt .or. maxval(abs(g(:))*max(abs(x(:)), &
                         1d0)/max(f, 0.5d0*n)) < tolmin)then
                     if(present(check_return))check_return = check
                     return
                 endif
-     
+
                 ! else calculate new jacobian
                 restrt=.true.
-     
+
             ! if check is false
             else
-     
+
                 ! do broydn step
                 restrt=.false.
-     
+
                 ! check for convergence
                 if (maxval((abs(x(:)-xold(:)))/max(abs(x(:)), &
                     1.0d0)) < tolx)then
@@ -6962,47 +6962,47 @@ contains
                 endif
             endif
         enddo
-     
+
         ! throw warning if broydn didn't converge
         if(present(check_return))check_return = .true.
-     
-     
+
+
     !##### SUBROUTINES AND FUNCTIONS ##########################################
-     
+
     contains
-     
-     
+
+
         !##########################################################################
         ! FUNCTION fdjac
         !
         ! Calculates finite difference jacobian.
         !##########################################################################
         subroutine fdjac(x, fvec, df, funcv)
-     
+
             implicit none
-     
-     
+
+
             !##### INPUT/OUTPUT VARIABLES #########################################
-     
+
             ! value where to calculate finite difference jacobian
             real*8, intent(inout) :: x(:)
-     
+
             ! function value at x
             real*8, intent(in) :: fvec(:)
-     
+
             ! resulting finite difference jacobian
             real*8, intent(out) :: df(:, :)
-     
-     
+
+
             !##### OTHER VARIABLES ################################################
-     
+
             real*8, parameter :: eps = 1.0e-6
             integer :: j, n
             real*8, dimension(size(x)) :: xsav, xph, h
-     
-     
+
+
             !##### INTERFACES #####################################################
-     
+
             ! interface for the function
             interface
                 function funcv(p)
@@ -7011,34 +7011,34 @@ contains
                     real*8 :: funcv(size(p, 1))
                 end function funcv
             end interface
-     
-     
+
+
             !##### ROUTINE CODE ###################################################
-     
+
             ! check equality of sizes
             n = assert_eq(size(x), size(fvec), size(df,1), size(df,2), 'fdjac')
-     
+
             ! store old x
             xsav = x
-     
+
             ! calculate difference
             h = eps*abs(xsav)
             where(abs(h) <= 1d-100)h = EPS
-     
+
             ! calculate x + h
             xph = xsav + h
             h = xph - xsav
-     
+
             ! itertate over dimensions and calculate difference
             do j = 1, n
                 x(j) = xph(j)
                 df(:,j) = (funcv(x)-fvec(:))/h(j)
                 x(j) = xsav(j)
             enddo
-     
+
         end subroutine fdjac
-     
-     
+
+
         !##########################################################################
         ! FUNCTION lnsrch
         !
@@ -7046,49 +7046,49 @@ contains
         !     function has decreased sufficiently (for one dimensional function).
         !##########################################################################
         subroutine lnsrch(xold, fold, g, p, x, f, stpmax, check, funcv)
-     
+
             implicit none
-     
-     
+
+
             !##### INPUT/OUTPUT VARIABLES #########################################
-     
+
             ! point where to start line search
             real*8, intent(in) :: xold(:)
-     
+
             ! the old function value
             real*8, intent(in) :: fold
-     
+
             ! gradient at this point
             real*8, intent(in) :: g(:)
-     
+
             ! a line search direction
             real*8, intent(inout) :: p(:)
-     
+
             ! new value along the search line
             real*8, intent(out) :: x(:)
-     
+
             ! function value at new x
             real*8, intent(out) :: f
-     
+
             ! maximum size of steps such that lnsrch does not search un undefined
             !     areas
             real*8, intent(in) :: stpmax
-     
+
             ! is true if x is too close at xold
             logical, intent(out) :: check
-     
-     
+
+
             !##### OTHER VARIABLES ################################################
-     
+
             real*8, parameter :: alf = 1.0e-4
             real*8, parameter :: tolx = epsilon(x)
             integer :: ndum
             real*8 :: a, alam, alam2=0d0, alamin, b, disc, f2=0d0, pabs, rhs1, rhs2, &
                 slope, tmplam
-     
-     
+
+
             !##### INTERFACES #####################################################
-     
+
             ! interface for the function
             interface
                 function funcv(p)
@@ -7097,54 +7097,54 @@ contains
                     real*8 :: funcv(size(p, 1))
                 end function funcv
             end interface
-     
-     
+
+
             !##### ROUTINE CODE ###################################################
-     
+
             ! assert sizes or arrays
             ndum = assert_eq(size(g), size(p), size(x), size(xold), 'lnsrch')
             ndum = ndum
-     
+
             ! set check's default value
             check=.false.
-     
+
             ! calculate norm of p
             pabs = sqrt(dot_product(p, p))
-     
+
             ! restrict p to maximum stepsize
             if(pabs > stpmax)p(:) = p(:)*stpmax/pabs
-     
+
             ! calculate slope
             slope = dot_product(g, p)
-     
+
             ! throw error if you would go uphill
             if(slope >= 0d0)then
                 call warning('lnsrch', 'roundoff problem, I cannot go uphill')
                 return
             endif
-     
+
             ! calculate newton stepsize
             alamin = tolx/maxval(abs(p(:))/max(abs(xold(:)),1d0))
             alam = 1d0
-     
+
             ! start iteration
             do
                 ! calculate calculate new x
                 x(:) = xold(:)+alam*p(:)
-     
+
                 ! calculate new function value at x
                 f = fmin(x, funcv)
-     
+
                 ! if new x is not away enough return with check=true
                 if(alam < alamin)then
                     x(:) = xold(:)
                     check = .true.
                     return
-     
+
                 ! if optimal value found return with false
                 elseif(f <= fold+alf*alam*slope)then
                     return
-     
+
                 ! else do backtracking
                 else
                     if(abs(alam -1d0) <= 1d-100)then
@@ -7173,31 +7173,31 @@ contains
                 f2 = f
                 alam = max(tmplam,0.1d0*alam)
             enddo
-     
+
         end subroutine lnsrch
-     
-     
+
+
         !##########################################################################
         ! FUNCTION fmin
         !
         ! Calculates vector norm of multidimensional function.
         !##########################################################################
         function fmin(x, funcv)
-     
+
             implicit none
-     
-     
+
+
             !##### INPUT/OUTPUT VARIABLES #########################################
-     
+
             ! value where to evaluate function
             real*8, intent(in) :: x(:)
-     
+
             ! euklidean square norm of function at x
             real*8 :: fmin
-     
-     
+
+
             !##### INTERFACES #####################################################
-     
+
             ! interface for the function
             interface
                 function funcv(p)
@@ -7206,31 +7206,31 @@ contains
                     real*8 :: funcv(size(p, 1))
                 end function funcv
             end interface
-     
+
             ! calculate function value
             fvec = funcv(x)
-     
+
             ! calculate squared norm
             fmin = 0.5d0*dot_product(fvec, fvec)
-     
+
         end function fmin
-     
-     
+
+
         !##########################################################################
         ! SUBROUTINE qrdcmp
         !
         ! Calculates QR decomposition of a matrix.
         !##########################################################################
         subroutine qrdcmp(a, c, d, sing)
-     
+
             implicit none
-     
+
             real*8, intent(inout) :: a(:, :)
             real*8, intent(out) :: c(:), d(:)
             logical, intent(out) :: sing
             integer :: k, n
             real*8 :: scale, sigma
-     
+
             n = assert_eq(size(a,1), size(a,2), size(c), size(d), 'qrdcmp')
             sing = .false.
             do k = 1, n-1
@@ -7251,24 +7251,24 @@ contains
             enddo
             d(n) = a(n, n)
             if (abs(d(n)) <= 1d-100) sing = .true.
-     
+
         end subroutine qrdcmp
-     
-     
+
+
         !##########################################################################
         ! SUBROUTINE qrupdt
         !
         ! Updates qr-matrices.
         !##########################################################################
         subroutine qrupdt(r,qt,u,v)
-     
+
             implicit none
-     
+
             real*8, intent(inout) :: r(:, :), qt(:, :)
             real*8, intent(inout) :: u(:)
             real*8, intent(in) :: v(:)
             integer :: i, k, n
-     
+
             n = assert_eq((/ size(r,1), size(r,2), size(qt,1), size(qt,2), &
                 size(u), size(v)/), 'qrupdt')
             k = n+1-ifirstloc(abs(u(n:1:-1)) >= 1d-100)
@@ -7282,39 +7282,39 @@ contains
                 call rotate(r,qt,i,r(i,i),-r(i+1,i))
             enddo
         end subroutine qrupdt
-     
+
         !##########################################################################
         ! SUBROUTINE rsolv
         !
         ! Solves upper diagonal system.
         !##########################################################################
         subroutine rsolv(a, d, b)
-     
+
             implicit none
-     
+
             real*8, intent(in) :: a(:, :), d(:)
             real*8, intent(inout) :: b(:)
             integer :: i, n
-     
+
             n = assert_eq(size(a,1), size(a,2), size(b), size(d), 'rsolv')
             b(n) = b(n)/d(n)
             do i = n-1, 1, -1
                     b(i) =( b(i)-dot_product(a(i, i+1:n),b(i+1:n)))/d(i)
             enddo
-     
+
         end subroutine rsolv
-     
-     
+
+
         subroutine rotate(r, qt, i, a, b)
-     
+
             implicit none
-     
+
             real*8, intent(inout) :: r(:, :), qt(:, :)
             integer, intent(in) :: i
             real*8, intent(in) :: a, b
             integer :: n
             real*8 :: c, fact, s, temp(size(r,1))
-     
+
             n = assert_eq(size(r,1), size(r,2), size(qt,1), size(qt,2), 'rotate')
             if(abs(a) <= 1d-100)then
                 c = 0d0
@@ -7334,18 +7334,18 @@ contains
             temp = qt(i, :)
             qt(i, :) = c*temp-s*qt(i+1, :)
             qt(i+1, :) = s*temp+c*qt(i+1, :)
-     
+
         end subroutine rotate
-     
-     
+
+
         function pythag(a, b)
-     
+
             implicit none
-     
+
             real*8, intent(in) :: a, b
             real*8 :: pythag
             real*8 :: absa, absb
-     
+
             absa = abs(a)
             absb = abs(b)
             if(absa > absb)then
@@ -7357,67 +7357,67 @@ contains
                     pythag = absb*sqrt(1d0+(absa/absb)**2)
                 endif
             endif
-     
+
         end function pythag
-     
-     
+
+
         function ifirstloc(mask)
-     
+
             logical, intent(in) :: mask(:)
             integer :: ifirstloc, loca(1)
-     
+
             loca = maxloc(merge(1, 0, mask))
             ifirstloc = loca(1)
             if(.not. mask(ifirstloc))ifirstloc = size(mask)+1
-     
+
         end function ifirstloc
-     
-     
+
+
         function lower_triangle(j, k, extra)
-     
+
             integer, intent(in) :: j, k
             integer, intent(in), optional :: extra
             logical :: lower_triangle(j, k)
             integer :: n
-     
+
             n = 0
             if(present(extra))n = extra
-     
+
             lower_triangle = (outerdiff(arth_i(1, 1, j), arth_i(1, 1, k)) > -n)
-     
+
         end function lower_triangle
-     
-     
+
+
         function outerdiff(a, b)
-     
+
             integer, intent(in) :: a(:), b(:)
             integer :: outerdiff(size(a, 1),size(b, 1))
-     
+
             outerdiff = spread(a, dim=2, ncopies=size(b, 1)) - &
                 spread(b, dim=1, ncopies=size(a, 1))
-     
+
         end function outerdiff
-     
-     
+
+
         function outerprod(a, b)
-     
+
             real*8, intent(in) :: a(:), b(:)
             real*8 :: outerprod(size(a, 1),size(b, 1))
-     
+
             outerprod = spread(a, dim=2, ncopies=size(b, 1)) * &
                 spread(b, dim=1, ncopies=size(a, 1))
-     
+
         end function outerprod
-     
-     
+
+
         function arth_i(first, increment, n)
-     
+
             integer, intent(in) :: first, increment, n
             integer, parameter :: npar_arth = 16
             integer, parameter :: npar2_arth = 8
             integer :: arth_i(n)
             integer :: k, k2, temp
-     
+
             if(n > 0)arth_i(1) = first
             if(n <= npar_arth) then
                 do k = 2, n
@@ -7438,7 +7438,7 @@ contains
                 enddo
             endif
         end function arth_i
-    
+
     end subroutine broydn
 
 
@@ -7460,229 +7460,229 @@ contains
 ! MODULE splines
 !##############################################################################
 !##############################################################################
-    
-    
+
+
     !##############################################################################
     ! SUBROUTINE spline_interp1
     !
     ! Subroutine for one-dimensional spline interpolation.
     !##############################################################################
     subroutine spline_interp1(yi, c)
-    
-    
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-     
+
         ! interpolation data
         real*8, intent(in) :: yi(0:)
-     
+
         ! coefficients for spline interpolation
         real*8, intent(out) :: c(1:)
-     
-     
+
+
         !##### OTHER VARIABLES ####################################################
-     
+
         integer :: n, j
         real*8, allocatable :: r(:), d(:)
-     
-     
+
+
         !##### ROUTINE CODE #######################################################
-     
+
         ! assert sizes for the two arrays do fit
         n = assert_eq(size(yi,1)+2, size(c,1), 'spline_interp')
-     
+
         ! deallocate help arrays
         if(allocated(r))deallocate(r)
         if(allocated(d))deallocate(d)
-     
+
         ! allocate help arrays
         allocate(r(n))
         allocate(d(n))
-     
+
         ! calculate real n
         n = n-3
-     
+
         ! calculate numerical derivatives at end points
         r(1) = (2d0*yi(0)-5d0*yi(1)+4d0*yi(2)-yi(3))/6d0
         r(n+3) = (2d0*yi(n)-5d0*yi(n-1)+4d0*yi(n-2)-yi(n-3))/6d0
-     
+
         ! set rest of right side of equation system
         r(2:n+2) = yi(0:n)
-     
+
         ! solve the spline interpolation equation system
         c(2) = (yi(0)-r(1))/6d0
         c(n+2) = (yi(n)-r(n+3))/6d0
-     
+
         d(3) = 4d0
         r(3) = yi(1)-c(2)
         r(n+1) = yi(n-1)-c(n+2)
-     
+
         do j = 4, n+1
             d(j) = 4d0-1d0/d(j-1)
             r(j) = r(j)-r(j-1)/d(j-1)
         enddo
-     
+
         c(n+1) = r(n+1)/d(n+1)
-     
+
         do j = n, 3, -1
             c(j) = (r(j)-c(j+1))/d(j)
         enddo
-     
+
         c(1) = r(1)+2d0*c(2)-c(3)
         c(n+3) = r(n+3)+2d0*c(n+2)-c(n+1)
-    
+
     end subroutine spline_interp1
-    
-    
+
+
     !##############################################################################
     ! SUBROUTINE spline_interp2
     !
     ! Subroutine for two-dimensional spline interpolation.
     !##############################################################################
     subroutine spline_interp2(yi, c)
-    
-    
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-     
+
         ! interpolation data
         real*8, intent(in) :: yi(0:, 0:)
-     
+
         ! coefficients for spline interpolation
         real*8, intent(out) :: c(1:, 1:)
-     
-     
+
+
         !##### OTHER VARIABLES ####################################################
-     
+
         integer :: n(2), j
         real*8, allocatable :: tempc(:, :)
-     
-     
+
+
         !##### ROUTINE CODE #######################################################
-     
+
         ! calculate array sizes
         do j = 1, 2
             n(j) = assert_eq(size(yi,j)+2, size(c,j), 'spline_interp')
         enddo
-     
+
         ! calculate real n
         n = n-3
-     
+
         ! deallocate tempc
         if(allocated(tempc))deallocate(tempc)
-     
+
         ! allocate tempc
         allocate(tempc(n(1)+3, 0:n(2)))
-     
+
         ! calculate temporary coefficients
         do j = 0, n(2)
             call spline_interp1(yi(:, j), tempc(:, j))
         enddo
-     
+
         ! calculate actual coefficients
         do j = 1, n(1)+3
             call spline_interp1(tempc(j, :), c(j, :))
         enddo
-    
+
     end subroutine spline_interp2
-    
-    
+
+
     !##############################################################################
     ! SUBROUTINE spline_interp3
     !
     ! Subroutine for three-dimensional spline interpolation.
     !##############################################################################
     subroutine spline_interp3(yi, c)
-    
-    
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-     
+
         ! interpolation data
         real*8, intent(in) :: yi(0:, 0:, 0:)
-     
+
         ! coefficients for spline interpolation
         real*8, intent(out) :: c(1:, 1:, 1:)
-     
-     
+
+
         !##### OTHER VARIABLES ####################################################
-     
+
         integer :: n(3), j, j2
         real*8, allocatable :: tempc(:, :, :)
-     
-     
+
+
         !##### ROUTINE CODE #######################################################
-     
+
         ! calculate array sizes
         do j = 1, 3
             n(j) = assert_eq(size(yi,j)+2, size(c,j), 'spline_interp')
         enddo
-     
+
         ! calculate real n
         n = n-3
-     
+
         ! deallocate tempc
         if(allocated(tempc))deallocate(tempc)
-     
+
         ! allocate tempc
         allocate(tempc(n(1)+3, n(2)+3, 0:n(3)))
-     
+
         ! calculate temporary coefficients
         do j = 0, n(3)
             call spline_interp2(yi(:, :, j), tempc(:, :, j))
         enddo
-     
+
         ! calculate actual coefficients
         do j = 1, n(1)+3
             do j2 = 1, n(2)+3
                 call spline_interp1(tempc(j, j2, :), c(j, j2, :))
             enddo
         enddo
-    
+
     end subroutine spline_interp3
-    
-    
+
+
     !##############################################################################
     ! SUBROUTINE spline_interp4
     !
     ! Subroutine for four-dimensional spline interpolation.
     !##############################################################################
     subroutine spline_interp4(yi, c)
-    
-    
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-     
+
         ! interpolation data
         real*8, intent(in) :: yi(0:, 0:, 0:, 0:)
-     
+
         ! coefficients for spline interpolation
         real*8, intent(out) :: c(1:, 1:, 1:, 1:)
-     
-     
+
+
         !##### OTHER VARIABLES ####################################################
-     
+
         integer :: n(4), j, j2, j3
         real*8, allocatable :: tempc(:, :, :, :)
-     
-     
+
+
         !##### ROUTINE CODE #######################################################
-     
+
         ! calculate array sizes
         do j = 1, 4
             n(j) = assert_eq(size(yi,j)+2, size(c,j), 'spline_interp')
         enddo
-     
+
         ! calculate real n
         n = n-3
-     
+
         ! deallocate tempc
         if(allocated(tempc))deallocate(tempc)
-     
+
         ! allocate tempc
         allocate(tempc(n(1)+3, n(2)+3, n(3)+3, 0:n(4)))
-     
+
         ! calculate temporary coefficients
         do j = 0, n(4)
             call spline_interp3(yi(:, :, :, j), tempc(:, :, :, j))
         enddo
-     
+
         ! calculate actual coefficients
         do j = 1, n(1)+3
             do j2 = 1, n(2)+3
@@ -7691,54 +7691,54 @@ contains
                 enddo
             enddo
         enddo
-    
+
     end subroutine spline_interp4
-    
-    
+
+
     !##############################################################################
     ! SUBROUTINE spline_interp5
     !
     ! Subroutine for five-dimensional spline interpolation.
     !##############################################################################
     subroutine spline_interp5(yi, c)
-    
-    
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-     
+
         ! interpolation data
         real*8, intent(in) :: yi(0:, 0:, 0:, 0:, 0:)
-     
+
         ! coefficients for spline interpolation
         real*8, intent(out) :: c(1:, 1:, 1:, 1:, 1:)
-     
-     
+
+
         !##### OTHER VARIABLES ####################################################
-     
+
         integer :: n(5), j, j2, j3, j4
         real*8, allocatable :: tempc(:, :, :, :, :)
-     
-     
+
+
         !##### ROUTINE CODE #######################################################
-     
+
         ! calculate array sizes
         do j = 1, 5
             n(j) = assert_eq(size(yi,j)+2, size(c,j), 'spline_interp')
         enddo
-     
+
         ! calculate real n
         n = n-3
-     
+
         ! deallocate tempc
         if(allocated(tempc))deallocate(tempc)
-     
+
         ! allocate tempc
         allocate(tempc(n(1)+3, n(2)+3, n(3)+3, n(4)+3, 0:n(5)))
-     
+
         ! calculate temporary coefficients
         do j = 0, n(5)
             call spline_interp4(yi(:, :, :, :, j), tempc(:, :, :, :, j))
         enddo
-     
+
         ! calculate actual coefficients
         do j = 1, n(1)+3
             do j2 = 1, n(2)+3
@@ -7750,54 +7750,54 @@ contains
                 enddo
             enddo
         enddo
-    
+
     end subroutine spline_interp5
-    
-    
+
+
     !##############################################################################
     ! SUBROUTINE spline_interp6
     !
     ! Subroutine for six-dimensional spline interpolation.
     !##############################################################################
     subroutine spline_interp6(yi, c)
-    
-    
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-     
+
         ! interpolation data
         real*8, intent(in) :: yi(0:, 0:, 0:, 0:, 0:, 0:)
-     
+
         ! coefficients for spline interpolation
         real*8, intent(out) :: c(1:, 1:, 1:, 1:, 1:, 1:)
-     
-     
+
+
         !##### OTHER VARIABLES ####################################################
-     
+
         integer :: n(6), j, j2, j3, j4, j5
         real*8, allocatable :: tempc(:, :, :, :, :, :)
-     
-     
+
+
         !##### ROUTINE CODE #######################################################
-     
+
         ! calculate array sizes
         do j = 1, 6
             n(j) = assert_eq(size(yi,j)+2, size(c,j), 'spline_interp')
         enddo
-     
+
         ! calculate real n
         n = n-3
-     
+
         ! deallocate tempc
         if(allocated(tempc))deallocate(tempc)
-     
+
         ! allocate tempc
         allocate(tempc(n(1)+3, n(2)+3, n(3)+3, n(4)+3, n(5)+3, 0:n(6)))
-     
+
         ! calculate temporary coefficients
         do j = 0, n(6)
             call spline_interp5(yi(:, :, :, :, :, j), tempc(:, :, :, :, :, j))
         enddo
-     
+
         ! calculate actual coefficients
         do j = 1, n(1)+3
             do j2 = 1, n(2)+3
@@ -7811,54 +7811,54 @@ contains
                 enddo
             enddo
         enddo
-    
+
     end subroutine spline_interp6
-    
-    
+
+
     !##############################################################################
     ! SUBROUTINE spline_interp7
     !
     ! Subroutine for seven-dimensional spline interpolation.
     !##############################################################################
     subroutine spline_interp7(yi, c)
-    
-    
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-     
+
         ! interpolation data
         real*8, intent(in) :: yi(0:, 0:, 0:, 0:, 0:, 0:, 0:)
-     
+
         ! coefficients for spline interpolation
         real*8, intent(out) :: c(1:, 1:, 1:, 1:, 1:, 1:, 1:)
-     
-     
+
+
         !##### OTHER VARIABLES ####################################################
-     
+
         integer :: n(7), j, j2, j3, j4, j5, j6
         real*8, allocatable :: tempc(:, :, :, :, :, :, :)
-     
-     
+
+
         !##### ROUTINE CODE #######################################################
-     
+
         ! calculate array sizes
         do j = 1, 7
             n(j) = assert_eq(size(yi,j)+2, size(c,j), 'spline_interp')
         enddo
-     
+
         ! calculate real n
         n = n-3
-     
+
         ! deallocate tempc
         if(allocated(tempc))deallocate(tempc)
-     
+
         ! allocate tempc
         allocate(tempc(n(1)+3, n(2)+3, n(3)+3, n(4)+3, n(5)+3, n(6)+3, 0:n(7)))
-     
+
         ! calculate temporary coefficients
         do j = 0, n(7)
             call spline_interp6(yi(:, :, :, :, :, :, j), tempc(:, :, :, :, :, :, j))
         enddo
-     
+
         ! calculate actual coefficients
         do j = 1, n(1)+3
             do j2 = 1, n(2)+3
@@ -7874,52 +7874,52 @@ contains
                 enddo
             enddo
         enddo
-    
+
     end subroutine spline_interp7
-    
-    
+
+
     !##############################################################################
     ! FUNCTION spline1
     !
     ! Function for evaluation of one-dimensional spline.
     !##############################################################################
     function spline1(x, c)
-    
-    
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-     
+
         ! value where to evaluate spline
         real*8, intent(in) :: x
-     
+
         ! coefficients for spline interpolation
         real*8, intent(in) :: c(1:)
-     
+
         ! value of spline function
         real*8 :: spline1
-     
-     
+
+
         !##### OTHER VARIABLES ####################################################
-     
+
         integer :: n1, j1, p1, q1
         real*8 :: phi1, xtemp1
-     
-     
+
+
         !##### ROUTINE CODE #######################################################
-     
+
         ! calculate number of points used
         n1 = size(c, 1)
-     
+
         ! calculate left and right summation end point
         p1 = max(floor(x)+1, 1)
         q1 = min(p1+3, n1)
-     
+
         spline1 = 0d0
-     
+
         do j1 = p1, q1
-     
+
             ! calculate value where to evaluate basis function
             xtemp1 = abs(x-j1+2)
-     
+
             ! calculate basis function
             if(xtemp1 <= 1d0)then
                 phi1 = 4d0+xtemp1**2*(3d0*xtemp1-6d0)
@@ -7928,67 +7928,67 @@ contains
             else
                 phi1 = 0d0
             endif
-     
+
             ! calculate spline value
             spline1 = spline1+c(j1)*phi1
         enddo
-    
+
     end function spline1
-    
-    
+
+
     !##############################################################################
     ! FUNCTION spline1_grid
     !
     ! Function for evaluation of one-dimensional spline, includes inverting grid.
     !##############################################################################
     function spline1_grid(x, c, left, right, growth)
-    
-    
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-     
+
         ! value where to evaluate spline
         real*8, intent(in) :: x
-     
+
         ! coefficients for spline interpolation
         real*8, intent(in) :: c(1:)
-     
+
         ! left interval endpoint
         real*8, intent(in) :: left
-     
+
         ! right interval endpoint
         real*8, intent(in) :: right
-     
+
         ! growth rate of grid
         real*8, intent(in), optional :: growth
-     
+
         ! value of spline function
         real*8 :: spline1_grid
-     
-     
+
+
         !##### OTHER VARIABLES ####################################################
-     
+
         integer :: n
         real*8 :: xtemp
-     
-     
+
+
         !##### ROUTINE CODE #######################################################
-     
+
         ! calculate number of grid-points
         n = size(c, 1)-3
-     
+
         ! invert grid
         if(present(growth))then
             xtemp = grid_Inv_Grow(x, left, right, growth, n)
         else
             xtemp = grid_Inv_Equi(x, left, right, n)
         endif
-     
+
         ! calculate spline value
         spline1_grid = spline1(xtemp, c)
-    
+
     end function spline1_grid
-    
-    
+
+
     !##############################################################################
     ! FUNCTION spline1_complete
     !
@@ -7996,49 +7996,49 @@ contains
     !     and interpolation method for a single point.
     !##############################################################################
     function spline1_complete(x, yi, left, right, growth)
-    
-    
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-     
+
         ! value where to evaluate spline
         real*8, intent(in) :: x
-     
+
         ! data for spline interpolation
         real*8, intent(in) :: yi(0:)
-     
+
         ! left interval endpoint
         real*8, intent(in) :: left
-     
+
         ! right interval endpoint
         real*8, intent(in) :: right
-     
+
         ! growth rate of grid
         real*8, intent(in), optional :: growth
-     
+
         ! value of spline function
         real*8 :: spline1_complete
-     
-     
+
+
         !##### OTHER VARIABLES ####################################################
-     
+
         real*8 :: spline_temp(1)
-     
-     
+
+
         !##### ROUTINE CODE #######################################################
-     
+
         ! invert grid for every evaluation point
         if(present(growth))then
             spline_temp = spline1_complete_m((/x/), yi, left, right, growth)
         else
             spline_temp = spline1_complete_m((/x/), yi, left, right)
         endif
-     
+
         ! paste data
         spline1_complete = spline_temp(1)
-    
+
     end function spline1_complete
-    
-    
+
+
     !##############################################################################
     ! FUNCTION spline1_complete_m
     !
@@ -8046,107 +8046,107 @@ contains
     !     and interpolation method for many points.
     !##############################################################################
     function spline1_complete_m(x, yi, left, right, growth)
-    
-    
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-     
+
         ! value where to evaluate spline
         real*8, intent(in) :: x(1:)
-     
+
         ! data for spline interpolation
         real*8, intent(in) :: yi(0:)
-     
+
         ! left interval endpoint
         real*8, intent(in) :: left
-     
+
         ! right interval endpoint
         real*8, intent(in) :: right
-     
+
         ! growth rate of grid
         real*8, intent(in), optional :: growth
-     
+
         ! value of spline function
         real*8 :: spline1_complete_m(size(x, 1))
-     
-     
+
+
         !##### OTHER VARIABLES ####################################################
-     
+
         real*8 :: c(1:size(yi, 1)+2)
         real*8 :: xtemp(1:size(x, 1))
         integer :: n, m, j
-     
-     
+
+
         !##### ROUTINE CODE #######################################################
-     
+
         ! calculate number of grid-points
         n = size(yi, 1)-1
-     
+
         ! calculate number of evaluation points
         m = size(x, 1)
-     
+
         ! invert grid for every evaluation point
         if(present(growth))then
             xtemp(:) = grid_Inv_Grow(x(:), left, right, growth, n)
         else
             xtemp(:) = grid_Inv_Equi(x(:), left, right, n)
         endif
-     
+
         ! interpolate data
         call spline_interp1(yi, c)
-     
+
         ! calculate spline values at point
         do j = 1, m
             spline1_complete_m(j) = spline1(xtemp(j), c)
         enddo
-    
+
     end function spline1_complete_m
-    
-    
+
+
     !##############################################################################
     ! FUNCTION spline2
     !
     ! Function for evaluation of two-dimensional spline.
     !##############################################################################
     function spline2(x, c)
-    
-    
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-     
+
         ! value where to evaluate spline
         real*8, intent(in) :: x(2)
-     
+
         ! coefficients for spline interpolation
         real*8, intent(in) :: c(1:, 1:)
-     
+
         ! value of spline function
         real*8 :: spline2
-     
-     
+
+
         !##### OTHER VARIABLES ####################################################
-     
+
         integer :: n(2), p(2), q(2)
         integer :: j1, j2
         real*8 :: phi1, xtemp1, phi2, xtemp2
         real*8 :: s2
-     
-     
+
+
         !##### ROUTINE CODE #######################################################
-     
+
         ! calculate number of points used
         n(1) = size(c, 1)
         n(2) = size(c, 2)
-     
+
         ! calculate left and right summation end point
         p = max(floor(x)+1, 1)
         q = min(p+3, n)
-     
+
         spline2 = 0d0
-     
+
         do j1 = p(1), q(1)
-     
+
             ! calculate value where to evaluate basis function
             xtemp1 = abs(x(1)-j1+2)
-     
+
             ! calculate basis function
             if(xtemp1 <= 1d0)then
                 phi1 = 4d0+xtemp1**2*(3d0*xtemp1-6d0)
@@ -8155,17 +8155,17 @@ contains
             else
                 phi1 = 0d0
             endif
-     
-     
+
+
             !#### calculate spline for second dimension ###########################
-     
+
             s2 = 0d0
-     
+
             do j2 = p(2), q(2)
-     
+
                 ! calculate value where to evaluate basis function
                 xtemp2 = abs(x(2)-j2+2)
-     
+
                 ! calculate basis function
                 if(xtemp2 <= 1d0)then
                     phi2 = 4d0+xtemp2**2*(3d0*xtemp2-6d0)
@@ -8174,59 +8174,59 @@ contains
                 else
                     phi2 = 0d0
                 endif
-     
+
                 ! calculate spline value
                 s2 = s2+c(j1, j2)*phi2
             enddo
-     
+
             ! calculate spline value
             spline2 = spline2+s2*phi1
         enddo
-    
+
     end function spline2
-    
-    
+
+
     !##############################################################################
     ! FUNCTION spline2_grid
     !
     ! Function for evaluation of two-dimensional spline, includ inverting grid.
     !##############################################################################
     function spline2_grid(x, c, left, right, growth)
-    
-    
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-     
+
         ! value where to evaluate spline
         real*8, intent(in) :: x(2)
-     
+
         ! coefficients for spline interpolation
         real*8, intent(in) :: c(1:, 1:)
-     
+
         ! left interval endpoint
         real*8, intent(in) :: left(2)
-     
+
         ! right interval endpoint
         real*8, intent(in) :: right(2)
-     
+
         ! growth rate of grid
         real*8, intent(in), optional :: growth(2)
-     
+
         ! value of spline function
         real*8 :: spline2_grid
-     
-     
+
+
         !##### OTHER VARIABLES ####################################################
-     
+
         integer :: n, j
         real*8 :: xtemp(2)
-     
-     
+
+
         !##### ROUTINE CODE #######################################################
-     
+
         ! calculate number of grid-points
         do j = 1, size(x, 1)
             n = size(c, j)-3
-     
+
             ! invert grid
             if(present(growth))then
                 xtemp(j) = grid_Inv_Grow(x(j), left(j), right(j), growth(j), n)
@@ -8234,13 +8234,13 @@ contains
                 xtemp(j) = grid_Inv_Equi(x(j), left(j), right(j), n)
             endif
         enddo
-     
+
         ! calculate spline value
         spline2_grid = spline2(xtemp, c)
-    
+
     end function spline2_grid
-    
-    
+
+
     !##############################################################################
     ! FUNCTION spline2_complete
     !
@@ -8248,55 +8248,55 @@ contains
     !     and interpolation method for a single point.
     !##############################################################################
     function spline2_complete(x, yi, left, right, growth)
-    
-    
+
+
         integer, parameter :: dim = 2
-     
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-     
+
         ! value where to evaluate spline
         real*8, intent(in) :: x(dim)
-     
+
         ! data for spline interpolation
         real*8, intent(in) :: yi(0:, 0:)
-     
+
         ! left interval endpoint
         real*8, intent(in) :: left(dim)
-     
+
         ! right interval endpoint
         real*8, intent(in) :: right(dim)
-     
+
         ! growth rate of grid
         real*8, intent(in), optional :: growth(dim)
-     
+
         ! value of spline function
         real*8 :: spline2_complete
-     
-     
+
+
         !##### OTHER VARIABLES ####################################################
-     
+
         real*8 :: xtemp(1, dim)
         real*8 :: spline_temp(1)
-     
-     
+
+
         !##### ROUTINE CODE #######################################################
-     
+
         ! set xtemp
         xtemp(1, :) = x
-     
+
         ! invert grid for every evaluation point
         if(present(growth))then
             spline_temp = spline2_complete_m(xtemp, yi, left, right, growth)
         else
             spline_temp = spline2_complete_m(xtemp, yi, left, right)
         endif
-     
+
         ! paste data
         spline2_complete = spline_temp(1)
-    
+
     end function spline2_complete
-    
-    
+
+
     !##############################################################################
     ! FUNCTION spline2_complete_m
     !
@@ -8304,51 +8304,51 @@ contains
     !     and interpolation method for many points.
     !##############################################################################
     function spline2_complete_m(x, yi, left, right, growth)
-    
+
         integer, parameter :: dim = 2
-     
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-     
+
         ! value where to evaluate spline
         real*8, intent(in) :: x(1:, 1:)
-     
+
         ! data for spline interpolation
         real*8, intent(in) :: yi(0:, 0:)
-     
+
         ! left interval endpoint
         real*8, intent(in) :: left(dim)
-     
+
         ! right interval endpoint
         real*8, intent(in) :: right(dim)
-     
+
         ! growth rate of grid
         real*8, intent(in), optional :: growth(dim)
-     
+
         ! value of spline function
         real*8 :: spline2_complete_m(size(x, 1))
-     
-     
+
+
         !##### OTHER VARIABLES ####################################################
-     
+
         real*8 :: c(1:size(yi, 1)+2, 1:size(yi, 2)+2)
         real*8 :: xtemp(1:size(x, 1), dim)
         integer :: n, m, j, k
-     
-     
+
+
         !##### ROUTINE CODE #######################################################
-     
+
         ! calculate number of evaluation points
         m = size(x, 1)
-     
+
         ! check whether x has the right dimension
         n = assert_eq(size(x, 2), dim, 'spline')
-     
+
         ! invert grid for every evaluation point
         if(present(growth))then
             do k = 1, dim
                 ! calculate number of grid-points
                 n = size(yi, k)-1
-     
+
                 xtemp(:, k) = grid_Inv_Grow(x(:, k), &
                         left(k), right(k), growth(k), n)
             enddo
@@ -8356,68 +8356,68 @@ contains
             do k = 1, dim
                 ! calculate number of grid-points
                 n = size(yi, k)-1
-     
+
                 xtemp(:, k) = grid_Inv_Equi(x(:, k), left(k), right(k), n)
             enddo
         endif
-     
+
         ! interpolate data
         call spline_interp2(yi, c)
-     
+
         ! calculate spline values at point
         do j = 1, m
             spline2_complete_m(j) = spline2(xtemp(j, :), c)
         enddo
-    
+
     end function spline2_complete_m
-    
-    
+
+
     !##############################################################################
     ! FUNCTION spline3
     !
     ! Function for evaluation of three-dimensional spline.
     !##############################################################################
     function spline3(x, c)
-    
-    
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-     
+
         ! value where to evaluate spline
         real*8, intent(in) :: x(3)
-     
+
         ! coefficients for spline interpolation
         real*8, intent(in) :: c(1:, 1:, 1:)
-     
+
         ! value of spline function
         real*8 :: spline3
-     
-     
+
+
         !##### OTHER VARIABLES ####################################################
-     
+
         integer :: n(3), p(3), q(3)
         integer :: j1, j2, j3
         real*8 :: phi1, xtemp1, phi2, xtemp2, phi3, xtemp3
         real*8 :: s2, s3
-     
-     
+
+
         !##### ROUTINE CODE #######################################################
-     
+
         ! calculate number of points used
         n(1) = size(c, 1)
         n(2) = size(c, 2)
         n(3) = size(c, 3)
-     
+
         ! calculate left and right summation end point
         p = max(floor(x)+1, 1)
         q = min(p+3, n)
-     
+
         spline3 = 0d0
-     
+
         do j1 = p(1), q(1)
-     
+
             ! calculate value where to evaluate basis function
             xtemp1 = abs(x(1)-j1+2)
-     
+
             ! calculate basis function
             if(xtemp1 <= 1d0)then
                 phi1 = 4d0+xtemp1**2*(3d0*xtemp1-6d0)
@@ -8426,17 +8426,17 @@ contains
             else
                 phi1 = 0d0
             endif
-     
-     
+
+
             !#### calculate spline for second dimension ###########################
-     
+
             s2 = 0d0
-     
+
             do j2 = p(2), q(2)
-     
+
                 ! calculate value where to evaluate basis function
                 xtemp2 = abs(x(2)-j2+2)
-     
+
                 ! calculate basis function
                 if(xtemp2 <= 1d0)then
                     phi2 = 4d0+xtemp2**2*(3d0*xtemp2-6d0)
@@ -8445,17 +8445,17 @@ contains
                 else
                     phi2 = 0d0
                 endif
-     
-     
+
+
                 !#### calculate spline for second dimension #######################
-     
+
                 s3 = 0d0
-     
+
                 do j3 = p(3), q(3)
-     
+
                     ! calculate value where to evaluate basis function
                     xtemp3 = abs(x(3)-j3+2)
-     
+
                     ! calculate basis function
                     if(xtemp3 <= 1d0)then
                         phi3 = 4d0+xtemp3**2*(3d0*xtemp3-6d0)
@@ -8464,63 +8464,63 @@ contains
                     else
                         phi3 = 0d0
                     endif
-     
+
                     ! calculate spline value
                     s3 = s3+c(j1, j2, j3)*phi3
                 enddo
-     
+
                 ! calculate spline value
                 s2 = s2+s3*phi2
             enddo
-     
+
             ! calculate spline value
             spline3 = spline3+s2*phi1
         enddo
-    
+
     end function spline3
-    
-    
+
+
     !##############################################################################
     ! FUNCTION spline3_grid
     !
     ! Function for evaluation of three-dimensional spline, includes inverting grid.
     !##############################################################################
     function spline3_grid(x, c, left, right, growth)
-    
-    
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-     
+
         ! value where to evaluate spline
         real*8, intent(in) :: x(3)
-     
+
         ! coefficients for spline interpolation
         real*8, intent(in) :: c(1:, 1:, 1:)
-     
+
         ! left interval endpoint
         real*8, intent(in) :: left(3)
-     
+
         ! right interval endpoint
         real*8, intent(in) :: right(3)
-     
+
         ! growth rate of grid
         real*8, intent(in), optional :: growth(3)
-     
+
         ! value of spline function
         real*8 :: spline3_grid
-     
-     
+
+
         !##### OTHER VARIABLES ####################################################
-     
+
         integer :: n, j
         real*8 :: xtemp(3)
-     
-     
+
+
         !##### ROUTINE CODE #######################################################
-     
+
         ! calculate number of grid-points
         do j = 1, size(x, 1)
             n = size(c, j)-3
-     
+
             ! invert grid
             if(present(growth))then
                 xtemp(j) = grid_Inv_Grow(x(j), left(j), right(j), growth(j), n)
@@ -8528,13 +8528,13 @@ contains
                 xtemp(j) = grid_Inv_Equi(x(j), left(j), right(j), n)
             endif
         enddo
-     
+
         ! calculate spline value
         spline3_grid = spline3(xtemp, c)
-    
+
     end function spline3_grid
-    
-    
+
+
     !##############################################################################
     ! FUNCTION spline3_complete
     !
@@ -8542,55 +8542,55 @@ contains
     !     and interpolation method for a single point.
     !##############################################################################
     function spline3_complete(x, yi, left, right, growth)
-    
-    
+
+
         integer, parameter :: dim = 3
-     
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-     
+
         ! value where to evaluate spline
         real*8, intent(in) :: x(dim)
-     
+
         ! data for spline interpolation
         real*8, intent(in) :: yi(0:, 0:, 0:)
-     
+
         ! left interval endpoint
         real*8, intent(in) :: left(dim)
-     
+
         ! right interval endpoint
         real*8, intent(in) :: right(dim)
-     
+
         ! growth rate of grid
         real*8, intent(in), optional :: growth(dim)
-     
+
         ! value of spline function
         real*8 :: spline3_complete
-     
-     
+
+
         !##### OTHER VARIABLES ####################################################
-     
+
         real*8 :: xtemp(1, dim)
         real*8 :: spline_temp(1)
-     
-     
+
+
         !##### ROUTINE CODE #######################################################
-     
+
         ! set xtemp
         xtemp(1, :) = x
-     
+
         ! invert grid for every evaluation point
         if(present(growth))then
             spline_temp = spline3_complete_m(xtemp, yi, left, right, growth)
         else
             spline_temp = spline3_complete_m(xtemp, yi, left, right)
         endif
-     
+
         ! paste data
         spline3_complete = spline_temp(1)
-    
+
     end function spline3_complete
-    
-    
+
+
     !##############################################################################
     ! FUNCTION spline3_complete_m
     !
@@ -8598,51 +8598,51 @@ contains
     !     and interpolation method for many points.
     !##############################################################################
     function spline3_complete_m(x, yi, left, right, growth)
-    
+
         integer, parameter :: dim = 3
-     
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-     
+
         ! value where to evaluate spline
         real*8, intent(in) :: x(1:, 1:)
-     
+
         ! data for spline interpolation
         real*8, intent(in) :: yi(0:, 0:, 0:)
-     
+
         ! left interval endpoint
         real*8, intent(in) :: left(dim)
-     
+
         ! right interval endpoint
         real*8, intent(in) :: right(dim)
-     
+
         ! growth rate of grid
         real*8, intent(in), optional :: growth(dim)
-     
+
         ! value of spline function
         real*8 :: spline3_complete_m(size(x, 1))
-     
-     
+
+
         !##### OTHER VARIABLES ####################################################
-     
+
         real*8 :: c(1:size(yi, 1)+2, 1:size(yi, 2)+2, 1:size(yi, 3)+2)
         real*8 :: xtemp(1:size(x, 1), dim)
         integer :: n, m, j, k
-     
-     
+
+
         !##### ROUTINE CODE #######################################################
-     
+
         ! calculate number of evaluation points
         m = size(x, 1)
-     
+
         ! check whether x has the right dimension
         n = assert_eq(size(x, 2), dim, 'spline')
-     
+
         ! invert grid for every evaluation point
         if(present(growth))then
             do k = 1, dim
                 ! calculate number of grid-points
                 n = size(yi, k)-1
-     
+
                 xtemp(:, k) = grid_Inv_Grow(x(:, k), &
                         left(k), right(k), growth(k), n)
             enddo
@@ -8650,64 +8650,64 @@ contains
             do k = 1, dim
                 ! calculate number of grid-points
                 n = size(yi, k)-1
-     
+
                 xtemp(:, k) = grid_Inv_Equi(x(:, k), left(k), right(k), n)
             enddo
         endif
-     
+
         ! interpolate data
         call spline_interp3(yi, c)
-     
+
         ! calculate spline values at point
         do j = 1, m
             spline3_complete_m(j) = spline3(xtemp(j, :), c)
         enddo
-    
+
     end function spline3_complete_m
-    
-    
+
+
     !##############################################################################
     ! FUNCTION spline4
     !
     ! Function for evaluation of four-dimensional spline.
     !##############################################################################
     function spline4(x, c)
-    
-    
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-     
+
         ! value where to evaluate spline
         real*8, intent(in) :: x(4)
-     
+
         ! coefficients for spline interpolation
         real*8, intent(in) :: c(1:, 1:, 1:, 1:)
-     
+
         ! value of spline function
         real*8 :: spline4
-     
-     
+
+
         !##### OTHER VARIABLES ####################################################
-     
+
         integer :: n, j, p, q
         real*8 :: phi, xtemp
-     
-     
+
+
         !##### ROUTINE CODE #######################################################
-     
+
         ! calculate number of points used
         n = size(c, 1)
-     
+
         ! calculate left and right summation end point
         p = max(floor(x(1))+1, 1)
         q = min(p+3, n)
-     
+
         spline4 = 0d0
-     
+
         do j = p, q
-     
+
             ! calculate value where to evaluate basis function
             xtemp = abs(x(1)-j+2)
-     
+
             ! calculate basis function
             if(xtemp <= 1d0)then
                 phi = 4d0+xtemp**2*(3d0*xtemp-6d0)
@@ -8716,55 +8716,55 @@ contains
             else
                 phi = 0d0
             endif
-     
+
             ! calculate spline value
             spline4 = spline4+spline3(x(2:4), c(j, :, :, :))*phi
         enddo
-    
+
     end function spline4
-    
-    
+
+
     !##############################################################################
     ! FUNCTION spline4_grid
     !
     ! Function for evaluation of four-dimensional spline, includes inverting grid.
     !##############################################################################
     function spline4_grid(x, c, left, right, growth)
-    
-    
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-     
+
         ! value where to evaluate spline
         real*8, intent(in) :: x(4)
-     
+
         ! coefficients for spline interpolation
         real*8, intent(in) :: c(1:, 1:, 1:, 1:)
-     
+
         ! left interval endpoint
         real*8, intent(in) :: left(4)
-     
+
         ! right interval endpoint
         real*8, intent(in) :: right(4)
-     
+
         ! growth rate of grid
         real*8, intent(in), optional :: growth(4)
-     
+
         ! value of spline function
         real*8 :: spline4_grid
-     
-     
+
+
         !##### OTHER VARIABLES ####################################################
-     
+
         integer :: n, j
         real*8 :: xtemp(4)
-     
-     
+
+
         !##### ROUTINE CODE #######################################################
-     
+
         ! calculate number of grid-points
         do j = 1, size(x, 1)
             n = size(c, j)-3
-     
+
             ! invert grid
             if(present(growth))then
                 xtemp(j) = grid_Inv_Grow(x(j), left(j), right(j), growth(j), n)
@@ -8772,13 +8772,13 @@ contains
                 xtemp(j) = grid_Inv_Equi(x(j), left(j), right(j), n)
             endif
         enddo
-     
+
         ! calculate spline value
         spline4_grid = spline4(xtemp, c)
-    
+
     end function spline4_grid
-    
-    
+
+
     !##############################################################################
     ! FUNCTION spline4_complete
     !
@@ -8786,55 +8786,55 @@ contains
     !     and interpolation method for a single point.
     !##############################################################################
     function spline4_complete(x, yi, left, right, growth)
-    
-    
+
+
         integer, parameter :: dim = 4
-     
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-     
+
         ! value where to evaluate spline
         real*8, intent(in) :: x(dim)
-     
+
         ! data for spline interpolation
         real*8, intent(in) :: yi(0:, 0:, 0:, 0:)
-     
+
         ! left interval endpoint
         real*8, intent(in) :: left(dim)
-     
+
         ! right interval endpoint
         real*8, intent(in) :: right(dim)
-     
+
         ! growth rate of grid
         real*8, intent(in), optional :: growth(dim)
-     
+
         ! value of spline function
         real*8 :: spline4_complete
-     
-     
+
+
         !##### OTHER VARIABLES ####################################################
-     
+
         real*8 :: xtemp(1, dim)
         real*8 :: spline_temp(1)
-     
-     
+
+
         !##### ROUTINE CODE #######################################################
-     
+
         ! set xtemp
         xtemp(1, :) = x
-     
+
         ! invert grid for every evaluation point
         if(present(growth))then
             spline_temp = spline4_complete_m(xtemp, yi, left, right, growth)
         else
             spline_temp = spline4_complete_m(xtemp, yi, left, right)
         endif
-     
+
         ! paste data
         spline4_complete = spline_temp(1)
-    
+
     end function spline4_complete
-    
-    
+
+
     !##############################################################################
     ! FUNCTION spline4_complete_m
     !
@@ -8842,52 +8842,52 @@ contains
     !     and interpolation method for many points.
     !##############################################################################
     function spline4_complete_m(x, yi, left, right, growth)
-    
+
         integer, parameter :: dim = 4
-     
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-     
+
         ! value where to evaluate spline
         real*8, intent(in) :: x(1:, 1:)
-     
+
         ! data for spline interpolation
         real*8, intent(in) :: yi(0:, 0:, 0:, 0:)
-     
+
         ! left interval endpoint
         real*8, intent(in) :: left(dim)
-     
+
         ! right interval endpoint
         real*8, intent(in) :: right(dim)
-     
+
         ! growth rate of grid
         real*8, intent(in), optional :: growth(dim)
-     
+
         ! value of spline function
         real*8 :: spline4_complete_m(size(x, 1))
-     
-     
+
+
         !##### OTHER VARIABLES ####################################################
-     
+
         real*8 :: c(1:size(yi, 1)+2, 1:size(yi, 2)+2, 1:size(yi, 3)+2, &
             1:size(yi, 4)+2)
         real*8 :: xtemp(1:size(x, 1), dim)
         integer :: n, m, j, k
-     
-     
+
+
         !##### ROUTINE CODE #######################################################
-     
+
         ! calculate number of evaluation points
         m = size(x, 1)
-     
+
         ! check whether x has the right dimension
         n = assert_eq(size(x, 2), dim, 'spline')
-     
+
         ! invert grid for every evaluation point
         if(present(growth))then
             do k = 1, dim
                 ! calculate number of grid-points
                 n = size(yi, k)-1
-     
+
                 xtemp(:, k) = grid_Inv_Grow(x(:, k), &
                         left(k), right(k), growth(k), n)
             enddo
@@ -8895,64 +8895,64 @@ contains
             do k = 1, dim
                 ! calculate number of grid-points
                 n = size(yi, k)-1
-     
+
                 xtemp(:, k) = grid_Inv_Equi(x(:, k), left(k), right(k), n)
             enddo
         endif
-     
+
         ! interpolate data
         call spline_interp4(yi, c)
-     
+
         ! calculate spline values at point
         do j = 1, m
             spline4_complete_m(j) = spline4(xtemp(j, :), c)
         enddo
-    
+
     end function spline4_complete_m
-    
-    
+
+
     !##############################################################################
     ! FUNCTION spline5
     !
     ! Function for evaluation of five-dimensional spline.
     !##############################################################################
     function spline5(x, c)
-    
-    
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-     
+
         ! value where to evaluate spline
         real*8, intent(in) :: x(5)
-     
+
         ! coefficients for spline interpolation
         real*8, intent(in) :: c(1:, 1:, 1:, 1:, 1:)
-     
+
         ! value of spline function
         real*8 :: spline5
-     
-     
+
+
         !##### OTHER VARIABLES ####################################################
-     
+
         integer :: n, j, p, q
         real*8 :: phi, xtemp
-     
-     
+
+
         !##### ROUTINE CODE #######################################################
-     
+
         ! calculate number of points used
         n = size(c, 1)
-     
+
         ! calculate left and right summation end point
         p = max(floor(x(1))+1, 1)
         q = min(p+3, n)
-     
+
         spline5 = 0d0
-     
+
         do j = p, q
-     
+
             ! calculate value where to evaluate basis function
             xtemp = abs(x(1)-j+2)
-     
+
             ! calculate basis function
             if(xtemp <= 1d0)then
                 phi = 4d0+xtemp**2*(3d0*xtemp-6d0)
@@ -8961,55 +8961,55 @@ contains
             else
                 phi = 0d0
             endif
-     
+
             ! calculate spline value
             spline5 = spline5+spline4(x(2:5), c(j, :, :, :, :))*phi
         enddo
-    
+
     end function spline5
-    
-    
+
+
     !##############################################################################
     ! FUNCTION spline5_grid
     !
     ! Function for evaluation of five-dimensional spline, includes inverting grid.
     !##############################################################################
     function spline5_grid(x, c, left, right, growth)
-    
-    
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-     
+
         ! value where to evaluate spline
         real*8, intent(in) :: x(5)
-     
+
         ! coefficients for spline interpolation
         real*8, intent(in) :: c(1:, 1:, 1:, 1:, 1:)
-     
+
         ! left interval endpoint
         real*8, intent(in) :: left(5)
-     
+
         ! right interval endpoint
         real*8, intent(in) :: right(5)
-     
+
         ! growth rate of grid
         real*8, intent(in), optional :: growth(5)
-     
+
         ! value of spline function
         real*8 :: spline5_grid
-     
-     
+
+
         !##### OTHER VARIABLES ####################################################
-     
+
         integer :: n, j
         real*8 :: xtemp(5)
-     
-     
+
+
         !##### ROUTINE CODE #######################################################
-     
+
         ! calculate number of grid-points
         do j = 1, size(x, 1)
             n = size(c, j)-3
-     
+
             ! invert grid
             if(present(growth))then
                 xtemp(j) = grid_Inv_Grow(x(j), left(j), right(j), growth(j), n)
@@ -9017,13 +9017,13 @@ contains
                 xtemp(j) = grid_Inv_Equi(x(j), left(j), right(j), n)
             endif
         enddo
-     
+
         ! calculate spline value
         spline5_grid = spline5(xtemp, c)
-    
+
     end function spline5_grid
-    
-    
+
+
     !##############################################################################
     ! FUNCTION spline5_complete
     !
@@ -9031,55 +9031,55 @@ contains
     !     and interpolation method for a single point.
     !##############################################################################
     function spline5_complete(x, yi, left, right, growth)
-    
-    
+
+
         integer, parameter :: dim = 5
-     
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-     
+
         ! value where to evaluate spline
         real*8, intent(in) :: x(dim)
-     
+
         ! data for spline interpolation
         real*8, intent(in) :: yi(0:, 0:, 0:, 0:, 0:)
-     
+
         ! left interval endpoint
         real*8, intent(in) :: left(dim)
-     
+
         ! right interval endpoint
         real*8, intent(in) :: right(dim)
-     
+
         ! growth rate of grid
         real*8, intent(in), optional :: growth(dim)
-     
+
         ! value of spline function
         real*8 :: spline5_complete
-     
-     
+
+
         !##### OTHER VARIABLES ####################################################
-     
+
         real*8 :: xtemp(1, dim)
         real*8 :: spline_temp(1)
-     
-     
+
+
         !##### ROUTINE CODE #######################################################
-     
+
         ! set xtemp
         xtemp(1, :) = x
-     
+
         ! invert grid for every evaluation point
         if(present(growth))then
             spline_temp = spline5_complete_m(xtemp, yi, left, right, growth)
         else
             spline_temp = spline5_complete_m(xtemp, yi, left, right)
         endif
-     
+
         ! paste data
         spline5_complete = spline_temp(1)
-    
+
     end function spline5_complete
-    
-    
+
+
     !##############################################################################
     ! FUNCTION spline5_complete_m
     !
@@ -9087,52 +9087,52 @@ contains
     !     and interpolation method for many points.
     !##############################################################################
     function spline5_complete_m(x, yi, left, right, growth)
-    
+
         integer, parameter :: dim = 5
-     
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-     
+
         ! value where to evaluate spline
         real*8, intent(in) :: x(1:, 1:)
-     
+
         ! data for spline interpolation
         real*8, intent(in) :: yi(0:, 0:, 0:, 0:, 0:)
-     
+
         ! left interval endpoint
         real*8, intent(in) :: left(dim)
-     
+
         ! right interval endpoint
         real*8, intent(in) :: right(dim)
-     
+
         ! growth rate of grid
         real*8, intent(in), optional :: growth(dim)
-     
+
         ! value of spline function
         real*8 :: spline5_complete_m(size(x, 1))
-     
-     
+
+
         !##### OTHER VARIABLES ####################################################
-     
+
         real*8 :: c(1:size(yi, 1)+2, 1:size(yi, 2)+2, 1:size(yi, 3)+2, &
             1:size(yi, 4)+2, 1:size(yi, 5)+2)
         real*8 :: xtemp(1:size(x, 1), dim)
         integer :: n, m, j, k
-     
-     
+
+
         !##### ROUTINE CODE #######################################################
-     
+
         ! calculate number of evaluation points
         m = size(x, 1)
-     
+
         ! check whether x has the right dimension
         n = assert_eq(size(x, 2), dim, 'spline')
-     
+
         ! invert grid for every evaluation point
         if(present(growth))then
             do k = 1, dim
                 ! calculate number of grid-points
                 n = size(yi, k)-1
-     
+
                 xtemp(:, k) = grid_Inv_Grow(x(:, k), &
                         left(k), right(k), growth(k), n)
             enddo
@@ -9140,64 +9140,64 @@ contains
             do k = 1, dim
                 ! calculate number of grid-points
                 n = size(yi, k)-1
-     
+
                 xtemp(:, k) = grid_Inv_Equi(x(:, k), left(k), right(k), n)
             enddo
         endif
-     
+
         ! interpolate data
         call spline_interp5(yi, c)
-     
+
         ! calculate spline values at point
         do j = 1, m
             spline5_complete_m(j) = spline5(xtemp(j, :), c)
         enddo
-    
+
     end function spline5_complete_m
-    
-    
+
+
     !##############################################################################
     ! FUNCTION spline6
     !
     ! Function for evaluation of six-dimensional spline.
     !##############################################################################
     function spline6(x, c)
-    
-    
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-     
+
         ! value where to evaluate spline
         real*8, intent(in) :: x(6)
-     
+
         ! coefficients for spline interpolation
         real*8, intent(in) :: c(1:, 1:, 1:, 1:, 1:, 1:)
-     
+
         ! value of spline function
         real*8 :: spline6
-     
-     
+
+
         !##### OTHER VARIABLES ####################################################
-     
+
         integer :: n, j, p, q
         real*8 :: phi, xtemp
-     
-     
+
+
         !##### ROUTINE CODE #######################################################
-     
+
         ! calculate number of points used
         n = size(c, 1)
-     
+
         ! calculate left and right summation end point
         p = max(floor(x(1))+1, 1)
         q = min(p+3, n)
-     
+
         spline6 = 0d0
-     
+
         do j = p, q
-     
+
             ! calculate value where to evaluate basis function
             xtemp = abs(x(1)-j+2)
-     
+
             ! calculate basis function
             if(xtemp <= 1d0)then
                 phi = 4d0+xtemp**2*(3d0*xtemp-6d0)
@@ -9206,55 +9206,55 @@ contains
             else
                 phi = 0d0
             endif
-     
+
             ! calculate spline value
             spline6 = spline6+spline5(x(2:6), c(j, :, :, :, :, :))*phi
         enddo
-    
+
     end function spline6
-    
-    
+
+
     !##############################################################################
     ! FUNCTION spline6_grid
     !
     ! Function for evaluation of six-dimensional spline, includes inverting grid.
     !##############################################################################
     function spline6_grid(x, c, left, right, growth)
-    
-    
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-     
+
         ! value where to evaluate spline
         real*8, intent(in) :: x(6)
-     
+
         ! coefficients for spline interpolation
         real*8, intent(in) :: c(1:, 1:, 1:, 1:, 1:, 1:)
-     
+
         ! left interval endpoint
         real*8, intent(in) :: left(6)
-     
+
         ! right interval endpoint
         real*8, intent(in) :: right(6)
-     
+
         ! growth rate of grid
         real*8, intent(in), optional :: growth(6)
-     
+
         ! value of spline function
         real*8 :: spline6_grid
-     
-     
+
+
         !##### OTHER VARIABLES ####################################################
-     
+
         integer :: n, j
         real*8 :: xtemp(6)
-     
-     
+
+
         !##### ROUTINE CODE #######################################################
-     
+
         ! calculate number of grid-points
         do j = 1, size(x, 1)
             n = size(c, j)-3
-     
+
             ! invert grid
             if(present(growth))then
                 xtemp(j) = grid_Inv_Grow(x(j), left(j), right(j), growth(j), n)
@@ -9262,13 +9262,13 @@ contains
                 xtemp(j) = grid_Inv_Equi(x(j), left(j), right(j), n)
             endif
         enddo
-     
+
         ! calculate spline value
         spline6_grid = spline6(xtemp, c)
-    
+
     end function spline6_grid
-    
-    
+
+
     !##############################################################################
     ! FUNCTION spline6_complete
     !
@@ -9276,55 +9276,55 @@ contains
     !     and interpolation method for a single point.
     !##############################################################################
     function spline6_complete(x, yi, left, right, growth)
-    
-    
+
+
         integer, parameter :: dim = 6
-     
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-     
+
         ! value where to evaluate spline
         real*8, intent(in) :: x(dim)
-     
+
         ! data for spline interpolation
         real*8, intent(in) :: yi(0:, 0:, 0:, 0:, 0:, 0:)
-     
+
         ! left interval endpoint
         real*8, intent(in) :: left(dim)
-     
+
         ! right interval endpoint
         real*8, intent(in) :: right(dim)
-     
+
         ! growth rate of grid
         real*8, intent(in), optional :: growth(dim)
-     
+
         ! value of spline function
         real*8 :: spline6_complete
-     
-     
+
+
         !##### OTHER VARIABLES ####################################################
-     
+
         real*8 :: xtemp(1, dim)
         real*8 :: spline_temp(1)
-     
-     
+
+
         !##### ROUTINE CODE #######################################################
-     
+
         ! set xtemp
         xtemp(1, :) = x
-     
+
         ! invert grid for every evaluation point
         if(present(growth))then
             spline_temp = spline6_complete_m(xtemp, yi, left, right, growth)
         else
             spline_temp = spline6_complete_m(xtemp, yi, left, right)
         endif
-     
+
         ! paste data
         spline6_complete = spline_temp(1)
-    
+
     end function spline6_complete
-    
-    
+
+
     !##############################################################################
     ! FUNCTION spline6_complete_m
     !
@@ -9332,52 +9332,52 @@ contains
     !     and interpolation method for many points.
     !##############################################################################
     function spline6_complete_m(x, yi, left, right, growth)
-    
+
         integer, parameter :: dim = 6
-     
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-     
+
         ! value where to evaluate spline
         real*8, intent(in) :: x(1:, 1:)
-     
+
         ! data for spline interpolation
         real*8, intent(in) :: yi(0:, 0:, 0:, 0:, 0:, 0:)
-     
+
         ! left interval endpoint
         real*8, intent(in) :: left(dim)
-     
+
         ! right interval endpoint
         real*8, intent(in) :: right(dim)
-     
+
         ! growth rate of grid
         real*8, intent(in), optional :: growth(dim)
-     
+
         ! value of spline function
         real*8 :: spline6_complete_m(size(x, 1))
-     
-     
+
+
         !##### OTHER VARIABLES ####################################################
-     
+
         real*8 :: c(1:size(yi, 1)+2, 1:size(yi, 2)+2, 1:size(yi, 3)+2, &
             1:size(yi, 4)+2, 1:size(yi, 5)+2, 1:size(yi, 6)+2)
         real*8 :: xtemp(1:size(x, 1), dim)
         integer :: n, m, j, k
-     
-     
+
+
         !##### ROUTINE CODE #######################################################
-     
+
         ! calculate number of evaluation points
         m = size(x, 1)
-     
+
         ! check whether x has the right dimension
         n = assert_eq(size(x, 2), dim, 'spline')
-     
+
         ! invert grid for every evaluation point
         if(present(growth))then
             do k = 1, dim
                 ! calculate number of grid-points
                 n = size(yi, k)-1
-     
+
                 xtemp(:, k) = grid_Inv_Grow(x(:, k), &
                         left(k), right(k), growth(k), n)
             enddo
@@ -9385,64 +9385,64 @@ contains
             do k = 1, dim
                 ! calculate number of grid-points
                 n = size(yi, k)-1
-     
+
                 xtemp(:, k) = grid_Inv_Equi(x(:, k), left(k), right(k), n)
             enddo
         endif
-     
+
         ! interpolate data
         call spline_interp6(yi, c)
-     
+
         ! calculate spline values at point
         do j = 1, m
             spline6_complete_m(j) = spline6(xtemp(j, :), c)
         enddo
-    
+
     end function spline6_complete_m
-    
-    
+
+
     !##############################################################################
     ! FUNCTION spline7
     !
     ! Function for evaluation of seven-dimensional spline.
     !##############################################################################
     function spline7(x, c)
-    
-    
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-     
+
         ! value where to evaluate spline
         real*8, intent(in) :: x(7)
-     
+
         ! coefficients for spline interpolation
         real*8, intent(in) :: c(1:, 1:, 1:, 1:, 1:, 1:, 1:)
-     
+
         ! value of spline function
         real*8 :: spline7
-     
-     
+
+
         !##### OTHER VARIABLES ####################################################
-     
+
         integer :: n, j, p, q
         real*8 :: phi, xtemp
-     
-     
+
+
         !##### ROUTINE CODE #######################################################
-     
+
         ! calculate number of points used
         n = size(c, 1)
-     
+
         ! calculate left and right summation end point
         p = max(floor(x(1))+1, 1)
         q = min(p+3, n)
-     
+
         spline7 = 0d0
-     
+
         do j = p, q
-     
+
             ! calculate value where to evaluate basis function
             xtemp = abs(x(1)-j+2)
-     
+
             ! calculate basis function
             if(xtemp <= 1d0)then
                 phi = 4d0+xtemp**2*(3d0*xtemp-6d0)
@@ -9451,55 +9451,55 @@ contains
             else
                 phi = 0d0
             endif
-     
+
             ! calculate spline value
             spline7 = spline7+spline6(x(2:7), c(j, :, :, :, :, :, :))*phi
         enddo
-    
+
     end function spline7
-    
-    
+
+
     !##############################################################################
     ! FUNCTION spline7_grid
     !
     ! Function for evaluation of seven-dimensional spline, includes inverting grid.
     !##############################################################################
     function spline7_grid(x, c, left, right, growth)
-    
-    
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-     
+
         ! value where to evaluate spline
         real*8, intent(in) :: x(7)
-     
+
         ! coefficients for spline interpolation
         real*8, intent(in) :: c(1:, 1:, 1:, 1:, 1:, 1:, 1:)
-     
+
         ! left interval endpoint
         real*8, intent(in) :: left(7)
-     
+
         ! right interval endpoint
         real*8, intent(in) :: right(7)
-     
+
         ! growth rate of grid
         real*8, intent(in), optional :: growth(7)
-     
+
         ! value of spline function
         real*8 :: spline7_grid
-     
-     
+
+
         !##### OTHER VARIABLES ####################################################
-     
+
         integer :: n, j
         real*8 :: xtemp(7)
-     
-     
+
+
         !##### ROUTINE CODE #######################################################
-     
+
         ! calculate number of grid-points
         do j = 1, size(x, 1)
             n = size(c, j)-3
-     
+
             ! invert grid
             if(present(growth))then
                 xtemp(j) = grid_Inv_Grow(x(j), left(j), right(j), growth(j), n)
@@ -9507,13 +9507,13 @@ contains
                 xtemp(j) = grid_Inv_Equi(x(j), left(j), right(j), n)
             endif
         enddo
-     
+
         ! calculate spline value
         spline7_grid = spline7(xtemp, c)
-    
+
     end function spline7_grid
-    
-    
+
+
     !##############################################################################
     ! FUNCTION spline7_complete
     !
@@ -9521,55 +9521,55 @@ contains
     !     and interpolation method for a single point.
     !##############################################################################
     function spline7_complete(x, yi, left, right, growth)
-    
-    
+
+
         integer, parameter :: dim = 7
-     
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-     
+
         ! value where to evaluate spline
         real*8, intent(in) :: x(dim)
-     
+
         ! data for spline interpolation
         real*8, intent(in) :: yi(0:, 0:, 0:, 0:, 0:, 0:, 0:)
-     
+
         ! left interval endpoint
         real*8, intent(in) :: left(dim)
-     
+
         ! right interval endpoint
         real*8, intent(in) :: right(dim)
-     
+
         ! growth rate of grid
         real*8, intent(in), optional :: growth(dim)
-     
+
         ! value of spline function
         real*8 :: spline7_complete
-     
-     
+
+
         !##### OTHER VARIABLES ####################################################
-     
+
         real*8 :: xtemp(1, dim)
         real*8 :: spline_temp(1)
-     
-     
+
+
         !##### ROUTINE CODE #######################################################
-     
+
         ! set xtemp
         xtemp(1, :) = x
-     
+
         ! invert grid for every evaluation point
         if(present(growth))then
             spline_temp = spline7_complete_m(xtemp, yi, left, right, growth)
         else
             spline_temp = spline7_complete_m(xtemp, yi, left, right)
         endif
-     
+
         ! paste data
         spline7_complete = spline_temp(1)
-    
+
     end function spline7_complete
-    
-    
+
+
     !##############################################################################
     ! FUNCTION spline7_complete_m
     !
@@ -9577,52 +9577,52 @@ contains
     !     and interpolation method for many points.
     !##############################################################################
     function spline7_complete_m(x, yi, left, right, growth)
-    
+
         integer, parameter :: dim = 7
-     
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-     
+
         ! value where to evaluate spline
         real*8, intent(in) :: x(1:, 1:)
-     
+
         ! data for spline interpolation
         real*8, intent(in) :: yi(0:, 0:, 0:, 0:, 0:, 0:, 0:)
-     
+
         ! left interval endpoint
         real*8, intent(in) :: left(dim)
-     
+
         ! right interval endpoint
         real*8, intent(in) :: right(dim)
-     
+
         ! growth rate of grid
         real*8, intent(in), optional :: growth(dim)
-     
+
         ! value of spline function
         real*8 :: spline7_complete_m(size(x, 1))
-     
-     
+
+
         !##### OTHER VARIABLES ####################################################
-     
+
         real*8 :: c(1:size(yi, 1)+2, 1:size(yi, 2)+2, 1:size(yi, 3)+2, &
             1:size(yi, 4)+2, 1:size(yi, 5)+2, 1:size(yi, 6)+2, 1:size(yi, 7)+2)
         real*8 :: xtemp(1:size(x, 1), dim)
         integer :: n, m, j, k
-     
-     
+
+
         !##### ROUTINE CODE #######################################################
-     
+
         ! calculate number of evaluation points
         m = size(x, 1)
-     
+
         ! check whether x has the right dimension
         n = assert_eq(size(x, 2), dim, 'spline')
-     
+
         ! invert grid for every evaluation point
         if(present(growth))then
             do k = 1, dim
                 ! calculate number of grid-points
                 n = size(yi, k)-1
-     
+
                 xtemp(:, k) = grid_Inv_Grow(x(:, k), &
                         left(k), right(k), growth(k), n)
             enddo
@@ -9630,19 +9630,19 @@ contains
             do k = 1, dim
                 ! calculate number of grid-points
                 n = size(yi, k)-1
-     
+
                 xtemp(:, k) = grid_Inv_Equi(x(:, k), left(k), right(k), n)
             enddo
         endif
-     
+
         ! interpolate data
         call spline_interp7(yi, c)
-     
+
         ! calculate spline values at point
         do j = 1, m
             spline7_complete_m(j) = spline7(xtemp(j, :), c)
         enddo
-    
+
     end function spline7_complete_m
 
 
@@ -9672,32 +9672,32 @@ contains
     ! Calculates Gauss-Legendre abscissas and weights on [x1, x2].
     !
     ! PARTS OF THIS PROCEDURE WERE COPIED AND ADAPTED FROM:
-    !     Press, W.H., Teukolsky, S.A., Vetterling, W.T. & Flannery, B.P. (1992). 
+    !     Press, W.H., Teukolsky, S.A., Vetterling, W.T. & Flannery, B.P. (1992).
     !     Numerical Recipes in Fortran 90: The Art of Parallel Scientific
     !     Computing, 2nd edition. Cambridge: Cambridge University Press.
     !##############################################################################
     subroutine legendre(x1, x2, x, w)
-    
+
         implicit none
-     
-     
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-     
+
         ! left interval point on which integral should be calculated
         real*8, intent(in) :: x1
-     
+
         ! left interval point on which integral should be calculated
         real*8, intent(in) :: x2
-     
+
         ! abscissas of gaussian integration formula
         real*8, intent(out) :: x(:)
-     
+
         ! weights of gaussian integration formula
         real*8, intent(out) :: w(:)
-     
-     
+
+
         !##### OTHER VARIABLES ####################################################
-     
+
         real*8, parameter :: eps = 3.0e-14
         integer, parameter :: maxits = 10
         real*8, parameter :: pi = 3.14159265358979d0
@@ -9705,116 +9705,116 @@ contains
         real*8 :: xl, xm
         real*8, dimension((size(x)+1)/2) :: p1, p2, p3, pp, z, z1
         logical, dimension((size(x)+1)/2) :: unfinished
-     
-     
+
+
         !##### ROUTINE CODE #######################################################
-     
+
         ! assert size equality
         n = assert_eq(size(x), size(w), 'legendre')
-     
+
         ! calculate only up to (n+1)/2 due to symmetry
         m = (n+1)/2
-     
+
         ! calculate interval midpoint
         xm = 0.5d0*(x2+x1)
-     
+
         ! calculate half of interval length
         xl = 0.5d0*(x2-x1)
-     
+
         ! set initial guess for the roots
         z = cos(pi*(arth(1,1,m)-0.25d0)/(n+0.5d0))
-     
+
         ! initialized unfinished
         unfinished = .true.
-     
+
         ! iterate Newton steps up to maximum iterations
         do its = 1, maxits
-     
+
             ! calculate Legendre polynomial at z where root has not yet been found
-     
+
             ! initialize p1 and p2
             where (unfinished)
                 p1 = 1d0
                 p2 = 0d0
             endwhere
-     
+
             ! calculate polynomial value at z by recursive formula
             do j = 1, n
-     
+
                 ! only where root has not yet been found
                 where (unfinished)
-     
+
                     ! the polynomial of order n - 2
                     p3 = p2
-     
+
                     ! the polynomial of order n - 1
                     p2 = p1
-     
+
                     ! the legendre polynomial
                     p1 = ((2d0*j-1d0)*z*p2-(j-1d0)*p3)/j
                 endwhere
             enddo
-     
+
             ! calculate derivative of polynomial p1 at z
             where (unfinished)
-     
+
                 ! derivative
                 pp = n*(z*p1-p2)/(z*z-1d0)
-     
+
                 ! store old z
                 z1 = z
-     
+
                 ! perform the newton step
                 z = z1-p1/pp
-     
+
                 ! check for difference between old and new guess being small enough
                 unfinished=(abs(z-z1) > EPS)
             endwhere
-     
+
             ! if all values have sufficiently converged, stop iteration
             if (.not. any(unfinished)) exit
         end do
-     
+
         ! throw error message if not sufficiently convergerd
         if(its == maxits+1)call error('legendre', 'too many iterations')
-     
+
         ! else calculate abscissas
         x(1:m) = xm-xl*z
-     
+
         ! symmetry for abscissas
         x(n:n-m+1:-1) = xm+xl*z
-     
+
         ! calculate weights
         w(1:m) = 2d0*xl/((1d0-z**2)*pp**2)
-     
+
         ! symmetry for weights
         w(n:n-m+1:-1) = w(1:m)
-    
+
     end subroutine legendre
-    
-    
+
+
     !##############################################################################
     ! FUNCTION arth
     !
     ! Calculates incremented array from first with n entries.
     !##############################################################################
     function arth(first, increment, n)
-    
+
         integer, intent(in) :: first, increment, n
         integer, parameter :: npar_arth = 16
         integer, parameter :: npar2_arth = 8
         integer :: arth(n)
         integer :: k, k2, temp
-     
+
         ! initialize first element
         if(n > 0)arth(1) = first
-     
+
         ! calculate by hand if n <= 16
         if(n <= npar_arth) then
             do k = 2, n
                 arth(k) = arth(k-1) + increment
             enddo
-     
+
         ! else set entries stepwise by 8 steps
         else
             do k = 2, npar2_arth
@@ -9830,7 +9830,7 @@ contains
                 k = k2
             enddo
         endif
-    
+
     end function arth
 
 
@@ -9860,106 +9860,106 @@ contains
     ! Discretizes an AR(1) process of the form z_j = \rho*z_{j-1} + eps using
     !     the Rouwenhorst method.
     !
-    ! REFERENCE: Kopecky, K.A., Suen, R.M.H., Finite state Markov-chain 
+    ! REFERENCE: Kopecky, K.A., Suen, R.M.H., Finite state Markov-chain
     !            approximations to highly persistent processes, Review of Economic
     !            Dynamics, Vol. 13, No. 3, 2010, 701-714.
     !##############################################################################
     subroutine discretize_AR(rho, mu, sigma_eps, z, pi, w)
-    
+
        implicit none
-    
-    
+
+
        !##### INPUT/OUTPUT VARIABLES #############################################
-    
+
        ! autoregression parameter
        real*8, intent(in) :: rho
-    
+
        ! unconditional mean of the process
        real*8, intent(in) :: mu
-    
+
        ! variance of the shock
        real*8, intent(in) :: sigma_eps
-    
+
        ! discrete shock values
        real*8, intent(out) :: z(:)
-    
+
        ! transition matrix
        real*8, intent(out) :: pi(:, :)
-    
+
        ! the stationary distribution
        real*8, intent(out), optional :: w(:)
-    
-    
+
+
        !##### OTHER VARIABLES ####################################################
-    
+
        integer :: n, in
        real*8 :: psi, sigma_eta
-    
-    
+
+
        !##### ROUTINE CODE #######################################################
-    
+
        ! assert size equality and get approximation points
        n = assert_eq(size(z), size(pi,1), size(pi,2), 'discretize_AR')
-    
+
        ! calculate variance of the overall process
        sigma_eta = sigma_eps/(1d0-rho**2)
-    
+
        ! determine the transition matrix
        call rouwenhorst_matrix(rho, pi)
-    
+
        ! determine the nodes
        psi = sqrt(dble(n-1))*sqrt(sigma_eta)
        do in = 1, n
            z(in) = -psi + 2d0*psi*dble(in-1)/dble(n-1)
        enddo
        z = z + mu
-    
+
        if(present(w))then
            w = 1d0/dble(n)
            do in = 1, 10000
                w = matmul(transpose(pi), w)
            enddo
        endif
-    
+
        !##########################################################################
        ! Subroutines and functions
        !##########################################################################
-    
+
        contains
-    
-    
+
+
        !##########################################################################
        ! subroutine rouwenhorst_matrix
        !
        ! Calculates value of function that should be integrated for pis.
        !##########################################################################
        recursive subroutine rouwenhorst_matrix(rho, pi_new)
-    
+
            implicit none
            real*8, intent(in) :: rho
            real*8, intent(out) :: pi_new(:, :)
            integer :: n
            real*8 :: p, pi_old(size(pi_new,1)-1, size(pi_new,1)-1)
-    
+
            n = size(pi_new, 1)
            p = (1d0 + rho)/2d0
-    
+
            if(n == 2)then
                pi_new(1, :) = (/p, 1d0-p/)
                pi_new(2, :) = (/1d0-p, p/)
            else
                call rouwenhorst_matrix(rho, pi_old)
                pi_new = 0d0
-    
+
                pi_new(1:n-1, 1:n-1) = pi_new(1:n-1, 1:n-1) + p*pi_old
                pi_new(1:n-1, 2:n  ) = pi_new(1:n-1, 2:n  ) + (1d0-p)*pi_old
                pi_new(2:n  , 1:n-1) = pi_new(2:n  , 1:n-1) + (1d0-p)*pi_old
                pi_new(2:n  , 2:n  ) = pi_new(2:n  , 2:n  ) + p*pi_old
-    
+
                pi_new(2:n-1, :) = pi_new(2:n-1, :)/2d0
            endif
        end subroutine
-    
+
     end subroutine discretize_AR
 
 
@@ -9968,46 +9968,46 @@ contains
     !
     ! Discretizes a log-AR(1) process using the Rouwenhorst method.
     !
-    ! REFERENCE: Kopecky, K.A., Suen, R.M.H., Finite state Markov-chain 
+    ! REFERENCE: Kopecky, K.A., Suen, R.M.H., Finite state Markov-chain
     !            approximations to highly persistent processes, Review of Economic
     !            Dynamics, Vol. 13, No. 3, 2010, 701-714.
     !##############################################################################
     subroutine discretize_log_AR(rho, mu, sigma_eps, z, pi, w)
-    
+
         implicit none
-    
-    
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-     
+
         ! autoregression parameter
         real*8, intent(in) :: rho
-     
+
         ! unconditional mean of the process
         real*8, intent(in) :: mu
-     
+
         ! variance of the shock
         real*8, intent(in) :: sigma_eps
-     
+
         ! discrete shock values
         real*8, intent(out) :: z(:)
-     
+
         ! transition matrix
         real*8, intent(out) :: pi(:, :)
-     
+
         ! the stationary distribution
         real*8, intent(out), optional :: w(:)
-    
-    
+
+
         !##### OTHER VARIABLES ####################################################
-    
+
         real*8 :: sigma_eta, mu_c, sigma_c
-    
-    
+
+
         !##### ROUTINE CODE #######################################################
 
         ! calculate variance of the overall process
         sigma_eta = sigma_eps/(1d0-rho**2)
-    
+
         ! get the transformed variance and expectation
         sigma_c = log(1d0+sigma_eta/mu**2)
         mu_c  = log(mu)-0.5d0*sigma_c
@@ -10022,43 +10022,43 @@ contains
 
         ! take exponentials
         z = exp(z)
-    
+
     end subroutine discretize_log_AR
-    
-    
+
+
     !##############################################################################
     ! SUBROUTINE simulate_AR
     !
     ! Simulates a discrete AR(1) process.
     !##############################################################################
     subroutine simulate_AR(pi, shocks, fixed)
-    
+
         implicit none
-     
-     
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
-     
+
         ! transition matrix
         real*8, intent(in) :: pi(:, :)
-     
+
         ! simulated schocks
         integer, intent(out) :: shocks(:)
-        
+
         ! should the random seed be initialized at a fixed values
         logical, optional :: fixed
-     
-     
+
+
         !##### OTHER VARIABLES ####################################################
-     
+
         integer :: T, n, j
-     
-     
+
+
         !##### ROUTINE CODE #######################################################
-     
+
         ! assert size equality and get number of simulated schocks
         n = assert_eq(size(pi,1), size(pi,2), 'tauchen')
         T = size(shocks)
-     
+
         ! initialize the random seed
         if(tbox_seed)then
             if(present(fixed))then
@@ -10068,68 +10068,68 @@ contains
             endif
             tbox_seed = .false.
         endif
-     
+
         ! get first entry
         shocks(1) = n/2+1
-     
+
         ! now calculate other shocks
         do j = 2, T
             shocks(j) = get_tomorrow(pi(shocks(j-1), :))
         enddo
-    
-    
+
+
     !##########################################################################
     ! Subroutines and functions
     !##########################################################################
-    
+
     contains
-    
-    
+
+
         !##########################################################################
         ! FUNCTION get_tomorrow
         !
         ! Calculates value of function that should be integrated for pis.
         !##########################################################################
         function get_tomorrow(pi)
-     
+
             implicit none
-     
-     
+
+
             !##### INPUT/OUTPUT VARIABLES #########################################
-     
+
             ! transition probabilities
             real*8, intent(in) :: pi(:)
-     
+
             ! tomorrows shock
             integer :: get_tomorrow
-     
-     
+
+
             !##### OTHER VARIABLES ################################################
-     
+
             real*8 :: rand
             integer :: i1
-     
-     
+
+
             !##### ROUTINE CODE ###################################################
-     
+
             ! get random number
             call random_number(rand)
-     
+
             ! get tomorrows value
             do i1 = 1, size(pi, 1)-1
-     
+
                 if(rand <= sum(pi(1:i1), 1))then
                     get_tomorrow = i1
                     return
                 endif
             enddo
-     
+
             ! else choose last value
             get_tomorrow = i1
             return
-     
+
         end function
-    
+
     end subroutine simulate_AR
 
 
@@ -10147,7 +10147,7 @@ contains
 !##############################################################################
 ! MODULE gnuplot
 !##############################################################################
-!############################################################################## 
+!##############################################################################
 
 
     !##############################################################################
@@ -10197,12 +10197,12 @@ contains
         character(LEN=*), optional :: output
 
         !##### OTHER VARIABLES ####################################################
- 
+
         integer :: i1, i2
         character(LEN=3) :: ft
         character(LEN=150) :: cfile, dfile
-     
-     
+
+
         !##### ROUTINE CODE #######################################################
 
         if(present(output))then
@@ -10234,14 +10234,9 @@ contains
         write(213659, '(a)')'            set terminal qt'
         write(213659, '(a)')'        } else {'
         write(213659, '(a)')'            print ""'
-        write(213659, '(a)')'            print "ATTENTION: There seems to be NO VALID TERMINAL installed in "'
-        write(213659, '(a)')'            print "           your version of gnuplot. It might be a good idea to "'
-        write(213659, '(a)')'            print "           completely uninstall your Fortran/gnuplot/geany installation"'
-        write(213659, '(a)')'            print "           using the uninstallation files on www.ce-fortran.com. "'
-        write(213659, '(a)')'            print "           Afterwards you should reinstall the Fortran system again."'
-        write(213659, '(a)')'            print "           If this does not help, please refer to the forum."'
+        write(213659, '(a)')'            print "No valid terminal found!"'
+        write(213659, '(a)')'            print "Fallback to global gnuplot configuration!"'
         write(213659, '(a)')'            print ""'
-        write(213659, '(a)')'            q'
         write(213659, '(a)')'        }'
         write(213659, '(a)')'    }'
         write(213659, '(a)')'}'
@@ -10250,12 +10245,12 @@ contains
             write(213659, '(a)')'set style data histograms'
             write(213659, '(a)')'set style fill solid border -1'
         endif
-          
+
         ! set x axis
         if(present(xlim))write(213659, '(a,e13.5,a,e13.5,a)')'set xrange [',minval(xlim),':',maxval(xlim),']'
-        if(present(xticks))write(213659, '(a,e13.5)')'set xtics ',xticks        
+        if(present(xticks))write(213659, '(a,e13.5)')'set xtics ',xticks
         if(present(xlabel))write(213659, '(a)')'set xlabel "'//xlabel//'"font ",12"'
-        
+
         ! set y axis
         if(present(ylim) .and. .not. gnu_histogram) &
             write(213659, '(a,e13.5,a,e13.5,a)')'set yrange [',minval(ylim),':',maxval(ylim),']'
@@ -10267,16 +10262,16 @@ contains
                 write(213659, '(a)') 'set yrange [0:]'
             endif
         endif
-                    
-        if(present(yticks))write(213659, '(a,e13.5)')'set ytics ',yticks        
+
+        if(present(yticks))write(213659, '(a,e13.5)')'set ytics ',yticks
         if(present(ylabel))write(213659, '(a)')'set ylabel "'//ylabel//'"font ",12"'
 
         ! set title
         if(present(title))write(213659, '(a)')'set title "'//title//'" font ",16"'
-        
+
         ! legend statement
         if(gnu_dolegend)then
-            if(present(legend))then            
+            if(present(legend))then
                 select case (legend(1:2))
                     case("ln")
                         write(213659, '(a)')'set key inside left top'
@@ -10307,7 +10302,7 @@ contains
                 end select
             else
                 write(213659, '(a)')'set key center below'
-            endif   
+            endif
         else
             write(213659, '(a)')'unset key'
         endif
@@ -10316,16 +10311,16 @@ contains
         if(gnu_mmax == 1)then
             write(213659, '(a)')'plot "'//trim(dfile)//'" using 1:2 '//trim(gnu_definitions(1))
         else
-            write(213659, '(a)')'plot "'//trim(dfile)//'" using 1:2 '//trim(gnu_definitions(1))//',\' 
+            write(213659, '(a)')'plot "'//trim(dfile)//'" using 1:2 '//trim(gnu_definitions(1))//',\'
             do i1 = 2, gnu_mmax-1
                 write(213659, '(a,i4,a,i4,a)')'     "'//trim(dfile)//'" using '&
-                    ,2*(i1-1)+1,':',2*(i1-1)+2,' '//trim(gnu_definitions(i1))//',\' 
+                    ,2*(i1-1)+1,':',2*(i1-1)+2,' '//trim(gnu_definitions(i1))//',\'
             enddo
             write(213659, '(a,i4,a,i4,a)')'     "'//trim(dfile)//'" using ',  &
                 2*(gnu_mmax-1)+1,':',2*(gnu_mmax-1)+2,' '//trim(gnu_definitions(i1))
         endif
-                        
-        write(213659, '(a)')'pause -1 "Press RETURN to continue..."'
+
+        !write(213659, '(a)')'pause -1 "Press RETURN to continue..."'
 
         ! write graph to file
         if(present(filename))then
@@ -10338,11 +10333,11 @@ contains
             write(213659, '(a)')'set output "'//filename//'.'//ft//'"'
             write(213659, '(a)')'replot'
         endif
-        
+
         write(213659, '(a)')'q'
         close(213659)
-        
-        call system('gnuplot "'//trim(cfile)//'"') 
+
+        call system('gnuplot "'//trim(cfile)//'"')
         if(.not.present(output))then
             open(213659,file=trim(dfile))
             close(213659, status='delete')
@@ -10356,7 +10351,7 @@ contains
 
     end subroutine
 
-    
+
     !##############################################################################
     ! SUBROUTINE plot
     !
@@ -10368,7 +10363,7 @@ contains
 
 
         !##### INPUT/OUTPUT VARIABLES #############################################
-        
+
         real*8, intent(in) :: xin(:), yin(:)
         character(LEN=*), optional :: color
         real*8, optional :: linewidth
@@ -10379,11 +10374,11 @@ contains
 
 
         !##### OTHER VARIABLES ####################################################
- 
+
         integer :: n, i1
         logical :: lines, points
-     
-     
+
+
         !##### ROUTINE CODE #######################################################
 
         n = assert_eq(size(xin, 1), size(yin, 1), 'plot')
@@ -10394,17 +10389,17 @@ contains
             ! allocate new x array
             if(allocated(gnu_x))deallocate(gnu_x)
             allocate(gnu_x(n, 1))
-            gnu_x(:, 1) = xin  
+            gnu_x(:, 1) = xin
 
             ! allocate new y array
             if(allocated(gnu_y))deallocate(gnu_y)
             allocate(gnu_y(n, 1))
-            gnu_y(:, 1) = yin  
+            gnu_y(:, 1) = yin
 
             ! allocate new x_temp array
             if(allocated(gnu_x_temp))deallocate(gnu_x_temp)
             allocate(gnu_x_temp(n, 1))
-            gnu_x_temp(:, 1) = xin  
+            gnu_x_temp(:, 1) = xin
 
             ! allocate new y_temp array
             if(allocated(gnu_y_temp))deallocate(gnu_y_temp)
@@ -10416,7 +10411,7 @@ contains
             gnu_mmax = 1
 
         else
-    
+
             ! get new number of lines
             gnu_mmax = gnu_mmax+1
             if(gnu_mmax > 1000)then
@@ -10427,13 +10422,13 @@ contains
             ! deallocate arrays
             deallocate(gnu_x)
             deallocate(gnu_y)
-            
+
             ! if the new array is the longer one
             if(n > gnu_nmax)then
                 allocate(gnu_x(n, gnu_mmax))
                 allocate(gnu_y(n, gnu_mmax))
 
-                gnu_x(1:gnu_nmax, 1:gnu_mmax-1) = gnu_x_temp                
+                gnu_x(1:gnu_nmax, 1:gnu_mmax-1) = gnu_x_temp
                 gnu_y(1:gnu_nmax, 1:gnu_mmax-1) = gnu_y_temp
 
                 ! fill up with the same values
@@ -10454,8 +10449,8 @@ contains
                 allocate(gnu_x(gnu_nmax, gnu_mmax))
                 allocate(gnu_y(gnu_nmax, gnu_mmax))
 
-                gnu_x(:, 1:gnu_mmax-1) = gnu_x_temp                
-                gnu_y(:, 1:gnu_mmax-1) = gnu_y_temp                
+                gnu_x(:, 1:gnu_mmax-1) = gnu_x_temp
+                gnu_y(:, 1:gnu_mmax-1) = gnu_y_temp
 
                 gnu_x(1:n, gnu_mmax) = xin
                 gnu_y(1:n, gnu_mmax) = yin
@@ -10464,7 +10459,7 @@ contains
                 do i1 = n+1, gnu_nmax
                     gnu_x(i1, gnu_mmax) = gnu_x(n, gnu_mmax)
                     gnu_y(i1, gnu_mmax) = gnu_y(n, gnu_mmax)
-                enddo                
+                enddo
             endif
 
             deallocate(gnu_x_temp)
@@ -10474,7 +10469,7 @@ contains
             deallocate(gnu_y_temp)
             allocate(gnu_y_temp(size(gnu_y,1), size(gnu_y,2)))
             gnu_y_temp = gnu_y
-                
+
         endif
 
         ! check for lines and points
@@ -10511,7 +10506,7 @@ contains
             else
                 write(gnu_definitions(gnu_mmax), '(a,i4)')trim(gnu_definitions(gnu_mmax))//' lc ', gnu_mmax-1
             endif
-        endif        
+        endif
 
         ! get line width
         if(lines)then
@@ -10524,7 +10519,7 @@ contains
 
         ! get marker definition
         if(points)then
-          
+
             if(present(marker)) then
                 write(gnu_definitions(gnu_mmax), '(a,i2)')trim(gnu_definitions(gnu_mmax))//' pt ', min(marker, 13)
             else
@@ -10536,7 +10531,7 @@ contains
             else
                 write(gnu_definitions(gnu_mmax), '(a,f8.2)')trim(gnu_definitions(gnu_mmax))//' ps ', 1d0
             endif
-        endif               
+        endif
 
         ! set the legend
         if(present(legend))then
@@ -10560,17 +10555,17 @@ contains
 
 
         !##### INPUT/OUTPUT VARIABLES #############################################
-        
+
         real*8, intent(in) :: xin(:), yin(:)
         character(LEN=*), optional :: color
         character(LEN=*), optional :: legend
 
 
         !##### OTHER VARIABLES ####################################################
- 
+
         integer :: n, i1
-     
-     
+
+
         !##### ROUTINE CODE #######################################################
 
         n = assert_eq(size(xin, 1), size(yin, 1), 'plot')
@@ -10581,17 +10576,17 @@ contains
             ! allocate new x array
             if(allocated(gnu_x))deallocate(gnu_x)
             allocate(gnu_x(n, 1))
-            gnu_x(:, 1) = xin  
+            gnu_x(:, 1) = xin
 
             ! allocate new y array
             if(allocated(gnu_y))deallocate(gnu_y)
             allocate(gnu_y(n, 1))
-            gnu_y(:, 1) = yin  
+            gnu_y(:, 1) = yin
 
             ! allocate new x_temp array
             if(allocated(gnu_x_temp))deallocate(gnu_x_temp)
             allocate(gnu_x_temp(n, 1))
-            gnu_x_temp(:, 1) = xin  
+            gnu_x_temp(:, 1) = xin
 
             ! allocate new y_temp array
             if(allocated(gnu_y_temp))deallocate(gnu_y_temp)
@@ -10603,7 +10598,7 @@ contains
             gnu_mmax = 1
 
         else
-    
+
             ! get new number of lines
             gnu_mmax = gnu_mmax+1
             if(gnu_mmax > 1000)then
@@ -10614,13 +10609,13 @@ contains
             ! deallocate arrays
             deallocate(gnu_x)
             deallocate(gnu_y)
-            
+
             ! if the new array is the longer one
             if(n > gnu_nmax)then
                 allocate(gnu_x(n, gnu_mmax))
                 allocate(gnu_y(n, gnu_mmax))
 
-                gnu_x(1:gnu_nmax, 1:gnu_mmax-1) = gnu_x_temp                
+                gnu_x(1:gnu_nmax, 1:gnu_mmax-1) = gnu_x_temp
                 gnu_y(1:gnu_nmax, 1:gnu_mmax-1) = gnu_y_temp
 
                 ! fill up with the same values
@@ -10641,8 +10636,8 @@ contains
                 allocate(gnu_x(gnu_nmax, gnu_mmax))
                 allocate(gnu_y(gnu_nmax, gnu_mmax))
 
-                gnu_x(:, 1:gnu_mmax-1) = gnu_x_temp                
-                gnu_y(:, 1:gnu_mmax-1) = gnu_y_temp                
+                gnu_x(:, 1:gnu_mmax-1) = gnu_x_temp
+                gnu_y(:, 1:gnu_mmax-1) = gnu_y_temp
 
                 gnu_x(1:n, gnu_mmax) = xin
                 gnu_y(1:n, gnu_mmax) = yin
@@ -10651,7 +10646,7 @@ contains
                 do i1 = n+1, gnu_nmax
                     gnu_x(i1, gnu_mmax) = gnu_x(n, gnu_mmax)
                     gnu_y(i1, gnu_mmax) = gnu_y(n, gnu_mmax)
-                enddo                
+                enddo
             endif
 
             deallocate(gnu_x_temp)
@@ -10661,8 +10656,8 @@ contains
             deallocate(gnu_y_temp)
             allocate(gnu_y_temp(size(gnu_y,1), size(gnu_y,2)))
             gnu_y_temp = gnu_y
-                
-        endif        
+
+        endif
 
         ! set up definitions
         gnu_definitions(gnu_mmax) = 'with boxes'
@@ -10672,7 +10667,7 @@ contains
             gnu_definitions(gnu_mmax) = trim(gnu_definitions(gnu_mmax))//' lc rgb "'//adjustl(trim(color))//'"'
         else
             write(gnu_definitions(gnu_mmax), '(a,i4)')trim(gnu_definitions(gnu_mmax))//' lc ', gnu_mmax
-        endif             
+        endif
 
         ! set the legend
         if(present(legend))then
@@ -10685,8 +10680,8 @@ contains
         gnu_histogram = .true.
 
     end subroutine
-    
-    
+
+
     !##############################################################################
     ! SUBROUTINE plot_hist_new
     !
@@ -10698,7 +10693,7 @@ contains
 
 
         !##### INPUT/OUTPUT VARIABLES #############################################
-        
+
         real*8, intent(in) :: xvalues(1:)
         integer, intent(in) :: nbins
         real*8, optional :: left
@@ -10710,35 +10705,35 @@ contains
 
 
         !##### OTHER VARIABLES ####################################################
- 
+
         integer :: n, i1
         real*8 :: lower, upper, total
         real*8 :: thresholds(0:nbins), freq(0:nbins)
         real*8 :: xin(nbins), yin(nbins)
-        
-     
-     
+
+
+
         !##### ROUTINE CODE #######################################################
 
         n = nbins
-        
+
         ! get lower and upper endpoint as well as width
         lower = minval(xvalues)
         if(present(left))lower = left
-        
+
         upper = maxval(xvalues)
         if(present(right))upper = right
-        
+
         ! get thresholds
         call grid_Cons_Equi(thresholds, lower, upper)
-        
+
         ! get frequency
         freq(0) = dble(count(xvalues < lower))
         do i1 = 1, nbins
             freq(i1) = dble(count(xvalues <= thresholds(i1)))
         enddo
         total = freq(nbins) - freq(0)
-        
+
         if(present(incl_outside))then
             if(incl_outside)then
                 freq(0) = 0d0
@@ -10746,13 +10741,13 @@ contains
                 total = freq(nbins)
             endif
         endif
-        
+
         ! get histogram data
         do i1 = 1, nbins
             xin(i1) = (thresholds(i1-1) + thresholds(i1))/2d0
             yin(i1) = (freq(i1) - freq(i1-1))
         enddo
-        
+
         if(present(absolute))then
             if(.not. absolute)then
                 yin = yin/total
@@ -10767,17 +10762,17 @@ contains
             ! allocate new x array
             if(allocated(gnu_x))deallocate(gnu_x)
             allocate(gnu_x(n, 1))
-            gnu_x(:, 1) = xin  
+            gnu_x(:, 1) = xin
 
             ! allocate new y array
             if(allocated(gnu_y))deallocate(gnu_y)
             allocate(gnu_y(n, 1))
-            gnu_y(:, 1) = yin  
+            gnu_y(:, 1) = yin
 
             ! allocate new x_temp array
             if(allocated(gnu_x_temp))deallocate(gnu_x_temp)
             allocate(gnu_x_temp(n, 1))
-            gnu_x_temp(:, 1) = xin  
+            gnu_x_temp(:, 1) = xin
 
             ! allocate new y_temp array
             if(allocated(gnu_y_temp))deallocate(gnu_y_temp)
@@ -10789,7 +10784,7 @@ contains
             gnu_mmax = 1
 
         else
-    
+
             ! get new number of lines
             gnu_mmax = gnu_mmax+1
             if(gnu_mmax > 1000)then
@@ -10800,13 +10795,13 @@ contains
             ! deallocate arrays
             deallocate(gnu_x)
             deallocate(gnu_y)
-            
+
             ! if the new array is the longer one
             if(n > gnu_nmax)then
                 allocate(gnu_x(n, gnu_mmax))
                 allocate(gnu_y(n, gnu_mmax))
 
-                gnu_x(1:gnu_nmax, 1:gnu_mmax-1) = gnu_x_temp                
+                gnu_x(1:gnu_nmax, 1:gnu_mmax-1) = gnu_x_temp
                 gnu_y(1:gnu_nmax, 1:gnu_mmax-1) = gnu_y_temp
 
                 ! fill up with the same values
@@ -10827,8 +10822,8 @@ contains
                 allocate(gnu_x(gnu_nmax, gnu_mmax))
                 allocate(gnu_y(gnu_nmax, gnu_mmax))
 
-                gnu_x(:, 1:gnu_mmax-1) = gnu_x_temp                
-                gnu_y(:, 1:gnu_mmax-1) = gnu_y_temp                
+                gnu_x(:, 1:gnu_mmax-1) = gnu_x_temp
+                gnu_y(:, 1:gnu_mmax-1) = gnu_y_temp
 
                 gnu_x(1:n, gnu_mmax) = xin
                 gnu_y(1:n, gnu_mmax) = yin
@@ -10837,7 +10832,7 @@ contains
                 do i1 = n+1, gnu_nmax
                     gnu_x(i1, gnu_mmax) = gnu_x(n, gnu_mmax)
                     gnu_y(i1, gnu_mmax) = gnu_y(n, gnu_mmax)
-                enddo                
+                enddo
             endif
 
             deallocate(gnu_x_temp)
@@ -10847,8 +10842,8 @@ contains
             deallocate(gnu_y_temp)
             allocate(gnu_y_temp(size(gnu_y,1), size(gnu_y,2)))
             gnu_y_temp = gnu_y
-                
-        endif        
+
+        endif
 
         ! set up definitions
         gnu_definitions(gnu_mmax) = 'with boxes'
@@ -10858,7 +10853,7 @@ contains
             gnu_definitions(gnu_mmax) = trim(gnu_definitions(gnu_mmax))//' lc rgb "'//adjustl(trim(color))//'"'
         else
             write(gnu_definitions(gnu_mmax), '(a,i4)')trim(gnu_definitions(gnu_mmax))//' lc ', gnu_mmax
-        endif             
+        endif
 
         ! set the legend
         if(present(legend))then
@@ -10878,18 +10873,18 @@ contains
     !
     ! Plots a x-y-z-data column on a grid. Plot will be executed immediately.
     !
-    ! Credits to Patrick Wiesmann for providing a first version of a 3d plotting 
+    ! Credits to Patrick Wiesmann for providing a first version of a 3d plotting
     !     subroutine during his research assistantship.
     !##############################################################################
     subroutine plot3d_grid(xin, yin, zin, color, linewidth, marker, markersize, noline, &
-                xlim, xticks, xlabel, ylim, yticks, ylabel, zlim, zticks, zlevel, zlabel, & 
+                xlim, xticks, xlabel, ylim, yticks, ylabel, zlim, zticks, zlevel, zlabel, &
                 surf, surf_color, transparent, view, title, filename, filetype, output)
 
         implicit none
 
 
         !##### INPUT/OUTPUT VARIABLES #############################################
-        
+
         ! input variables
         real*8, intent(in) :: xin(:), yin(:), zin(:,:)
 
@@ -10949,7 +10944,7 @@ contains
 
         ! output file name
         character(LEN=*), optional :: zlabel
-        
+
         ! output file name
         character(LEN=*), optional :: title
 
@@ -10964,14 +10959,14 @@ contains
 
 
         !##### OTHER VARIABLES ####################################################
- 
+
         logical :: lines, points
-        character(LEN = 2000) :: definition 
+        character(LEN = 2000) :: definition
         integer :: i1, i2, n1, n2
         character(LEN=3) :: ft
         character(LEN=150) :: cfile, dfile
-     
-     
+
+
         !##### ROUTINE CODE #######################################################
 
         ! assert that the sizes are coorect
@@ -11008,7 +11003,7 @@ contains
             definition = trim(definition)//' lc rgb "'//adjustl(trim(color))//'"'
         else
             definition = trim(definition)//' lc rgb "blue"'
-        endif        
+        endif
 
         ! get line width
         if(lines)then
@@ -11025,7 +11020,7 @@ contains
 
         ! get marker definition
         if(points)then
-          
+
             if(present(marker)) then
                 write(definition, '(a,i2)')trim(definition)//' pt ', min(marker, 13)
             else
@@ -11037,7 +11032,7 @@ contains
             else
                 write(definition, '(a,f8.2)')trim(definition)//' ps ', 1d0
             endif
-        endif               
+        endif
 
         ! set the legend
         definition = trim(definition)//' notitle '
@@ -11057,7 +11052,7 @@ contains
             do i2 = 1, n2
                 write(213659, '(3e21.10e4)')xin(i1), yin(i2), zin(i1, i2)
              enddo
-            write(213659,*)            
+            write(213659,*)
         enddo
         close(213659)
 
@@ -11075,25 +11070,20 @@ contains
         write(213659, '(a)')'            set terminal qt'
         write(213659, '(a)')'        } else {'
         write(213659, '(a)')'            print ""'
-        write(213659, '(a)')'            print "ATTENTION: There seems to be NO VALID TERMINAL installed in "'
-        write(213659, '(a)')'            print "           your version of gnuplot. It might be a good idea to "'
-        write(213659, '(a)')'            print "           completely uninstall your Fortran/gnuplot/geany installation"'
-        write(213659, '(a)')'            print "           using the uninstallation files on www.ce-fortran.com. "'
-        write(213659, '(a)')'            print "           Afterwards you should reinstall the Fortran system again."'
-        write(213659, '(a)')'            print "           If this does not help, please refer to the forum."'
+        write(213659, '(a)')'            print "No valid terminal found!"'
+        write(213659, '(a)')'            print "Fallback to global gnuplot configuration!"'
         write(213659, '(a)')'            print ""'
-        write(213659, '(a)')'            q'
         write(213659, '(a)')'        }'
         write(213659, '(a)')'    }'
         write(213659, '(a)')'}'
         write(213659, '(a)')'set grid'
-        
+
         if(present(zlevel)) then
             write(213659, '(a,e13.5)')'set ticslevel ', -min(max(zlevel, 0d0), 1d0)
-        else 
+        else
             write(213659, '(a,e13.5)')'set ticslevel 0'
         endif
-        
+
         if(present(surf) .and. surf) then
             write(213659, '(a)')'set pm3d'
             if(present(surf_color)) then
@@ -11111,43 +11101,43 @@ contains
                     case default
                         write(213659, '(a)')'set palette rgbformulae 7,5,15'
                     end select
-            endif               
+            endif
         endif
 
         if(present(transparent) .and. .not. transparent) then
             write(213659, '(a)')'set hidden3d'
         endif
-        
+
         if(present(view)) then
             write(213659, '(a,e13.5,a,e13.5)')'set view ', min(max(view(1), 0d0), 360d0), &
                 ',',min(max(view(2), 0d0), 360d0)
         endif
-          
+
         ! set x axis
         if(present(xlim))write(213659, '(a,e13.5,a,e13.5,a)')'set xrange [',minval(xlim),':',maxval(xlim),']'
-        if(present(xticks))write(213659, '(a,e13.5)')'set xtics ',xticks        
+        if(present(xticks))write(213659, '(a,e13.5)')'set xtics ',xticks
         if(present(xlabel))write(213659, '(a)')'set xlabel "'//xlabel//'"font ",12"'
-        
+
         ! set y axis
         if(present(ylim))write(213659, '(a,e13.5,a,e13.5,a)')'set yrange [',minval(ylim),':',maxval(ylim),']'
-        if(present(yticks))write(213659, '(a,e13.5)')'set ytics ',yticks        
+        if(present(yticks))write(213659, '(a,e13.5)')'set ytics ',yticks
         if(present(ylabel))write(213659, '(a)')'set ylabel "'//ylabel//'"font ",12"'
 
         ! set z axis
         if(present(zlim))write(213659, '(a,e13.5,a,e13.5,a)')'set zrange [',minval(zlim),':',maxval(zlim),']'
-        if(present(zticks))write(213659, '(a,e13.5)')'set ztics ',zticks        
+        if(present(zticks))write(213659, '(a,e13.5)')'set ztics ',zticks
         if(present(zlabel))write(213659, '(a)')'set zlabel "'//zlabel//'"font ",12"'
 
         ! set title
         if(present(title))write(213659, '(a)')'set title "'//title//'" font ",16"'
-        
+
         ! legend statement
         write(213659, '(a)')'unset key'
 
         ! write plot lines for 3D-data
         write(213659, '(a)')'splot "'//trim(dfile)//'" using 1:2:3 '//trim(definition)
-                        
-        write(213659, '(a)')'pause -1 "Press RETURN to continue..."'
+
+        !write(213659, '(a)')'pause -1 "Press RETURN to continue..."'
 
         ! write graph to file
         if(present(filename))then
@@ -11160,18 +11150,18 @@ contains
             write(213659, '(a)')'set output "'//filename//'.'//ft//'"'
             write(213659, '(a)')'replot'
         endif
-        
+
         write(213659, '(a)')'q'
         close(213659)
-        
-        call system('gnuplot "'//trim(cfile)//'"') 
+
+        call system('gnuplot "'//trim(cfile)//'"')
         if(.not.present(output))then
             open(213659,file=trim(dfile))
             close(213659, status='delete')
             open(213659,file=trim(cfile))
             close(213659, status='delete')
         endif
-        
+
     end subroutine
 
 
@@ -11180,18 +11170,18 @@ contains
     !
     ! Plots a x-y-z-data column with random points. Plot will be executed immediately.
     !
-    ! Credits to Patrick Wiesmann for providing a first version of a 3d plotting 
+    ! Credits to Patrick Wiesmann for providing a first version of a 3d plotting
     !     subroutine during his research assistantship.
     !##############################################################################
     subroutine plot3d_line(xin, yin, zin, color, linewidth, marker, markersize, noline, &
-                xlim, xticks, xlabel, ylim, yticks, ylabel, zlim, zticks, zlevel, zlabel, & 
+                xlim, xticks, xlabel, ylim, yticks, ylabel, zlim, zticks, zlevel, zlabel, &
                 view, title, filename, filetype, output)
 
         implicit none
 
 
         !##### INPUT/OUTPUT VARIABLES #############################################
-        
+
         ! input variables
         real*8, intent(in) :: xin(:), yin(:), zin(:)
 
@@ -11242,7 +11232,7 @@ contains
 
         ! output file name
         character(LEN=*), optional :: zlabel
-        
+
         ! output file name
         character(LEN=*), optional :: title
 
@@ -11257,14 +11247,14 @@ contains
 
 
         !##### OTHER VARIABLES ####################################################
- 
+
         logical :: lines, points
-        character(LEN = 2000) :: definition 
+        character(LEN = 2000) :: definition
         integer :: i1, n
         character(LEN=3) :: ft
         character(LEN=150) :: cfile, dfile
-     
-     
+
+
         !##### ROUTINE CODE #######################################################
 
         ! assert that the sizes are coorect
@@ -11300,7 +11290,7 @@ contains
             definition = trim(definition)//' lc rgb "'//adjustl(trim(color))//'"'
         else
             definition = trim(definition)//' lc rgb "blue"'
-        endif        
+        endif
 
         ! get line width
         if(lines)then
@@ -11313,7 +11303,7 @@ contains
 
         ! get marker definition
         if(points)then
-          
+
             if(present(marker)) then
                 write(definition, '(a,i2)')trim(definition)//' pt ', min(marker, 13)
             else
@@ -11325,7 +11315,7 @@ contains
             else
                 write(definition, '(a,f8.2)')trim(definition)//' ps ', 1d0
             endif
-        endif               
+        endif
 
         ! set the legend
         definition = trim(definition)//' notitle '
@@ -11360,55 +11350,50 @@ contains
         write(213659, '(a)')'            set terminal qt'
         write(213659, '(a)')'        } else {'
         write(213659, '(a)')'            print ""'
-        write(213659, '(a)')'            print "ATTENTION: There seems to be NO VALID TERMINAL installed in "'
-        write(213659, '(a)')'            print "           your version of gnuplot. It might be a good idea to "'
-        write(213659, '(a)')'            print "           completely uninstall your Fortran/gnuplot/geany installation"'
-        write(213659, '(a)')'            print "           using the uninstallation files on www.ce-fortran.com. "'
-        write(213659, '(a)')'            print "           Afterwards you should reinstall the Fortran system again."'
-        write(213659, '(a)')'            print "           If this does not help, please refer to the forum."'
+        write(213659, '(a)')'            print "No valid terminal found!"'
+        write(213659, '(a)')'            print "Fallback to global gnuplot configuration!"'
         write(213659, '(a)')'            print ""'
-        write(213659, '(a)')'            q'
         write(213659, '(a)')'        }'
         write(213659, '(a)')'    }'
         write(213659, '(a)')'}'
         write(213659, '(a)')'set grid'
-        
+
         if(present(zlevel)) then
             write(213659, '(a,e13.5)')'set ticslevel ', -min(max(zlevel, 0d0), 1d0)
-        else 
+        else
             write(213659, '(a,e13.5)')'set ticslevel 0'
         endif
-               
+
         if(present(view)) then
             write(213659, '(a,e13.5,a,e13.5)')'set view ', min(max(view(1), 0d0), 360d0), &
                 ',',min(max(view(2), 0d0), 360d0)
         endif
-          
+
         ! set x axis
         if(present(xlim))write(213659, '(a,e13.5,a,e13.5,a)')'set xrange [',minval(xlim),':',maxval(xlim),']'
-        if(present(xticks))write(213659, '(a,e13.5)')'set xtics ',xticks        
+        if(present(xticks))write(213659, '(a,e13.5)')'set xtics ',xticks
         if(present(xlabel))write(213659, '(a)')'set xlabel "'//xlabel//'"font ",12"'
-        
+
         ! set y axis
         if(present(ylim))write(213659, '(a,e13.5,a,e13.5,a)')'set yrange [',minval(ylim),':',maxval(ylim),']'
-        if(present(yticks))write(213659, '(a,e13.5)')'set ytics ',yticks        
+        if(present(yticks))write(213659, '(a,e13.5)')'set ytics ',yticks
         if(present(ylabel))write(213659, '(a)')'set ylabel "'//ylabel//'"font ",12"'
 
         ! set z axis
         if(present(zlim))write(213659, '(a,e13.5,a,e13.5,a)')'set zrange [',minval(zlim),':',maxval(zlim),']'
-        if(present(zticks))write(213659, '(a,e13.5)')'set ztics ',zticks        
+        if(present(zticks))write(213659, '(a,e13.5)')'set ztics ',zticks
         if(present(zlabel))write(213659, '(a)')'set zlabel "'//zlabel//'"font ",12"'
 
         ! set title
         if(present(title))write(213659, '(a)')'set title "'//title//'" font ",16"'
-        
+
         ! legend statement
         write(213659, '(a)')'unset key'
 
         ! write plot lines for 3D-data
         write(213659, '(a)')'splot "'//trim(dfile)//'" using 1:2:3 '//trim(definition)
-                        
-        write(213659, '(a)')'pause -1 "Press RETURN to continue..."'
+
+        !write(213659, '(a)')'pause -1 "Press RETURN to continue..."'
 
         ! write graph to file
         if(present(filename))then
@@ -11421,18 +11406,18 @@ contains
             write(213659, '(a)')'set output "'//filename//'.'//ft//'"'
             write(213659, '(a)')'replot'
         endif
-        
+
         write(213659, '(a)')'q'
         close(213659)
-        
-        call system('gnuplot "'//trim(cfile)//'"') 
+
+        call system('gnuplot "'//trim(cfile)//'"')
         if(.not.present(output))then
             open(213659,file=trim(dfile))
             close(213659, status='delete')
             open(213659,file=trim(cfile))
             close(213659, status='delete')
         endif
-        
+
     end subroutine
 
 
@@ -11449,7 +11434,7 @@ contains
 !##############################################################################
 ! MODULE sorting
 !##############################################################################
-!############################################################################## 
+!##############################################################################
 
 
     !##############################################################################
@@ -11461,7 +11446,7 @@ contains
     !     The Wikibook "Algorithm Implementation" available at
     !     https://en.wikibooks.org/wiki/Algorithm_Implementation/Sorting/Quicksort#FORTRAN_90.2F95
     !
-    !     and follows closely the Qsort implementation found in 
+    !     and follows closely the Qsort implementation found in
     !     "A FORTRAN 90 Numerical Library" (AFNL), which is available at
     !     https://sourceforge.net/projects/afnl/
     !
@@ -11470,8 +11455,8 @@ contains
     subroutine sort_r(x)
 
         implicit none
-        
-        
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
 
         ! the array that should be sorted
@@ -11488,25 +11473,25 @@ contains
            integer :: Ileft, Iright
         end type Limits
 
-        ! other variables        
+        ! other variables
         integer :: Ipvn, Ileft, Iright, ISpos, ISmax
         type(Limits), allocatable :: Stack(:)
-        
+
 
         !##### ROUTINE CODE #######################################################
 
-        allocate(Stack(Size(X)*2)) 
-    
+        allocate(Stack(Size(X)*2))
+
         Stack(:)%Ileft = 0
-        
+
         ! Iniitialize the stack
         Ispos = 1
         Ismax = 1
         Stack(ISpos)%Ileft  = 1
         Stack(ISpos)%Iright = size(X)
-        
+
         do while (Stack(ISpos)%Ileft /= 0)
- 
+
            Ileft = Stack(ISPos)%Ileft
            Iright = Stack(ISPos)%Iright
 
@@ -11517,7 +11502,7 @@ contains
            else
               Ipvn = ChoosePiv(X, Ileft, Iright)
               Ipvn = Partition(X, Ileft, Iright, Ipvn)
-              
+
               Stack(ISmax+1)%Ileft = Ileft
               Stack(ISmax+1) %Iright = Ipvn-1
               Stack(ISmax+2)%Ileft = Ipvn + 1
@@ -11529,13 +11514,13 @@ contains
 
         ! deallocate all arrays
         deallocate(Stack)
-        
-    
+
+
     !##### SUBROUTINES AND FUNCTIONS ##########################################
 
     contains
 
-            
+
         !##########################################################################
         ! FUNCTION ChoosePiv
         !
@@ -11544,35 +11529,35 @@ contains
         function ChoosePiv(XX, IIleft, IIright) result (IIpv)
 
 
-            !##### INPUT/OUTPUT VARIABLES #############################################          
+            !##### INPUT/OUTPUT VARIABLES #############################################
 
             ! the array to work on
             real*8, intent(in) :: XX(:)
 
             ! the left and right definition of the sub-array
             integer, intent(in) :: IIleft, IIright
-   
+
             ! the pivotal element that is returned
             integer :: IIpv
-            
+
 
             !##### OTHER VARIABLES ####################################################
-            
+
             real*8 :: XXcp(3)
             integer :: IIpt(3), IImd
 
 
             !##### ROUTINE CODE #######################################################
-            
+
             IImd = Int((IIleft+IIright)/2)
             IIpv = IImd
             XXcp(1) = XX(IIleft)
             XXcp(2) = XX(IImd)
             XXcp(3) = XX(IIright)
             IIpt = (/1,2,3/)
-            
+
             call InsrtLC(XXcp, 1, 3, IIpt)
-            
+
             select case (IIpt(2))
             case (1)
                 IIpv = IIleft
@@ -11581,19 +11566,19 @@ contains
             case (3)
                 IIpv = IIright
             End Select
-   
+
         end function
 
-            
+
         !##########################################################################
         ! SUBROUTINE InsrtLC
         !
-        ! Perform an insertion sort of the list XX(:) between index 
+        ! Perform an insertion sort of the list XX(:) between index
         !     values IIl and IIr.
         !##########################################################################
         subroutine InsrtLC(XX, IIl, IIr, IIpt)
-       
-        
+
+
             !##### INPUT/OUTPUT VARIABLES #############################################
 
             ! the array to work on
@@ -11605,15 +11590,15 @@ contains
             ! the permutations
             integer, intent(inout), optional :: IIpt(:)
 
-            
+
             !##### OTHER VARIABLES ####################################################
-            
+
             real*8 :: RRtmp
             integer :: II, JJ
-            
+
 
             !##### ROUTINE CODE #######################################################
-      
+
             do II = IIl+1, IIr
                 RRtmp = XX(II)
                 do JJ = II-1, 1, -1
@@ -11626,20 +11611,20 @@ contains
                 enddo
                 XX(JJ+1) = RRtmp
             enddo
-           
+
         end subroutine InsrtLC
 
-        
+
         !##########################################################################
         ! FUNCTION Partition
         !
         ! Arranges the array X between the index values Ileft and Iright
-        !     positioning elements smallers than X(Ipv) at the left and the others 
+        !     positioning elements smallers than X(Ipv) at the left and the others
         !     at the right.
         !##########################################################################
         function Partition(X, Ileft, Iright, Ipv) result(Ipvfn)
-        
-            
+
+
             !##### INPUT/OUTPUT VARIABLES #############################################
 
             ! the array to work on
@@ -11651,30 +11636,30 @@ contains
             ! return value
             integer :: Ipvfn
 
-            
+
             !##### OTHER VARIABLES ####################################################
-            
+
             real*8 :: Rpv
             integer :: I
-            
+
 
             !##### ROUTINE CODE #######################################################
-        
+
             Rpv = X(Ipv)
             call Swap(X, Ipv, Iright)
             Ipvfn = Ileft
-        
+
             do I = Ileft, Iright-1
                 if (X(I) <= Rpv) then
                     call Swap(X, I, Ipvfn)
                     Ipvfn = Ipvfn + 1
                 endif
             enddo
-        
+
             call Swap(X, Ipvfn, Iright)
-        
+
         end function Partition
-        
+
 
         !##########################################################################
         ! SUBROUTINE Swap
@@ -11691,19 +11676,19 @@ contains
 
             ! the left and right definition of the sub-array and pivotal element
             integer, intent(in) :: I, J
-            
-            
-            !##### OTHER VARIABLES ####################################################
-            
-            real*8 :: Xtmp
-            
 
-            !##### ROUTINE CODE #######################################################        
-        
+
+            !##### OTHER VARIABLES ####################################################
+
+            real*8 :: Xtmp
+
+
+            !##### ROUTINE CODE #######################################################
+
             Xtmp = X(I)
             X(I) = X(J)
             X(J) = Xtmp
-        
+
         end subroutine Swap
 
 
@@ -11722,21 +11707,21 @@ contains
 
             ! the left and right definition of the sub-array and pivotal element
             integer, intent(in) :: I, J
-            
-            
-            !##### OTHER VARIABLES ####################################################
-            
-            integer :: Xtmp
-            
 
-            !##### ROUTINE CODE #######################################################        
-        
+
+            !##### OTHER VARIABLES ####################################################
+
+            integer :: Xtmp
+
+
+            !##### ROUTINE CODE #######################################################
+
             Xtmp = X(I)
             X(I) = X(J)
             X(J) = Xtmp
-        
+
         end subroutine Swap_IN
-   
+
      end subroutine sort_r
 
 
@@ -11750,7 +11735,7 @@ contains
     !     The Wikibook "Algorithm Implementation" available at
     !     https://en.wikibooks.org/wiki/Algorithm_Implementation/Sorting/Quicksort#FORTRAN_90.2F95
     !
-    !     and follows closely the Qsort implementation found in 
+    !     and follows closely the Qsort implementation found in
     !     "A FORTRAN 90 Numerical Library" (AFNL), which is available at
     !     https://sourceforge.net/projects/afnl/
     !
@@ -11759,8 +11744,8 @@ contains
     subroutine sort_r2(x, iorder)
 
         implicit none
-        
-        
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
 
         ! the array that should be sorted
@@ -11780,28 +11765,28 @@ contains
            integer :: Ileft, Iright
         end type Limits
 
-        ! other variables        
+        ! other variables
         integer :: Ipvn, Ileft, Iright, ISpos, ISmax, ii
         type(Limits), allocatable :: Stack(:)
-        
+
 
         !##### ROUTINE CODE #######################################################
 
         ! initialize the sorting order array
         iorder = (/(ii, ii = 1, size(x, 1))/)
 
-        allocate(Stack(Size(X)*2)) 
-    
+        allocate(Stack(Size(X)*2))
+
         Stack(:)%Ileft = 0
-        
+
         ! Iniitialize the stack
         Ispos = 1
         Ismax = 1
         Stack(ISpos)%Ileft  = 1
         Stack(ISpos)%Iright = size(X)
-        
+
         do while (Stack(ISpos)%Ileft /= 0)
- 
+
            Ileft = Stack(ISPos)%Ileft
            Iright = Stack(ISPos)%Iright
 
@@ -11812,7 +11797,7 @@ contains
            else
               Ipvn = ChoosePiv(X, Ileft, Iright)
               Ipvn = Partition(X, iorder, Ileft, Iright, Ipvn)
-              
+
               Stack(ISmax+1)%Ileft = Ileft
               Stack(ISmax+1) %Iright = Ipvn-1
               Stack(ISmax+2)%Ileft = Ipvn + 1
@@ -11824,13 +11809,13 @@ contains
 
         ! deallocate all arrays
         deallocate(Stack)
-        
-    
+
+
     !##### SUBROUTINES AND FUNCTIONS ##########################################
 
     contains
 
-            
+
         !##########################################################################
         ! FUNCTION ChoosePiv
         !
@@ -11839,35 +11824,35 @@ contains
         function ChoosePiv(XX, IIleft, IIright) result (IIpv)
 
 
-            !##### INPUT/OUTPUT VARIABLES #############################################          
+            !##### INPUT/OUTPUT VARIABLES #############################################
 
             ! the array to work on
             real*8, intent(in) :: XX(:)
 
             ! the left and right definition of the sub-array
             integer, intent(in) :: IIleft, IIright
-   
+
             ! the pivotal element that is returned
             integer :: IIpv
-            
+
 
             !##### OTHER VARIABLES ####################################################
-            
+
             real*8 :: XXcp(3)
             integer :: IIpt(3), IImd
 
 
             !##### ROUTINE CODE #######################################################
-            
+
             IImd = Int((IIleft+IIright)/2)
             IIpv = IImd
             XXcp(1) = XX(IIleft)
             XXcp(2) = XX(IImd)
             XXcp(3) = XX(IIright)
             IIpt = (/1,2,3/)
-            
+
             call InsrtLC_help(XXcp, 1, 3, IIpt)
-            
+
             select case (IIpt(2))
             case (1)
                 IIpv = IIleft
@@ -11876,7 +11861,7 @@ contains
             case (3)
                 IIpv = IIright
             End Select
-   
+
         end function
 
         !##########################################################################
@@ -11885,8 +11870,8 @@ contains
         ! Just a helping routine. Same as below but without iorder.
         !##########################################################################
         subroutine InsrtLC_help(XX, IIl, IIr, IIpt)
-       
-        
+
+
             !##### INPUT/OUTPUT VARIABLES #############################################
 
             ! the array to work on
@@ -11898,15 +11883,15 @@ contains
             ! the permutations
             integer, intent(inout) :: IIpt(:)
 
-            
+
             !##### OTHER VARIABLES ####################################################
-            
+
             real*8 :: RRtmp
             integer :: II, JJ
-            
+
 
             !##### ROUTINE CODE #######################################################
-      
+
             do II = IIl+1, IIr
                 RRtmp = XX(II)
                 do JJ = II-1, 1, -1
@@ -11919,19 +11904,19 @@ contains
                 enddo
                 XX(JJ+1) = RRtmp
             enddo
-           
+
         end subroutine InsrtLC_help
 
-            
+
         !##########################################################################
         ! SUBROUTINE InsrtLC
         !
-        ! Perform an insertion sort of the list XX(:) between index 
+        ! Perform an insertion sort of the list XX(:) between index
         !     values IIl and IIr.
         !##########################################################################
         subroutine InsrtLC(XX, iorder, IIl, IIr)
-       
-        
+
+
             !##### INPUT/OUTPUT VARIABLES #############################################
 
             ! the array to work on
@@ -11943,16 +11928,16 @@ contains
             ! the left and right definition of the sub-array
             integer, intent(in) :: IIl, IIr
 
-            
+
             !##### OTHER VARIABLES ####################################################
-            
+
             real*8 :: RRtmp
             integer :: IItmp
             integer :: II, JJ
-            
+
 
             !##### ROUTINE CODE #######################################################
-      
+
             do II = IIl+1, IIr
                 RRtmp = XX(II)
                 IItmp = iorder(II)
@@ -11967,20 +11952,20 @@ contains
                 XX(JJ+1) = RRtmp
                 iorder(JJ+1) = IItmp
             enddo
-           
+
         end subroutine InsrtLC
 
-        
+
         !##########################################################################
         ! FUNCTION Partition
         !
         ! Arranges the array X between the index values Ileft and Iright
-        !     positioning elements smallers than X(Ipv) at the left and the others 
+        !     positioning elements smallers than X(Ipv) at the left and the others
         !     at the right.
         !##########################################################################
         function Partition(X, iorder, Ileft, Iright, Ipv) result(Ipvfn)
-        
-            
+
+
             !##### INPUT/OUTPUT VARIABLES #############################################
 
             ! the array to work on
@@ -11995,20 +11980,20 @@ contains
             ! return value
             integer :: Ipvfn
 
-            
+
             !##### OTHER VARIABLES ####################################################
-            
+
             real*8 :: Rpv
             integer :: I
-            
+
 
             !##### ROUTINE CODE #######################################################
-        
+
             Rpv = X(Ipv)
             call Swap(X, Ipv, Iright)
             call Swap_IN(iorder, Ipv, Iright)
             Ipvfn = Ileft
-        
+
             do I = Ileft, Iright-1
                 if (X(I) <= Rpv) then
                     call Swap(X, I, Ipvfn)
@@ -12016,12 +12001,12 @@ contains
                     Ipvfn = Ipvfn + 1
                 endif
             enddo
-        
+
             call Swap(X, Ipvfn, Iright)
             call Swap_IN(iorder, Ipvfn, Iright)
-        
+
         end function Partition
-        
+
 
         !##########################################################################
         ! SUBROUTINE Swap
@@ -12038,19 +12023,19 @@ contains
 
             ! the left and right definition of the sub-array and pivotal element
             integer, intent(in) :: I, J
-            
-            
-            !##### OTHER VARIABLES ####################################################
-            
-            real*8 :: Xtmp
-            
 
-            !##### ROUTINE CODE #######################################################        
-        
+
+            !##### OTHER VARIABLES ####################################################
+
+            real*8 :: Xtmp
+
+
+            !##### ROUTINE CODE #######################################################
+
             Xtmp = X(I)
             X(I) = X(J)
             X(J) = Xtmp
-        
+
         end subroutine Swap
 
 
@@ -12069,21 +12054,21 @@ contains
 
             ! the left and right definition of the sub-array and pivotal element
             integer, intent(in) :: I, J
-            
-            
-            !##### OTHER VARIABLES ####################################################
-            
-            integer :: Xtmp
-            
 
-            !##### ROUTINE CODE #######################################################        
-        
+
+            !##### OTHER VARIABLES ####################################################
+
+            integer :: Xtmp
+
+
+            !##### ROUTINE CODE #######################################################
+
             Xtmp = X(I)
             X(I) = X(J)
             X(J) = Xtmp
-        
+
         end subroutine Swap_IN
-   
+
     end subroutine sort_r2
 
 
@@ -12098,7 +12083,7 @@ contains
     !     The Wikibook "Algorithm Implementation" available at
     !     https://en.wikibooks.org/wiki/Algorithm_Implementation/Sorting/Quicksort#FORTRAN_90.2F95
     !
-    !     and follows closely the Qsort implementation found in 
+    !     and follows closely the Qsort implementation found in
     !     "A FORTRAN 90 Numerical Library" (AFNL), which is available at
     !     https://sourceforge.net/projects/afnl/
     !
@@ -12107,8 +12092,8 @@ contains
     subroutine sort_i(x)
 
         implicit none
-        
-        
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
 
         ! the array that should be sorted
@@ -12125,25 +12110,25 @@ contains
            integer :: Ileft, Iright
         end type Limits
 
-        ! other variables        
+        ! other variables
         integer :: Ipvn, Ileft, Iright, ISpos, ISmax
         type(Limits), allocatable :: Stack(:)
-        
+
 
         !##### ROUTINE CODE #######################################################
-        
+
         allocate(Stack(Size(X)*2))
-    
+
         Stack(:)%Ileft = 0
-        
+
         ! Iniitialize the stack
         Ispos = 1
         Ismax = 1
         Stack(ISpos)%Ileft  = 1
         Stack(ISpos)%Iright = size(X)
-        
+
         do while (Stack(ISpos)%Ileft /= 0)
- 
+
            Ileft = Stack(ISPos)%Ileft
            Iright = Stack(ISPos)%Iright
 
@@ -12154,7 +12139,7 @@ contains
            else
               Ipvn = ChoosePiv(X, Ileft, Iright)
               Ipvn = Partition(X, Ileft, Iright, Ipvn)
-              
+
               Stack(ISmax+1)%Ileft = Ileft
               Stack(ISmax+1) %Iright = Ipvn-1
               Stack(ISmax+2)%Ileft = Ipvn + 1
@@ -12166,13 +12151,13 @@ contains
 
         ! deallocate all arrays
         deallocate(Stack)
-        
-    
+
+
     !##### SUBROUTINES AND FUNCTIONS ##########################################
 
     contains
 
-            
+
         !##########################################################################
         ! FUNCTION ChoosePiv
         !
@@ -12181,35 +12166,35 @@ contains
         function ChoosePiv(XX, IIleft, IIright) result (IIpv)
 
 
-            !##### INPUT/OUTPUT VARIABLES #############################################          
+            !##### INPUT/OUTPUT VARIABLES #############################################
 
             ! the array to work on
             integer, intent(in) :: XX(:)
 
             ! the left and right definition of the sub-array
             integer, intent(in) :: IIleft, IIright
-   
+
             ! the pivotal element that is returned
             integer :: IIpv
-            
+
 
             !##### OTHER VARIABLES ####################################################
-            
+
             integer :: XXcp(3)
             integer :: IIpt(3), IImd
 
 
             !##### ROUTINE CODE #######################################################
-            
+
             IImd = Int((IIleft+IIright)/2)
             IIpv = IImd
             XXcp(1) = XX(IIleft)
             XXcp(2) = XX(IImd)
             XXcp(3) = XX(IIright)
             IIpt = (/1,2,3/)
-            
+
             call InsrtLC(XXcp, 1, 3, IIpt)
-            
+
             select case (IIpt(2))
             case (1)
                 IIpv = IIleft
@@ -12218,19 +12203,19 @@ contains
             case (3)
                 IIpv = IIright
             End Select
-   
+
         end function
 
-            
+
         !##########################################################################
         ! SUBROUTINE InsrtLC
         !
-        ! Perform an insertion sort of the list XX(:) between index 
+        ! Perform an insertion sort of the list XX(:) between index
         !     values IIl and IIr.
         !##########################################################################
         subroutine InsrtLC(XX, IIl, IIr, IIpt)
-       
-        
+
+
             !##### INPUT/OUTPUT VARIABLES #############################################
 
             ! the array to work on
@@ -12242,15 +12227,15 @@ contains
             ! the permutations
             integer, intent(inout), optional :: IIpt(:)
 
-            
+
             !##### OTHER VARIABLES ####################################################
-            
+
             integer :: RRtmp
             integer :: II, JJ
-            
+
 
             !##### ROUTINE CODE #######################################################
-      
+
             do II = IIl+1, IIr
                 RRtmp = XX(II)
                 do JJ = II-1, 1, -1
@@ -12263,20 +12248,20 @@ contains
                 enddo
                 XX(JJ+1) = RRtmp
             enddo
-           
+
         end subroutine InsrtLC
 
-        
+
         !##########################################################################
         ! FUNCTION Partition
         !
         ! Arranges the array X between the index values Ileft and Iright
-        !     positioning elements smallers than X(Ipv) at the left and the others 
+        !     positioning elements smallers than X(Ipv) at the left and the others
         !     at the right.
         !##########################################################################
         function Partition(X, Ileft, Iright, Ipv) result(Ipvfn)
-        
-            
+
+
             !##### INPUT/OUTPUT VARIABLES #############################################
 
             ! the array to work on
@@ -12288,30 +12273,30 @@ contains
             ! return value
             integer :: Ipvfn
 
-            
+
             !##### OTHER VARIABLES ####################################################
-            
+
             real*8 :: Rpv
             integer :: I
-            
+
 
             !##### ROUTINE CODE #######################################################
-        
+
             Rpv = X(Ipv)
             call Swap(X, Ipv, Iright)
             Ipvfn = Ileft
-        
+
             do I = Ileft, Iright-1
                 if (X(I) <= Rpv) then
                     call Swap(X, I, Ipvfn)
                     Ipvfn = Ipvfn + 1
                 endif
             enddo
-        
+
             call Swap(X, Ipvfn, Iright)
-        
+
         end function Partition
-        
+
 
         !##########################################################################
         ! SUBROUTINE Swap
@@ -12328,19 +12313,19 @@ contains
 
             ! the left and right definition of the sub-array and pivotal element
             integer, intent(in) :: I, J
-            
-            
-            !##### OTHER VARIABLES ####################################################
-            
-            integer :: Xtmp
-            
 
-            !##### ROUTINE CODE #######################################################        
-        
+
+            !##### OTHER VARIABLES ####################################################
+
+            integer :: Xtmp
+
+
+            !##### ROUTINE CODE #######################################################
+
             Xtmp = X(I)
             X(I) = X(J)
             X(J) = Xtmp
-        
+
         end subroutine Swap
 
 
@@ -12359,21 +12344,21 @@ contains
 
             ! the left and right definition of the sub-array and pivotal element
             integer, intent(in) :: I, J
-            
-            
-            !##### OTHER VARIABLES ####################################################
-            
-            integer :: Xtmp
-            
 
-            !##### ROUTINE CODE #######################################################        
-        
+
+            !##### OTHER VARIABLES ####################################################
+
+            integer :: Xtmp
+
+
+            !##### ROUTINE CODE #######################################################
+
             Xtmp = X(I)
             X(I) = X(J)
             X(J) = Xtmp
-        
+
         end subroutine Swap_IN
-   
+
      end subroutine sort_i
 
 
@@ -12387,7 +12372,7 @@ contains
     !     The Wikibook "Algorithm Implementation" available at
     !     https://en.wikibooks.org/wiki/Algorithm_Implementation/Sorting/Quicksort#FORTRAN_90.2F95
     !
-    !     and follows closely the Qsort implementation found in 
+    !     and follows closely the Qsort implementation found in
     !     "A FORTRAN 90 Numerical Library" (AFNL), which is available at
     !     https://sourceforge.net/projects/afnl/
     !
@@ -12396,8 +12381,8 @@ contains
     subroutine sort_i2(x, iorder)
 
         implicit none
-        
-        
+
+
         !##### INPUT/OUTPUT VARIABLES #############################################
 
         ! the array that should be sorted
@@ -12417,28 +12402,28 @@ contains
            integer :: Ileft, Iright
         end type Limits
 
-        ! other variables        
+        ! other variables
         integer :: Ipvn, Ileft, Iright, ISpos, ISmax, ii
         type(Limits), allocatable :: Stack(:)
-        
+
 
         !##### ROUTINE CODE #######################################################
 
         ! initialize the sorting order array
         iorder = (/(ii, ii = 1, size(x, 1))/)
 
-        allocate(Stack(Size(X)*2)) 
-    
+        allocate(Stack(Size(X)*2))
+
         Stack(:)%Ileft = 0
-        
+
         ! Iniitialize the stack
         Ispos = 1
         Ismax = 1
         Stack(ISpos)%Ileft  = 1
         Stack(ISpos)%Iright = size(X)
-        
+
         do while (Stack(ISpos)%Ileft /= 0)
- 
+
            Ileft = Stack(ISPos)%Ileft
            Iright = Stack(ISPos)%Iright
 
@@ -12449,7 +12434,7 @@ contains
            else
               Ipvn = ChoosePiv(X, Ileft, Iright)
               Ipvn = Partition(X, iorder, Ileft, Iright, Ipvn)
-              
+
               Stack(ISmax+1)%Ileft = Ileft
               Stack(ISmax+1) %Iright = Ipvn-1
               Stack(ISmax+2)%Ileft = Ipvn + 1
@@ -12461,13 +12446,13 @@ contains
 
         ! deallocate all arrays
         deallocate(Stack)
-        
-    
+
+
     !##### SUBROUTINES AND FUNCTIONS ##########################################
 
     contains
 
-            
+
         !##########################################################################
         ! FUNCTION ChoosePiv
         !
@@ -12476,35 +12461,35 @@ contains
         function ChoosePiv(XX, IIleft, IIright) result (IIpv)
 
 
-            !##### INPUT/OUTPUT VARIABLES #############################################          
+            !##### INPUT/OUTPUT VARIABLES #############################################
 
             ! the array to work on
             integer, intent(in) :: XX(:)
 
             ! the left and right definition of the sub-array
             integer, intent(in) :: IIleft, IIright
-   
+
             ! the pivotal element that is returned
             integer :: IIpv
-            
+
 
             !##### OTHER VARIABLES ####################################################
-            
+
             integer :: XXcp(3)
             integer :: IIpt(3), IImd
 
 
             !##### ROUTINE CODE #######################################################
-            
+
             IImd = Int((IIleft+IIright)/2)
             IIpv = IImd
             XXcp(1) = XX(IIleft)
             XXcp(2) = XX(IImd)
             XXcp(3) = XX(IIright)
             IIpt = (/1,2,3/)
-            
+
             call InsrtLC_help(XXcp, 1, 3, IIpt)
-            
+
             select case (IIpt(2))
             case (1)
                 IIpv = IIleft
@@ -12513,7 +12498,7 @@ contains
             case (3)
                 IIpv = IIright
             End Select
-   
+
         end function
 
         !##########################################################################
@@ -12522,8 +12507,8 @@ contains
         ! Just a helping routine. Same as below but without iorder.
         !##########################################################################
         subroutine InsrtLC_help(XX, IIl, IIr, IIpt)
-       
-        
+
+
             !##### INPUT/OUTPUT VARIABLES #############################################
 
             ! the array to work on
@@ -12535,15 +12520,15 @@ contains
             ! the permutations
             integer, intent(inout) :: IIpt(:)
 
-            
+
             !##### OTHER VARIABLES ####################################################
-            
+
             integer :: RRtmp
             integer :: II, JJ
-            
+
 
             !##### ROUTINE CODE #######################################################
-      
+
             do II = IIl+1, IIr
                 RRtmp = XX(II)
                 do JJ = II-1, 1, -1
@@ -12556,19 +12541,19 @@ contains
                 enddo
                 XX(JJ+1) = RRtmp
             enddo
-           
+
         end subroutine InsrtLC_help
 
-            
+
         !##########################################################################
         ! SUBROUTINE InsrtLC
         !
-        ! Perform an insertion sort of the list XX(:) between index 
+        ! Perform an insertion sort of the list XX(:) between index
         !     values IIl and IIr.
         !##########################################################################
         subroutine InsrtLC(XX, iorder, IIl, IIr)
-       
-        
+
+
             !##### INPUT/OUTPUT VARIABLES #############################################
 
             ! the array to work on
@@ -12580,16 +12565,16 @@ contains
             ! the left and right definition of the sub-array
             integer, intent(in) :: IIl, IIr
 
-            
+
             !##### OTHER VARIABLES ####################################################
-            
+
             integer :: RRtmp
             integer :: IItmp
             integer :: II, JJ
-            
+
 
             !##### ROUTINE CODE #######################################################
-      
+
             do II = IIl+1, IIr
                 RRtmp = XX(II)
                 IItmp = iorder(II)
@@ -12604,20 +12589,20 @@ contains
                 XX(JJ+1) = RRtmp
                 iorder(JJ+1) = IItmp
             enddo
-           
+
         end subroutine InsrtLC
 
-        
+
         !##########################################################################
         ! FUNCTION Partition
         !
         ! Arranges the array X between the index values Ileft and Iright
-        !     positioning elements smallers than X(Ipv) at the left and the others 
+        !     positioning elements smallers than X(Ipv) at the left and the others
         !     at the right.
         !##########################################################################
         function Partition(X, iorder, Ileft, Iright, Ipv) result(Ipvfn)
-        
-            
+
+
             !##### INPUT/OUTPUT VARIABLES #############################################
 
             ! the array to work on
@@ -12632,20 +12617,20 @@ contains
             ! return value
             integer :: Ipvfn
 
-            
+
             !##### OTHER VARIABLES ####################################################
-            
+
             integer :: Rpv
             integer :: I
-            
+
 
             !##### ROUTINE CODE #######################################################
-        
+
             Rpv = X(Ipv)
             call Swap(X, Ipv, Iright)
             call Swap_IN(iorder, Ipv, Iright)
             Ipvfn = Ileft
-        
+
             do I = Ileft, Iright-1
                 if (X(I) <= Rpv) then
                     call Swap(X, I, Ipvfn)
@@ -12653,12 +12638,12 @@ contains
                     Ipvfn = Ipvfn + 1
                 endif
             enddo
-        
+
             call Swap(X, Ipvfn, Iright)
             call Swap_IN(iorder, Ipvfn, Iright)
-        
+
         end function Partition
-        
+
 
         !##########################################################################
         ! SUBROUTINE Swap
@@ -12675,19 +12660,19 @@ contains
 
             ! the left and right definition of the sub-array and pivotal element
             integer, intent(in) :: I, J
-            
-            
-            !##### OTHER VARIABLES ####################################################
-            
-            integer :: Xtmp
-            
 
-            !##### ROUTINE CODE #######################################################        
-        
+
+            !##### OTHER VARIABLES ####################################################
+
+            integer :: Xtmp
+
+
+            !##### ROUTINE CODE #######################################################
+
             Xtmp = X(I)
             X(I) = X(J)
             X(J) = Xtmp
-        
+
         end subroutine Swap
 
 
@@ -12706,21 +12691,21 @@ contains
 
             ! the left and right definition of the sub-array and pivotal element
             integer, intent(in) :: I, J
-            
-            
-            !##### OTHER VARIABLES ####################################################
-            
-            integer :: Xtmp
-            
 
-            !##### ROUTINE CODE #######################################################        
-        
+
+            !##### OTHER VARIABLES ####################################################
+
+            integer :: Xtmp
+
+
+            !##### ROUTINE CODE #######################################################
+
             Xtmp = X(I)
             X(I) = X(J)
             X(J) = Xtmp
-        
+
         end subroutine Swap_IN
-   
+
     end subroutine sort_i2
 
 

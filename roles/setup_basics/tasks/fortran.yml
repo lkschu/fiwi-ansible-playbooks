@@ -20,6 +20,10 @@
     src: ../../../configs/toolbox
     dest: /tmp
 
+- name: Make executable
+  shell: chmod +x /tmp/toolbox/install_toolbox.sh
+  become: true
+
 - name: "Install toolbox"
   shell: echo y | /tmp/toolbox/install_toolbox.sh
   become: true

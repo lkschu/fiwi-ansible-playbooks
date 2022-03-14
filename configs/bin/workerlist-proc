@@ -24,6 +24,18 @@ function callproc() {
     sleep 4
 }
 
+function callprocmaxram() {
+    # same as callproc put for high ram machines
+    while IFS="" read -r p || [ -n "$p" ]
+    do
+        proc "$p" &
+    done < /usr/local/lib/workerlist-maxram
+
+    # wait for ssh to finish
+    sleep 4
+}
+
+
 # sort -n to sort numbers
 # tee /dev/tty is to also print values: | tee /dev/tty  |
 # get first entry, second word = host ip
@@ -31,6 +43,8 @@ function callproc() {
 if [[ "$1" == "--all" ]]; then
     # list all for printing, so add '%'
     callproc | /usr/bin/sort -n | /usr/bin/awk '{ print $1 "%\t" $2 }'
+elif [[ "$1" == "--max" ]]; then
+    callprocmaxram | /usr/bin/sort -n | /usr/bin/head -n 1 | /usr/bin/cut -d ' ' -f 2
 else
     # return least used cpu
     callproc | /usr/bin/sort -n | /usr/bin/head -n 1 | /usr/bin/cut -d ' ' -f 2

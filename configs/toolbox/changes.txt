@@ -1,0 +1,7 @@
+# Tracking changes to toolbox
+
+replaced gfortran with gfortran-8
+
+Removed block which set terminal to wxt, x11 or qt so default gnuplot config will be loaded. (x3)
+
+Removed: pause -1 "Press RETURN to continue..." (x3)

@@ -43,6 +43,5 @@
       loop: "{{ users_to_add }}"
       vars:
         user_name: "{{ item.name }}"
-        user_pw: "{{ item.passwd }}"
 
 

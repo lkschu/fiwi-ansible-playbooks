@@ -1,0 +1,16 @@
+---
+
+- hosts: worker
+  pre_tasks:
+    - name: include config
+      include_vars: ../configs/ldap_config.yml
+    - name: include user vars
+      include_vars: ../configs/users_to_add.yml
+
+  tasks:
+    - name: Install smb and smb utils
+      include_role:
+        name: setup_basics
+        tasks_from: fortran.yml
+
+

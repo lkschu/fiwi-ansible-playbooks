@@ -15,6 +15,7 @@ timestamp=""
 gpu=false
 detach=true
 kill_tmux=false
+maxram=false
 
 for i in "$@"; do
     case $i in
@@ -28,6 +29,10 @@ for i in "$@"; do
             ;;
         --kill)
             kill_tmux=true
+            shift
+            ;;
+        --max)
+            maxram=true
             shift
             ;;
         --ts=*)
@@ -62,10 +67,15 @@ if [ "$kill_tmux" = true ]; then
     exit
 fi
 
-
-echo "Getting valid worker..."
-HOST=$(/usr/local/bin/workerlist-proc)
-echo "Worker node is $HOST "
+if [ "$maxram" = true ]; then
+    echo "Getting valid worker..."
+    HOST=$(/usr/local/bin/workerlist-proc --max)
+    echo "Worker node is $HOST "
+else
+    echo "Getting valid worker..."
+    HOST=$(/usr/local/bin/workerlist-proc)
+    echo "Worker node is $HOST "
+fi
 
 if [ "$detach" = true ]; then
     ssh "$USER"@"$HOST" "tmux new -d -s $timestamp 'prepare-build $timestamp'"
