@@ -63,9 +63,9 @@
 Stelle sicher, dass SSH keys bereits generiert wurden. Dies wurde vermutlich schon erledit ist aber notwendig für weitere Schritte.
 SSH keys befinden sich im Ordner \texttt{\%userprofile\%\bs.ssh} und können über den Konsolenbefehl \texttt{ssh-keygen} generiert werden, siehe Sec. \ref{sec:ssh}.
 
-\begin{wrapfigure}{r}{0.55\linewidth}
+\begin{wrapfigure}{r}{0.65\linewidth}
     \centering
-    \includegraphics[width=0.65\linewidth]{./pics/2022-03-16_15-36.png}
+    \includegraphics[width=0.85\linewidth]{./pics/2022-03-16_15-36.png}
     \caption{Terminal an diesem Ort öffnen, durch Eingabe von cmd in der Pfadleiste und Bestätigen mit Enter}
     \vspace{-4em}
     \label{fig:install-1}
@@ -174,22 +174,22 @@ Für ein Programm mit Timestamp '2022-03-01\_12-51-55' also
 \newline\texttt{fiwi-fortran.bat -{}-kill 2022-03-01\_12-51-55} für Windows.
 
 \subsection{Auflistung und Kopieren der ins Archiv verschobener Programme}
-Ist ein Programm nicht mehr über die Website einsehbar, so wurde der ordner ins Archiv verschoben.
-Der Inhalt kann über den Parameter \newline\texttt{-{}-ls} angezeigt, und mittels \newline\texttt{-{}-get <timestamp>} auf den lokalen Rechner kopiert werden.
+Ist ein Programm nicht mehr über die Website einsehbar, so wurde der Ordner ins Archiv verschoben.
+Der Inhalt kann durch ausführen des Skripts mit dem Parameter \newline\texttt{-{}-ls} angezeigt, und mittels \newline\texttt{-{}-get <timestamp>} auf den lokalen Rechner kopiert werden, siehe Fig.\ref{fig:script-ls},\ref{fig:script-get}.
 
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.7\linewidth]{./pics/2022-03-16_16-31.png}
     \caption{Zeige Einträge im Archiv}
     %\vspace{-5em}
-    \label{fig:web-1}
+    \label{fig:script-ls}
 \end{figure}
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.7\linewidth]{./pics/2022-03-16_16-33_1.png}
     \caption{Eintrag aus Archiv in aktuellen Ordner herunterladen}
     %\vspace{-5em}
-    \label{fig:web-1}
+    \label{fig:script-get}
 \end{figure}
 
 

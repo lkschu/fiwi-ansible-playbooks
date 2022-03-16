@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/Arch Linux) (preloaded format=pdflatex 2021.12.30)  16 MAR 2022 16:39
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/Arch Linux) (preloaded format=pdflatex 2021.12.30)  16 MAR 2022 16:59
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -263,12 +263,6 @@ File: l3backend-pdftex.def 2021-12-14 L3 backend support: PDF output (pdfTeX)
 LaTeX Warning: Label `fig:web-1' multiply defined.
 
 
-LaTeX Warning: Label `fig:web-1' multiply defined.
-
-
-LaTeX Warning: Label `fig:web-1' multiply defined.
-
-
 LaTeX Warning: Label `sec:ssh' multiply defined.
 
 )
@@ -396,10 +390,20 @@ ich im Ord-ner \T1/cmtt/m/n/10.95 %userprofile%\.ssh
 File: ./pics/2022-03-16_15-36.png Graphic file (type png)
 <use ./pics/2022-03-16_15-36.png>
 Package pdftex.def Info: ./pics/2022-03-16_15-36.png  used on input line 68.
-(pdftex.def)             Requested size: 147.4914pt x 64.71895pt.
+(pdftex.def)             Requested size: 227.94162pt x 100.02055pt.
 
-Underfull \hbox (badness 3861) in paragraph at lines 75--75
-\T1/cmr/m/n/10.95 nen Be-nutzer-ac-count gesetzt
+Underfull \hbox (badness 2205) in paragraph at lines 75--75
+\T1/cmr/m/n/10.95 ac-count gesetzt wer-
+ []
+
+
+Overfull \hbox (2.03682pt too wide) in paragraph at lines 76--76
+[]\T1/cmtt/m/n/10.95 IPADDRESS \T1/cmr/m/n/10.95 ver-weist auf
+ []
+
+
+Overfull \hbox (2.46251pt too wide) in paragraph at lines 76--76
+\T1/cmr/m/n/10.95 den Ko-or-di-na-tor Server
  []
 
 <./pics/2022-03-08_23-57.png, id=44, 581.53711pt x 124.9528pt>
@@ -466,12 +470,12 @@ een already used, duplicate ignored
 l.171 
        [3 <./pics/2022-03-09_01-03_1.png (PNG copy)> <./pics/2022-03-09_01-18.p
 ng (PNG copy)>]
-<./pics/2022-03-16_16-31.png, id=79, 535.6085pt x 294.48337pt>
+<./pics/2022-03-16_16-31.png, id=80, 535.6085pt x 294.48337pt>
 File: ./pics/2022-03-16_16-31.png Graphic file (type png)
 <use ./pics/2022-03-16_16-31.png>
 Package pdftex.def Info: ./pics/2022-03-16_16-31.png  used on input line 182.
 (pdftex.def)             Requested size: 288.79422pt x 158.78497pt.
-<./pics/2022-03-16_16-33_1.png, id=80, 532.2314pt x 222.21336pt>
+<./pics/2022-03-16_16-33_1.png, id=81, 532.2314pt x 222.21336pt>
 File: ./pics/2022-03-16_16-33_1.png Graphic file (type png)
 <use ./pics/2022-03-16_16-33_1.png>
 Package pdftex.def Info: ./pics/2022-03-16_16-33_1.png  used on input line 189.
@@ -484,7 +488,7 @@ een already used, duplicate ignored
 l.197 \clearpage
                  [4 <./pics/2022-03-16_16-31.png (PNG copy)> <./pics/2022-03-16
 _16-33_1.png (PNG copy)>]
-<./pics/2022-03-09_00-17.png, id=87, 439.02336pt x 290.43085pt>
+<./pics/2022-03-09_00-17.png, id=89, 439.02336pt x 290.43085pt>
 File: ./pics/2022-03-09_00-17.png Graphic file (type png)
 <use ./pics/2022-03-09_00-17.png>
 Package pdftex.def Info: ./pics/2022-03-09_00-17.png  used on input line 207.
@@ -503,7 +507,7 @@ Overfull \hbox (24.62454pt too wide) in paragraph at lines 217--220
 0.95 für Ma-cOS/Linux bzw. \T1/cmtt/m/n/10.95 %userprofile%\.ssh\known_hosts
  []
 
-<./pics/2022-03-16_16-04.png, id=89, 678.12224pt x 281.65038pt>
+<./pics/2022-03-16_16-04.png, id=91, 678.12224pt x 281.65038pt>
 File: ./pics/2022-03-16_16-04.png Graphic file (type png)
 <use ./pics/2022-03-16_16-04.png>
 Package pdftex.def Info: ./pics/2022-03-16_16-04.png  used on input line 223.
@@ -548,10 +552,10 @@ Package rerunfilecheck Info: File `user-manual.out' has not changed.
 (rerunfilecheck)             Checksum: D63C7157EC6FF004C6E3E15752C7B4B2;1923.
  ) 
 Here is how much of TeX's memory you used:
- 10663 strings out of 478353
- 173396 string characters out of 5854634
- 471581 words of memory out of 5000000
- 28640 multiletter control sequences out of 15000+600000
+ 10665 strings out of 478353
+ 173427 string characters out of 5854634
+ 471699 words of memory out of 5000000
+ 28642 multiletter control sequences out of 15000+600000
  415205 words of font info for 52 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  60i,6n,63p,439b,335s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -565,10 +569,10 @@ fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texmf-dist/fonts/type1/pub
 lic/cm-super/sfrm1728.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sf
 ti1095.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sftt1095.pfb></us
 r/share/texmf-dist/fonts/type1/public/cm-super/sftt1200.pfb>
-Output written on user-manual.pdf (6 pages, 464942 bytes).
+Output written on user-manual.pdf (6 pages, 465014 bytes).
 PDF statistics:
- 158 PDF objects out of 1000 (max. 8388607)
- 116 compressed objects within 2 object streams
+ 160 PDF objects out of 1000 (max. 8388607)
+ 118 compressed objects within 2 object streams
  21 named destinations out of 1000 (max. 500000)
  123 words of extra memory for PDF output out of 10000 (max. 10000000)
 

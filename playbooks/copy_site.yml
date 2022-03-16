@@ -1,4 +1,5 @@
 ---
+# Copies the website and required resources like the documentation
 
 - hosts: ldap
 
