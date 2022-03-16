@@ -65,9 +65,9 @@ SSH keys befinden sich im Ordner \texttt{\%userprofile\%\bs.ssh} und können üb
 
 \begin{wrapfigure}{r}{0.55\linewidth}
     \centering
-    \includegraphics[width=0.65\linewidth]{./pics/2022-03-08_23-52.png}
-    \caption{Terminal an diesem Ort öffnen}
-    \vspace{-5em}
+    \includegraphics[width=0.65\linewidth]{./pics/2022-03-16_15-36.png}
+    \caption{Terminal an diesem Ort öffnen, durch Eingabe von cmd in der Pfadleiste und Bestätigen mit Enter}
+    \vspace{-4em}
     \label{fig:install-1}
 \end{wrapfigure}
 
@@ -75,7 +75,7 @@ Im Skript müssen können folgende Variablen gesetzt werden:
 \e \texttt{REMOTEUSER} muss auf den eigenen Benutzeraccount gesetzt werden
 \e \texttt{IPADDRESS} verweist auf den Koordinator Server und sollte in den meisten Fällen nicht geändert werden.
 
-Anschließend kann das heruntergeladene Script mit \texttt{-{}-install} aufgerufen werden, siehe Fig.\ref{fig:install-1}.
+Anschließend kann das heruntergeladene Script mit \texttt{-{}-install} aufgerufen werden, siehe Fig.\ref{fig:install-1} und Fig.\ref{fig:install-2}.
 
 Hier muss einmalig mit '\texttt{ja}' bzw. '\texttt{yes}' bestätigt werden, dass der Server in die Liste der bekannten Server aufgenommen werden soll.
 
@@ -164,9 +164,37 @@ Die Datei \texttt{console.txt}, die sich in jedem Ordner finden lässt, enthält
     \label{fig:web-1}
 \end{figure}
 
-Weitere Funktionalitäten, wie das beenden fälschlich gestarteter Programme mittels \texttt{--kill}, sowie das Auflisten und Verunterladen älterer Ergebnisse mittels \texttt{--ls, --get} folgt die nächsten Tage.
+
+\subsection{Vorzeitiges beenden eines laufenden Programms}
+
+Soll ein Programm, dass im Hintergrund auf dem Server läuft, vorzeitig beendet werden, so kann das Script mittels Konsole mit dem zusätzlichen Parameter \texttt{-{}-kill} gefolgt von dem Timestamp des zu beendenden Programms aufgerufen werden.
+
+Für ein Programm mit Timestamp '2022-03-01\_12-51-55' also
+\newline\texttt{./fiwi-fortan.sh -{}-kill 2022-03-01\_12-51-55} für MacOS oder Linux bzw.
+\newline\texttt{fiwi-fortran.bat -{}-kill 2022-03-01\_12-51-55} für Windows.
+
+\subsection{Auflistung und Kopieren der ins Archiv verschobener Programme}
+Ist ein Programm nicht mehr über die Website einsehbar, so wurde der ordner ins Archiv verschoben.
+Der Inhalt kann über den Parameter \newline\texttt{-{}-ls} angezeigt, und mittels \newline\texttt{-{}-get <timestamp>} auf den lokalen Rechner kopiert werden.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.7\linewidth]{./pics/2022-03-16_16-31.png}
+    \caption{Zeige Einträge im Archiv}
+    %\vspace{-5em}
+    \label{fig:web-1}
+\end{figure}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.7\linewidth]{./pics/2022-03-16_16-33_1.png}
+    \caption{Eintrag aus Archiv in aktuellen Ordner herunterladen}
+    %\vspace{-5em}
+    \label{fig:web-1}
+\end{figure}
 
 
+
+\clearpage
 \section{Problemlösung}
 
 \subsection{Keine SSH keys vorhanden}\label{sec:ssh}
@@ -182,18 +210,41 @@ Konsole öffnen, den Befehl \texttt{ssh-keygen} ausführen und nächste Eingaben
     \label{fig:ssh}
 \end{figure}
 
+
+\subsection{Fehler bei \texttt{-{}-install}: "REMOTE HOST IDENTIFICATION HAS CHANGED"}\label{sec:ssh}
+Sollte beim erstmaligen Installieren die in Fig.\ref{fig:ssh-host-key} zu sehende Fehlermeldung auftauchen, so kannte der PC einen anderen Server hinter der IP 10.106.242.102.
+
+Dieser Eintrag muss entfernt werden. In manchen Fällen, vor allem unter Ubuntu wird in der Fehlermeldung selbst ein Befehl vorgeschlagen wie der Eintrag entfernt werden kann.
+Sollte dies nicht der Fall sein, so muss die Zeile mit der IP von 10.106.242.102 aus der Datei \texttt{\$HOME/.ssh/known\_hosts} für MacOS/Linux bzw. \texttt{\%userprofile\%\textbackslash.ssh\textbackslash{}known\_hosts} mit einem Texteditor entfernt werden.
+Danach kann die Installation erneut versucht werden.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.9\linewidth]{./pics/2022-03-16_16-04.png}
+    \caption{SSH Fehlermeldung}
+    %\vspace{-5em}
+    \label{fig:ssh-host-key}
+\end{figure}
+
+
 \subsection{Fehlende Berechtigungen unter MacOS oder Linux}
 Lässt sich das Script nicht starten müssen möglicherweise Berechtigungen überprüft werden.
 
 Hierfür ein Konsolenfenster öffnen und mit folgendem Befehl Ausführberechtigungen erteilen: \newline\texttt{chmod +x "/pfad/zu/meiner datei.sh"}
 
 Unter MacOS könnte es zusätzlich noch notwendig sein eine sog. erweiterte Dateieigenschaft zu entfernen.
-Diese sind mittels: \newline\texttt{xattr "/pfad/zu/meiner datei.sh"}\newline einsehbar, wobei bei Bedarf \emph{com.apple.quarantine} mittels: \newline\texttt{xattr -d com.apple.quarantine "/pfad/zu/meiner datei.sh"}\newline entfernt werden kann.
+Diese sind mittels:
+\newline\texttt{xattr "/pfad/zu/meiner datei.sh"}
+\newline einsehbar, wobei bei Bedarf \emph{com.apple.quarantine} mittels:
+\newline\texttt{xattr -d com.apple.quarantine "/pfad/zu/meiner datei.sh"}
+\newline entfernt werden kann.
 
 
 \section{Kontakt}
 
-Fragen, Fehlermeldungen, Ergänzungen und Anregungen können gerne an \underline{\href{mailto:lukas_kilian.schumann@stud-mail.uni-wuerzburg.de}{Lukas K. Schumann}} gesendet werden.
+Fragen, Fehlermeldungen, Ergänzungen und Anregungen können gerne an
+\newline\underline{\href{mailto:lukas\_kilian.schumann@stud-mail.uni-wuerzburg.de}{Lukas K. Schumann}}
+, {\href{mailto:lukas\_kilian.schumann@stud-mail.uni-wuerzburg.de}{lukas\_kilian.schumann@stud-mail.uni-wuerzburg.de}} gesendet werden.
 
 \end{document}
 

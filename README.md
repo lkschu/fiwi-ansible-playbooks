@@ -6,12 +6,9 @@ created for Chair of Public Finance, Julius-Maximilians-Universität Wuerzburg, 
 
 
 
-Uses LDAP, ZFS, Samba, Apache and more.
+Uses LDAP, ZFS, Samba, Apache and more to autmatically delegate jobs to free worker nodes.
 
 
-
-# TODO
-
-- Toolbox has gnuplot terminal type hardcoded and doesn't allow png or cairopng. Should be patched
-
+- [user-manual](./docs/manual-user/user-manual.pdf)
+- [admin-manual](./docs/manual-admin/admin-manual.pdf)
 
