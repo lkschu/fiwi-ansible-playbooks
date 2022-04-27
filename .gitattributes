@@ -1,4 +1,4 @@
-configs/toolbox/* linguist-documentation
+configs/toolbox/** linguist-vendored
 
 *.yml linguist-detectable
 
