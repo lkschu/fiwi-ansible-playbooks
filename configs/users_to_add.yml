@@ -10,12 +10,12 @@ users_to_add:
       3039613065366235370a656162353066633034633064376236376533656135316266613339653738
       6661
 
+  # Cleartext pw for testing because the accounts have no rights
+  # and pw will be changed anyways
   - name: 'test01'
     passwd: '6789'
-
   - name: 'test02'
     passwd: 'abc'
-
   - name: 'test03'
     passwd: 'lkjl'
 
