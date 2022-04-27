@@ -1,1 +1,1 @@
-*.f90 linguist-vendored=true
+configs/toolbox/* linguist-documentation
