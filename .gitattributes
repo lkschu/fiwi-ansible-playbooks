@@ -1,6 +1,6 @@
-# Hide toolbox in language detection
 configs/toolbox/* linguist-documentation
 
-# Detect yaml as language (and not as data type)
-*.yml linguist-detectable=true
+*.yml linguist-detectable
+
 *.yml linguist-language=YAML
+*.php linguist-language=PHP
