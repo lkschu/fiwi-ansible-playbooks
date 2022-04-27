@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/Arch Linux) (preloaded format=pdflatex 2022.4.21)  26 APR 2022 20:59
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/Arch Linux) (preloaded format=pdflatex 2022.4.21)  26 APR 2022 21:01
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**user-manual.tex
-(./user-manual.tex
+**admin-manual.tex
+(./admin-manual.tex
 LaTeX2e <2021-11-15> patch level 1
 L3 programming layer <2022-02-24>
 (/usr/share/texmf-dist/tex/latex/base/article.cls
@@ -268,15 +268,8 @@ File: l3backend-pdftex.def 2022-02-07 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count277
 \l__pdf_internal_box=\box52
 )
-(./user-manual.aux
-
-LaTeX Warning: Label `fig:web-1' multiply defined.
-
-
-LaTeX Warning: Label `sec:ssh' multiply defined.
-
-)
-\openout1 = `user-manual.aux'.
+(./admin-manual.aux)
+\openout1 = `admin-manual.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 55.
 LaTeX Font Info:    ... okay on input line 55.
@@ -312,9 +305,9 @@ LaTeX Info: Redefining \ref on input line 55.
 LaTeX Info: Redefining \pageref on input line 55.
 LaTeX Info: Redefining \nameref on input line 55.
 
-(./user-manual.out) (./user-manual.out)
+(./admin-manual.out) (./admin-manual.out)
 \@outlinefile=\write3
-\openout3 = `user-manual.out'.
+\openout3 = `admin-manual.out'.
 
 
 (/usr/share/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
@@ -386,238 +379,19 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 
 LaTeX Warning: No \author given.
 
-[1
-
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] (./user-manual.toc
+(./admin-manual.toc
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <10.95> on input line 3.
-LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 7
-.
-
-(/usr/share/texmf-dist/tex/latex/base/t1cmtt.fd
-File: t1cmtt.fd 2019/12/16 v2.5j Standard LaTeX font definitions
-)
-Overfull \hbox (25.50185pt too wide) in paragraph at lines 7--7
- [][] [][]\T1/cmr/m/n/10.95 Fehler bei \T1/cmtt/m/n/10.95 --install\T1/cmr/m/n/
-10.95 : "RE-MOTE HOST IDEN-TI-FI-CA-TION HAS CHANGED"[] []  
- []
-
+(Font)              <10.95> on input line 2.
 )
 \tf@toc=\write4
-\openout4 = `user-manual.toc'.
+\openout4 = `admin-manual.toc'.
 
+ [1
 
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 13.59999pt, for example:
-(fancyhdr)                \setlength{\headheight}{13.59999pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-
-(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
-
-pdfTeX warning (ext4): destination with the same identifier (name{page.}) has b
-een already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.66 \newpage
-              [2]
-Overfull \hbox (33.27815pt too wide) in paragraph at lines 73--75
-\T1/cmr/m/n/10.95 ist aber notwendig für weit-ere Schritte. SSH keys befinden s
-ich im Ord-ner \T1/cmtt/m/n/10.95 %userprofile%\.ssh
- []
-
-<./pics/2022-03-16_15-36.png, id=66, 292.4571pt x 128.32991pt>
-File: ./pics/2022-03-16_15-36.png Graphic file (type png)
-<use ./pics/2022-03-16_15-36.png>
-Package pdftex.def Info: ./pics/2022-03-16_15-36.png  used on input line 78.
-(pdftex.def)             Requested size: 227.94162pt x 100.02055pt.
-
-Underfull \hbox (badness 2205) in paragraph at lines 85--85
-\T1/cmr/m/n/10.95 ac-count gesetzt wer-
- []
-
-
-Overfull \hbox (2.03682pt too wide) in paragraph at lines 86--86
-[]\T1/cmtt/m/n/10.95 IPADDRESS \T1/cmr/m/n/10.95 ver-weist auf
- []
-
-
-Overfull \hbox (2.46251pt too wide) in paragraph at lines 86--86
-\T1/cmr/m/n/10.95 den Ko-or-di-na-tor Server
- []
-
-<./pics/2022-03-08_23-57.png, id=69, 581.53711pt x 124.9528pt>
-File: ./pics/2022-03-08_23-57.png Graphic file (type png)
-<use ./pics/2022-03-08_23-57.png>
-Package pdftex.def Info: ./pics/2022-03-08_23-57.png  used on input line 94.
-(pdftex.def)             Requested size: 412.56497pt x 88.64655pt.
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 13.59999pt, for example:
-(fancyhdr)                \setlength{\headheight}{13.59999pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-
-(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
-
-pdfTeX warning (ext4): destination with the same identifier (name{page.}) has b
-een already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.117 \clearpage
-                 [3 <./pics/2022-03-16_15-36.png (PNG copy)> <./pics/2022-03-08
-_23-57.png (PNG copy)>]
-<./pics/2022-03-08_23-59_1.png, id=78, 436.32169pt x 218.16084pt>
-File: ./pics/2022-03-08_23-59_1.png Graphic file (type png)
-<use ./pics/2022-03-08_23-59_1.png>
-Package pdftex.def Info: ./pics/2022-03-08_23-59_1.png  used on input line 124.
-
-(pdftex.def)             Requested size: 288.79422pt x 144.39937pt.
-<./pics/2022-03-09_00-05.png, id=80, 450.50551pt x 405.92775pt>
-File: ./pics/2022-03-09_00-05.png Graphic file (type png)
-<use ./pics/2022-03-09_00-05.png>
-Package pdftex.def Info: ./pics/2022-03-09_00-05.png  used on input line 143.
-(pdftex.def)             Requested size: 288.79422pt x 260.22025pt.
-
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 13.59999pt, for example:
-(fancyhdr)                \setlength{\headheight}{13.59999pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-
-(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
-
-pdfTeX warning (ext4): destination with the same identifier (name{page.}) has b
-een already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.150 
-       [4
-
- <./pics/2022-03-08_23-59_1.png (PNG copy)> <./pics/2022-03-09_00-05.png (PNG c
-opy)>]
-LaTeX Font Info:    Trying to load font information for TS1+cmtt on input line 
-151.
- (/usr/share/texmf-dist/tex/latex/base/ts1cmtt.fd
-File: ts1cmtt.fd 2019/12/16 v2.5j Standard LaTeX font definitions
-)
-Overfull \hbox (16.46083pt too wide) in paragraph at lines 151--152
-[]\T1/cmr/m/n/10.95 In bei-den Fällen sind Ergeb-nisse über die Web-site auf \T
-1/cmtt/m/n/10.95 https://10.106.242.102/[]<username>
- []
-
-
-Overfull \hbox (66.4742pt too wide) in paragraph at lines 153--156
-[]\T1/cmr/m/n/10.95 Bei er-st-ma-ligem öff-nen wird der Web-browser eine War-nu
-ng mit dem Na-men \T1/cmtt/m/n/10.95 SEC_ERROR_UNKNOWN_ISSUER\T1/cmr/m/n/10.95 
-,
- []
-
-<./pics/2022-03-09_01-03_1.png, id=88, 434.29543pt x 343.11365pt>
-File: ./pics/2022-03-09_01-03_1.png Graphic file (type png)
-<use ./pics/2022-03-09_01-03_1.png>
-Package pdftex.def Info: ./pics/2022-03-09_01-03_1.png  used on input line 159.
-
-(pdftex.def)             Requested size: 288.79422pt x 228.16771pt.
-<./pics/2022-03-09_01-18.png, id=89, 614.6327pt x 339.73654pt>
-File: ./pics/2022-03-09_01-18.png Graphic file (type png)
-<use ./pics/2022-03-09_01-18.png>
-Package pdftex.def Info: ./pics/2022-03-09_01-18.png  used on input line 171.
-(pdftex.def)             Requested size: 288.79422pt x 159.62953pt.
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 13.59999pt, for example:
-(fancyhdr)                \setlength{\headheight}{13.59999pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-
-(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
-
-pdfTeX warning (ext4): destination with the same identifier (name{page.}) has b
-een already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.181 
-       [5 <./pics/2022-03-09_01-03_1.png (PNG copy)> <./pics/2022-03-09_01-18.p
-ng (PNG copy)>]
-<./pics/2022-03-16_16-31.png, id=98, 535.6085pt x 294.48337pt>
-File: ./pics/2022-03-16_16-31.png Graphic file (type png)
-<use ./pics/2022-03-16_16-31.png>
-Package pdftex.def Info: ./pics/2022-03-16_16-31.png  used on input line 192.
-(pdftex.def)             Requested size: 288.79422pt x 158.78497pt.
-<./pics/2022-03-16_16-33_1.png, id=99, 532.2314pt x 222.21336pt>
-File: ./pics/2022-03-16_16-33_1.png Graphic file (type png)
-<use ./pics/2022-03-16_16-33_1.png>
-Package pdftex.def Info: ./pics/2022-03-16_16-33_1.png  used on input line 199.
-
-(pdftex.def)             Requested size: 288.79422pt x 120.57661pt.
-
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 13.59999pt, for example:
-(fancyhdr)                \setlength{\headheight}{13.59999pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-
-(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
-
-pdfTeX warning (ext4): destination with the same identifier (name{page.}) has b
-een already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.207 \clearpage
-                 [6 <./pics/2022-03-16_16-31.png (PNG copy)> <./pics/2022-03-16
-_16-33_1.png (PNG copy)>]
-<./pics/2022-03-09_00-17.png, id=107, 439.02336pt x 290.43085pt>
-File: ./pics/2022-03-09_00-17.png Graphic file (type png)
-<use ./pics/2022-03-09_00-17.png>
-Package pdftex.def Info: ./pics/2022-03-09_00-17.png  used on input line 217.
-(pdftex.def)             Requested size: 288.79422pt x 191.05565pt.
-LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <12> not available
-(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 224.
-
-Overfull \hbox (1.2445pt too wide) in paragraph at lines 224--224
-[]\T1/cmr/bx/n/12 Fehler bei \T1/cmtt/m/n/12 --install\T1/cmr/bx/n/12 : "RE-MOT
-E HOST IDEN-TI-FI-CA-TION HAS
- []
-
-
-Overfull \hbox (24.62454pt too wide) in paragraph at lines 227--230
-\T1/cmr/m/n/10.95 Datei \T1/cmtt/m/n/10.95 $HOME/.ssh/known_hosts \T1/cmr/m/n/1
-0.95 für Ma-cOS/Linux bzw. \T1/cmtt/m/n/10.95 %userprofile%\.ssh\known_hosts
- []
-
-<./pics/2022-03-16_16-04.png, id=109, 678.12224pt x 281.65038pt>
-File: ./pics/2022-03-16_16-04.png Graphic file (type png)
-<use ./pics/2022-03-16_16-04.png>
-Package pdftex.def Info: ./pics/2022-03-16_16-04.png  used on input line 233.
-(pdftex.def)             Requested size: 371.30595pt x 154.22055pt.
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-
-Overfull \hbox (6.9715pt too wide) in paragraph at lines 243--244
-[]\T1/cmr/m/n/10.95 Hierfür ein Kon-solen-fen-ster öff-nen und mit fol-gen-dem 
-Be-fehl Aus-führberech-ti-gun-gen erteilen: 
- []
-
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 13.85303pt, for example:
-(fancyhdr)                \setlength{\headheight}{13.85303pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-
-(fancyhdr)                \addtolength{\topmargin}{-1.85303pt}.
-
-pdfTeX warning (ext4): destination with the same identifier (name{page.}) has b
-een already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.245 U
-       nter MacOS kÃ¶nnte es zusÃ¤tzlich noch notwendig sein eine sog. erwei...
-[7
-
- <./pics/2022-03-09_00-17.png (PNG copy)>]
-Overfull \hbox (4.305pt too wide) in paragraph at lines 255--258
-[]$ \T1/cmr/m/n/10.95 , []lukas_kilian.schumann@stud-mail.uni-wuerzburg.de[] ge
-sendet wer-
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
+Overfull \hbox (15.31891pt too wide) in paragraph at lines 81--82
+[]\T1/cmr/m/n/10.95 Fragen, Fehler-mel-dun-gen, Ergänzun-gen und An-re-gun-gen 
+kön-nen gerne an $[]$
  []
 
 
@@ -632,38 +406,33 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.}) has b
 een already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.259 \end{document}
-                     [8 <./pics/2022-03-16_16-04.png (PNG copy)>]
-(./user-manual.aux)
+l.83 \end{document}
+                    [2
 
-LaTeX Warning: There were multiply-defined labels.
-
-Package rerunfilecheck Info: File `user-manual.out' has not changed.
-(rerunfilecheck)             Checksum: D63C7157EC6FF004C6E3E15752C7B4B2;1923.
+] (./admin-manual.aux)
+Package rerunfilecheck Info: File `admin-manual.out' has not changed.
+(rerunfilecheck)             Checksum: 09E28D1E784ADBEBFC6F328BA0FE1407;475.
  ) 
 Here is how much of TeX's memory you used:
- 10864 strings out of 478276
- 176271 string characters out of 5853013
- 465297 words of memory out of 5000000
- 28915 multiletter control sequences out of 15000+600000
- 481860 words of font info for 54 fonts, out of 8000000 for 9000
+ 10713 strings out of 478276
+ 172363 string characters out of 5853013
+ 462526 words of memory out of 5000000
+ 28801 multiletter control sequences out of 15000+600000
+ 479481 words of font info for 49 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 60i,12n,63p,439b,346s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}{/usr/share/t
-exmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/share/texmf-dist/font
+ 60i,11n,63p,245b,326s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}{/usr/share/
+texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}</usr/share/texmf-dist/font
 s/type1/public/cm-super/sfbx1095.pfb></usr/share/texmf-dist/fonts/type1/public/
 cm-super/sfbx1200.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx14
-40.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm0900.pfb></usr/sh
-are/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb></usr/share/texmf-dist/
-fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texmf-dist/fonts/type1/pub
-lic/cm-super/sfrm1728.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sf
-sl1095.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfti1095.pfb></us
-r/share/texmf-dist/fonts/type1/public/cm-super/sftt1095.pfb></usr/share/texmf-d
-ist/fonts/type1/public/cm-super/sftt1200.pfb>
-Output written on user-manual.pdf (8 pages, 495700 bytes).
+40.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb></usr/sh
+are/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texmf-dist/
+fonts/type1/public/cm-super/sfrm1728.pfb></usr/share/texmf-dist/fonts/type1/pub
+lic/cm-super/sfsl1095.pfb>
+Output written on admin-manual.pdf (2 pages, 111111 bytes).
 PDF statistics:
- 183 PDF objects out of 1000 (max. 8388607)
- 137 compressed objects within 2 object streams
- 22 named destinations out of 1000 (max. 500000)
- 123 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 86 PDF objects out of 1000 (max. 8388607)
+ 66 compressed objects within 1 object stream
+ 8 named destinations out of 1000 (max. 500000)
+ 41 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -11,44 +11,33 @@
     dest: /usr/local/lib/workerlist
   become: true
 
-- name: remove old workerlist-max if exits
-  shell: rm /usr/local/lib/workerlist-maxram
+- name: add (1/6) cronjob to proc cpu
+  cron:
+    name: get cpu usage (1/6)
+    job: (/usr/local/bin/procsys > /tmp/proccpu)
   become: true
-  ignore_errors: true
-
-- name: copy workerlist-maxram
-  copy:
-    src: ../../../configs/workerlist-maxram
-    dest: /usr/local/lib/workerlist-maxram
+- name: add (2/6) cronjob to proc cpu
+  cron:
+    name: get cpu usage (2/6)
+    job: (sleep 10; /usr/local/bin/procsys > /tmp/proccpu)
   become: true
-
-    # - name: add (1/6) cronjob to proc cpu
-    #   cron:
-    #     name: get cpu usage (1/6)
-    #     job: (/usr/local/bin/procsys > /tmp/proccpu)
-    #   become: true
-    # - name: add (2/6) cronjob to proc cpu
-    #   cron:
-    #     name: get cpu usage (2/6)
-    #     job: (sleep 10; /usr/local/bin/procsys > /tmp/proccpu)
-    #   become: true
-    # - name: add (3/6) cronjob to proc cpu
-    #   cron:
-    #     name: get cpu usage (3/6)
-    #     job: (sleep 20; /usr/local/bin/procsys > /tmp/proccpu)
-    #   become: true
-    # - name: add (4/6) cronjob to proc cpu
-    #   cron:
-    #     name: get cpu usage (4/6)
-    #     job: (sleep 30; /usr/local/bin/procsys > /tmp/proccpu)
-    #   become: true
-    # - name: add (5/6) cronjob to proc cpu
-    #   cron:
-    #     name: get cpu usage (5/6)
-    #     job: (sleep 40; /usr/local/bin/procsys > /tmp/proccpu)
-    #   become: true
-    # - name: add (6/6) cronjob to proc cpu
-    #   cron:
-    #     name: get cpu usage (6/6)
-    #     job: (sleep 50; /usr/local/bin/procsys > /tmp/proccpu)
-    #   become: true
+- name: add (3/6) cronjob to proc cpu
+  cron:
+    name: get cpu usage (3/6)
+    job: (sleep 20; /usr/local/bin/procsys > /tmp/proccpu)
+  become: true
+- name: add (4/6) cronjob to proc cpu
+  cron:
+    name: get cpu usage (4/6)
+    job: (sleep 30; /usr/local/bin/procsys > /tmp/proccpu)
+  become: true
+- name: add (5/6) cronjob to proc cpu
+  cron:
+    name: get cpu usage (5/6)
+    job: (sleep 40; /usr/local/bin/procsys > /tmp/proccpu)
+  become: true
+- name: add (6/6) cronjob to proc cpu
+  cron:
+    name: get cpu usage (6/6)
+    job: (sleep 50; /usr/local/bin/procsys > /tmp/proccpu)
+  become: true

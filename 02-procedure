@@ -1,3 +1,7 @@
+# Installation Guide
+
+## Prerequisits
+
 fresh install
 
 add admin user and make sure ist accessible over ssh
@@ -10,20 +14,21 @@ connect to each machine in host, to test connection and add machine to known_hos
 
 test ansible connection with: ansible vms -m ping
 
+
+## Playbookss
+
 Then run these playbooks like so: ansible-playbook playbooks/<name>
--apt-upgrade
--basics
--ldap
--zfs-smb
--add-user
--apache
+- apt-upgrade.yml
+- install_basics.yml
+- install_ldap.yml  << FIREWALL MUST BE CONFIGURED CORRECTLY!
+- install_zfs_smb.yml
+- add-user.yml
+- install_apache.yml
 
 
 TODO
  proc wieder normal
  procall -> ssh key muss passen
-
-
 
 
 

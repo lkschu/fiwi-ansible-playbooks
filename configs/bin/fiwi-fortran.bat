@@ -3,12 +3,12 @@
 :: Author: Lukas K. Schumann,
 :: Mail: lukas_kilian.schumann@stud-mail.uni-wuerzburg.de
 
-:: Newest Version always available at https://10.106.242.102
+:: Newest Version always available at https://10.106.242.121
 
 
 
-:: should normally point to fiwi-coordinator: 10.106.242.102
-set IPADDRESS=10.106.242.102
+:: should normally point to fiwi-coordinator: 10.106.242.121
+set IPADDRESS=10.106.242.121
 :: your user account, i.e. lkschu
 set REMOTEUSER=test02
 

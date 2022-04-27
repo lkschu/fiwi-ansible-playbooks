@@ -2,15 +2,11 @@
 vms:
   hosts:
     FIWI-COORDINATOR:
-      ansible_host: '10.106.242.102'
-    FIWI-W01:
-      ansible_host: '10.106.242.191'
-    FIWI-W02:
-      ansible_host: '10.106.241.105'
-    FIWI-W03:
-      ansible_host: '10.106.242.45'
-    FIWI-GPU01:
-      ansible_host: '10.106.241.232'
+      ansible_host: '10.106.242.121'
+    FIWI-WORKER-01:
+      ansible_host: '10.106.242.151'
+    FIWI-GPU-01:
+      ansible_host: '10.106.242.190'
 
   vars:
     ansible_user: ubuntu
@@ -55,12 +51,16 @@ vms:
 # All vms but ldap
 worker:
   hosts:
-    FIWI-W[01:03]
-    FIWI-GPU01
+    FIWI-WORKER-01:
+    FIWI-GPU-01:
+
+gpu:
+  hosts:
+    FIWI-GPU-01:
 
 # One machine handling ldap, webserver and zfs network storage
 ldap:
   hosts:
-    FIWI-COORDINATOR
+    FIWI-COORDINATOR:
 
 

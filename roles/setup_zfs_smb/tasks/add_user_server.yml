@@ -1,10 +1,6 @@
 ---
 # notes: requires user_name
 
-- name: Add user {{ user_name }}
-  shell: (echo "{{ smb_master_pw }}"; echo "{{ smb_master_pw }}") | smbpasswd -a {{ user_name }}
-  become: true
-
 # adjust permissions
 - name: Adjust permissions
   shell: chown {{ user_name }}:www-data /home/ldap/{{ user_name }}
@@ -69,6 +65,9 @@
     loop_var: inner_item
 
   # TODO: include server logic
+- name: Add user {{ user_name }}
+  shell: (echo "{{ smb_master_pw }}"; echo "{{ smb_master_pw }}") | smbpasswd -a {{ user_name }}
+  become: true
 
 - name: Restart samba
   service:

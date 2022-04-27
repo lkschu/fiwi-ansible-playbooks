@@ -3,13 +3,13 @@
 # Author: Lukas K. schumann
 # Mail: lukas_kilian.schumann@stud-mail.uni-wuerzburg.de
 
-# Newest Version always available at https://10.106.242.102
+# Newest Version always available at https://10.106.242.121
 
 
 
 
-# should normally point to fiwi-coordinator: 10.106.242.102
-IPADDRESS="10.106.242.102"
+# should normally point to fiwi-coordinator: 10.106.242.121
+IPADDRESS="10.106.242.121"
 # your user account, i.e. lkschu
 REMOTEUSER="test02"
 

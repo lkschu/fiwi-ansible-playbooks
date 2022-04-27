@@ -1,0 +1,54 @@
+---
+# Do this:
+# - update & upgrade
+# - install basics
+# - install ldap
+# - don't install zfs,smb
+# - add users
+# - add ssh host key of new machine to known_hosts of coordinator
+# - install apache
+
+# WARNING!
+# The Host variable here must also be set at 'ssh-keyscan' at the bottom!
+
+- hosts: vms  #__new__host__
+  pre_tasks:
+    - name: include config
+      include_vars: ../configs/ldap_config.yml
+    - name: include user vars
+      include_vars: ../configs/users_to_add.yml
+
+  roles:
+    - purge_unattended_upgrades
+    - apt_update_cache
+    - copy_bin
+    - setup_basics
+    - setup_timezone
+    - setup_ldap
+
+
+  tasks:
+    - name: Update & Upgrade
+      apt:
+        update_cache: no
+        upgrade: full
+        autoremove: yes
+      become: yes
+
+    # From install_zfs_smb playbook, start
+    - name: Install smb and smb utils
+      include_role:
+        name: setup_zfs_smb
+        tasks_from: client.yml
+    # From install_zfs_smb playbook, end
+
+    # From add_user playbook, start
+    - name: Setting up smb mounts
+      include_role:
+        name: setup_zfs_smb
+        tasks_from: add_user_client.yml
+      loop: "{{ users_to_add }}"
+      vars:
+        user_name: "{{ item.name }}"
+    # From add_user playbook, end
+

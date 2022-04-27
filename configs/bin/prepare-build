@@ -25,7 +25,7 @@ if [[ $# -eq 1 ]]; then
 
     # redirect output (and stderr) from programm to prog-log.txt
     date >> 0-RUNNING
-    execute-elivagar 2>&1 | tee console.txt
+    execute-build 2>&1 | tee console.txt
     # if stderr is not empty tee won't exit with exit 0, so no '&&'
     rm -r Build && rm config.cfg # && rm *.f90
     rm 0-RUNNING

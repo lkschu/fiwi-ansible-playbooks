@@ -27,6 +27,17 @@
         user_name: "{{ item.name }}"
         user_pw: "{{ item.passwd }}"
 
+  tasks:
+    - name: Copy gnuplot config
+      copy:
+        src: '../configs/.gnuplot'
+        dest: "$HOME/.gnuplot"
+      loop: "{{ users_to_add }}"
+      become: true
+      become_user: "{{ item.name }}"
+      vars:
+        allow_world_readable_tmpfiles: true
+
 # Clients
 - hosts: worker
   pre_tasks:

@@ -1,0 +1,15 @@
+Export ldpa data into data.ldif with:
+    slapcat -n 1 -l data.ldif
+
+Delete first few paragraphs so only people to add are present
+
+Import data like this
+    slapadd -v -l data.ldif
+
+
+
+
+log into each new user to force home creation
+    sudo su <user>
+and set permissions and make directories
+    ansible vms -m include_role -a "name=setup_zfs_smb tasks_from=add_user_server.yml" --extra-vars="user_name=<user>"

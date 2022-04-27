@@ -20,3 +20,12 @@
 - include_tasks: fortran.yml
 - include_tasks: set_config.yml
 - include_tasks: workerlist.yml
+
+- name: "Make sure all hosts know each other"
+  lineinfile:
+    path: /etc/hosts
+    line: "{{ hostvars[host_item]['ansible_host'] }} {{ host_item }}"
+  become: true
+  loop: "{{ groups['vms'] }}"
+  loop_control:
+    loop_var: host_item

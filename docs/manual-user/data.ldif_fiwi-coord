@@ -1,0 +1,231 @@
+dn: dc=FIWI-COORDINATOR,dc=local
+objectClass: top
+objectClass: dcObject
+objectClass: organization
+o: FiWi-Wue
+dc: FIWI-COORDINATOR
+structuralObjectClass: organization
+entryUUID: 4f8b2a00-339a-103c-88a4-ddbf2dc7eaae
+creatorsName: cn=admin,dc=FIWI-COORDINATOR,dc=local
+createTimestamp: 20220309021353Z
+entryCSN: 20220309021353.013954Z#000000#000#000000
+modifiersName: cn=admin,dc=FIWI-COORDINATOR,dc=local
+modifyTimestamp: 20220309021353Z
+
+dn: cn=admin,dc=FIWI-COORDINATOR,dc=local
+objectClass: simpleSecurityObject
+objectClass: organizationalRole
+cn: admin
+description: LDAP administrator
+userPassword:: e1NTSEF9TEhMZlM1Uk5KU1FyZVlWODdoeXlEQ3Fac0RlM0lUdjQ=
+structuralObjectClass: organizationalRole
+entryUUID: 4f8be9f4-339a-103c-88a5-ddbf2dc7eaae
+creatorsName: cn=admin,dc=FIWI-COORDINATOR,dc=local
+createTimestamp: 20220309021353Z
+entryCSN: 20220309021353.018895Z#000000#000#000000
+modifiersName: cn=admin,dc=FIWI-COORDINATOR,dc=local
+modifyTimestamp: 20220309021353Z
+
+dn: ou=People,dc=FIWI-COORDINATOR,dc=local
+objectClass: organizationalUnit
+ou: People
+structuralObjectClass: organizationalUnit
+entryUUID: 691a877c-339a-103c-9dec-0d265878ea87
+creatorsName: cn=admin,dc=FIWI-COORDINATOR,dc=local
+createTimestamp: 20220309021435Z
+entryCSN: 20220309021435.896564Z#000000#000#000000
+modifiersName: cn=admin,dc=FIWI-COORDINATOR,dc=local
+modifyTimestamp: 20220309021435Z
+
+dn: ou=Groups,dc=FIWI-COORDINATOR,dc=local
+objectClass: organizationalUnit
+ou: Groups
+structuralObjectClass: organizationalUnit
+entryUUID: 691bbbce-339a-103c-9ded-0d265878ea87
+creatorsName: cn=admin,dc=FIWI-COORDINATOR,dc=local
+createTimestamp: 20220309021435Z
+entryCSN: 20220309021435.904471Z#000000#000#000000
+modifiersName: cn=admin,dc=FIWI-COORDINATOR,dc=local
+modifyTimestamp: 20220309021435Z
+
+dn: cn=fiwi,ou=Groups,dc=FIWI-COORDINATOR,dc=local
+objectClass: posixGroup
+cn: testgroup
+cn: fiwi
+gidNumber: 5566
+structuralObjectClass: posixGroup
+entryUUID: 691c17c2-339a-103c-9dee-0d265878ea87
+creatorsName: cn=admin,dc=FIWI-COORDINATOR,dc=local
+createTimestamp: 20220309021435Z
+memberUid: dummy
+memberUid: test01
+memberUid: test02
+memberUid: test03
+memberUid: hfehr
+memberUid: mfeldman
+memberUid: afroehlich
+memberUid: mhofmann
+entryCSN: 20220309083053.552789Z#000000#000#000000
+modifiersName: cn=admin,dc=FIWI-COORDINATOR,dc=local
+modifyTimestamp: 20220309083053Z
+
+dn: uid=dummy,ou=People,dc=FIWI-COORDINATOR,dc=local
+objectClass: account
+objectClass: posixAccount
+cn: dummy
+uid: dummy
+uidNumber: 10000
+gidNumber: 5566
+homeDirectory: /home/ldap/dummy
+loginShell: /bin/bash
+gecos: dummy
+description: User account
+structuralObjectClass: account
+entryUUID: 7d8bbe64-339b-103c-8643-79fdcd751464
+creatorsName: cn=admin,dc=FIWI-COORDINATOR,dc=local
+createTimestamp: 20220309022219Z
+userPassword:: e1NTSEF9dmxtaHpnaVJMbkJSaWpINWNuSlBxQVpKZGxBQzJZVGg=
+entryCSN: 20220309022221.291481Z#000000#000#000000
+modifiersName: cn=admin,dc=FIWI-COORDINATOR,dc=local
+modifyTimestamp: 20220309022221Z
+
+dn: uid=test01,ou=People,dc=FIWI-COORDINATOR,dc=local
+objectClass: account
+objectClass: posixAccount
+cn: test01
+uid: test01
+uidNumber: 10001
+gidNumber: 5566
+homeDirectory: /home/ldap/test01
+loginShell: /bin/bash
+gecos: test01
+description: User account
+structuralObjectClass: account
+entryUUID: 7f6fe6a6-339b-103c-8644-79fdcd751464
+creatorsName: cn=admin,dc=FIWI-COORDINATOR,dc=local
+createTimestamp: 20220309022222Z
+userPassword:: e1NTSEF9NVVBZTFHMFE3Y090TkRERWFRMGtJbmozU2FKZ28yOXo=
+entryCSN: 20220309022224.455576Z#000000#000#000000
+modifiersName: cn=admin,dc=FIWI-COORDINATOR,dc=local
+modifyTimestamp: 20220309022224Z
+
+dn: uid=test02,ou=People,dc=FIWI-COORDINATOR,dc=local
+objectClass: account
+objectClass: posixAccount
+cn: test02
+uid: test02
+uidNumber: 10002
+gidNumber: 5566
+homeDirectory: /home/ldap/test02
+loginShell: /bin/bash
+gecos: test02
+description: User account
+structuralObjectClass: account
+entryUUID: 8151ae78-339b-103c-8645-79fdcd751464
+creatorsName: cn=admin,dc=FIWI-COORDINATOR,dc=local
+createTimestamp: 20220309022226Z
+userPassword:: e1NTSEF9bTdtTUNJVjRqcDVtZmtUd1FyUFUxRFVxeG4xamF4ZVo=
+entryCSN: 20220309083922.131356Z#000000#000#000000
+modifiersName: uid=test02,ou=People,dc=FIWI-COORDINATOR,dc=local
+modifyTimestamp: 20220309083922Z
+
+dn: uid=test03,ou=People,dc=FIWI-COORDINATOR,dc=local
+objectClass: account
+objectClass: posixAccount
+cn: test03
+uid: test03
+uidNumber: 10003
+gidNumber: 5566
+homeDirectory: /home/ldap/test03
+loginShell: /bin/bash
+gecos: test03
+description: User account
+structuralObjectClass: account
+entryUUID: 83380138-339b-103c-8646-79fdcd751464
+creatorsName: cn=admin,dc=FIWI-COORDINATOR,dc=local
+createTimestamp: 20220309022229Z
+userPassword:: e1NTSEF9VWVMSFE2cXhGNFB0ZWZLcTlpZmMvOGZ1Z25jcldoeDI=
+entryCSN: 20220322150358.081859Z#000000#000#000000
+modifiersName: uid=test03,ou=People,dc=FIWI-COORDINATOR,dc=local
+modifyTimestamp: 20220322150358Z
+
+dn: uid=hfehr,ou=People,dc=FIWI-COORDINATOR,dc=local
+objectClass: account
+objectClass: posixAccount
+cn: hfehr
+uid: hfehr
+uidNumber: 10004
+gidNumber: 5566
+homeDirectory: /home/ldap/hfehr
+loginShell: /bin/bash
+gecos: hfehr
+description: User account
+structuralObjectClass: account
+entryUUID: f1947160-33ce-103c-8647-79fdcd751464
+creatorsName: cn=admin,dc=FIWI-COORDINATOR,dc=local
+createTimestamp: 20220309083038Z
+userPassword:: e1NTSEF9U1RPa281Z0hqRWNCWEtFcSs3ZkVGR2Y0ai9UOEdXZzU=
+entryCSN: 20220309092325.456153Z#000000#000#000000
+modifiersName: uid=hfehr,ou=People,dc=FIWI-COORDINATOR,dc=local
+modifyTimestamp: 20220309092325Z
+
+dn: uid=mfeldman,ou=People,dc=FIWI-COORDINATOR,dc=local
+objectClass: account
+objectClass: posixAccount
+cn: mfeldman
+uid: mfeldman
+uidNumber: 10005
+gidNumber: 5566
+homeDirectory: /home/ldap/mfeldman
+loginShell: /bin/bash
+gecos: mfeldman
+description: User account
+structuralObjectClass: account
+entryUUID: f388e8a2-33ce-103c-8648-79fdcd751464
+creatorsName: cn=admin,dc=FIWI-COORDINATOR,dc=local
+createTimestamp: 20220309083041Z
+userPassword:: e1NTSEF9S2o1VGF6ZWxUcmpRcEE4UElzMTZJM3JDbHVnS2JWeS8=
+entryCSN: 20220309101607.166090Z#000000#000#000000
+modifiersName: uid=mfeldman,ou=People,dc=FIWI-COORDINATOR,dc=local
+modifyTimestamp: 20220309101607Z
+
+dn: uid=afroehlich,ou=People,dc=FIWI-COORDINATOR,dc=local
+objectClass: account
+objectClass: posixAccount
+cn: afroehlich
+uid: afroehlich
+uidNumber: 10006
+gidNumber: 5566
+homeDirectory: /home/ldap/afroehlich
+loginShell: /bin/bash
+gecos: afroehlich
+description: User account
+structuralObjectClass: account
+entryUUID: f57c9636-33ce-103c-8649-79fdcd751464
+creatorsName: cn=admin,dc=FIWI-COORDINATOR,dc=local
+createTimestamp: 20220309083045Z
+userPassword:: e1NTSEF9N1M0UlJlblJKTm9yb1ZCb2RCc0VnVWxsRlhTcnBVTDY=
+entryCSN: 20220309100923.663467Z#000000#000#000000
+modifiersName: uid=afroehlich,ou=People,dc=FIWI-COORDINATOR,dc=local
+modifyTimestamp: 20220309100923Z
+
+dn: uid=mhofmann,ou=People,dc=FIWI-COORDINATOR,dc=local
+objectClass: account
+objectClass: posixAccount
+cn: mhofmann
+uid: mhofmann
+uidNumber: 10007
+gidNumber: 5566
+homeDirectory: /home/ldap/mhofmann
+loginShell: /bin/bash
+gecos: mhofmann
+description: User account
+structuralObjectClass: account
+entryUUID: f9b2a218-33ce-103c-864a-79fdcd751464
+creatorsName: cn=admin,dc=FIWI-COORDINATOR,dc=local
+createTimestamp: 20220309083052Z
+userPassword:: e1NTSEF9ZnEzRkg2Q3pVc3luaFBZaEpmeEZuNlp1M1luNTNFOCs=
+entryCSN: 20220322162024.630157Z#000000#000#000000
+modifiersName: uid=mhofmann,ou=People,dc=FIWI-COORDINATOR,dc=local
+modifyTimestamp: 20220322162024Z
+

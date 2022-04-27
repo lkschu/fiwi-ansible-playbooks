@@ -1,0 +1,22 @@
+---
+
+# updates the .gnuplot config file for all users
+
+# Server
+- hosts: ldap
+  pre_tasks:
+    - name: include user vars
+      include_vars: ../configs/users_to_add.yml
+    - name: include config
+      include_vars: ../configs/ldap_config.yml
+
+  tasks:
+    - name: Copy gnuplot config
+      copy:
+        src: '../configs/.gnuplot'
+        dest: "$HOME/.gnuplot"
+      loop: "{{ users_to_add }}"
+      become: true
+      become_user: "{{ item.name }}"
+      vars:
+        allow_world_readable_tmpfiles: true

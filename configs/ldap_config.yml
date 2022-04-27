@@ -1,7 +1,7 @@
 ---
 
 ldap_host: 'FIWI-COORDINATOR'
-ldap_ip: '10.106.242.102'
+ldap_ip: '10.106.242.121'
 ldap_fqdn: 'FIWI-COORDINATOR.local'
 ldap_dc_base: 'dc=FIWI-COORDINATOR,dc=local'
 
