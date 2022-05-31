@@ -1,11 +1,11 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/Arch Linux) (preloaded format=pdflatex 2022.4.21)  26 APR 2022 20:59
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022/Arch Linux) (preloaded format=pdflatex 2022.5.10)  31 MAY 2022 20:02
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **user-manual.tex
 (./user-manual.tex
 LaTeX2e <2021-11-15> patch level 1
-L3 programming layer <2022-02-24>
+L3 programming layer <2022-04-10>
 (/usr/share/texmf-dist/tex/latex/base/article.cls
 Document Class: article 2021/10/04 v1.4n Standard LaTeX document class
 (/usr/share/texmf-dist/tex/latex/base/size11.clo
@@ -264,7 +264,7 @@ rs
 \f@nch@O@orf=\skip59
 )
 (/usr/share/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
-File: l3backend-pdftex.def 2022-02-07 L3 backend support: PDF output (pdfTeX)
+File: l3backend-pdftex.def 2022-04-14 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count277
 \l__pdf_internal_box=\box52
 )
@@ -415,6 +415,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
+
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has b
 een already used, duplicate ignored
 <to be read again> 
@@ -459,6 +460,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
+
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has b
 een already used, duplicate ignored
 <to be read again> 
@@ -466,13 +468,13 @@ een already used, duplicate ignored
 l.117 \clearpage
                  [3 <./pics/2022-03-16_15-36.png (PNG copy)> <./pics/2022-03-08
 _23-57.png (PNG copy)>]
-<./pics/2022-03-08_23-59_1.png, id=78, 436.32169pt x 218.16084pt>
+<./pics/2022-03-08_23-59_1.png, id=79, 436.32169pt x 218.16084pt>
 File: ./pics/2022-03-08_23-59_1.png Graphic file (type png)
 <use ./pics/2022-03-08_23-59_1.png>
 Package pdftex.def Info: ./pics/2022-03-08_23-59_1.png  used on input line 124.
 
 (pdftex.def)             Requested size: 288.79422pt x 144.39937pt.
-<./pics/2022-03-09_00-05.png, id=80, 450.50551pt x 405.92775pt>
+<./pics/2022-03-09_00-05.png, id=81, 450.50551pt x 405.92775pt>
 File: ./pics/2022-03-09_00-05.png Graphic file (type png)
 <use ./pics/2022-03-09_00-05.png>
 Package pdftex.def Info: ./pics/2022-03-09_00-05.png  used on input line 143.
@@ -485,6 +487,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
 
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has b
 een already used, duplicate ignored
@@ -502,7 +505,7 @@ File: ts1cmtt.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 )
 Overfull \hbox (16.46083pt too wide) in paragraph at lines 151--152
 []\T1/cmr/m/n/10.95 In bei-den Fällen sind Ergeb-nisse über die Web-site auf \T
-1/cmtt/m/n/10.95 https://10.106.242.102/[]<username>
+1/cmtt/m/n/10.95 https://10.106.242.121/[]<username>
  []
 
 
@@ -531,6 +534,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
+
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has b
 een already used, duplicate ignored
 <to be read again> 
@@ -557,6 +561,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
 
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has b
 een already used, duplicate ignored
@@ -606,6 +611,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-1.85303pt}.
 
+
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has b
 een already used, duplicate ignored
 <to be read again> 
@@ -628,6 +634,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
+
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has b
 een already used, duplicate ignored
 <to be read again> 
@@ -642,10 +649,10 @@ Package rerunfilecheck Info: File `user-manual.out' has not changed.
 (rerunfilecheck)             Checksum: D63C7157EC6FF004C6E3E15752C7B4B2;1923.
  ) 
 Here is how much of TeX's memory you used:
- 10864 strings out of 478276
- 176271 string characters out of 5853013
- 465297 words of memory out of 5000000
- 28915 multiletter control sequences out of 15000+600000
+ 10886 strings out of 478238
+ 176992 string characters out of 5850456
+ 466248 words of memory out of 5000000
+ 28968 multiletter control sequences out of 15000+600000
  481860 words of font info for 54 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  60i,12n,63p,439b,346s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -660,7 +667,7 @@ lic/cm-super/sfrm1728.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sf
 sl1095.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfti1095.pfb></us
 r/share/texmf-dist/fonts/type1/public/cm-super/sftt1095.pfb></usr/share/texmf-d
 ist/fonts/type1/public/cm-super/sftt1200.pfb>
-Output written on user-manual.pdf (8 pages, 495700 bytes).
+Output written on user-manual.pdf (8 pages, 496208 bytes).
 PDF statistics:
  183 PDF objects out of 1000 (max. 8388607)
  137 compressed objects within 2 object streams

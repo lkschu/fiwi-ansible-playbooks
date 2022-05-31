@@ -3,3 +3,6 @@ ansible-vault [edit|view|...] --vault-password-file <vault-file>
 
 # use ad hoc roles like this
 ansible vms -m include_role -a name=reboot --vault-password-file=.vkey
+
+# encrypted values can be viewed like this
+ansible localhost -m debug -a 'var=users_to_add' -e '@configs/users_to_add.yml'

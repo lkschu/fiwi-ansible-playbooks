@@ -50,7 +50,7 @@
 
 \title{\vspace{+3cm}FiWi Würzburg Fortran Pipeline - Manual}
 %\author{Lukas K. Schumann, \\\small{lukas\_kilian.schumann@stud-mail.uni-wuerzburg.de}}
-\date{Stand: 04.2022}
+\date{Stand: 05.2022}
 
 \begin{document}
 
@@ -85,7 +85,7 @@ Im Skript müssen können folgende Variablen gesetzt werden:
 \e \texttt{REMOTEUSER} muss auf den eigenen Benutzeraccount gesetzt werden
 \e \texttt{IPADDRESS} verweist auf den Koordinator Server und sollte in den meisten Fällen nicht geändert werden.
 
-Anschließend kann das heruntergeladene Script mit \texttt{-{}-install} aufgerufen werden, siehe Fig.\ref{fig:install-1} und Fig.\ref{fig:install-2}.
+Anschließend kann das heruntergeladene Script mit \texttt{-{}-install} aufgerufen werden, siehe Fig.\ref{fig:install-1} und Fig.\ref{fig:install-2}. Dies installiert \emph{keine} zusätzlichen Programme auf dem eigenen Rechner sondern \emph{installiert} die Kennung des eigenen PCs auf dem Server.
 
 Hier muss einmalig mit '\texttt{ja}' bzw. '\texttt{yes}' bestätigt werden, dass der Server in die Liste der bekannten Server aufgenommen werden soll.
 
@@ -148,7 +148,7 @@ Mit '\texttt{y}' bestätigen bzw. mit '\texttt{n}' ablehnen.
 
 Analog wird gefragt ob die Ergebnisse unmittelbar, über das Konsolenfenster verfügbar sein sollen - und damit abbrechen würde falls die Internetverbindung abbricht, oder das Programm in einen Hintergrund Prozess des Servers geforkt werden soll.
 
-In beiden Fällen sind Ergebnisse über die Website auf \texttt{https://10.106.242.102/\raisebox{0.5ex}{\texttildelow}<username>} aufrufbar, wobei '\texttt{\raisebox{0.5ex}{\texttildelow}}' nicht vergessen werden darf!
+In beiden Fällen sind Ergebnisse über die Website auf \texttt{https://10.106.242.121/\raisebox{0.5ex}{\texttildelow}<username>} aufrufbar, wobei '\texttt{\raisebox{0.5ex}{\texttildelow}}' nicht vergessen werden darf!
 
 Bei erstmaligem öffnen wird der Webbrowser eine Warnung mit dem Namen \texttt{SEC\_ERROR\_UNKNOWN\_ISSUER}, \texttt{ERR\_CERT\_AUTHORITY\_INVALID}, oder ähnlich presentieren, da das Zertifikat selbst signiert wurde.
 Hier bitte einmal auf \emph{advanced} klicken und bestätigen.
@@ -222,10 +222,10 @@ Konsole öffnen, den Befehl \texttt{ssh-keygen} ausführen und nächste Eingaben
 
 
 \subsection{Fehler bei \texttt{-{}-install}: "REMOTE HOST IDENTIFICATION HAS CHANGED"}\label{sec:ssh}
-Sollte beim erstmaligen Installieren die in Fig.\ref{fig:ssh-host-key} zu sehende Fehlermeldung auftauchen, so kannte der PC einen anderen Server hinter der IP 10.106.242.102.
+Sollte beim erstmaligen Installieren die in Fig.\ref{fig:ssh-host-key} zu sehende Fehlermeldung auftauchen, so kannte der PC einen anderen Server hinter der IP 10.106.242.121.
 
 Dieser Eintrag muss entfernt werden. In manchen Fällen, vor allem unter Ubuntu wird in der Fehlermeldung selbst ein Befehl vorgeschlagen wie der Eintrag entfernt werden kann.
-Sollte dies nicht der Fall sein, so muss die Zeile mit der IP von 10.106.242.102 aus der Datei \texttt{\$HOME/.ssh/known\_hosts} für MacOS/Linux bzw. \texttt{\%userprofile\%\textbackslash.ssh\textbackslash{}known\_hosts} mit einem Texteditor entfernt werden.
+Sollte dies nicht der Fall sein, so muss die Zeile mit der IP von 10.106.242.121 aus der Datei \texttt{\$HOME/.ssh/known\_hosts} für MacOS/Linux bzw. \texttt{\%userprofile\%\textbackslash.ssh\textbackslash{}known\_hosts} mit einem Texteditor entfernt werden.
 Danach kann die Installation erneut versucht werden.
 
 \begin{figure}[h]
