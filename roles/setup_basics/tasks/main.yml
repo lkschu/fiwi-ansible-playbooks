@@ -16,6 +16,7 @@
     - unzip
     - dos2unix
     - gnuplot-nox
+    - cpufrequtils
 
 - include_tasks: fortran.yml
 - include_tasks: set_config.yml

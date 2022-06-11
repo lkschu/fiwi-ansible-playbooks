@@ -47,5 +47,10 @@ elif [[ "$1" == "--max" ]]; then
     callprocmaxram | /usr/bin/sort -n | /usr/bin/head -n 1 | /usr/bin/cut -d ' ' -f 2
 else
     # return least used cpu
-    callproc | /usr/bin/sort -n | /usr/bin/head -n 1 | /usr/bin/cut -d ' ' -f 2
+    # WORKER_OVERRIDE variable can be set (e.g. in bashrc) to force specific machine
+    if [[ $WORKER_OVERRIDE ]]; then
+        echo "$WORKER_OVERRIDE"
+    else
+        callproc | /usr/bin/sort -n | /usr/bin/head -n 1 | /usr/bin/cut -d ' ' -f 2
+    fi
 fi
