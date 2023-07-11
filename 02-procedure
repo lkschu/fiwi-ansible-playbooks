@@ -33,11 +33,17 @@ TODO
 
 
 
+# Environment variables
+Variables are set in ~/.ssh/environment
+- `GFORTRAN_UNBUFFERED_ALL=1`
+- `WORKER_OVERRIDE=10.106.242.190`
 
 
 # REMEMBER:
  - passwords of users can be changed by user with passwd, but sudo user have to use ldapsetpasswd <user> to set password of others
  - for each user: ldapadduser, smbpasswd -a <user>, add mountentry to fstab & systemd file
+
+
 
 # TODO:
  - WARNING: not all ldappw are valid: '<>' will get escaped

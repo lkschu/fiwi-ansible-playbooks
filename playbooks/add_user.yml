@@ -27,7 +27,6 @@
         user_name: "{{ item.name }}"
         user_pw: "{{ item.passwd }}"
 
-  tasks:
     - name: Copy gnuplot config
       copy:
         src: '../configs/.gnuplot'
